@@ -1,0 +1,31 @@
+# Based on https://gitlab.com/humaid/yabfig/blob/master/.gitlab-ci.yml by Humaid
+image: golang:latest
+
+variables:
+  REPO_NAME: gitlab.com/group-nacdlow/nacdlow-server
+  BINARY: nacdlow-server
+
+before_script:
+  - cd $CI_PROJECT_DIR
+  - go get ./...
+
+stages:
+    - get
+    - test
+    - build
+
+format:
+    stage: test
+    script:
+      - go fmt $(go list ./... | grep -v /vendor/)
+      - go vet $(go list ./... | grep -v /vendor/)
+      - go test -cover -race $(go list ./... | grep -v /vendor/)
+
+compile:
+    stage: build
+    script:
+      - go build -race -ldflags "-extldflags '-static'" -o $CI_PROJECT_DIR/$BINARY
+    artifacts:
+      paths:
+        - $BINARY
+
