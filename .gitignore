@@ -1,6 +1,10 @@
 # For those folks using macOS
 .DS_Store
 
+# Do not include binary
+nacdlow-server
+source
+
 # Using Go gitignore template from: 
 # https://github.com/github/gitignore/blob/master/Go.gitignore 
 
