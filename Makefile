@@ -1,6 +1,6 @@
 GC = go
 
-TARGET = source
+TARGET = nacdlow-server
 
 all: clean format test $(TARGET)
 
