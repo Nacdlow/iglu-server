@@ -5,9 +5,9 @@
 
 ## Change these variables...
 # This shall be the module name of the project.
-module="gitlab.com/group-nacdlow/source"
+module="gitlab.com/group-nacdlow/nacdlow-server"
 # This shall be the path of the wiki site.
-docpath="../source.wiki"
+docpath="../nacdlow-server.wiki"
 
 mkdir -p $docpath
 
