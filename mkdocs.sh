@@ -23,7 +23,7 @@ done
 
 # Generate home wiki page with navigation listing
 docs=$(cd $docpath && find -L . | grep \\.md)
-echo "# Welcome to the documentation wiki\n\n" > $docpath/home.md
+echo -e "# Welcome to the documentation wiki\n\n" > $docpath/home.md
 echo "This documentation is generated at $(date) for commit
 $(git rev-parse --short HEAD) (*$(git log -1 --pretty=%B)*).  \n\n" >> $docpath/home.md
 echo "### Documentation listing" >> $docpath/home.md
@@ -31,9 +31,11 @@ echo
 for item in $docs
 do
 	propername=$(echo $item | sed "s#./##" | sed "s#\\.md##")
-	echo "- [$propername]($propername)" >> $docpath/home.md
+	if [ $propername != "home" ]; then
+		echo "- [$propername]($propername)" >> $docpath/home.md
+	fi
 done
-echo "\n\n> Generated using [godoc2markdown](https://humaidq.ae/projects/godoc2markdown/)
+echo -e "\n\n> Generated using [godoc2markdown](https://humaidq.ae/projects/godoc2markdown/)
 and a script." >> $docpath/home.md
 
 echo "Done. Wiki generated at $docpath"
