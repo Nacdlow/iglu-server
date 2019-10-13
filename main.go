@@ -1,7 +1,27 @@
 package main
 
-import "fmt"
+import (
+	"gitlab.com/group-nacdlow/nacdlow-server/cmd"
+	"log"
+	"os"
+
+	"github.com/urfave/cli"
+)
+
+// VERSION specifies the version of nacdlow-server
+var VERSION = "0.1.0"
 
 func main() {
-	fmt.Println("hello nacdlow!")
+	app := cli.NewApp()
+	app.Name = "nacdlow-server"
+	app.Usage = "The smart home system server application"
+	app.Version = VERSION
+	app.Commands = []cli.Command{
+		cmd.CmdStart,
+	}
+
+	err := app.Run(os.Args)
+	if err != nil {
+		log.Fatal(err)
+	}
 }
