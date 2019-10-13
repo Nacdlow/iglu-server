@@ -1,0 +1,1 @@
+/* The global JavaScript file */
