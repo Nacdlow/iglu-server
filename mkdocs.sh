@@ -1,10 +1,17 @@
-#!/bin/sh
+#!/bin/bash
 
-# Change these variables...
+## This scripts generates Markdown formatted documentation of all packages in
+## the project, using 'go doc' and 'godoc2markdown' tools.
+
+## Change these variables...
+# This shall be the module name of the project.
 module="gitlab.com/group-nacdlow/source"
+# This shall be the path of the wiki site.
 docpath="../source.wiki"
 
 mkdir -p $docpath
+
+# Generate documentation/markdown of project
 for fullpkg in $(go list ./...)
 do
 	package=$(echo $fullpkg | rev | cut -d"/" -f1 | rev)
@@ -14,7 +21,7 @@ do
 	go doc -all $fullpkg | godoc2markdown > $docpath/$path/$package.md
 done
 
-# Create home wiki page
+# Generate home wiki page with navigation listing
 docs=$(cd $docpath && find -L . | grep \\.md)
 echo "# Welcome to the documentation wiki\n\n" > $docpath/home.md
 echo "This documentation is generated at $(date) for commit
