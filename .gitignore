@@ -1,6 +1,7 @@
 # For those folks using macOS
 .DS_Store
 
+.idea/
 # Do not include binary
 nacdlow-server
 source
