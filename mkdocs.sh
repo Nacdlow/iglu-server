@@ -18,13 +18,14 @@ do
 	path=$(echo $fullpkg | sed "s#$module##")
 	mkdir -p $docpath/$path
 	echo "Generating $path..."
-	go doc -all $fullpkg | godoc2markdown > $docpath/$path/$package.md
+	echo "[< Go back to docs listing](/home)" > $docpath/$path/$package.md
+	go doc -all $fullpkg | godoc2markdown >> $docpath/$path/$package.md
 done
 
 # Generate home wiki page with navigation listing
 docs=$(cd $docpath && find -L . | grep \\.md)
 echo -e "# Welcome to the documentation wiki\n\n" > $docpath/home.md
-echo "This documentation is generated at $(date) for commit
+echo "This documentation is generated for commit
 $(git rev-parse --short HEAD) (*$(git log -1 --pretty=%B)*).  \n\n" >> $docpath/home.md
 echo "### Documentation listing" >> $docpath/home.md
 echo 
