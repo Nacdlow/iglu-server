@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"fmt"
 	"log"
 
 	"github.com/urfave/cli"
@@ -16,7 +17,14 @@ var CmdStart = cli.Command{
 	Name:    "start",
 	Aliases: []string{"run"},
 	Usage:   "Start the smart home web server",
-	Action:  start,
+	Flags: []cli.Flag{
+		&cli.StringFlag{
+			Name:  "port",
+			Value: "8080",
+			Usage: "the web server port",
+		},
+	},
+	Action: start,
 }
 
 func start(clx *cli.Context) (err error) {
@@ -29,6 +37,7 @@ func start(clx *cli.Context) (err error) {
 
 	m.Get("/", routes.HomepageHandler)
 
-	log.Fatal(http.ListenAndServe(":8080", m)) // TODO use port from config
+	log.Printf("Starting server on port %s!\n", clx.String("port"))
+	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%s", clx.String("port")), m))
 	return nil
 }
