@@ -1,12 +1,12 @@
 package models
 
-type UserType int64
+type UserRole int64
 
 const (
-    Normal = iota
-    Admin
-    Guest
-    Restricted
+    NormalRole = iota
+    AdminRole
+    GuestRole
+    RestrictedRole
 )
 
 type User struct {
@@ -14,5 +14,5 @@ type User struct {
     Password  string
     FirstName string
     LastName  string
-    Type      UserType
+    Role      UserRole
 }
