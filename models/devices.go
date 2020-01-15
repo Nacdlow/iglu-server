@@ -4,7 +4,7 @@ type DeviceType int64
 
 const (
 	Light = iota
-	TempControll
+	TempControl
 	TV
 	Speaker
 )
