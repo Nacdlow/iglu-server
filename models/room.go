@@ -3,16 +3,16 @@ package models
 type RType int64
 
 const (
-	Lounge = iota //iota acts as an auto-increment, Lounge = 1, Bedroom = 2, etc.
-	Bedroom
-	Dining
-	Kitchen
-	Bathroom
-	Hallway
-	Storage
-	Utility
-	Garage
-	Guest
+	LoungeRoom = iota //iota acts as an auto-increment, Lounge = 1, Bedroom = 2, etc.
+	BedroomRoom
+	DiningRoom
+	KitchenRoom
+	BathroomRoom
+	HallwayRoom
+	StorageRoom
+	UtilityRoom
+	GarageRoom
+	GuestRoom
 )
 
 type Room struct {
