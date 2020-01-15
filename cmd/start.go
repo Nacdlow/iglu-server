@@ -8,6 +8,7 @@ import (
 	macaron "gopkg.in/macaron.v1"
 	"net/http"
 
+	"gitlab.com/group-nacdlow/nacdlow-server/models"
 	"gitlab.com/group-nacdlow/nacdlow-server/routes"
 )
 
@@ -29,7 +30,8 @@ var CmdStart = cli.Command{
 
 func start(clx *cli.Context) (err error) {
 	// TODO load configuration files
-	// TODO connect to db
+	engine := models.SetupEngine()
+	defer engine.Close()
 
 	// Start the web server
 	m := macaron.Classic()
