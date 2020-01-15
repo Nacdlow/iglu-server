@@ -9,8 +9,8 @@ const (
 	Speaker
 )
 
-type Devices struct {
-	DeviceID    int64 `xorm:"pk"`
+type Device struct {
+	DeviceID    int64 `xorm:"pk autoincr"`
 	RoomID      int64
 	Type        DeviceType
 	Description string
