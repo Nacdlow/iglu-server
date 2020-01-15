@@ -1,5 +1,6 @@
 package models
 
+// RType is the room type.
 type RType int64
 
 const (
@@ -15,6 +16,8 @@ const (
 	GuestRoom
 )
 
+// Room represents a room in a house, it includes a description and type of the
+// room.
 type Room struct {
 	RoomID      int64 `xorm:"pk autoincr"`
 	RoomName    string

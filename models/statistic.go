@@ -1,8 +1,8 @@
 package models
 
 type Statistic struct {
-	Datetime int64 `xorm:"pk"`
+	StatID   int64 `xorm:"pk"`
+	Datetime int64
 	Powergen float64
 	Powercon float64
-	StatID   int64
 }

@@ -1,5 +1,6 @@
 package models
 
+// UserRole is the role of a user.
 type UserRole int64
 
 const (
@@ -9,6 +10,7 @@ const (
 	RestrictedRole
 )
 
+// User is a smart home system user whom may interact with the system.
 type User struct {
 	Username  string `xorm:"pk"`
 	Password  string

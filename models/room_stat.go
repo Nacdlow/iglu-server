@@ -1,7 +1,9 @@
 package models
 
+// RoomStat represents a room statistic, which is a part of a larger Statistic.
 type RoomStat struct {
-	RstatID     int64 `xorm:"pk autoincr"`
+	RStatID     int64 `xorm:"pk autoincr"`
+	StatID      int64 // the larger Statistic ID
 	RoomID      int64
 	Room        Room `xorm:"-"`
 	Temperature float64

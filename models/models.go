@@ -22,6 +22,8 @@ func init() {
 	)
 }
 
+// SetupEngine sets up an XORM engine and syncs the schema.
+// It will return an xorm engine.
 func SetupEngine() *xorm.Engine {
 	engine, err := xorm.NewEngine("sqlite3", "data.db")
 	if err != nil {
