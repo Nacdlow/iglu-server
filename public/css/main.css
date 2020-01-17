@@ -7,3 +7,9 @@ background-color: #009688 !important;
 color: white;
 text-decoration-color: white;
 }
+
+/*text color same as nav colour*/
+#navcolor
+{
+ color: #2bbbad!important;
+}
