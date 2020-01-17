@@ -1,9 +1,21 @@
 /* The global CSS file */
 .background {
-background-color: #009688 !important;
+  background-color: #009688 !important;
+  color: white;
 }
 
 #roomAvatar {
-color: white;
-text-decoration-color: white;
+  color: white;
+  text-decoration-color: white;
+}
+
+.circle {
+  color: black;
+  border-radius: 100%;
+  width: 18vh;
+  height: 18vh;
+}
+.circle-sm {
+  width: 10vh;
+  height: 10vh;
 }
