@@ -1,6 +1,7 @@
 package routes
 
 import (
+	"fmt"
 	macaron "gopkg.in/macaron.v1"
 )
 
@@ -16,7 +17,7 @@ func DashboardHandler(ctx *macaron.Context) {
 }
 
 func SpecificRoomsHandler(ctx *macaron.Context) {
-	ctx.Data["NavTitle"] = "X's Room"
+	ctx.Data["NavTitle"] = fmt.Sprintf("%s's Room", ctx.Params("name"))
 	ctx.HTML(200, "specificRooms")
 }
 

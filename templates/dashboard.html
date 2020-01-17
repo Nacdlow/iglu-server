@@ -1,11 +1,16 @@
 {{template "base/head" .}}
 {{template "base/nav" .}}
-<span class="min-chart" id="chart-sales" data-percent="56">56%</span>
+<div class="row d-flex justify-content-center">
+<div class="col-md-4 pt-5">
+<div class="chart" id="chart-power" data-percent="56">56%</div>
+
+</div>
+</div>
 
 {{template "base/scripts" .}}
 <script>
 $(function () {
-  $('.min-chart#chart-sales').easyPieChart({
+  $('.chart#chart-power').easyPieChart({
     barColor: "#4caf50",
     onStep: function (from, to, percent) {
       $(this.el).find('.percent').text(Math.round(percent));

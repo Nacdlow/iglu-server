@@ -43,7 +43,7 @@ func start(clx *cli.Context) (err error) {
 	m.Get("/rooms", routes.RoomsHandler)
 	m.Get("/devices", routes.DevicesHandler)
 
-	m.Get("/sr", routes.SpecificRoomsHandler)
+	m.Get("/room/:name", routes.SpecificRoomsHandler)
 
 	log.Printf("Starting server on port %s!\n", clx.String("port"))
 	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%s", clx.String("port")), m))
