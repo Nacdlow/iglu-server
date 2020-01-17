@@ -18,18 +18,21 @@ func HomepageHandler(ctx *macaron.Context) {
 // DashboardHandler handles rendering the dashboard.
 func DashboardHandler(ctx *macaron.Context) {
 	ctx.Data["NavTitle"] = "Dashboard"
+	ctx.Data["IsDashboard"] = 1
 	ctx.HTML(200, "dashboard")
 }
 
 //SpecificRoomsHandler handles the specific rooms
 func SpecificRoomsHandler(ctx *macaron.Context) {
 	ctx.Data["NavTitle"] = fmt.Sprintf("%s", ctx.Params("roomType"))
+	ctx.Data["IsRooms"] = 1
 	ctx.HTML(200, "specificRooms")
 }
 
 //RoomsHandler handles rendering the rooms page
 func RoomsHandler(ctx *macaron.Context) {
 	ctx.Data["NavTitle"] = "Rooms"
+	ctx.Data["IsRooms"] = 1
 	ctx.HTML(200, "rooms")
 }
 
