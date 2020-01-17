@@ -12,3 +12,6 @@ func HomepageHandler(ctx *macaron.Context) {
 func SpecificRoomsHandler(ctx *macaron.Context) {
 	ctx.HTML(200, "specificRooms")
 }
+func DevicesHandler(ctx *macaron.Context) {
+	ctx.HTML(200, "devices")
+}

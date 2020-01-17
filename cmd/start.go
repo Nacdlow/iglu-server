@@ -4,9 +4,10 @@ import (
 	"fmt"
 	"log"
 
+	"net/http"
+
 	"github.com/urfave/cli"
 	macaron "gopkg.in/macaron.v1"
-	"net/http"
 
 	"gitlab.com/group-nacdlow/nacdlow-server/models"
 	"gitlab.com/group-nacdlow/nacdlow-server/routes"
@@ -38,6 +39,7 @@ func start(clx *cli.Context) (err error) {
 	m.Use(macaron.Renderer())
 
 	m.Get("/", routes.HomepageHandler)
+	m.Get("/devices", routes.DevicesHandler)
 
 	m.Get("/sr", routes.SpecificRoomsHandler)
 
