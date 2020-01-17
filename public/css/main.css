@@ -4,11 +4,6 @@
   color: white;
 }
 
-#roomAvatar {
-  color: white;
-  text-decoration-color: white;
-}
-
 .circle {
   color: black;
   border-radius: 100%;
@@ -18,4 +13,24 @@
 .circle-sm {
   width: 10vh;
   height: 10vh;
+}
+
+#roomAvatarDiv {
+  color: white;
+  text-decoration-color: white;
+  margin-bottom: 2%;
+}
+
+#roomAvatar {
+  margin-right: 1em;
+}
+
+#addRoom {
+  margin-right: 1em;
+  height: 7em;
+  width: 7em;
+}
+
+.plsbewhite {
+  stroke: white;
 }
