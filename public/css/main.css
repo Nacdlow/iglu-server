@@ -2,3 +2,8 @@
 .srbackground {
 background-color: #009688 !important;
 }
+
+#roomAvatar {
+color: white;
+text-decoration-color: white;
+}
