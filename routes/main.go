@@ -24,7 +24,7 @@ func DashboardHandler(ctx *macaron.Context) {
 
 //SpecificRoomsHandler handles the specific rooms
 func SpecificRoomsHandler(ctx *macaron.Context) {
-	ctx.Data["NavTitle"] = fmt.Sprintf("%s's Room", ctx.Params("name"))
+	ctx.Data["NavTitle"] = fmt.Sprintf("%s", ctx.Params("roomType"))
 	ctx.Data["IsRooms"] = 1
 	ctx.HTML(200, "specificRooms")
 }

@@ -1,6 +1,24 @@
 /* The global CSS file */
 .background {
-background-color: #009688 !important;
+  background-color: #009688 !important;
+  color: white;
+}
+
+.circle {
+  color: black;
+  border-radius: 100%;
+  width: 18vh;
+  height: 18vh;
+}
+.circle-sm {
+  width: 10vh;
+  height: 10vh;
+}
+
+#roomAvatarDiv {
+  color: white;
+  text-decoration-color: white;
+  margin-bottom: 2%;
 }
 
 #roomAvatar {
@@ -14,4 +32,10 @@ a{
 
 ::placeholder{
     color: white;
+}
+
+#addRoom {
+  margin-right: 1em;
+  height: 7em;
+  width: 7em;
 }

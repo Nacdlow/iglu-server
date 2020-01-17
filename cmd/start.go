@@ -44,7 +44,6 @@ func start(clx *cli.Context) (err error) {
 	m.Get("/dashboard", routes.DashboardHandler)
 	m.Get("/rooms", routes.RoomsHandler)
 	m.Get("/devices", routes.DevicesHandler)
-
 	m.Get("/room/:name", routes.SpecificRoomsHandler)
 	m.Get("/register", routes.RegisterHandler)
 
