@@ -1,11 +1,6 @@
 /* The global CSS file */
-.background {
-  background-color: #009688 !important;
+body {
   color: white;
-}
-
-.modal {
-  color: black;
 }
 
 .btn {
