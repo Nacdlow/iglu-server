@@ -41,3 +41,8 @@ func DevicesHandler(ctx *macaron.Context) {
 	ctx.Data["NavTitle"] = "Devices"
 	ctx.HTML(200, "devices")
 }
+
+//DevicesHandler handles the devices page
+func RegisterHandler(ctx *macaron.Context) {
+	ctx.HTML(200, "register")
+}
