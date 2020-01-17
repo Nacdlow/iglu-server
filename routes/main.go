@@ -13,3 +13,7 @@ func HomepageHandler(ctx *macaron.Context) {
 func DashboardHandler(ctx *macaron.Context) {
 	ctx.HTML(200, "dashboard")
 }
+
+func DevicesHandler(ctx *macaron.Context) {
+	ctx.HTML(200, "devices")
+}
