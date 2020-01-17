@@ -4,6 +4,14 @@
   color: white;
 }
 
+.modal {
+  color: black;
+}
+
+.btn {
+  border-radius: 100vw;
+}
+
 .circle {
   color: black;
   border-radius: 100%;
@@ -29,8 +37,4 @@
   margin-right: 1em;
   height: 7em;
   width: 7em;
-}
-
-.plsbewhite {
-  stroke: white;
 }
