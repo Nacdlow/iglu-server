@@ -38,11 +38,12 @@ func start(clx *cli.Context) (err error) {
 	m := macaron.Classic()
 	m.Use(macaron.Renderer())
 
+	m.NotFound(routes.NotFoundHandler)
+
 	m.Get("/", routes.HomepageHandler)
 	m.Get("/dashboard", routes.DashboardHandler)
 	m.Get("/rooms", routes.RoomsHandler)
 	m.Get("/devices", routes.DevicesHandler)
-
 	m.Get("/sr", routes.SpecificRoomsHandler)
 
 	log.Printf("Starting server on port %s!\n", clx.String("port"))
