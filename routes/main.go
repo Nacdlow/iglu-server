@@ -4,6 +4,11 @@ import (
 	macaron "gopkg.in/macaron.v1"
 )
 
+// NotFoundHandler handles 404 errors
+func NotFoundHandler(ctx *macaron.Context) {
+	ctx.HTML(404, "notfound")
+}
+
 // HomepageHandler handles rendering the homepage.
 func HomepageHandler(ctx *macaron.Context) {
 	ctx.HTML(200, "index")
@@ -15,6 +20,7 @@ func DashboardHandler(ctx *macaron.Context) {
 	ctx.HTML(200, "dashboard")
 }
 
+//SpecificRoomsHandler handles the specific rooms
 func SpecificRoomsHandler(ctx *macaron.Context) {
 	ctx.Data["NavTitle"] = "X's Room"
 	ctx.HTML(200, "specificRooms")
@@ -26,6 +32,7 @@ func RoomsHandler(ctx *macaron.Context) {
 	ctx.HTML(200, "rooms")
 }
 
+//DevicesHandler handles the devices page
 func DevicesHandler(ctx *macaron.Context) {
 	ctx.Data["NavTitle"] = "Devices"
 	ctx.HTML(200, "devices")
