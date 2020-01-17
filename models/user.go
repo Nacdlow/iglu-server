@@ -1,18 +1,20 @@
 package models
 
-type UserType int64
+// UserRole is the role of a user.
+type UserRole int64
 
 const (
-    Normal = iota
-    Admin
-    Guest
-    Restricted
+	NormalRole = iota
+	AdminRole
+	GuestRole
+	RestrictedRole
 )
 
+// User is a smart home system user whom may interact with the system.
 type User struct {
-    Username  string `xorm:"pk"`
-    Password  string
-    FirstName string
-    LastName  string
-    Type      UserType
+	Username  string `xorm:"pk"`
+	Password  string
+	FirstName string
+	LastName  string
+	Role      UserRole
 }
