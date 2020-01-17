@@ -2,7 +2,47 @@
 {{template "base/nav" .}}
 <div class="row d-flex justify-content-center">
 <div class="col-md-4 pt-5">
-<div class="chart" id="chart-power" data-percent="56">56%</div>
+
+<div class="row d-flex justify-content-center">
+<div class="card p-3 warning-color circle flex-center flex-column">
+  <div class="card-body">
+	  <h5 class="card-title"><small>&pound;</small> 0.52</h5>
+    <p class="card-text">per hour</p>
+  </div>
+</div>
+</div>
+
+<h4>Favourites</h4>
+<div class="container">
+  <div class="row">
+    <div class="col-sm m-2">
+<div class="card p-1 circle circle-sm flex-center flex-column">
+  <div class="card-body">
+	  <h5 class="card-title">1</h5>
+  </div>
+</div>
+    </div>
+    <div class="col-sm">
+<div class="card p-1 circle circle-sm flex-center flex-column">
+  <div class="card-body">
+	  <h5 class="card-title">2</h5>
+  </div>
+</div>
+    </div>
+    <div class="col-sm">
+<div class="card p-1 circle circle-sm flex-center flex-column">
+  <div class="card-body">
+	  <h5 class="card-title">3</h5>
+  </div>
+</div>
+    </div>
+  </div>
+</div>
+
+<hr>
+<h5><i class="fas fa-lightbulb"></i> Tips</h5>
+<p>For every degree celcius that you have lower your heating, you may reduce
+your energy bill by 10%!</p>
 
 </div>
 </div>
@@ -12,6 +52,10 @@
 $(function () {
   $('.chart#chart-power').easyPieChart({
     barColor: "#4caf50",
+	lineWidth: 5,
+	scaleLength: 8,
+	lineCap: 'butt',
+	rotate: 240,
     onStep: function (from, to, percent) {
       $(this.el).find('.percent').text(Math.round(percent));
     }

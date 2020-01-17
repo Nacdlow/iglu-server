@@ -1,15 +1,36 @@
 /* The global CSS file */
-.srbackground {
-background-color: #009688 !important;
+.background {
+  background-color: #009688 !important;
+  color: white;
+}
+
+.circle {
+  color: black;
+  border-radius: 100%;
+  width: 18vh;
+  height: 18vh;
+}
+.circle-sm {
+  width: 10vh;
+  height: 10vh;
+}
+
+#roomAvatarDiv {
+  color: white;
+  text-decoration-color: white;
+  margin-bottom: 2%;
 }
 
 #roomAvatar {
-color: white;
-text-decoration-color: white;
+  margin-right: 1em;
 }
 
-/*text color same as nav colour*/
-#navcolor
-{
- color: #2bbbad!important;
+#addRoom {
+  margin-right: 1em;
+  height: 7em;
+  width: 7em;
+}
+
+.plsbewhite {
+  stroke: white;
 }
