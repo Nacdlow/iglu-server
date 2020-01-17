@@ -1,9 +1,24 @@
 /* The global CSS file */
-.srbackground {
+.background {
 background-color: #009688 !important;
 }
 
-#roomAvatar {
+#roomAvatarDiv {
 color: white;
 text-decoration-color: white;
+margin-bottom: 2%;
+}
+
+#roomAvatar {
+margin-right: 1em;
+}
+
+#addRoom {
+    margin-right: 1em;
+    height: 7em;
+    width: 7em;
+    }
+
+.plsbewhite {
+    stroke: white;
 }
