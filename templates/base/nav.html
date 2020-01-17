@@ -1,32 +1,67 @@
 <header>
     <nav class="navbar navbar-expand-lg navbar-dark default-color">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-		<a class="navbar-brand" href="#"><strong>{{.NavTitle}}</strong></a>
+        <a class="navbar-brand" href="#"><strong>{{.NavTitle}}</strong></a>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-				<li class="nav-item{{if .IsDashboard}} active{{end}}">
+                <li class="nav-item{{if .IsDashboard}} active{{end}}">
                     <a class="nav-link" href="/dashboard">Main <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item{{if .IsRooms}} active{{end}}">
                     <a class="nav-link" href="/rooms">Rooms</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/notifications">Notifications</a>
+                <li class="nav-item" data-toggle="modal" data-target="#fullHeightModalRight">
+                    <a class="nav-link" href="#">Notifications</a>
                 </li>
+                <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#fullHeightModalRight">
+                    Notifications
+                  </button> -->
+
             </ul>
             <ul class="navbar-nav nav-flex-icons">
                 <li class="nav-item">
                     <a class="nav-link"><i class="fas fa-cloud"></i></a>
                 </li>
- <li class="nav-item avatar">
-        <a class="nav-link p-0" href="#">
-          <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-5.jpg" class="rounded-circle z-depth-0"
-            alt="avatar image" height="35">
-        </a>
-      </li>
+                <li class="nav-item avatar">
+                    <a class="nav-link p-0" href="#">
+                        <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-5.jpg"
+                            class="rounded-circle z-depth-0" alt="avatar image" height="35">
+                    </a>
+                </li>
             </ul>
         </div>
     </nav>
+
+
+
+
+<!-- Full Height Modal Right -->
+<div class="modal fade right" id="fullHeightModalRight" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+
+  <!-- Add class .modal-full-height and then add class .modal-right (or other classes from list above) to set a position to the modal -->
+  <div class="modal-dialog modal-full-height modal-right" role="document">
+
+
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title w-100" id="myModalLabel">Some text</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer justify-content-center">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Full Height Modal Right -->
 </header>
