@@ -4,9 +4,10 @@ import (
 	"fmt"
 	"log"
 
+	"net/http"
+
 	"github.com/urfave/cli"
 	macaron "gopkg.in/macaron.v1"
-	"net/http"
 
 	"gitlab.com/group-nacdlow/nacdlow-server/routes"
 )
@@ -36,6 +37,7 @@ func start(clx *cli.Context) (err error) {
 	m.Use(macaron.Renderer())
 
 	m.Get("/", routes.HomepageHandler)
+	m.Get("/devices", routes.DevicesHandler)
 
 	log.Printf("Starting server on port %s!\n", clx.String("port"))
 	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%s", clx.String("port")), m))
