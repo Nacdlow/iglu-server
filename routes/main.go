@@ -8,3 +8,7 @@ import (
 func HomepageHandler(ctx *macaron.Context) {
 	ctx.HTML(200, "index")
 }
+
+func SpecificRoomsHandler(ctx *macaron.Context) {
+	ctx.HTML(200, "specificRooms")
+}
