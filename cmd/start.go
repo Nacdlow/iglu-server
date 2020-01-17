@@ -39,6 +39,7 @@ func start(clx *cli.Context) (err error) {
 	m.Use(macaron.Renderer())
 
 	m.Get("/", routes.HomepageHandler)
+	m.Get("/rooms", routes.RoomsHandler)
 	m.Get("/devices", routes.DevicesHandler)
 
 	m.Get("/sr", routes.SpecificRoomsHandler)
