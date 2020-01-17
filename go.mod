@@ -5,6 +5,7 @@ go 1.13
 require (
 	github.com/cpuguy83/go-md2man/v2 v2.0.0 // indirect
 	github.com/mattn/go-sqlite3 v2.0.2+incompatible
+	github.com/spf13/viper v1.6.1
 	github.com/unknwon/com v1.0.1 // indirect
 	github.com/urfave/cli v1.22.2
 	golang.org/x/crypto v0.0.0-20200115085410-6d4e4cb37c7d // indirect

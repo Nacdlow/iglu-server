@@ -10,6 +10,7 @@ import (
 	macaron "gopkg.in/macaron.v1"
 
 	"gitlab.com/group-nacdlow/nacdlow-server/models"
+	"gitlab.com/group-nacdlow/nacdlow-server/modules/settings"
 	"gitlab.com/group-nacdlow/nacdlow-server/routes"
 )
 
@@ -30,7 +31,7 @@ var CmdStart = cli.Command{
 }
 
 func start(clx *cli.Context) (err error) {
-	// TODO load configuration files
+	settings.LoadConfig()
 	engine := models.SetupEngine()
 	defer engine.Close()
 
