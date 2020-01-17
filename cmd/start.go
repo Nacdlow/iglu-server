@@ -38,6 +38,7 @@ func start(clx *cli.Context) (err error) {
 	m.Use(macaron.Renderer())
 
 	m.Get("/", routes.HomepageHandler)
+	m.Get("/dashboard", routes.DashboardHandler)
 
 	log.Printf("Starting server on port %s!\n", clx.String("port"))
 	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%s", clx.String("port")), m))

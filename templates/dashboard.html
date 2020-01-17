@@ -1,0 +1,16 @@
+{{template "base/head" .}}
+{{template "base/nav" .}}
+<span class="min-chart" id="chart-sales" data-percent="56">56%</span>
+
+{{template "base/scripts" .}}
+<script>
+$(function () {
+  $('.min-chart#chart-sales').easyPieChart({
+    barColor: "#4caf50",
+    onStep: function (from, to, percent) {
+      $(this.el).find('.percent').text(Math.round(percent));
+    }
+  });
+});
+</script>
+{{template "base/footer" .}}

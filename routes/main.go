@@ -8,3 +8,8 @@ import (
 func HomepageHandler(ctx *macaron.Context) {
 	ctx.HTML(200, "index")
 }
+
+// DashboardHandler handles rendering the dashboard.
+func DashboardHandler(ctx *macaron.Context) {
+	ctx.HTML(200, "dashboard")
+}
