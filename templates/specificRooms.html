@@ -2,46 +2,53 @@
 {{template "base/nav" .}}
 
 <body class="background">
+
+</div>
+<div class="p-5"><hr></div>
     <div class="d-flex justify-content-center">
-        <div class="col-md-4 pt-5">
+        <div class="row col-md-12 pt-2">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-4"><a class="nav-link p-0" href="#" id="roomAvatarDiv">
-                            <img src="https://i1.wp.com/bestlifeonline.com/wp-content/uploads/2019/11/alesandra-dubin-best-life-writer.jpg?fit=96%2C96&ssl=1"
-                                class="rounded-circle z-depth-2" alt="100x100" data-holder-rendered="true"
-                                id="roomAvatar">
-                            <p class="pt-2">Joanne's Room</p>
-                    </div>
 
-                    <div class="col-md-4"><a class="nav-link p-0" href="#" id="roomAvatarDiv">
+                    <div class="col-md-4 row d-flex justify-content-center" id="roomAvatarDiv"><a class="nav-link p-0"
+                            href="/devices" id="roomAvatar">
                             <img src="https://www.scottishfriendly.co.uk/blog/wp-content/uploads/2018/06/Kevin-McFarlane_avatar_1528802862-96x96.jpg"
-                                class="rounded-circle z-depth-2" alt="100x100" data-holder-rendered="true"
-                                id="roomAvatar">
-                            <p class="pt-2">Mike's Room</p>
+                                class="mt-3 rounded-circle z-depth-2" alt="avatar image">
+                            <p class="pt-2 text-center">David's Room</p>
                     </div>
 
-                    <div class="col-md-4"><a class="nav-link p-0" href="#" id="roomAvatarDiv">
-                            <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-5.jpg"
-                                class="rounded-circle z-depth-2" alt="100x100" data-holder-rendered="true"
-                                id="roomAvatar">
-                            <p class="pt-2">Anna's Room</p>
-                    </div>
-
-                    <div class="col-md-4"><a class="nav-link p-0" href="#" id="roomAvatarDiv">
-                        <img src="https://www.cityam.com/wp-content/uploads/2019/06/Joe-Curtis-96x96.jpg"
-                            class="rounded-circle z-depth-2" alt="100x100" data-holder-rendered="true"
+                    <div class="col-md-4 row d-flex justify-content-center"><a class="nav-link p-0" href="/devices"
                             id="roomAvatar">
-                        <p class="pt-2">Ethan's Room</p>
+                            <img src="https://i1.wp.com/bestlifeonline.com/wp-content/uploads/2019/11/alesandra-dubin-best-life-writer.jpg?fit=96%2C96&ssl=1"
+                                class="mt-3 rounded-circle z-depth-2" alt="avatar image">
+                            <p class="pt-2 text-center">Janet's Room</p>
+                    </div>
 
-                    <div class="col-md-4"><a class="nav-link p-0" href="#" id="roomAvatarDiv">
-                         <img src="/img/whiteAdd.png"
-                             class="plsbewhite rounded-circle z-depth-2" alt="100x100" data-holder-rendered="true"
-                             id="addRoom">
+                    <div class="col-md-4 row d-flex justify-content-center"><a class="nav-link p-0"
+                            href="/devices" id="roomAvatar">
+                            <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-5.jpg"
+                                class="mt-3 rounded-circle z-depth-2" alt="avatar image">
+                            <p class="pt-2 text-center">Anna's Room</p>
+                    </div>
+
+                    <div class="col-md-4 row d-flex justify-content-center"><a class="nav-link p-0" href="/devices"
+                            id="roomAvatar">
+                            <img src="https://www.cityam.com/wp-content/uploads/2019/06/Joe-Curtis-96x96.jpg"
+                                class="mt-3 rounded-circle z-depth-2" alt="avatar image">
+                            <p class="pt-2 text-center">Ben's Room</p>
+                    </div>
+
+                    <div class="col-md-4 row d-flex justify-content-center ">
+                        <a id="navcolor" type="button" href="#" style="color: white;">
+                            <i class="fas fa-plus-circle mt-4 addRoom rounded-circle animated fadeIn" style="font-size: 6em;"></i>
+                            <div class="pt-2 text-center"></div></a>
+                    </div>
+
                 </div>
-                </div>
-            </div>
+            </div> 
         </div>
-    </div>
+    </div>  
+    <div class="p-5"><hr></div>
 </body>
 {{template "base/scripts" .}}
 {{template "base/footer" .}}

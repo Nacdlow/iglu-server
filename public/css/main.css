@@ -3,6 +3,10 @@ body {
   color: white;
 }
 
+.bg {
+    background-color: #009688;
+}
+
 .modal {
   color: black;
 }
@@ -41,8 +45,17 @@ a{
     color: white;
 }
 
-#addRoom {
-  margin-right: 1em;
-  height: 7em;
-  width: 7em;
+.addRoom {
+  opacity: 90%;
+  background-color: none; 
 }
+
+.bell{
+    font-size: 1.6em;
+    color: red;
+}
+
+.regText{
+    color: white;
+}
+
