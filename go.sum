@@ -48,8 +48,11 @@ github.com/ghodss/yaml v1.0.0/go.mod h1:4dBDuWmgqj2HViK6kFavaiC9ZROes6MMH2rRYeME
 github.com/go-kit/kit v0.8.0/go.mod h1:xBxKIO96dXMWWy0MnWVtmwkA9/13aqxPnvrjFYMA2as=
 github.com/go-logfmt/logfmt v0.3.0/go.mod h1:Qt1PoO58o5twSAckw1HlFXLmHsOX5/0LbT9GBnD5lWE=
 github.com/go-logfmt/logfmt v0.4.0/go.mod h1:3RMwSq7FuexP4Kalkev3ejPJsZTpXXBr9+V4qmtdjCk=
+github.com/go-macaron/csrf v0.0.0-20191101041016-98718788f460 h1:qA3N0sOGQ4OnQlz52JKBNIwzoHtS+d2bTqNMxbCqIFg=
+github.com/go-macaron/csrf v0.0.0-20191101041016-98718788f460/go.mod h1:FX53Xq0NNlUj0E5in5J8Dq5nrbdK3ZyDIy6y5VWOiUo=
 github.com/go-macaron/inject v0.0.0-20160627170012-d8a0b8677191 h1:NjHlg70DuOkcAMqgt0+XA+NHwtu66MkTVVgR4fFWbcI=
 github.com/go-macaron/inject v0.0.0-20160627170012-d8a0b8677191/go.mod h1:VFI2o2q9kYsC4o7VP1HrEVosiZZTd+MVT3YZx4gqvJw=
+github.com/go-macaron/session v0.0.0-20190805070824-1a3cdc6f5659/go.mod h1:tLd0QEudXocQckwcpCq5pCuTCuYc24I0bRJDuRe9OuQ=
 github.com/go-macaron/session v0.0.0-20191101041208-c5d57a35f512 h1:7ndsXTX42iYHryQz98zUsBJfStJ0kXFKgDrPmRvR400=
 github.com/go-macaron/session v0.0.0-20191101041208-c5d57a35f512/go.mod h1:tLd0QEudXocQckwcpCq5pCuTCuYc24I0bRJDuRe9OuQ=
 github.com/go-sql-driver/mysql v1.4.1 h1:g24URVg0OFbNUTx9qqY1IRZ9D9z3iPyi5zKhQZpNwpA=

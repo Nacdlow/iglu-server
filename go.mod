@@ -5,6 +5,7 @@ go 1.13
 require (
 	github.com/cpuguy83/go-md2man/v2 v2.0.0 // indirect
 	github.com/denisenkom/go-mssqldb v0.0.0-20191128021309-1d7a30a10f73 // indirect
+	github.com/go-macaron/csrf v0.0.0-20191101041016-98718788f460
 	github.com/go-macaron/session v0.0.0-20191101041208-c5d57a35f512
 	github.com/go-sql-driver/mysql v1.5.0 // indirect
 	github.com/gopherjs/gopherjs v0.0.0-20191106031601-ce3c9ade29de // indirect

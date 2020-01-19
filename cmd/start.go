@@ -6,6 +6,7 @@ import (
 
 	"net/http"
 
+	"github.com/go-macaron/csrf"
 	"github.com/go-macaron/session"
 	"github.com/urfave/cli"
 	macaron "gopkg.in/macaron.v1"
@@ -40,6 +41,7 @@ func start(clx *cli.Context) (err error) {
 	m := macaron.Classic()
 	m.Use(macaron.Renderer())
 	m.Use(session.Sessioner())
+	m.Use(csrf.Csrfer())
 
 	m.NotFound(routes.NotFoundHandler)
 
