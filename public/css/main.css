@@ -1,8 +1,4 @@
 /* The global CSS file */
-body {
-  color: white;
-}
-
 .btn {
   border-radius: 100vw;
 }
@@ -10,31 +6,21 @@ body {
 .circle {
   color: black;
   border-radius: 100%;
-  width: 18vh;
-  height: 18vh;
+  width:  140px;
+  height: 140px;
 }
 .circle-sm {
-  width: 10vh;
-  height: 10vh;
+  width:  70px;
+  height: 70px;
 }
 
 #roomAvatarDiv {
-  color: white;
   text-decoration-color: white;
   margin-bottom: 2%;
 }
 
 #roomAvatar {
-color: white;
 text-decoration-color: white;
-}
-
-a{
-    color: rgb(218, 218, 218);
-}
-
-::placeholder{
-    color: white;
 }
 
 .addRoom {
@@ -46,8 +32,3 @@ a{
     font-size: 1.6em;
     color: red;
 }
-
-.regText{
-    color: white;
-}
-
