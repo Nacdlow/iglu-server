@@ -2,6 +2,7 @@ package routes
 
 import (
 	"fmt"
+	"gitlab.com/group-nacdlow/nacdlow-server/models"
 	macaron "gopkg.in/macaron.v1"
 )
 
@@ -33,7 +34,13 @@ func SpecificRoomsHandler(ctx *macaron.Context) {
 func RoomsHandler(ctx *macaron.Context) {
 	ctx.Data["NavTitle"] = "Rooms"
 	ctx.Data["IsRooms"] = 1
+	ctx.Data["Rooms"] = models.GetRooms()
 	ctx.HTML(200, "rooms")
+}
+
+// AddRoomHandler handles rendering the add room page page.
+func AddRoomHandler(ctx *macaron.Context) {
+	ctx.HTML(200, "addroom")
 }
 
 //DevicesHandler handles the devices page

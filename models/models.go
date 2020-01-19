@@ -2,6 +2,7 @@ package models
 
 import (
 	_ "github.com/mattn/go-sqlite3" // SQLite driver support
+
 	"log"
 	"xorm.io/core"
 	"xorm.io/xorm"
@@ -25,7 +26,8 @@ func init() {
 // SetupEngine sets up an XORM engine and syncs the schema.
 // It will return an xorm engine.
 func SetupEngine() *xorm.Engine {
-	engine, err := xorm.NewEngine("sqlite3", "data.db")
+	var err error
+	engine, err = xorm.NewEngine("sqlite3", "data.db")
 	if err != nil {
 		log.Fatalln("Failed to setup engine!", err)
 	}
@@ -36,6 +38,7 @@ func SetupEngine() *xorm.Engine {
 	if err != nil {
 		log.Fatalln("Failed to sync schema!", err)
 	}
+	log.Println("DONEE")
 
 	return engine
 }

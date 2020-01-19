@@ -42,7 +42,7 @@ func GetRoom(id int64) (*Room, error) {
 
 func GetRooms() (room []Room) {
 	engine.Find(&room)
-	return
+	return room
 }
 
 func AddRoom(r *Room) (err error) {

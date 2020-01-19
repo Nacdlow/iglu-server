@@ -6,6 +6,7 @@ import (
 
 	"net/http"
 
+	"github.com/go-macaron/session"
 	"github.com/urfave/cli"
 	macaron "gopkg.in/macaron.v1"
 
@@ -38,14 +39,18 @@ func start(clx *cli.Context) (err error) {
 	// Start the web server
 	m := macaron.Classic()
 	m.Use(macaron.Renderer())
+	m.Use(session.Sessioner())
 
 	m.NotFound(routes.NotFoundHandler)
 
 	m.Get("/", routes.HomepageHandler)
 	m.Get("/dashboard", routes.DashboardHandler)
-	m.Get("/rooms", routes.RoomsHandler)
 	m.Get("/devices", routes.DevicesHandler)
-	m.Get("/room/:name", routes.SpecificRoomsHandler)
+	m.Group("/room", func() {
+		m.Get("/add", routes.AddRoomHandler)
+		m.Get("/:name", routes.SpecificRoomsHandler)
+	})
+	m.Get("/rooms", routes.RoomsHandler)
 	m.Get("/register", routes.RegisterHandler)
 
 	log.Printf("Starting server on port %s!\n", clx.String("port"))

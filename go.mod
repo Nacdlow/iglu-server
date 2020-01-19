@@ -5,6 +5,7 @@ go 1.13
 require (
 	github.com/cpuguy83/go-md2man/v2 v2.0.0 // indirect
 	github.com/denisenkom/go-mssqldb v0.0.0-20191128021309-1d7a30a10f73 // indirect
+	github.com/go-macaron/session v0.0.0-20191101041208-c5d57a35f512
 	github.com/go-sql-driver/mysql v1.5.0 // indirect
 	github.com/gopherjs/gopherjs v0.0.0-20191106031601-ce3c9ade29de // indirect
 	github.com/kr/pretty v0.2.0 // indirect
@@ -25,6 +26,6 @@ require (
 	gopkg.in/ini.v1 v1.51.1 // indirect
 	gopkg.in/macaron.v1 v1.3.4
 	gopkg.in/yaml.v2 v2.2.7 // indirect
-	xorm.io/core v0.7.2
+	xorm.io/core v0.7.3
 	xorm.io/xorm v0.8.1
 )
