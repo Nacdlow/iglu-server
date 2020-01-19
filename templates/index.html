@@ -1,14 +1,23 @@
 {{template "base/head" .}}
+
+<td class="bg" s>
+   
+
+
 <div class="row d-flex justify-content-center">
 <div class="col-md-4 pt-5">
 <form class="text-center p-5" action="#!">
-    <p class="h4 mb-4">Sign in</p>
+    <p class="h4 mb-4">Welcome</p>
 
     <!-- Email -->
+    <div class="md-form">
     <input type="email" id="defaultLoginFormEmail" class="form-control mb-4" placeholder="E-mail">
+    </div>
 
     <!-- Password -->
+    <div class="md-form">
     <input type="password" id="defaultLoginFormPassword" class="form-control mb-4" placeholder="Password">
+    </div>
 
     <div class="d-flex justify-content-around">
         <div>
@@ -25,14 +34,16 @@
     </div>
 
     <!-- Sign in button -->
-    <button class="btn btn-info btn-block my-4" type="submit">Sign in</button>
-    
+    <button class="btn btn-default my-4 btn-block" type="submit">Sign in</button>
+
     <!-- Register -->
     <p>Not a member?
         <a href="">Register</a>
     </p>
 
 </form>
+</div>
+
 </div>
 </div>
 {{template "base/footer" .}}

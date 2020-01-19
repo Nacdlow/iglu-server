@@ -1,29 +1,34 @@
-<form class="text-center border border-light p-5" action="#!">
+{{template "base/head" .}}
 
-    <p class="h4 mb-4">Sign up</p>
+<div class="row d-flex justify-content-center">
+    <div class="col-md-4 pt-5">
+<form class="text-center p-5" action="#!">
+
+    <p class="h4 mb-2">Sign Up<hr></p>
 
     <div class="form-row mb-4">
         <div class="col">
             <!-- First name -->
             <div class="md-form">
-            <input type="text" id="defaultRegisterFormFirstName" class="form-control" placeholder="First name">
+                <input type="text" id="defaultRegisterFormFirstName" class="form-control" placeholder="First name">
             </div>
         </div>
         <div class="col">
             <!-- Last name -->
             <div class="md-form">
-            <input type="text" id="defaultRegisterFormLastName" class="form-control" placeholder="Last name">
+                <input type="text" id="defaultRegisterFormLastName" class="form-control" placeholder="Last name">
             </div>
         </div>
     </div>
 
     <!-- E-mail -->
     <div class="md-form">
-    <input type="email" id="defaultRegisterFormEmail" class="form-control mb-4" placeholder="E-mail">
+        <input type="email" id="defaultRegisterFormEmail" class="form-control mb-4" placeholder="E-mail">
     </div>
     <!-- Password -->
     <div class="md-form">
-    <input type="password" id="defaultRegisterFormPassword" class="form-control" placeholder="Password" aria-describedby="defaultRegisterFormPasswordHelpBlock">
+        <input type="password" id="defaultRegisterFormPassword" class="form-control" placeholder="Password"
+            aria-describedby="defaultRegisterFormPasswordHelpBlock">
     </div>
 
     <small id="defaultRegisterFormPasswordHelpBlock" class="form-text text-muted mb-4">
@@ -31,11 +36,15 @@
     </small>
 
     <!-- Sign up button -->
-    <button class="btn btn-green my-4 btn-block" type="submit">Sign in</button>
+    <button class="btn btn-default my-4 btn-block" type="submit">Sign up</button>
 
     <!-- Terms of service -->
     <p>By clicking
         <em>Sign up</em> you agree to our
         <a href="" target="_blank">terms of service</a>
-
+<hr>
 </form>
+</div>
+</div>
+
+{{template "base/footer" .}}

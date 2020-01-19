@@ -10,6 +10,7 @@ import (
 	macaron "gopkg.in/macaron.v1"
 
 	"gitlab.com/group-nacdlow/nacdlow-server/models"
+	"gitlab.com/group-nacdlow/nacdlow-server/modules/settings"
 	"gitlab.com/group-nacdlow/nacdlow-server/routes"
 )
 
@@ -30,7 +31,7 @@ var CmdStart = cli.Command{
 }
 
 func start(clx *cli.Context) (err error) {
-	// TODO load configuration files
+	settings.LoadConfig()
 	engine := models.SetupEngine()
 	defer engine.Close()
 
@@ -44,7 +45,8 @@ func start(clx *cli.Context) (err error) {
 	m.Get("/dashboard", routes.DashboardHandler)
 	m.Get("/rooms", routes.RoomsHandler)
 	m.Get("/devices", routes.DevicesHandler)
-	m.Get("/room/:roomType", routes.SpecificRoomsHandler)
+	m.Get("/room/:name", routes.SpecificRoomsHandler)
+	m.Get("/register", routes.RegisterHandler)
 
 	log.Printf("Starting server on port %s!\n", clx.String("port"))
 	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%s", clx.String("port")), m))

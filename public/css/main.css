@@ -25,11 +25,29 @@ body {
 }
 
 #roomAvatar {
-  margin-right: 1em;
+color: white;
+text-decoration-color: white;
 }
 
-#addRoom {
-  margin-right: 1em;
-  height: 7em;
-  width: 7em;
+a{
+    color: rgb(218, 218, 218);
 }
+
+::placeholder{
+    color: white;
+}
+
+.addRoom {
+  opacity: 90%;
+  background-color: none; 
+}
+
+.bell{
+    font-size: 1.6em;
+    color: red;
+}
+
+.regText{
+    color: white;
+}
+
