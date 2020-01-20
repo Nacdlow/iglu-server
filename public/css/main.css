@@ -13,6 +13,10 @@ a {
     color: white!important;
 }
 
+.card {
+  color: black!important;
+}
+
 a:hover {
     color: palegreen!important;
 }

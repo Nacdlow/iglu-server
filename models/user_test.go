@@ -41,4 +41,6 @@ func TestUserFavRooms(t *testing.T) {
 	assert.Equal(AdminRole, int(user.Role), "Role must match!")
 	assert.Equal(2, len(user.FavRoomsList), "Length of favourite rooms list must be 2!")
 	assert.Equal(2, len(user.FavRooms), "Length of favourite rooms must be 2!")
+	assert.False(HasUser("ha82"), "The user should not be in the database!")
+	assert.False(HasRoom(10), "The room should not be in the database!")
 }
