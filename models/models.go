@@ -4,13 +4,16 @@ import (
 	_ "github.com/mattn/go-sqlite3" // SQLite driver support
 
 	"log"
+	"os"
 	"xorm.io/core"
 	"xorm.io/xorm"
 )
 
 var (
-	engine *xorm.Engine
-	tables []interface{}
+	engine         *xorm.Engine
+	tables         []interface{}
+	sqlitePath     = "data.db"
+	testSqlitePath = "test.db"
 )
 
 func init() {
@@ -27,7 +30,7 @@ func init() {
 // It will return an xorm engine.
 func SetupEngine() *xorm.Engine {
 	var err error
-	engine, err = xorm.NewEngine("sqlite3", "data.db")
+	engine, err = xorm.NewEngine("sqlite3", sqlitePath)
 	if err != nil {
 		log.Fatalln("Failed to setup engine!", err)
 	}
@@ -37,6 +40,26 @@ func SetupEngine() *xorm.Engine {
 
 	if err != nil {
 		log.Fatalln("Failed to sync schema!", err)
+	}
+
+	return engine
+}
+
+// SetupTestEngine sets up an XORM engine for unit testing and syncs the
+// schema to it.
+func SetupTestEngine() *xorm.Engine {
+	var err error
+	os.Remove(testSqlitePath)
+	engine, err = xorm.NewEngine("sqlite3", testSqlitePath)
+	if err != nil {
+		log.Fatalln("Failed to setup test engine!", err)
+	}
+
+	engine.SetMapper(core.GonicMapper{})
+	err = engine.Sync(tables...)
+
+	if err != nil {
+		log.Fatalln("Failed to sync schema with testing database!", err)
 	}
 
 	return engine
