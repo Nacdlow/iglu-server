@@ -67,3 +67,9 @@ func UpdateDeviceCols(d *Device, cols ...string) (err error) {
 	_, err = engine.ID(d.DeviceID).Cols(cols...).Update(d)
 	return
 }
+
+// DeleteDevice deletes a Device from the database.
+func DeleteDevice(id int64) (err error) {
+	_, err = engine.ID(id).Delete(&Device{})
+	return
+}

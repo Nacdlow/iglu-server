@@ -71,3 +71,9 @@ func UpdateRoomCols(r *Room, cols ...string) (err error) {
 	_, err = engine.ID(r.RoomID).Cols(cols...).Update(r)
 	return
 }
+
+// DeleteRoom deletes a Room from the database.
+func DeleteRoom(id int64) (err error) {
+	_, err = engine.ID(id).Delete(&Room{})
+	return
+}

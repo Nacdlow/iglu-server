@@ -65,3 +65,9 @@ func UpdateUserCols(u *User, cols ...string) error {
 	_, err := engine.Id(u.Username).Cols(cols...).Update(u)
 	return err
 }
+
+// DeleteUser deletes a User from the database.
+func DeleteUser(user string) (err error) {
+	_, err = engine.ID(user).Delete(&User{})
+	return
+}
