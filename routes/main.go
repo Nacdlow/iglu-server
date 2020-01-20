@@ -58,3 +58,8 @@ func RegisterHandler(ctx *macaron.Context) {
 func LightsHandler(ctx *macaron.Context) {
 	ctx.HTML(200, "lights")
 }
+
+//HeatingHandler handles the heating page
+func HeatingHandler(ctx *macaron.Context) {
+	ctx.HTML(200, "heating")
+}
