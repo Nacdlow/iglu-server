@@ -53,3 +53,8 @@ func DevicesHandler(ctx *macaron.Context) {
 func RegisterHandler(ctx *macaron.Context) {
 	ctx.HTML(200, "register")
 }
+
+//LightsHandler handles the lights page
+func LightsHandler(ctx *macaron.Context) {
+	ctx.HTML(200, "lights")
+}

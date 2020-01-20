@@ -32,3 +32,7 @@ text-decoration-color: white;
     font-size: 1.6em;
     color: red;
 }
+/* Switch success */
+.switch {
+    background-color: #00C851;
+}

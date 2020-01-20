@@ -48,6 +48,7 @@ func start(clx *cli.Context) (err error) {
 	m.Get("/", routes.HomepageHandler)
 	m.Get("/dashboard", routes.DashboardHandler)
 	m.Get("/devices", routes.DevicesHandler)
+	m.Get("/lights", routes.LightsHandler)
 	m.Group("/room", func() {
 		m.Get("/add", routes.AddRoomHandler)
 		m.Get("/:name", routes.SpecificRoomsHandler)

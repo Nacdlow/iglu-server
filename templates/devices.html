@@ -1,30 +1,78 @@
-{{template "base/head" .}} {{template "base/nav" .}} {{template "base/scripts" .}}
+{{template "base/head" .}} {{template "base/nav" .}} 
+<style>
+    body {
+    background-color: #17a2b8!important;
+    color: white!important;}
+    
+    a {
+        color: white!important;
+    }
+    
+    a:hover {
+        color: darkgreen!important;
+    }
+</style>
 
-<!--<div class="card-body card-body-cascade text-center">-->
-    <div class="row d-flex justify-content-center pt-5">
+<body>
+<div class="container">
+    
+    <h4 class="pt-5 text-center">Home Control</h4>
+    
+    <div class="row justify-content-center pt-4">
+        <div class="col-lg-2 col-md-3 col-4 text-center pb-3">
+            <a type="button" class="far fa-lightbulb pb-3" href="/lights" style="color: white; font-size: 50px;"></a>
+            <h6>Lights</h6>
+        </div>
+        <div class="col-lg-2 col-md-3 col-4 text-center pb-3">
+            <a type="button" class="fas fa-volume-up pb-3" href="#" style="color: white; font-size: 50px;"></a>
+            <h6>Speakers</h6>
+        </div>
+        <div class="col-lg-2 col-md-3 col-4 text-center pb-3">
+            <a type="button" class="fas fa-tv pb-3" href="#" style="color: white; font-size: 50px;"></a>
+            <h6>TV</h6>
+        </div>
+        <div class="col-lg-2 col-md-3 col-4 text-center pb-3">
+            <a type="button" class="far fa-snowflake pb-3" href="#" style="color: white; font-size: 50px;"></a>
+            <h6>Heating</h6>
+        </div>
+         <div class="col-lg-2 col-md-3 col-4 text-center pb-3">
+            <a type="button" class="fas fa-lock pb-3" href="#" style="color: white; font-size: 50px;"></a>
+            <h6>Locks</h6>
+        </div>
+        <div class="col-lg-2 col-md-3 col-4 text-center pb-3">
+            <a type="button" class="fas fa-plus pb-3" href="#" style="color: white; font-size: 50px;"></a>
+            <h6>Add Control Module</h6>
+        </div>
+    </div>
+</div>
+
+</body>
+
+<!--<div class="card-body card-body-cascade text-center">
+<div class="container">
+    <div class="row justify-content-center pt-5">
         <div class="col-md-auto">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-3 col-4 text-center pr-3 pl-3 pb-3">
-                            <a type="button" href="#" style="color: white;"><i class="far fa-lightbulb" style="font-size: 50px;"></i>
+            <div class="row">
+                <div class="col-lg-3 col-4 text-center pr-3 pl-3 pb-3">
+                    <a type="button" href="#" style="color: white;"><i class="far fa-lightbulb" style="font-size: 50px;"></i>
                                 <div class="pt-1">Lights</div></a>
-                    </div>
-                    <div class="col-lg-3 col-4 text-center pr-3 pl-3 pb-3">
-                            <a type="button" href="#" style="color: white;"><i class="fas fa-volume-up" style="font-size: 50px;"></i><div class="pt-1">Speakers</div></a>
-                    </div>
-                    <div class="col-lg-3 col-4 text-center pr-3 pl-3 pb-3">
-                            <a type="button" href="#" style="color: white;"><i class="fas fa-tv" style="font-size: 50px;"></i><div class="pt-1">TV</div></a>
-                    </div>
-                    <div class="col-lg-3 col-4 text-center pr-3 pl-3 pb-3">
-                            <a type="button" href="#" style="color: white;"><i class="far fa-snowflake" style="font-size: 50px;"></i><div class="pt-1">Heating</div></a>
-                    </div>
-                    <div class="col-lg-3 col-4 text-center pr-3 pl-3 pb-3">
-                            <a id="navcolor" type="button" href="" style="color: white;"><i class="fas fa-plus" style="font-size: 50px;"></i><div class="pt-1">Add Device</div></a>
-                    </div>
+                </div>
+                <div class="col-lg-3 col-4 text-center pr-3 pl-3 pb-3">
+                    <a type="button" href="#" style="color: white;"><i class="fas fa-volume-up" style="font-size: 50px;"></i><div class="pt-1">Speakers</div></a>
+                </div>
+                <div class="col-lg-3 col-4 text-center pr-3 pl-3 pb-3">
+                    <a type="button" href="#" style="color: white;"><i class="fas fa-tv" style="font-size: 50px;"></i><div class="pt-1">TV</div></a>
+                </div>
+                <div class="col-lg-3 col-4 text-center pr-3 pl-3 pb-3">
+                    <a type="button" href="#" style="color: white;"><i class="far fa-snowflake" style="font-size: 50px;"></i><div class="pt-1">Heating</div></a>
+                </div>
+                <div class="col-lg-3 col-4 text-center pr-3 pl-3 pb-3">
+                    <a id="navcolor" type="button" href="" style="color: white;"><i class="fas fa-plus" style="font-size: 50px;"></i><div class="pt-1">Add Device</div></a>
                 </div>
             </div>
         </div>
-    </div>  
-<!--</div>-->
+    </div>
+</div>
+</div>-->
 
-{{template "base/footer" .}}
+{{template "base/scripts" .}} {{template "base/footer" .}}
