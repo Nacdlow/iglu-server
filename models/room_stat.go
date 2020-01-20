@@ -15,6 +15,7 @@ type RoomStat struct {
 	OpenWindows int64
 }
 
+// GetRoomStat gets a RoomStat based on its ID from the database.
 func GetRoomStat(id int64) (*RoomStat, error) {
 	r := new(RoomStat)
 	has, err := engine.ID(id).Get(r)
@@ -26,27 +27,38 @@ func GetRoomStat(id int64) (*RoomStat, error) {
 	return r, nil
 }
 
+// GetRoomStats returns an array of all RoomStats from the database.
 func GetRoomStats() (roomStats []RoomStat) {
 	engine.Find(&roomStats)
 	return
 }
 
+// AddRoomStat adds an RoomStat in the database.
 func AddRoomStat(r *RoomStat) (err error) {
 	_, err = engine.Insert(r)
 	return
 }
 
+// HasRoomStat returns whether an RoomStat is in the database or not.
 func HasRoomStat(id int64) (has bool) {
 	has, _ = engine.Get(&RoomStat{RStatID: id})
 	return
 }
 
+// UpdateRoomStat updates an RoomStat in the database.
 func UpdateRoomStat(r *RoomStat) (err error) {
 	_, err = engine.Id(r.RStatID).Update(r)
 	return
 }
 
+// UpdateRoomStatCols will update the columns of an item even if they are empty.
 func UpdateRoomStatCols(r *RoomStat, cols ...string) (err error) {
 	_, err = engine.ID(r.RStatID).Cols(cols...).Update(r)
+	return
+}
+
+// DeleteRoomStat deletes a RoomStat from the database.
+func DeleteRoomStat(id int64) (err error) {
+	_, err = engine.ID(id).Delete(&RoomStat{})
 	return
 }

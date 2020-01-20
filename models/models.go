@@ -38,7 +38,6 @@ func SetupEngine() *xorm.Engine {
 	if err != nil {
 		log.Fatalln("Failed to sync schema!", err)
 	}
-	log.Println("DONEE")
 
 	return engine
 }

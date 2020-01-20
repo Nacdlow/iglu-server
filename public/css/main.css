@@ -34,3 +34,7 @@ text-decoration-color: white;
 }
 
 
+/* Switch success */
+.switch {
+    background-color: #00C851;
+}
