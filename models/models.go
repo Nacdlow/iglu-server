@@ -3,6 +3,7 @@ package models
 import (
 	_ "github.com/mattn/go-sqlite3" // SQLite driver support
 
+	"github.com/brianvoe/gofakeit/v4"
 	"log"
 	"os"
 	"xorm.io/core"
@@ -24,6 +25,7 @@ func init() {
 		new(Statistic),
 		new(User),
 	)
+	gofakeit.Seed(0) // Using 0 will use current Unix time.
 }
 
 // SetupEngine sets up an XORM engine and syncs the schema.

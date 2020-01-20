@@ -2,14 +2,26 @@ package models
 
 import (
 	"errors"
+	"github.com/brianvoe/gofakeit/v4"
+	"time"
 )
 
 // Statistic represents a statistic log at a period of time.
 type Statistic struct {
-	StatID   int64 `xorm:"pk"`
-	Datetime int64
-	Powergen float64
-	Powercon float64
+	StatID    int64   `xorm:"pk"`
+	Timestamp int64   `xorm:"created"`
+	Powergen  float64 // Power generated, kWh
+	Powercon  float64 // Power conserved, kWh
+}
+
+// GetFakeStat returns a new randomly generated statistic. This is used for
+// testing purposes.
+func GetFakeStat() (s *Statistic) {
+	s = new(Statistic)
+	s.Timestamp = time.Now().UnixNano() - int64(gofakeit.Number(0, 99999))
+	s.Powergen = gofakeit.Float64Range(0, 45)
+	s.Powercon = gofakeit.Float64Range(0, s.Powergen)
+	return
 }
 
 // GetStat gets a Statistic based on its ID from the database.

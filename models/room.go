@@ -2,6 +2,7 @@ package models
 
 import (
 	"errors"
+	"github.com/brianvoe/gofakeit/v4"
 )
 
 // RType is the room type.
@@ -24,10 +25,19 @@ const (
 // Room represents a room in a house, it includes a description and type of the
 // room.
 type Room struct {
-	RoomID      int64 `xorm:"pk autoincr"`
-	RoomName    string
-	Description string
-	RoomType    RType
+	RoomID      int64  `xorm:"pk autoincr" fake:"skip"`
+	RoomName    string `fake:"{hipster.word}{address.street_suffix}"`
+	Description string `fake:"{hacker.ingverb} {hacker.noun} {hacker.adjective}"`
+	RoomType    RType  `fake:"skip"`
+}
+
+// GetFakeRoom returns a new randomly generated Room. This is used for testing
+// purposes.
+func GetFakeRoom() (r *Room) {
+	r = new(Room)
+	gofakeit.Struct(r)
+	r.RoomType = RType(gofakeit.Number(0, 9)) // This must match number of enums!
+	return
 }
 
 // GetRoom gets a Room based on its ID from the database.

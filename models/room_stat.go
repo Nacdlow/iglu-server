@@ -2,6 +2,7 @@ package models
 
 import (
 	"errors"
+	"github.com/brianvoe/gofakeit/v4"
 )
 
 // RoomStat represents a room statistic, which is a part of a larger Statistic.
@@ -13,6 +14,20 @@ type RoomStat struct {
 	Temperature float64
 	Humidity    float64
 	OpenWindows int64
+}
+
+// GetFakeRoomStat returns a randomly generated room statistic. This is used
+// for testing purposes.
+func GetFakeRoomStat() (r *RoomStat) {
+	// We will not use gofakeit.Struct as all fields are using ranges, which is
+	// not possible to do with gofakeit's struct tag support.
+	r = new(RoomStat)
+	r.StatID = int64(gofakeit.Number(0, 9))
+	r.RoomID = int64(gofakeit.Number(0, 9))
+	r.Temperature = gofakeit.Float64Range(13, 26)
+	r.Humidity = gofakeit.Float64Range(30, 75)
+	r.OpenWindows = int64(gofakeit.Number(0, 3))
+	return
 }
 
 // GetRoomStat gets a RoomStat based on its ID from the database.

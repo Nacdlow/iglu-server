@@ -2,6 +2,9 @@ package models
 
 import (
 	"errors"
+	"fmt"
+	"github.com/brianvoe/gofakeit/v4"
+	"golang.org/x/crypto/bcrypt"
 )
 
 // UserRole is the role of a user.
@@ -17,13 +20,32 @@ const (
 
 // User is a smart home system user whom may interact with the system.
 type User struct {
-	Username     string `xorm:"pk"`
-	Password     string
-	FirstName    string
-	LastName     string
-	Role         UserRole
-	FavRoomsList []int64
-	FavRooms     []*Room `xorm:"-"` // This means do not store this in the DB.
+	Username     string   `xorm:"pk" fake:"{animal.petname}###"`
+	Password     string   `fake:"skip"`
+	FirstName    string   `fake:"{person.first}"`
+	LastName     string   `fake:"{person.last}"`
+	Role         UserRole `fake:"skip"`
+	FavRoomsList []int64  `fake:"skip"`
+	FavRooms     []*Room  `xorm:"-" fake:"skip"` // This means do not store this in the DB.
+}
+
+// GetFakeUser returns a new randomly generated User. This is used for testing
+// purposes.
+func GetFakeUser() (u *User) {
+	u = new(User)
+	gofakeit.Struct(u)
+	newPass := gofakeit.Password(true, true, true, true, false, 12)
+	pass, err := bcrypt.GenerateFromPassword([]byte(newPass), 4)
+	if err != nil {
+		panic(err)
+	}
+	u.Password = string(pass)
+	fmt.Printf("Fake user %s has password of: %s\n", u.Username, newPass)
+	u.Role = UserRole(gofakeit.Number(0, 3)) // This must match the number of enums!
+	for i := 0; i < gofakeit.Number(0, 4); i++ {
+		u.FavRoomsList = append(u.FavRoomsList, int64(gofakeit.Number(0, 9)))
+	}
+	return
 }
 
 // GetUser gets a User based on its ID from the database.

@@ -3,6 +3,7 @@ module gitlab.com/group-nacdlow/nacdlow-server
 go 1.13
 
 require (
+	github.com/brianvoe/gofakeit/v4 v4.2.1
 	github.com/cpuguy83/go-md2man/v2 v2.0.0 // indirect
 	github.com/denisenkom/go-mssqldb v0.0.0-20191128021309-1d7a30a10f73 // indirect
 	github.com/go-macaron/csrf v0.0.0-20191101041016-98718788f460
@@ -13,7 +14,6 @@ require (
 	github.com/lib/pq v1.3.0 // indirect
 	github.com/mattn/go-sqlite3 v2.0.2+incompatible
 	github.com/pelletier/go-toml v1.6.0 // indirect
-	github.com/ramya-rao-a/go-outline v0.0.0-20200117021646-2a048b4510eb // indirect
 	github.com/spf13/afero v1.2.2 // indirect
 	github.com/spf13/cast v1.3.1 // indirect
 	github.com/spf13/jwalterweatherman v1.1.0 // indirect
@@ -23,7 +23,7 @@ require (
 	github.com/unknwon/com v1.0.1 // indirect
 	github.com/urfave/cli v1.22.2
 	gitlab.com/skilstak/code/go/uniq v0.0.0-20190715184642-a9672d63d2d8
-	golang.org/x/crypto v0.0.0-20200117160349-530e935923ad // indirect
+	golang.org/x/crypto v0.0.0-20200117160349-530e935923ad
 	golang.org/x/sys v0.0.0-20200120151820-655fe14d7479 // indirect
 	gopkg.in/check.v1 v1.0.0-20190902080502-41f04d3bba15 // indirect
 	gopkg.in/ini.v1 v1.51.1 // indirect

@@ -2,6 +2,7 @@ package models
 
 import (
 	"errors"
+	"github.com/brianvoe/gofakeit/v4"
 )
 
 // DeviceType is the type of smart device.
@@ -18,12 +19,26 @@ const (
 // Device represents a smart home (Internet of Things) device, such as a light
 // bulb, TV, temperature control (thermometer), etc.
 type Device struct {
-	DeviceID    int64 `xorm:"pk autoincr"`
-	RoomID      int64
-	Type        DeviceType
-	Description string
-	Status      bool
-	Temp        float64 `xorm:"null"`
+	DeviceID    int64      `xorm:"pk autoincr" fake:"skip"`
+	RoomID      int64      `fake:"skip"`
+	Type        DeviceType `fake:"skip"`
+	Description string     `fake:"{lorem.word} {lorem.word} {lorem.word}"`
+	Status      bool       `fake:"skip"`
+	Temp        float64    `xorm:"null" fake:"skip"` // In Celcius
+}
+
+// GetFakeDevice returns a new randomly created Device. This is used for
+// testing purposes.
+func GetFakeDevice() (d *Device) {
+	d = new(Device)
+	gofakeit.Struct(d)
+	d.RoomID = int64(gofakeit.Number(0, 10))
+	d.Type = DeviceType(gofakeit.Number(0, 3)) // This must match number of enums!
+	d.Status = gofakeit.Bool()
+	if d.Type == TempControl {
+		d.Temp = gofakeit.Float64Range(18, 28)
+	}
+	return
 }
 
 // GetDevice gets a device based on its ID from the database.
