@@ -1,38 +1,59 @@
 /* The global CSS file */
+
+body {
+    background-color: #17a2b8!important;
+    color: white!important;
+}
+
+hr {
+    border-top: 1.5px solid white!important;
+}
+
+a {
+    color: white!important;
+}
+
+a:hover {
+    color: palegreen!important;
+}
+
 .btn {
-  border-radius: 100vw;
+    border-radius: 100vw;
 }
 
 .circle {
-  color: black;
-  border-radius: 100%;
-  width:  140px;
-  height: 140px;
+    color: black;
+    border-radius: 100%;
+    width: 140px;
+    height: 140px;
 }
+
 .circle-sm {
-  width:  70px;
-  height: 70px;
+    width: 70px;
+    height: 70px;
 }
 
 #roomAvatarDiv {
-  text-decoration-color: white;
-  margin-bottom: 2%;
+    text-decoration-color: white;
+    margin-bottom: 2%;
 }
 
 #roomAvatar {
-text-decoration-color: white;
+    text-decoration-color: white;
 }
 
 .addRoom {
-  opacity: 90%;
-  background-color: none; 
+    opacity: 90%;
+    background-color: none;
 }
 
-.bell{
+.bell {
     font-size: 1.6em;
     color: red;
 }
+
 /* Switch success */
+
 .switch {
     background-color: #00C851;
 }
