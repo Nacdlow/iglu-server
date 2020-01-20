@@ -1,7 +1,47 @@
-{{template "base/head" .}}
-{{template "base/nav" .}}
+{{template "base/head" .}} {{template "base/nav" .}}
 
-<body class="background">
+
+<div class="container">
+
+    <h4 class="pt-5 text-center">Bedrooms</h4>
+    <div class="p-3">
+        <hr>
+    </div>
+
+    <div class="row justify-content-center pt-4">
+        <div class="col-lg-2 col-md-3 col-4 text-center pb-3">
+            <a class="nav-link p-0" href="/devices" id="roomAvatar">
+                <img src="https://www.scottishfriendly.co.uk/blog/wp-content/uploads/2018/06/Kevin-McFarlane_avatar_1528802862-96x96.jpg" class="  rounded-circle z-depth-2" alt="avatar image">
+            </a>
+            <h6>David's Room</h6>
+        </div>
+        <div class="col-lg-2 col-md-3 col-4 text-center pb-3">
+            <a class="nav-link p-0" href="/devices" id="roomAvatar">
+                <img src="https://careacademy.com/wp-content/uploads/2019/06/ErikaSessions-96x96.png" class=" rounded-circle z-depth-2" alt="avatar image">
+            </a>
+            <h6>Janet's Room</h6>
+        </div>
+        <div class="col-lg-2 col-md-3 col-4 text-center pb-3">
+            <a class="nav-link p-0" href="/devices" id="roomAvatar">
+                <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-5.jpg" class="  rounded-circle z-depth-2" alt="avatar image">
+            </a>
+            <h6>Anna's Room</h6>
+        </div>
+        <div class="col-lg-2 col-md-3 col-4 text-center pb-3">
+            <a class="nav-link p-0" href="/devices" id="roomAvatar">
+            <img src="https://www.cityam.com/wp-content/uploads/2019/06/Joe-Curtis-96x96.jpg" class="  rounded-circle z-depth-2" alt="avatar image">
+            </a>
+            <h6>Ben's Room</h6>
+        </div>
+        <div class="col-lg-2 col-md-3 col-4 text-center pb-3">            
+            <a type="button" class="fas fa-plus pb-3" href="#" id="roomAvatar" data-toggle="modal" data-target="#centralModal" style="color: white; font-size: 50px;"></a>
+            <h6>Add Control Module</h6>
+        </div>
+    </div>
+</div>
+
+
+<!--
 
 <h4 class="pt-5 pr-5 d-flex text-center justify-content-center">Bedrooms</h4>
 <div class="p-3"><hr></div>
@@ -10,7 +50,8 @@
             <div class="container">
                 <div class="row">
 
-                    <div class="col-md-4 row d-flex justify-content-center animated fadeIn" id="roomAvatarDiv"><a class="nav-link p-0"
+                    <div class="col-md-4 row d-flex justify-content-center animated fadeIn" id="roomAvatarDiv">
+<a class="nav-link p-0"
                             href="/devices" id="roomAvatar">
                             <img src="https://www.scottishfriendly.co.uk/blog/wp-content/uploads/2018/06/Kevin-McFarlane_avatar_1528802862-96x96.jpg"
                                 class="mt-3 rounded-circle z-depth-2" alt="avatar image">
@@ -32,7 +73,7 @@
                     </div>
 
                     <div class="col-md-4 row d-flex justify-content-center animated fadeIn"><a class="nav-link p-0" href="/devices"
-                            id="roomAvatar">
+                                                                                               id="roomAvatar"></a>
                             <img src="https://www.cityam.com/wp-content/uploads/2019/06/Joe-Curtis-96x96.jpg"
                                 class="mt-3 rounded-circle z-depth-2" alt="avatar image">
                             <p class="pt-2 text-center" style="color: black">Ben's Room</p>
@@ -47,33 +88,31 @@
     </div>  
 </div>
     <div class="p-5"><hr></div>
+-->
 
 <!-- Central Modal -->
-<div class="modal fade" id="centralModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-  aria-hidden="true">
+<div class="modal fade" id="centralModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 
-  <!-- Change class .modal-sm to change the size of the modal -->
-  <div class="modal-dialog modal" role="document">
+    <!-- Change class .modal-sm to change the size of the modal -->
+    <div class="modal-dialog modal" role="document">
 
 
-    <div class="modal-content elegant-color">
-      <div class="modal-header">
-        <h4 class="modal-title w-100" id="myModalLabel">New Bedroom</h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span class="text-white" aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        Room name:
-      </div>
-      <div class="modal-footer justify-content-center">
-        <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary btn-sm">Save changes</button>
-      </div>
+        <div class="modal-content elegant-color">
+            <div class="modal-header">
+                <h4 class="modal-title w-100" id="myModalLabel">New Bedroom</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span class="text-white" aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Room name:
+            </div>
+            <div class="modal-footer justify-content-center">
+                <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary btn-sm">Save changes</button>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 <!-- Central Modal -->
-</body>
-{{template "base/scripts" .}}
-{{template "base/footer" .}}
+{{template "base/scripts" .}} {{template "base/footer" .}}
