@@ -6,9 +6,11 @@ import (
 )
 
 var (
+	// Config is the viper configuration file.
 	Config = viper.New()
 )
 
+// LoadConfig loads the configuration file and sets the default settings.
 func LoadConfig() {
 	Config.SetConfigName("config")
 	Config.AddConfigPath("/etc/nacdlow/")

@@ -17,3 +17,8 @@ test:
 clean:
 	$(RM) $(TARGET)
 
+sat:
+	gocyclo -over 15 .
+	golint ./...
+	ineffassign .
+
