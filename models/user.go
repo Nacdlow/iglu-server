@@ -17,11 +17,13 @@ const (
 
 // User is a smart home system user whom may interact with the system.
 type User struct {
-	Username  string `xorm:"pk"`
-	Password  string
-	FirstName string
-	LastName  string
-	Role      UserRole
+	Username     string `xorm:"pk"`
+	Password     string
+	FirstName    string
+	LastName     string
+	Role         UserRole
+	FavRoomsList []int64
+	FavRooms     []*Room `xorm:"-"` // This means do not store this in the DB.
 }
 
 // GetUser gets a User based on its ID from the database.
@@ -32,6 +34,13 @@ func GetUser(user string) (*User, error) {
 		return u, err
 	} else if !has {
 		return u, errors.New("User does not exist")
+	}
+	// Load favourite rooms
+	for _, i := range u.FavRoomsList {
+		room, err := GetRoom(i)
+		if err != nil {
+			u.FavRooms = append(u.FavRooms, room)
+		}
 	}
 	return u, nil
 }
