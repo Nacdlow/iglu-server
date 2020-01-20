@@ -23,14 +23,14 @@ func DashboardHandler(ctx *macaron.Context) {
 	ctx.HTML(200, "dashboard")
 }
 
-//SpecificRoomsHandler handles the specific rooms
+// SpecificRoomsHandler handles the specific rooms
 func SpecificRoomsHandler(ctx *macaron.Context) {
 	ctx.Data["NavTitle"] = fmt.Sprintf("%s", ctx.Params("roomType"))
 	ctx.Data["IsRooms"] = 1
 	ctx.HTML(200, "specificRooms")
 }
 
-//RoomsHandler handles rendering the rooms page
+// RoomsHandler handles rendering the rooms page
 func RoomsHandler(ctx *macaron.Context) {
 	ctx.Data["NavTitle"] = "Rooms"
 	ctx.Data["IsRooms"] = 1
@@ -43,13 +43,13 @@ func AddRoomHandler(ctx *macaron.Context) {
 	ctx.HTML(200, "addroom")
 }
 
-//DevicesHandler handles the devices page
+// DevicesHandler handles the devices page
 func DevicesHandler(ctx *macaron.Context) {
 	ctx.Data["NavTitle"] = "Devices"
 	ctx.HTML(200, "devices")
 }
 
-//DevicesHandler handles the devices page
+// RegisterHandler handles the registration page.
 func RegisterHandler(ctx *macaron.Context) {
 	ctx.HTML(200, "register")
 }
