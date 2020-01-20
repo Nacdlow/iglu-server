@@ -9,7 +9,7 @@ type RType int64
 
 // RType enums.
 const (
-	LoungeRoom = iota //iota acts as an auto-increment, Lounge = 1, Bedroom = 2, etc.
+	LoungeRoom = iota // iota acts as an auto-increment, Lounge = 0, Bedroom = 1, etc.
 	BedroomRoom
 	DiningRoom
 	KitchenRoom
@@ -69,5 +69,11 @@ func UpdateRoom(r *Room) (err error) {
 // UpdateRoomCols will update the columns of an item even if they are empty.
 func UpdateRoomCols(r *Room, cols ...string) (err error) {
 	_, err = engine.ID(r.RoomID).Cols(cols...).Update(r)
+	return
+}
+
+// DeleteRoom deletes a Room from the database.
+func DeleteRoom(id int64) (err error) {
+	_, err = engine.ID(id).Delete(&Room{})
 	return
 }

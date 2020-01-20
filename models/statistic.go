@@ -53,3 +53,9 @@ func UpdateStatCols(d *Statistic, cols ...string) (err error) {
 	_, err = engine.ID(d.StatID).Cols(cols...).Update(d)
 	return
 }
+
+// DeleteStat deletes a Statistic from the database.
+func DeleteStat(id int64) (err error) {
+	_, err = engine.ID(id).Delete(&Statistic{})
+	return
+}

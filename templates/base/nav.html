@@ -1,27 +1,30 @@
 <header>
-    <nav class="navbar navbar-expand-lg navbar-dark default-color">
+    <nav class="navbar navbar-expand-lg navbar-dark default-color" >
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" >
+            <span class="navbar-toggler-icon" ></span>
         </button>
         <a class="navbar-brand" href="#"><strong>{{.NavTitle}}</strong></a>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent" style="padding:0; align-content: right; float:right;">
+          
+
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item{{if .IsDashboard}} active{{end}}">
-                    <a class="nav-link" href="/dashboard">Main <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="/dashboard"><i class="fas fa-tachometer-alt"></i> <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item{{if .IsRooms}} active{{end}}">
-                    <a class="nav-link" href="/rooms">Rooms</a>
+                    <a class="nav-link" href="/rooms"><i class="fas fa-bed"></i></a>
                 </li>
                 <li class="nav-item" data-toggle="modal" data-target="#fullHeightModalRight">
-                    <a class="nav-link" href="#">Notifications</a>
+                    <a class="nav-link" href="#"> <i class="far fa-bell"></i></a>
                 </li>
                 <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#fullHeightModalRight">
                     Notifications
                   </button> -->
 
             </ul>
-            <ul class="navbar-nav nav-flex-icons">
+
+            <ul class="navbar-nav nav-flex-icons" >
                 <li class="nav-item">
                     <a class="nav-link" data-toggle="modal" data-target="#fullHeightModalRight">
                       <i class="fas fa-bell bell animated wobble infinite"></i></a>

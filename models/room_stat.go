@@ -56,3 +56,9 @@ func UpdateRoomStatCols(r *RoomStat, cols ...string) (err error) {
 	_, err = engine.ID(r.RStatID).Cols(cols...).Update(r)
 	return
 }
+
+// DeleteRoomStat deletes a RoomStat from the database.
+func DeleteRoomStat(id int64) (err error) {
+	_, err = engine.ID(id).Delete(&RoomStat{})
+	return
+}
