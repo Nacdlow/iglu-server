@@ -9,7 +9,7 @@ type RType int64
 
 // RType enums.
 const (
-	LoungeRoom = iota //iota acts as an auto-increment, Lounge = 1, Bedroom = 2, etc.
+	LoungeRoom = iota // iota acts as an auto-increment, Lounge = 0, Bedroom = 1, etc.
 	BedroomRoom
 	DiningRoom
 	KitchenRoom
