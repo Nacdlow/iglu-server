@@ -38,7 +38,7 @@ func GetUser(user string) (*User, error) {
 	// Load favourite rooms
 	for _, i := range u.FavRoomsList {
 		room, err := GetRoom(i)
-		if err != nil {
+		if err == nil {
 			u.FavRooms = append(u.FavRooms, room)
 		}
 	}
