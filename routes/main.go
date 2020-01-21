@@ -11,11 +11,6 @@ func NotFoundHandler(ctx *macaron.Context) {
 	ctx.HTML(404, "notfound")
 }
 
-// HomepageHandler handles rendering the homepage.
-func HomepageHandler(ctx *macaron.Context) {
-	ctx.HTML(200, "index")
-}
-
 // DashboardHandler handles rendering the dashboard.
 func DashboardHandler(ctx *macaron.Context) {
 	ctx.Data["NavTitle"] = "Dashboard"
@@ -47,11 +42,6 @@ func AddRoomHandler(ctx *macaron.Context) {
 func DevicesHandler(ctx *macaron.Context) {
 	ctx.Data["NavTitle"] = "Devices"
 	ctx.HTML(200, "devices")
-}
-
-// RegisterHandler handles the registration page.
-func RegisterHandler(ctx *macaron.Context) {
-	ctx.HTML(200, "register")
 }
 
 //LightsHandler handles the lights page
