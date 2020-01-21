@@ -5,16 +5,14 @@ import (
 
 	"github.com/brianvoe/gofakeit/v4"
 	"log"
-	"os"
 	"xorm.io/core"
 	"xorm.io/xorm"
 )
 
 var (
-	engine         *xorm.Engine
-	tables         []interface{}
-	sqlitePath     = "data.db"
-	testSqlitePath = "test.db"
+	engine     *xorm.Engine
+	tables     []interface{}
+	sqlitePath = "data.db"
 )
 
 func init() {
@@ -51,8 +49,7 @@ func SetupEngine() *xorm.Engine {
 // schema to it.
 func SetupTestEngine() *xorm.Engine {
 	var err error
-	os.Remove(testSqlitePath)
-	engine, err = xorm.NewEngine("sqlite3", testSqlitePath)
+	engine, err = xorm.NewEngine("sqlite3", ":memory:")
 	if err != nil {
 		log.Fatalln("Failed to setup test engine!", err)
 	}
