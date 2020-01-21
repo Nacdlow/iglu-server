@@ -9,7 +9,7 @@ import (
 	"github.com/go-macaron/binding"
 	"github.com/go-macaron/csrf"
 	"github.com/go-macaron/session"
-	"github.com/urfave/cli"
+	"github.com/urfave/cli/v2"
 	macaron "gopkg.in/macaron.v1"
 
 	"gitlab.com/group-nacdlow/nacdlow-server/models"
@@ -20,7 +20,7 @@ import (
 
 // CmdStart represents a command-line command
 // which starts the smart home web server.
-var CmdStart = cli.Command{
+var CmdStart = &cli.Command{
 	Name:    "start",
 	Aliases: []string{"run"},
 	Usage:   "Start the smart home web server",

@@ -3,8 +3,8 @@ package forms
 // SignInForm is for the sign in page, receiving the email and password of the
 // user, also storing if the user wants to be signed in indefinitely
 type SignInForm struct {
-	Email      string `form:"email" binding:"Required;Email"`
-	Password   string `form:"password" binding:"Required;MinSize(8);MaxSize(50)"`
+	Email      string `form:"email" binding:"Required"`
+	Password   string `form:"password" binding:"Required"`
 	RememberMe bool   `form:"remember"`
 }
 

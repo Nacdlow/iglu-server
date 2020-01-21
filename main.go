@@ -5,7 +5,7 @@ import (
 	"log"
 	"os"
 
-	"github.com/urfave/cli"
+	"github.com/urfave/cli/v2"
 )
 
 // VERSION specifies the version of nacdlow-server
@@ -16,8 +16,9 @@ func main() {
 	app.Name = "nacdlow-server"
 	app.Usage = "The smart home system server application"
 	app.Version = VERSION
-	app.Commands = []cli.Command{
+	app.Commands = []*cli.Command{
 		cmd.CmdStart,
+		cmd.CmdAdduser,
 	}
 
 	err := app.Run(os.Args)
