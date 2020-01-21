@@ -45,7 +45,7 @@ func adduser(c *cli.Context) (err error) {
 	fmt.Scanln(&u.FirstName)
 	fmt.Printf("Last name: ")
 	fmt.Scanln(&u.LastName)
-	fmt.Printf("Password: ")
+	fmt.Printf("Password (will not echo): ")
 	inPass, _ := terminal.ReadPassword(0)
 
 	pass, err := bcrypt.GenerateFromPassword([]byte(inPass), 10)

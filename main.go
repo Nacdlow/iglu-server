@@ -19,6 +19,7 @@ func main() {
 	app.Commands = []*cli.Command{
 		cmd.CmdStart,
 		cmd.CmdAdduser,
+		cmd.CmdDumpfakes,
 	}
 
 	err := app.Run(os.Args)
