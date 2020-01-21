@@ -43,19 +43,26 @@ func start(clx *cli.Context) (err error) {
 	m.Use(session.Sessioner())
 	m.Use(csrf.Csrfer())
 
+	m.Use(routes.ContextInit())
+
 	m.NotFound(routes.NotFoundHandler)
 
-	m.Get("/", routes.HomepageHandler)
-	m.Get("/dashboard", routes.DashboardHandler)
-	m.Get("/devices", routes.DevicesHandler)
-	m.Get("/lights", routes.LightsHandler)
-	m.Get("/heating", routes.HeatingHandler)
-	m.Group("/room", func() {
-		m.Get("/add", routes.AddRoomHandler)
-		m.Get("/:name", routes.SpecificRoomsHandler)
-	})
-	m.Get("/rooms", routes.RoomsHandler)
+	m.Get("/", routes.LoginHandler)
+	m.Post("/", routes.PostLoginHandler)
 	m.Get("/register", routes.RegisterHandler)
+	m.Post("/register", routes.PostRegisterHandler)
+
+	m.Group("", func() {
+		m.Get("/dashboard", routes.DashboardHandler)
+		m.Get("/devices", routes.DevicesHandler)
+		m.Get("/lights", routes.LightsHandler)
+		m.Get("/heating", routes.HeatingHandler)
+		m.Group("/room", func() {
+			m.Get("/add", routes.AddRoomHandler)
+			m.Get("/:name", routes.SpecificRoomsHandler)
+		})
+		m.Get("/rooms", routes.RoomsHandler)
+	}, routes.RequireLogin)
 
 	log.Printf("Starting server on port %s!\n", clx.String("port"))
 	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%s", clx.String("port")), m))
