@@ -1,0 +1,234 @@
+{{template "base/head" .}}
+{{template "base/nav" .}}
+
+<body class="background">
+
+</div>
+<h4 class="pt-5 pr-5 d-flex text-center justify-content-center">Speakers</h4>
+<div class="m-5 pt-0"><hr></div>
+
+<div class="card-deck">
+
+    <!--Card 1-->
+    <div class="card m-4">
+      <div class="card-body">
+                
+        <!--Navbar-->
+        <nav class="navbar navbar-light navbar-1 white elipsesNav">
+
+          <!-- Navbar brand -->
+          <a class="navbar-brand w-10 float-right" href="#"></a>
+
+          <!-- Collapse button -->
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent14"
+            aria-controls="navbarSupportedContent15" aria-expanded="false" aria-label="Toggle navigation"><span
+              class="fas fa-ellipsis-h"></span></button>
+
+          <!-- Collapsible content -->
+          <div class="collapse navbar-collapse position-relative" id="navbarSupportedContent14">
+
+            <!-- Links -->
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item active">
+                <a class="nav-link black-text" type="button">Favourite<i class="fas fa-heart black-text"></i><span
+                    class="sr-only">(current)</span></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link black-text" href="#" data-toggle="modal" data-target="#basicExampleModal2">Options</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link black-text" href="#">Remove</a>
+              </li>
+            </ul>
+            <!-- Links -->
+
+          </div>
+          <!-- Collapsible content -->
+        </nav>
+        <!--/.Navbar-->
+                <h5 class="card-title">Sonos</h5>
+         <!-- Default switch -->
+        <div class="">
+            <a type="button" class="fas fa-power-off pb-3 green-text " href="#" style="color: black; font-size: 2em;"></a>
+        </div>
+        <p class="text-center pt-2">Volume</p>
+        <div class="d-flex justify-content-center  ">
+            <span class="font-weight-bold black-text mr-2 "><i class="fas fa-volume-mute" aria-hidden="true"></i></span>
+            <form class="range-field w-35">
+              <input class="border-0" type="range" min="0" max="100" />
+            </form>
+            <span class="font-weight-bold black-text ml-2 "><i class="fas fa-volume-up" aria-hidden="true"></i></span>
+          </div>
+      </div>
+      <div class="card-footer" style="background-color: #A8FFA8;">
+        <small class="text-muted">Connected to David's Iphone</small>
+      </div>
+    </div>
+
+    <!--Card 2-->
+    <div class="card m-4">
+      <div class="card-body">
+        
+        <!--Navbar-->
+        <nav class="navbar navbar-light navbar-1 white elipsesNav">
+
+          <!-- Navbar brand -->
+          <a class="navbar-brand w-10 float-right" href="#"></a>
+
+          <!-- Collapse button -->
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent15"
+            aria-controls="navbarSupportedContent15" aria-expanded="false" aria-label="Toggle navigation"><span
+              class="fas fa-ellipsis-h"></span></button>
+
+          <!-- Collapsible content -->
+          <div class="collapse navbar-collapse position-relative" id="navbarSupportedContent15">
+
+            <!-- Links -->
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item active">
+                <a class="nav-link black-text" type="button">Favourite<i class="fas fa-heart black-text"></i><span
+                    class="sr-only">(current)</span></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link black-text" href="#" data-toggle="modal" data-target="#basicExampleModal">Options</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link black-text" href="#">Remove</a>
+              </li>
+            </ul>
+            <!-- Links -->
+
+          </div>
+          <!-- Collapsible content -->
+        </nav>
+        <!--/.Navbar-->
+        <h5 class="card-title">Sony Sound Bar</h5>
+         <!-- Default switch -->
+         <div class="">
+            <a type="button" class="fas fa-power-off pb-3 red-text" href="#" style="color: black; font-size: 2em; opacity: 50%;"></a>
+        </div>
+       <p class="text-center pt-2" style="opacity: 50%;">Volume</p>
+        <div class="d-flex justify-content-center" style="opacity: 50%;">
+            <span class="font-weight-bold black-text mr-2 "><i class="fas fa-volume-mute" aria-hidden="true"></i></span>
+            <form class="range-field w-35">
+              <input class="border-0" type="range" min="0" max="100" />
+            </form>
+            <span class="font-weight-bold black-text ml-2 mt-1"><i class="fas fa-volume-up" aria-hidden="true"></i></span>
+          </div>
+      </div>
+      <div class="card-footer" style="background-color: #FFA8A8;">
+        <small class="text-muted">Disconnected</small>
+      </div>
+    </div>
+
+    <div class="card m-4">
+        <div class="card-body">
+        <div class="text-center">
+          <a type="button" class="text-center p-5 pt-4 mt-5 fas fa-plus text-center black-text" style="font-size: 6em; opacity: 90%;"></a>
+        </div>
+        </div>
+    </div>
+</div>
+
+<div class="m-5"><hr></div>
+
+<!--OPTIONS MODAL1-->
+<!-- Modal -->
+<div class="modal fade" id="basicExampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title black-text" id="exampleModalLabel">Options</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <h6 class="text-center black-text">Bass</h6>
+        <div class="d-flex justify-content-center" style="opacity: 50%;">
+          <span class="font-weight-bold black-text mr-2 "><i class="fas fa-minus" aria-hidden="true"></i></span>
+          <form class="range-field w-35">
+            <input class="border-0" type="range" min="0" max="100" />
+          </form>
+          <span class="font-weight-bold black-text ml-2 mt-1"><i class="fas fa-plus" aria-hidden="true"></i></span>
+        </div>
+        <h6 class="text-center black-text pt-2">Midrange</h6>
+        <div class="d-flex justify-content-center" style="opacity: 50%;">
+          <span class="font-weight-bold black-text mr-2 "><i class="fas fa-volume-minus" aria-hidden="true"></i></span>
+          <form class="range-field w-35">
+            <input class="border-0" type="range" min="0" max="100" />
+          </form>
+          <span class="font-weight-bold black-text ml-2 mt-1"><i class="fas fa-plus" aria-hidden="true"></i></span>
+        </div>
+        <h6 class="text-center black-text pt-2">Treble</h6>
+        <div class="d-flex justify-content-center" style="opacity: 50%;">
+          <span class="font-weight-bold black-text mr-2 "><i class="fas fa-minus" aria-hidden="true"></i></span>
+          <form class="range-field w-35">
+            <input class="border-0" type="range" min="0" max="100" />
+          </form>
+          <span class="font-weight-bold black-text ml-2 mt-1"><i class="fas fa-plus" aria-hidden="true"></i></span>
+        </div>
+        <div class="text-center">
+        <button class="default-button text-center mr-1">Connect</button><button class="default-button text-center ml-2">Disconnect</button>
+      </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--OPTIONS MODAL2-->
+<!-- Modal -->
+<div class="modal fade" id="basicExampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title black-text" id="exampleModalLabel">Options</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <h6 class="text-center black-text">Bass</h6>
+        <div class="d-flex justify-content-center" style="opacity: 50%;">
+          <span class="font-weight-bold black-text mr-2 "><i class="fas fa-minus" aria-hidden="true"></i></span>
+          <form class="range-field w-35">
+            <input class="border-0" type="range" min="0" max="100" />
+          </form>
+          <span class="font-weight-bold black-text ml-2 mt-1"><i class="fas fa-plus" aria-hidden="true"></i></span>
+        </div>
+        <h6 class="text-center black-text pt-2">Midrange</h6>
+        <div class="d-flex justify-content-center" style="opacity: 50%;">
+          <span class="font-weight-bold black-text mr-2 "><i class="fas fa-volume-minus" aria-hidden="true"></i></span>
+          <form class="range-field w-35">
+            <input class="border-0" type="range" min="0" max="100" />
+          </form>
+          <span class="font-weight-bold black-text ml-2 mt-1"><i class="fas fa-plus" aria-hidden="true"></i></span>
+        </div>
+        <h6 class="text-center black-text pt-2">Treble</h6>
+        <div class="d-flex justify-content-center" style="opacity: 50%;">
+          <span class="font-weight-bold black-text mr-2 "><i class="fas fa-minus" aria-hidden="true"></i></span>
+          <form class="range-field w-35">
+            <input class="border-0" type="range" min="0" max="100" />
+          </form>
+          <span class="font-weight-bold black-text ml-2 mt-1"><i class="fas fa-plus" aria-hidden="true"></i></span>
+        </div>
+        <div class="text-center">
+        <button class="default-button text-center mr-1">Connect</button><button class="default-button text-center ml-2">Disconnect</button>
+      </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+{{template "base/scripts" .}}
+{{template "base/footer" .}}

@@ -49,7 +49,12 @@ func LightsHandler(ctx *macaron.Context) {
 	ctx.HTML(200, "lights")
 }
 
-//HeatingHandler handles the heating page
+//HeatingHandler handles the temperature page
 func HeatingHandler(ctx *macaron.Context) {
-	ctx.HTML(200, "heating")
+	ctx.HTML(200, "temperature")
+}
+
+//SpeakerHandler handles the speakers page
+func SpeakerHandler(ctx *macaron.Context) {
+	ctx.HTML(200, "speakers")
 }
