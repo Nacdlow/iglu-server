@@ -13,6 +13,8 @@ const (
 	LoggedIn
 )
 
+// ContextInit initialises the Macaron context to load the authenticated user
+// from the database, and set other page fields such as the app name.
 func ContextInit() macaron.Handler {
 	return func(ctx *macaron.Context, sess session.Store) {
 		ctx.Data["AppName"] = "AppName"
@@ -30,6 +32,22 @@ func ContextInit() macaron.Handler {
 	}
 }
 
+// RequireAdmin is a per-route middleware which requires the user to be an
+// admin.
+func RequireAdmin(ctx *macaron.Context, sess session.Store) {
+	if u, err := models.GetUser(sess.Get("username").(string)); err == nil {
+		if u.Role != models.AdminRole {
+			ctx.Redirect("/")
+			return
+		}
+	} else {
+		ctx.Redirect("/")
+		return
+	}
+}
+
+// RequireLogin is a per-route middleware which requires the user to be logged
+// in.
 func RequireLogin(ctx *macaron.Context, sess session.Store) {
 	if sess.Get("auth") != LoggedIn {
 		ctx.Redirect("/")
