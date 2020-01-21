@@ -61,3 +61,17 @@ a:hover {
 .switch {
     background-color: #00C851;
 }
+
+.elipsesNav {
+    box-shadow: none!important;
+    text-shadow: none!important;
+    max-width: 30%!important;
+    float: right;
+    padding-right: 0%;
+    padding-top: 0%;
+    position: relative;
+}
+
+.cardContent {
+    position: fixed;
+}

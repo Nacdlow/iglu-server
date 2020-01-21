@@ -3,18 +3,86 @@
 
 <body class="background">
 
-  </div>
-  <h4 class="pt-5 pr-5 d-flex text-center justify-content-center">Lights</h4>
-  <div class="m-5 pt-0">
-    <hr>
+</div>
+<h4 class="pt-5  d-flex text-center justify-content-center">Room Temperature</h4>
+<div class="p-3"><hr></div>
+
+<div class="row d-flex justify-content-center text-center pb-4">
+    <div class="card warning-color circle flex-center flex-column">
+      <div class="card-body">
+        <h5 class="card-title text-center pt-4" style="font-size: 3em;">17<small>&deg;C</small></h5>
+      </div>
+    </div>
   </div>
 
   <div class="card-deck">
 
     <!--Card 1-->
     <div class="card m-4">
-      <div class="card-body">
+        <div class="card-body">
+          <!-- Default switch -->
+          <div class="custom-control custom-switch float-left">
+              <input type="checkbox" class="custom-control-input" id="customSwitches" checked>
+             <label class="custom-control-label" for="customSwitches">Off</label>
+         </div> 
+         
+        <!--Navbar-->
+        <nav class="navbar navbar-light navbar-1 white elipsesNav">
 
+          <!-- Navbar brand -->
+          <a class="navbar-brand w-10 float-right" href="#"></a>
+
+          <!-- Collapse button -->
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent14"
+            aria-controls="navbarSupportedContent15" aria-expanded="false" aria-label="Toggle navigation"><span
+              class="fas fa-ellipsis-h"></span></button>
+
+          <!-- Collapsible content -->
+          <div class="collapse navbar-collapse position-relative" id="navbarSupportedContent14">
+
+            <!-- Links -->
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item active">
+                <a class="nav-link black-text" type="button">Favourite<i class="fas fa-heart black-text"></i><span
+                    class="sr-only">(current)</span></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link black-text" href="#">Options</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link black-text" href="#">Remove</a>
+              </li>
+            </ul>
+            <!-- Links -->
+
+          </div>
+          <!-- Collapsible content -->
+        </nav>
+        <!--/.Navbar-->
+          <h5 class="card-title text-center pr-5 pb-4">Radiator</h5>
+         <p class="text-center pt-3">Temperature</p>
+          <div class="d-flex justify-content-center">
+              <span class="font-weight-bold blue-text mr-2 ">0<small>&deg;C</small></span>
+              <form class="range-field w-35">
+                <input class="border-0" type="range" min="0" max="100" />
+              </form>
+              <span class="font-weight-bold red-text ml-2">40<small>&deg;C</small></span>
+            </div>
+        </div>
+        <div class="card-footer" style="background-color: #A8FFA8;">
+          <small class="text-muted">Heating since 09:24 (3hrs)</small>
+        </div>
+      </div>
+
+    <!--Card 2-->
+    <div class="card m-4">
+      <div class="card-body">
+        <!-- Default switch -->
+        <div class="custom-control custom-switch float-left">
+            <input type="checkbox" class="custom-control-input" id="customSwitches1">
+           <label class="custom-control-label" for="customSwitches1">Off</label>
+       </div> 
+       
         <!--Navbar-->
         <nav class="navbar navbar-light navbar-1 white elipsesNav">
 
@@ -48,95 +116,35 @@
           <!-- Collapsible content -->
         </nav>
         <!--/.Navbar-->
-
-        <h5 class="card-title">Main Light</h5>
-        <!-- Default switch -->
-        <div class="custom-control custom-switch ">
-          <input type="checkbox" class="custom-control-input" id="customSwitches" checked>
-          <label class="custom-control-label" for="customSwitches">On</label>
-        </div>
-        <p class="text-center pt-3 position-absolute-center">Brightness</p>
-        <div class="d-flex justify-content-center position-absolute-center">
-          <span class="font-weight-bold purple-text mr-2 "><i class="fas fa-moon" aria-hidden="true"></i></span>
-          <form class="range-field w-35">
-            <input class="border-0" type="range" min="0" max="100" />
-          </form>
-          <span class="font-weight-bold purple-text ml-2 "><i class="fas fa-sun" aria-hidden="true"></i></span>
-        </div>
-      </div>
-      <div class="card-footer" style="background-color: #FEFF9E;">
-        <small class="text-muted">This light has been on for 4hrs 15mins</small>
-      </div>
-    </div>
-
-    <!--Card 2-->
-    <div class="card m-4">
-      <div class="card-body">
-        <!--Navbar-->
-        <nav class="navbar navbar-light navbar-1 white elipsesNav">
-
-          <!-- Navbar brand -->
-          <a class="navbar-brand w-10 float-right" href="#"></a>
-
-          <!-- Collapse button -->
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent16"
-            aria-controls="navbarSupportedContent15" aria-expanded="false" aria-label="Toggle navigation"><span
-              class="fas fa-ellipsis-h"></span></button>
-
-          <!-- Collapsible content -->
-          <div class="collapse navbar-collapse position-relative" id="navbarSupportedContent16">
-
-            <!-- Links -->
-            <ul class="navbar-nav mr-auto">
-              <li class="nav-item active">
-                <a class="nav-link black-text" type="button">Favourite<i class="fas fa-heart black-text"></i><span
-                    class="sr-only">(current)</span></a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link black-text" href="#">Options</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link black-text" href="#">Remove</a>
-              </li>
-            </ul>
-            <!-- Links -->
-          </div>
-          <!-- Collapsible content -->
-        </nav>
-        <!--/.Navbar-->
-        <h5 class="card-title">Bedside Lamp</h5>
-        <!-- Default switch -->
-        <div class="custom-control custom-switch ">
-          <input type="checkbox" class="custom-control-input" id="customSwitches1">
-          <label class="custom-control-label" for="customSwitches1">Off</label>
-        </div>
-        <p class="text-center pt-3" style="opacity: 50%;">Brightness</p>
+        <h5 class="card-title text-center pr-5 pb-4">Air Conditioning</h5>
+       <p class="text-center pt-3" style="opacity: 50%;">Temperature</p>
         <div class="d-flex justify-content-center" style="opacity: 50%;">
-          <span class="font-weight-bold purple-text mr-2 "><i class="fas fa-moon" aria-hidden="true"></i></span>
-          <form class="range-field w-35">
-            <input class="border-0" type="range" min="0" max="100" />
-          </form>
-          <span class="font-weight-bold purple-text ml-2 mt-1"><i class="fas fa-sun" aria-hidden="true"></i></span>
-        </div>
+            <span class="font-weight-bold blue-text mr-2 ">0<small>&deg;C</small></span>
+            <form class="range-field w-35">
+              <input class="border-0" type="range" min="0" max="100" />
+            </form>
+            <span class="font-weight-bold red-text ml-2">40<small>&deg;C</small></span></span>
+          </div>
       </div>
       <div class="card-footer" style="background-color: #FFA8A8;">
         <small class="text-muted">Last on yesterday</small>
       </div>
     </div>
 
+    <!--Card 3-->
     <div class="card m-4">
-      <div class="card-body">
+        <div class="card-body">
         <div class="text-center">
-          <a type="button" class="text-center p-5 pt-4 mt-3 fas fa-plus text-center black-text"
-            style="font-size: 6em; opacity: 90%;"></a>
+          <a type="button" class="text-center p-5 pt-4 mt-3 fas fa-plus text-center black-text" style="font-size: 6em; opacity: 90%;"></a>
         </div>
-      </div>
+        </div>
     </div>
-  </div>
+</div>
 
-  <div class="m-5">
-    <hr>
-  </div>
+
+
+<div class="p-5 pt-0"><hr></div>
 </body>
 {{template "base/scripts" .}}
 {{template "base/footer" .}}
+
