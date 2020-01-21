@@ -6,12 +6,14 @@ import (
 
 	"net/http"
 
+	"github.com/go-macaron/binding"
 	"github.com/go-macaron/csrf"
 	"github.com/go-macaron/session"
 	"github.com/urfave/cli"
 	macaron "gopkg.in/macaron.v1"
 
 	"gitlab.com/group-nacdlow/nacdlow-server/models"
+	"gitlab.com/group-nacdlow/nacdlow-server/models/forms"
 	"gitlab.com/group-nacdlow/nacdlow-server/modules/settings"
 	"gitlab.com/group-nacdlow/nacdlow-server/routes"
 )
@@ -48,7 +50,7 @@ func start(clx *cli.Context) (err error) {
 	m.NotFound(routes.NotFoundHandler)
 
 	m.Get("/", routes.LoginHandler)
-	m.Post("/", routes.PostLoginHandler)
+	m.Post("/", binding.Bind(forms.SignInForm{}), routes.PostLoginHandler)
 	m.Get("/register", routes.RegisterHandler)
 	m.Post("/register", routes.PostRegisterHandler)
 
