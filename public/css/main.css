@@ -62,7 +62,6 @@ a:hover {
     background-color: #00C851;
 }
 
-<<<<<<< HEAD
 .elipsesNav {
     box-shadow: none!important;
     text-shadow: none!important;
@@ -76,7 +75,6 @@ a:hover {
 .cardContent {
     position: fixed;
 }
-=======
 #mobilenav{
 position: fixed;
 bottom: 0;
@@ -96,4 +94,3 @@ display: none;
 }
 }
 
->>>>>>> 930d31f745b17f753fc7d3b5bf77f8d4842328cb
