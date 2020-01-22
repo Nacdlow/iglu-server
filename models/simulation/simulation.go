@@ -37,6 +37,7 @@ type WeatherStatus struct {
 type Home struct {
 	MainDoorOpened bool // Whether the main door is opened or not.
 	Rooms          []Room
+	SolarMaxPower  int64 // Maximum solar panel generation capacity, in kWh.
 }
 
 // Room represents a simulated room state.
