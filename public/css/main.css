@@ -1,7 +1,7 @@
 /* The global CSS file */
 
 body {
-    background-color: #17a2b8!important;
+    background-color: #34383b!important;
     color: white!important;
     margin-bottom: 100px;
 }
@@ -124,6 +124,59 @@ padding: .5rem 1rem;
 .nav-item {
     font-size: 21px!important;
 }
+
+.split {
+    height: 100%;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    overflow-x: hidden;
+  }
+  
+  .split-left {
+    left: 0;
+    width: 60%;
+    background-color: #2bbbad;
+  }
+  
+  .split-right {
+    right: 0;
+    width: 40%;
+    background-color: #34383b;
+  }
+  
+  .centered {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    padding: 0% 15%;
+  }
+
+  .split-vert {
+    width: 100%;
+    position: fixed;
+  }
+
+  .split-top {
+    top: 0;
+    height: 25%;
+    background-color: #2bbbad;
+    overflow-x: auto;
+  }
+  
+  .split-bottom {
+    bottom: 0;
+    height: 75%;
+    background-color: #34383b;
+  }
+
+  .centered-bottom {
+    top: 40%!important;
+  }
+  
+  
 
 
 

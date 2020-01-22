@@ -1,41 +1,166 @@
 {{template "base/head" .}}
 
-<td class="bg" s>
-   
+    <div class="mobhide">
+    <div class="split split-right">
+    <div class="centered">
+    <form class="text-center" method="POST">
+        <h2>Login</h2>
+    
+        <!-- E-mail -->
+        <div class="md-form">
+            <input type="email" id="defaultRegisterFormEmail" class="form-control mb-4" placeholder="E-mail" name="email">
+        </div>
+        <!-- Password -->
+        <div class="md-form">
+        <input type="password" id="defaultLoginFormPassword" class="form-control mb-4" placeholder="Password" name="password">
+        </div>
+    
+        <div class="d-flex justify-content-around">
+            <div>
+                <!-- Remember me -->
+                <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" id="defaultLoginFormRemember" name="remember">
+                    <label class="custom-control-label" for="defaultLoginFormRemember">Remember me</label>
+                </div>
+            </div>
+            <div>
+                <!-- Forgot password -->
+                <a href="forgotpassword">Forgot password?</a>
+            </div>
+        </div>
+    
+        <!-- Sign in button -->
+        <button class="btn btn-default my-4 btn-block" type="submit">Sign in</button>
+    
+        <!-- Register -->
+        <p>Not a member?
+            <a href="register">Register</a>
+        </p>
+    
+    </form>
+    </div>
+    
+    </div>
 
+    <div class="split split-left">
+        <div class="centered">
+          <h1>Welcome to [AppName]</h1>
+          <div class="pt-3 pb-5"><hr></div>
+          <div class="row justify-content-center pt-2">
+            <div class="col-4 text-center pb-3">
+                <i class="fas fa-tachometer-alt pb-3" style="font-size: 85px;"></i>
+                <h4>Monitor</h4>
+            </div>
+            <div class="col-4 text-center pb-3">
+                <i class="fas fa-sliders-h pb-3" style="font-size: 85px;"></i>
+                <h4>Control</h4>
+            </div>
+            <div class="col-4 text-center pb-3">
+                <i class="fas fa-mug-hot pl-2 pb-3" style="font-size: 85px;"></i>
+                <h4>Relax</h4>
+            </div>
+        </div>
+        </div>
+      </div>
+    </div>
 
+        <div class="deskhide">
+            <div class="split-vert split-bottom mt-2">
+                <div class="centered centered-bottom">
+                <form class="text-center" method="POST">
+                    <h3>Login</h3>
+                
+                    
+                    <div class="md-form">
+                        <input type="email" id="defaultRegisterFormEmail" class="form-control mb-4" placeholder="E-mail" name="email">
+                    </div>
+                    
+                    <div class="md-form">
+                    <input type="password" id="defaultLoginFormPassword" class="form-control mb-4" placeholder="Password" name="password">
+                    </div>
+                
+                    <div class="d-flex justify-content-around">
+                        <div>
+                            
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="defaultLoginFormRemember" name="remember">
+                                <label class="custom-control-label" for="defaultLoginFormRemember">Remember me</label>
+                            </div>
+                        </div>
+                        <div>
+                            
+                            <a href="forgotpassword">Forgot password?</a>
+                        </div>
+                    </div>
+                
+                    
+                    <button class="btn btn-default my-4 btn-block" type="submit">Sign in</button>
+                
+                    
+                    <p>Not a member?
+                        <a href="register">Register</a>
+                    </p>
+                
+                </form>
+                </div>
+                
+                </div>
+            
+                <div class="split-vert split-top">
+                    <div class="centered pt-4">
+                      <h4>[AppName]</h4>
+                      <div class=""><hr></div>
+                      <div class="row justify-content-center">
+                        <div class="col-4 text-center">
+                            <i class="fas fa-tachometer-alt pb-1" style="font-size: 40px;"></i>
+                            <h5>Monitor</h5>
+                        </div>
+                        <div class="col-4 text-center">
+                            <i class="fas fa-sliders-h pb-1" style="font-size: 40px;"></i>
+                            <h5>Control</h5>
+                        </div>
+                        <div class="col-4 text-center pb-3">
+                            <i class="fas fa-mug-hot pb-1" style="font-size: 40px;"></i>
+                            <h5>Relax</h5>
+                        </div>
+                    </div>
+                    </div>
+                  </div>
+                </div>
+
+<!--<div class="deskhide">
 <div class="d-flex justify-content-center">
 <div class="col-md-4 pt-5">
 <form class="text-center p-5" method="POST">
     <p class="h4 mb-4">Welcome</p>
 
-    <!-- E-mail -->
+    <!-- E-mail 
     <div class="md-form">
         <input type="email" id="defaultRegisterFormEmail" class="form-control mb-4" placeholder="E-mail" name="email">
     </div>
-    <!-- Password -->
+    <!-- Password 
     <div class="md-form">
     <input type="password" id="defaultLoginFormPassword" class="form-control mb-4" placeholder="Password" name="password">
     </div>
 
     <div class="d-flex justify-content-around">
         <div>
-            <!-- Remember me -->
+            <!-- Remember me 
             <div class="custom-control custom-checkbox">
                 <input type="checkbox" class="custom-control-input" id="defaultLoginFormRemember" name="remember">
                 <label class="custom-control-label" for="defaultLoginFormRemember">Remember me</label>
             </div>
         </div>
         <div>
-            <!-- Forgot password -->
+            <!-- Forgot password 
             <a href="forgotpassword">Forgot password?</a>
         </div>
     </div>
 
-    <!-- Sign in button -->
+    <!-- Sign in button 
     <button class="btn btn-default my-4 btn-block" type="submit">Sign in</button>
 
-    <!-- Register -->
+    <!-- Register 
     <p>Not a member?
         <a href="register">Register</a>
     </p>
@@ -44,5 +169,5 @@
 </div>
 
 </div>
-</div>
+</div> -->
 {{template "base/footer" .}}
