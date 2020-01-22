@@ -49,17 +49,6 @@ func start(clx *cli.Context) (err error) {
 
 	m.NotFound(routes.NotFoundHandler)
 
-	//m.Get("/", routes.HomepageHandler)
-	m.Get("/dashboard", routes.DashboardHandler)
-	m.Get("/devices", routes.DevicesHandler)
-	m.Get("/lights", routes.LightsHandler)
-	m.Get("/temperature", routes.HeatingHandler)
-	m.Get("/speakers", routes.SpeakerHandler)
-	m.Group("/room", func() {
-		m.Get("/add", routes.AddRoomHandler)
-		m.Get("/:name", routes.SpecificRoomsHandler)
-	})
-	m.Get("/rooms", routes.RoomsHandler)
 	m.Get("/", routes.LoginHandler)
 	m.Post("/", binding.Bind(forms.SignInForm{}), routes.PostLoginHandler)
 	m.Get("/register", routes.RegisterHandler)
