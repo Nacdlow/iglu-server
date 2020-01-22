@@ -22,6 +22,7 @@ const (
 type User struct {
 	Username     string   `xorm:"pk" fake:"{animal.petname}###"`
 	Password     string   `fake:"skip"`
+	TOTPKey      string   `xorm:"null" fake:"skip"`
 	FirstName    string   `fake:"{person.first}"`
 	LastName     string   `fake:"{person.last}"`
 	Role         UserRole `fake:"skip"`

@@ -1,0 +1,50 @@
+/* CSS file for the Simulator web app */
+body {
+  font-family: "Lucidia Grande", "Segoe UI", "Roboto", sans-serif;
+  font-size: 1.2em;
+  margin: 0;
+  background-color: #f1f1f1;
+}
+
+.container {
+  max-width: 1250px;
+  position: relative;
+  margin: 0 auto;
+}
+
+.content {
+  padding: 20px 30px;
+}
+
+.footer {
+  font-size: 0.8rem;
+  padding: 8px;
+  text-align: center;
+}
+
+/* Navigation */
+.nav {
+  padding: 5px 15px;
+  margin-bottom: 1.2em;
+  height: 35px;
+}
+
+.nav a {
+  text-decoration: none;
+  padding-right: 15px;
+  line-height: 2rem;
+  color: #000 !important;
+}
+
+.nav-left {
+  float: left;
+}
+
+.nav-right {
+  float: right;
+  text-align: right;
+}
+
+a {
+  text-decoration: none;
+}

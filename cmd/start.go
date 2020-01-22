@@ -16,6 +16,7 @@ import (
 	"gitlab.com/group-nacdlow/nacdlow-server/models/forms"
 	"gitlab.com/group-nacdlow/nacdlow-server/modules/settings"
 	"gitlab.com/group-nacdlow/nacdlow-server/routes"
+	routes_sim "gitlab.com/group-nacdlow/nacdlow-server/routes/simulator"
 )
 
 // CmdStart represents a command-line command
@@ -65,6 +66,10 @@ func start(clx *cli.Context) (err error) {
 		})
 		m.Get("/rooms", routes.RoomsHandler)
 	}, routes.RequireLogin)
+
+	m.Group("/sim", func() {
+		m.Get("/", routes_sim.HomepageHandler)
+	})
 
 	log.Printf("Starting server on port %s!\n", clx.String("port"))
 	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%s", clx.String("port")), m))

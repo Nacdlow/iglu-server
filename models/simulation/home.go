@@ -14,6 +14,8 @@ const (
 	Rainy
 )
 
+// SimulationEnvironment represents an entire simulated environment state,
+// which includes the home, weather, time and location states.
 type SimulationEnvironment struct {
 	Home
 	Weather     WeatherStatus
