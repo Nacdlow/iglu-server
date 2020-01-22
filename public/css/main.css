@@ -3,6 +3,7 @@
 body {
     background-color: #17a2b8!important;
     color: white!important;
+    margin-bottom: 100px;
 }
 
 hr {
@@ -88,9 +89,41 @@ justify-content: space-between;
 padding: .5rem 1rem;
 }
 
+
 @media (min-width: 992px) {
+#brand {
+        position: absolute;
+        left: 50%;
+        margin-left: -50px !important;
+        display: block;
+        font-size: 25px;
+ }
+
 #mobilenav {
-display: none;
+    display: none;
+}
+
+.deskhide{
+    display: none;
 }
 }
+
+@media (max-width: 992px) {
+.mobhide{
+    display: none;
+}
+
+}
+
+.navbar-brand {
+    margin-right: 0.5rem;
+    /* margin-left: 2rem; */
+    font-size: 25px;
+}
+
+.nav-item {
+    font-size: 21px!important;
+}
+
+
 
