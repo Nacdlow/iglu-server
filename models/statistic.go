@@ -6,12 +6,14 @@ import (
 	"time"
 )
 
-// Statistic represents a statistic log at a period of time.
+// Statistic represents a statistic log at a period of time, which spans an
+// hour.
 type Statistic struct {
-	StatID    int64   `xorm:"pk"`
-	Timestamp int64   `xorm:"created"`
-	Powergen  float64 // Power generated, kWh
-	Powercon  float64 // Power conserved, kWh
+	StatID               int64   `xorm:"pk"`
+	Timestamp            int64   `xorm:"created"`
+	Powergen             float64 // Power generated, kWh
+	Powercon             float64 // Power conserved, kWh
+	MainDoorsOpenedCount int64   // How many times the doors opened
 }
 
 // GetFakeStat returns a new randomly generated statistic. This is used for

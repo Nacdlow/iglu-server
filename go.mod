@@ -3,6 +3,7 @@ module gitlab.com/group-nacdlow/nacdlow-server
 go 1.13
 
 require (
+	github.com/adlio/darksky v0.0.0-20190219023837-63c8e8a7fabe
 	github.com/brianvoe/gofakeit/v4 v4.2.1
 	github.com/cpuguy83/go-md2man/v2 v2.0.0 // indirect
 	github.com/denisenkom/go-mssqldb v0.0.0-20191128021309-1d7a30a10f73 // indirect
