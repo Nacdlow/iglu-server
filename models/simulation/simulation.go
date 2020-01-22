@@ -7,6 +7,7 @@ import (
 // WeatherType represents the weather type.
 type WeatherType int64
 
+// WeatherType enums.
 const (
 	Clear = iota
 	Cloudy
@@ -14,9 +15,9 @@ const (
 	Rainy
 )
 
-// SimulationEnvironment represents an entire simulated environment state,
-// which includes the home, weather, time and location states.
-type SimulationEnvironment struct {
+// Environment represents an entire simulated environment state, which includes
+// the home, weather, time and location states.
+type Environment struct {
 	Home
 	Weather     WeatherStatus
 	CurrentTime int64  // In Unix time.

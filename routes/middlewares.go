@@ -6,11 +6,14 @@ import (
 	macaron "gopkg.in/macaron.v1"
 )
 
+// LoginStatus represents the status of a user's session.
 type LoginStatus int64
 
+// LoginStatus enums.
 const (
 	Unauthenticated = iota
 	LoggedIn
+	Verification // For OTP
 )
 
 // ContextInit initialises the Macaron context to load the authenticated user
