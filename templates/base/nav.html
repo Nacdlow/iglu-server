@@ -32,10 +32,13 @@
           <!-- Links -->
           <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
               <li class="nav-item{{if .IsDashboard}} active{{end}}">
-                  <a class="nav-link" href="/dashboard">Dashboard</a>
+                  <a class="nav-link" href="/dashboard"><i class="fas fa-tachometer-alt"></i></a>
               </li>
               <li class="nav-item{{if .IsRooms}} active{{end}}">
-                  <a class="nav-link" href="/rooms">Rooms</a>
+                  <a class="nav-link" href="/rooms"><i class="fas fa-bed"></i></a>
+              </li>
+              <li class="nav-item{{if .IsRooms}} active{{end}}">
+                <a class="nav-link" href="/settings"><i class="fas fa-cog"></i></a>
               </li>
           </ul>
           <!-- Links -->
