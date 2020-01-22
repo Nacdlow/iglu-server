@@ -1,18 +1,15 @@
 {{template "base/head" .}}
 {{template "base/nav" .}}
 
-<body class="background">
+<div class="container animated fadeIn">
+  <h2 class="pt-5 pr-3 text-center">Lights</h2>
 
-  </div>
-  <h4 class="pt-5 pr-5 d-flex text-center justify-content-center">Lights</h4>
-  <div class="m-5 pt-0">
-    <hr>
-  </div>
+  <div class="pt-3 pb-1"><hr></div>
 
   <div class="card-deck">
 
     <!--Card 1-->
-    <div class="card m-4">
+    <div class="card m-3">
       <div class="card-body">
 
         <!--Navbar-->
@@ -70,7 +67,7 @@
     </div>
 
     <!--Card 2-->
-    <div class="card m-4">
+    <div class="card m-3">
       <div class="card-body">
         <!--Navbar-->
         <nav class="navbar navbar-light navbar-1 white elipsesNav">
@@ -124,19 +121,16 @@
       </div>
     </div>
 
-    <div class="card m-4">
-      <div class="card-body">
-        <div class="text-center">
-          <a type="button" class="text-center p-5 pt-4 mt-3 fas fa-plus text-center black-text"
-            style="font-size: 6em; opacity: 90%;"></a>
+    <div class="card m-3">
+      <div class="card-body d-flex align-items-center justify-content-center">
+        <div>
+          <a type="button" class="fas fa-plus black-text" style="font-size: 6em;"></a>
         </div>
-      </div>
-    </div>
+        </div>
+    </div> 
   </div>
 
-  <div class="m-5">
-    <hr>
-  </div>
-</body>
+</div>
 {{template "base/scripts" .}}
 {{template "base/footer" .}}
+{{template "base/tabnav" .}}
