@@ -26,7 +26,7 @@ func LoadConfig() {
 	if !Config.IsSet("CustomerID") {
 		Config.SetDefault("CustomerID", uniq.UUID())
 	}
-	//Config.SetDefault("","")
+	Config.SetDefault("DarkskyAPIKey", "APIKEYHERE")
 
 	if err := Config.ReadInConfig(); err != nil {
 		if _, ok := err.(viper.ConfigFileNotFoundError); ok {
