@@ -1,5 +1,5 @@
-data.db
-test.db
+*.db
+*.db-journal
 config.toml
 
 # For those folks using macOS

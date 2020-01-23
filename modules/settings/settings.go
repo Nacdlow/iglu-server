@@ -27,6 +27,8 @@ func LoadConfig() {
 		Config.SetDefault("CustomerID", uniq.UUID())
 	}
 	Config.SetDefault("DarkskyAPIKey", "APIKEYHERE")
+	Config.SetDefault("Location.Lat", "25.371679")
+	Config.SetDefault("Location.Lon", "55.511716")
 
 	if err := Config.ReadInConfig(); err != nil {
 		if _, ok := err.(viper.ConfigFileNotFoundError); ok {
