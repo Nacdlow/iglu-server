@@ -39,7 +39,7 @@ a:hover {
 }
 
 #roomAvatarDiv {
-    text-decoration-color: white;
+    text-decoration-color: white ;
     margin-bottom: 2%;
 }
 
@@ -66,11 +66,12 @@ a:hover {
 .elipsesNav {
     box-shadow: none!important;
     text-shadow: none!important;
-    max-width: 30%!important;
+    max-width: 35%!important;
     float: right;
     padding-right: 0%;
     padding-top: 0%;
     position: relative;
+    font-size: 0.5em !important;
 }
 
 .cardContent {
@@ -175,6 +176,18 @@ padding: .5rem 1rem;
   .centered-bottom {
     top: 40%!important;
   }
+
+  .lilnav {
+      font-size: 0.7em !important;
+  }
+
+  .modal-backdrop.in { 
+      z-index: auto !important;
+    }
+
+    .modal-backdrop {
+        z-index: 1020 !important;
+    }
   
   
 
