@@ -16,7 +16,7 @@ var (
 	Env Environment
 	// TickSleep is the length of a second in the simulation world, in
 	// milliseconds.
-	TickSleep time.Duration = 1000
+	TickSleep time.Duration = 1000 * time.Millisecond
 	rnd       *rand.Rand
 )
 
@@ -118,7 +118,7 @@ func Start() {
 	// This is the main simulation loop
 	for {
 		Tick()
-		time.Sleep(TickSleep * time.Millisecond)
+		time.Sleep(TickSleep)
 	}
 }
 

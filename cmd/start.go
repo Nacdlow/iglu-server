@@ -14,6 +14,7 @@ import (
 
 	"gitlab.com/group-nacdlow/nacdlow-server/models"
 	"gitlab.com/group-nacdlow/nacdlow-server/models/forms"
+	forms_sim "gitlab.com/group-nacdlow/nacdlow-server/models/forms/sim"
 	"gitlab.com/group-nacdlow/nacdlow-server/models/simulation"
 	"gitlab.com/group-nacdlow/nacdlow-server/modules/settings"
 	"gitlab.com/group-nacdlow/nacdlow-server/routes"
@@ -73,7 +74,10 @@ func start(clx *cli.Context) (err error) {
 	m.Group("/sim", func() {
 		m.Get("/", routes_sim.HomepageHandler)
 		m.Get("/data.json", routes_sim.DataHandler)
-
+		m.Post("/override_weather", binding.Bind(forms_sim.OverrideWeatherForm{}),
+			routes_sim.PostOverrideWeatherHandler)
+		m.Post("/time_sleep", binding.Bind(forms_sim.ChangeTimeSleepForm{}),
+			routes_sim.PostChangeTimeSleepHandler)
 	})
 
 	log.WithFields(log.Fields{"port": clx.String("port")}).Printf("Starting server.")

@@ -2,10 +2,10 @@ package routes
 
 import (
 	"fmt"
-	"math"
 	"gitlab.com/group-nacdlow/nacdlow-server/models"
 	"gitlab.com/group-nacdlow/nacdlow-server/models/simulation"
 	macaron "gopkg.in/macaron.v1"
+	"math"
 )
 
 // NotFoundHandler handles 404 errors

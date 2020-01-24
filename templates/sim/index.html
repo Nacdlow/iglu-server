@@ -8,7 +8,7 @@
 	<dd>{{.Env.Weather.OutdoorTemp}}</dd>
 	<dt>Outdoor humidity</dt>
 	<dd>{{.Env.Weather.Humidity}}</dd>
-	<dt>Cloud coverage</dt>
+	<dt>Cloud cover</dt>
 	<dd>{{.Env.Weather.CloudCover}}</dd>
 	<dt>Power generation</dt>
 	<dd>{{.Env.PowerGenRate}} kWh (capacity of {{.Env.SolarMaxPower}})</dd>
@@ -16,31 +16,38 @@
 <h3>Environment Model</h3>
 <p>Regenerate simulation model from the database? <a class="btn" href="/sim/reload_db">Regenerate</a></p>
 <h3>Override Weather</h3>
-<form method="post">
+<form method="post" action="/sim/override_weather">
 	<label>Outdoor Temperature</label>
-	<input type="number" value="{{.Env.Weather.OutdoorTemp}}">
+	<input type="number" name="outdoor_temp"
+	value="{{.Env.Weather.OutdoorTemp}}" min="-89" max="58" step=".01">
 	<br>
 	<label>Humidity</label>
-	<input type="number" value="{{.Env.Weather.Humidity}}">
+	<input type="number" name="humidity" value="{{.Env.Weather.Humidity}}"
+	min="0" max="1" step=".01">
 	<br>
-	<label>Cloud coverage</label>
-	<input type="number" value="{{.Env.Weather.CloudCover}}">
+	<label>Cloud cover</label>
+	<input type="number" name="cloud_cover" value="{{.Env.Weather.CloudCover}}"
+	min="0" max="1" step=".01">
 	<br>
 	<button class="btn" type="submit">Override</button>
 </form>
-<p><a href="/sim/pull-weather" class="btn">Pull weather from ext. API</a></p>
+<p><a href="/sim/pull_weather" class="btn">Pull weather from ext. API</a></p>
 <h3>Change Time</h3>
-<form method="post">
-	<label>Tick speed (in ms)</label>
-	<input type="number" value="{{.TickSpeed}}">
+<form method="post" action="/sim/time_sleep">
+	<label>Tick sleep (in ms)</label>
+	<input type="number" name="tick_sleep" value="{{.TickSleep}}" min="0"
+				 max="10000">
 	<br>
 	<button class="btn" type="submit">Change</button>
 </form>
-<p><a href="/sim/time/stop" class="btn">Stop time</a></p>
 
 <h3>Minecraft Simulation Status</h3>
 <dl>
 	<dt>Status</dt>
-	<dd>Connected (last ping x ms ago)</dd>
+	<dd>{{if .MCConnected}}Connected{{else}}Disconnected{{end}}
+	{{if .LastMCPing}}<small>(last ping {{.LastMCPing}} ms ago)</small>{{end}}</dd>
+	<dt>Server Implementation</dt>
+	<dd>{{if .MCVersion}}{{.MCVersion}}{{else}}Unknown{{end}}
+	{{if and (not .MCConnected) .LastMCPing}}<small> (last connection)</small>{{end}}</dd>
 </dl>
 {{template "sim/base/footer" .}}
