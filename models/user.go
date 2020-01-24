@@ -2,8 +2,8 @@ package models
 
 import (
 	"errors"
-	"fmt"
 	"github.com/brianvoe/gofakeit/v4"
+	log "github.com/sirupsen/logrus"
 	"golang.org/x/crypto/bcrypt"
 )
 
@@ -41,7 +41,7 @@ func GetFakeUser() (u *User) {
 		panic(err)
 	}
 	u.Password = string(pass)
-	fmt.Printf("Fake user %s has password of: %s\n", u.Username, newPass)
+	log.Infof("Fake user %s has password of: %s", u.Username, newPass)
 	u.Role = UserRole(gofakeit.Number(0, 3)) // This must match the number of enums!
 	for i := 0; i < gofakeit.Number(0, 4); i++ {
 		u.FavRoomsList = append(u.FavRoomsList, int64(gofakeit.Number(0, 9)))
