@@ -7,9 +7,10 @@
   <div class="pt-3 pb-1"><hr></div>
 
   <div class="card-deck">
-
+{{range .Lights}}{{if eq .Type 0}}
     <!--Card 1-->
-    <div class="card m-3">
+    <div
+     class="card m-3">
       <div class="card-body">
 
         <!--Navbar-->
@@ -19,12 +20,12 @@
           <a class="navbar-brand w-10 float-right" href="#"></a>
 
           <!-- Collapse button -->
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent15"
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#options-{{.DeviceID}}"
             aria-controls="navbarSupportedContent15" aria-expanded="false" aria-label="Toggle navigation"><span
               class="fas fa-ellipsis-h"></span></button>
 
           <!-- Collapsible content -->
-          <div class="collapse navbar-collapse position-relative" id="navbarSupportedContent15">
+          <div class="collapse navbar-collapse position-relative" id="options-{{.DeviceID}}">
 
             <!-- Links -->
             <ul class="navbar-nav mr-auto lilnav">
@@ -46,17 +47,17 @@
         </nav>
         <!--/.Navbar-->
 
-        <h5 class="card-title">Main Light</h5>
+        <h5 class="card-title">{{.Description}}</h5>
         <!-- Default switch -->
         <div class="custom-control custom-switch ">
-          <input type="checkbox" class="custom-control-input" id="customSwitches" checked>
-          <label class="custom-control-label" for="customSwitches">On</label>
+          <input type="checkbox" class="custom-control-input" id="customSwitches-{{.DeviceID}}" {{if .Status}} checked {{end}}>
+          <label class="custom-control-label" for="customSwitches-{{.DeviceID}}">On</label>
         </div>
         <p class="text-center pt-3 position-absolute-center">Brightness</p>
         <div class="d-flex justify-content-center position-absolute-center">
           <span class="font-weight-bold purple-text mr-2 "><i class="fas fa-moon" aria-hidden="true"></i></span>
           <form class="range-field w-35">
-            <input class="border-0" type="range" min="0" max="100" />
+            <input class="border-0" type="range" min="0" max="10" value="{{.Brightness}}"/>
           </form>
           <span class="font-weight-bold purple-text ml-2 "><i class="fas fa-sun" aria-hidden="true"></i></span>
         </div>
@@ -65,61 +66,8 @@
         <small class="text-muted">This light has been on for 4hrs 15mins</small>
       </div>
     </div>
+    {{end}}{{end}}
 
-    <!--Card 2-->
-    <div class="card m-3">
-      <div class="card-body">
-        <!--Navbar-->
-        <nav class="navbar navbar-light navbar-1 white elipsesNav">
-
-          <!-- Navbar brand -->
-          <a class="navbar-brand w-10 float-right" href="#"></a>
-
-          <!-- Collapse button -->
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent16"
-            aria-controls="navbarSupportedContent15" aria-expanded="false" aria-label="Toggle navigation"><span
-              class="fas fa-ellipsis-h"></span></button>
-
-          <!-- Collapsible content -->
-          <div class="collapse navbar-collapse position-relative" id="navbarSupportedContent16">
-
-            <!-- Links -->
-            <ul class="navbar-nav mr-auto lilnav">
-              <li class="nav-item active">
-                <a class="nav-link black-text lilnav" type="button">Favourite<i class="fas fa-heart black-text"></i><span
-                    class="sr-only">(current)</span></a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link black-text lilnav" href="#">Options</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link black-text lilnav" href="#">Remove</a>
-              </li>
-            </ul>
-            <!-- Links -->
-          </div>
-          <!-- Collapsible content -->
-        </nav>
-        <!--/.Navbar-->
-        <h5 class="card-title">Bedside Lamp</h5>
-        <!-- Default switch -->
-        <div class="custom-control custom-switch ">
-          <input type="checkbox" class="custom-control-input" id="customSwitches1">
-          <label class="custom-control-label" for="customSwitches1">Off</label>
-        </div>
-        <p class="text-center pt-3" style="opacity: 50%;">Brightness</p>
-        <div class="d-flex justify-content-center" style="opacity: 50%;">
-          <span class="font-weight-bold purple-text mr-2 "><i class="fas fa-moon" aria-hidden="true"></i></span>
-          <form class="range-field w-35">
-            <input class="border-0" type="range" min="0" max="100" />
-          </form>
-          <span class="font-weight-bold purple-text ml-2 mt-1"><i class="fas fa-sun" aria-hidden="true"></i></span>
-        </div>
-      </div>
-      <div class="card-footer" style="background-color: #FFA8A8;">
-        <small class="text-muted">Last on yesterday</small>
-      </div>
-    </div>
 
     <div class="card m-3">
       <div class="card-body d-flex align-items-center justify-content-center">
@@ -130,13 +78,13 @@
     </div> 
   </div>
 
-  <!-- ADD Speaker Modal -->
+  <!-- ADD Light Modal -->
 <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
 aria-hidden="true" data-backdrop="false">
 <div class="modal-dialog" role="document" data-backdrop="false">
   <div class="modal-content" data-backdrop="false">
     <div class="modal-header">
-      <h5 class="modal-title black-text" id="addModal">Add new Speaker</h5>
+      <h5 class="modal-title black-text" id="addModal">Add new Light</h5>
       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true">&times;</span>
       </button>

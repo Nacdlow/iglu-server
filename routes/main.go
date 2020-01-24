@@ -46,15 +46,18 @@ func DevicesHandler(ctx *macaron.Context) {
 
 //LightsHandler handles the lights page
 func LightsHandler(ctx *macaron.Context) {
+	ctx.Data["Lights"] = models.GetDevices()
 	ctx.HTML(200, "lights")
 }
 
 //HeatingHandler handles the temperature page
 func HeatingHandler(ctx *macaron.Context) {
+	ctx.Data["Heating"] = models.GetDevices()
 	ctx.HTML(200, "temperature")
 }
 
 //SpeakerHandler handles the speakers page
 func SpeakerHandler(ctx *macaron.Context) {
+	ctx.Data["Speakers"] = models.GetDevices()
 	ctx.HTML(200, "speakers")
 }
