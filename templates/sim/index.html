@@ -4,6 +4,17 @@
 <!-- TODO form to change weather -->
 
 <!-- TODO button to speed, stop, resume time -->
-<p>Current simulation time: {{.CurrentTime}}</p>
-<p></p>
+<dl>
+	<dt>Current simulation time</dt>
+	<dd>{{.CurrentTime}}</dd>
+	<dt>Outdoor temperature</dt>
+	<dd>{{.Env.Weather.OutdoorTemp}}</dd>
+	<dt>Outdoor humidity</dt>
+	<dd>{{.Env.Weather.Humidity}}</dd>
+	<dt>Cloud coverage</dt>
+	<dd>{{.Env.Weather.CloudCover}}</dd>
+	<dt>Power generation</dt>
+	<dd>{{.Env.PowerGenRate}} kWh (capacity of {{.Env.SolarMaxPower}})</dd>
+</dl>
+
 {{template "sim/base/footer" .}}

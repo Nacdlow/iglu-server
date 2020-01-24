@@ -103,6 +103,9 @@ func Start() {
 		log.Error("Please make sure that the Darksky API key is correct.")
 		log.Error("You may use the group API key at: https://wiki.nacdlow.com/Accounts.html")
 		log.Error("Simulation may not work properly!")
+		Env.Weather.OutdoorTemp = 4
+		Env.Weather.Humidity = 0.12
+		Env.Weather.CloudCover = 0.45
 	} else {
 		Env.ForecastData = f
 		current := f.Currently
@@ -163,12 +166,23 @@ func Tick() {
 		}
 	}
 	// Update kWh solar generation value
-	change := float64(Env.SolarMaxPower) / Env.Weather.CloudCover
-	vMax, vMin := (float64(Env.SolarMaxPower) / 4), float64(0) // Will vary up to a 1/4 less
+	var change float64
+	if Env.Weather.CloudCover > 0 {
+		change = float64(Env.SolarMaxPower) * (1 - Env.Weather.CloudCover)
+	} else {
+		change = float64(Env.SolarMaxPower)
+	}
+
+	// TODO use sine function?
+	// TODO no sun at night.
+	vMax, vMin := (float64(Env.SolarMaxPower) / 5), float64(0) // Will vary up to a 1/4 less
 	vary := rnd.Float64()*(vMax-vMin) + vMin
 	change -= vary
-
-	Env.PowerGenRate = change
+	if change < 0 {
+		Env.PowerGenRate = 0
+	} else {
+		Env.PowerGenRate = change
+	}
 }
 
 // WeatherType represents the weather type.
