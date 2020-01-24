@@ -14,6 +14,7 @@ var (
 )
 
 func Start() {
+	Env.CurrentTime = time.Now().Unix()
 	Env.Location.Latitude = settings.Config.GetString("Location.Lat")
 	Env.Location.Longitude = settings.Config.GetString("Location.Lon")
 	f, err := weather.GetWeather()
