@@ -29,6 +29,7 @@ type Room struct {
 	RoomName    string `fake:"{hipster.word}{address.street_suffix}"`
 	Description string `fake:"{hacker.ingverb} {hacker.noun} {hacker.adjective}"`
 	RoomType    RType  `fake:"skip"`
+	WindowCount int64  `xorm:"null" fake:"skip"`
 }
 
 // GetFakeRoom returns a new randomly generated Room. This is used for testing
@@ -37,6 +38,7 @@ func GetFakeRoom() (r *Room) {
 	r = new(Room)
 	gofakeit.Struct(r)
 	r.RoomType = RType(gofakeit.Number(0, 9)) // This must match number of enums!
+	r.WindowCount = int64(gofakeit.Number(0, 4))
 	return
 }
 
