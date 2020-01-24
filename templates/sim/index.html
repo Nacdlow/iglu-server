@@ -1,9 +1,6 @@
 {{template "sim/base/head" .}}
 <h2>Simulator</h2>
-<!-- TODO form to change time -->
-<!-- TODO form to change weather -->
-
-<!-- TODO button to speed, stop, resume time -->
+<h3>Environment Status</h3>
 <dl>
 	<dt>Current simulation time</dt>
 	<dd>{{.CurrentTime}}</dd>
@@ -16,5 +13,34 @@
 	<dt>Power generation</dt>
 	<dd>{{.Env.PowerGenRate}} kWh (capacity of {{.Env.SolarMaxPower}})</dd>
 </dl>
+<h3>Environment Model</h3>
+<p>Regenerate simulation model from the database? <a class="btn" href="/sim/reload_db">Regenerate</a></p>
+<h3>Override Weather</h3>
+<form method="post">
+	<label>Outdoor Temperature</label>
+	<input type="number" value="{{.Env.Weather.OutdoorTemp}}">
+	<br>
+	<label>Humidity</label>
+	<input type="number" value="{{.Env.Weather.Humidity}}">
+	<br>
+	<label>Cloud coverage</label>
+	<input type="number" value="{{.Env.Weather.CloudCover}}">
+	<br>
+	<button class="btn" type="submit">Override</button>
+</form>
+<p><a href="/sim/pull-weather" class="btn">Pull weather from ext. API</a></p>
+<h3>Change Time</h3>
+<form method="post">
+	<label>Tick speed (in ms)</label>
+	<input type="number" value="{{.TickSpeed}}">
+	<br>
+	<button class="btn" type="submit">Change</button>
+</form>
+<p><a href="/sim/time/stop" class="btn">Stop time</a></p>
 
+<h3>Minecraft Simulation Status</h3>
+<dl>
+	<dt>Status</dt>
+	<dd>Connected (last ping x ms ago)</dd>
+</dl>
 {{template "sim/base/footer" .}}

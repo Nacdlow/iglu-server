@@ -48,3 +48,19 @@ body {
 a {
   text-decoration: none;
 }
+
+.btn {
+  display: inline-block;
+  font-align: center;
+  color: #333;
+  background-color: #fafafa;
+  padding: 3px 5px;
+  border: #ccc 1px solid;
+  text-decoration: none;
+}
+
+input {
+  border-radius: 0;
+  padding: 3px 5px;
+  border: #ccc 1px solid;
+}
