@@ -4,8 +4,10 @@ import (
 	"github.com/adlio/darksky"
 	log "github.com/sirupsen/logrus"
 	"gitlab.com/group-nacdlow/nacdlow-server/models"
+	"gitlab.com/group-nacdlow/nacdlow-server/modules/settings"
 	"gitlab.com/group-nacdlow/nacdlow-server/modules/weather"
 	"math"
+	"math/rand"
 	"time"
 )
 
@@ -15,7 +17,13 @@ var (
 	// TickSleep is the length of a second in the simulation world, in
 	// milliseconds.
 	TickSleep time.Duration = 1000
+	rnd       *rand.Rand
 )
+
+func init() {
+	// Create and seed a new randomiser
+	rnd = rand.New(rand.NewSource(time.Now().UnixNano()))
+}
 
 // LoadFromDB loads the rooms from the database into
 func LoadFromDB() {
@@ -50,6 +58,8 @@ func LoadFromDB() {
 			}
 		}
 
+		// If the temperature isn't set (due to no temp control), we can set it
+		// to something else.
 		if !tempSet {
 			if Env.ForecastData != nil {
 				log.Errorf("Room %d (%s) does not have a temperature control device! Using outside temp...",
@@ -61,6 +71,8 @@ func LoadFromDB() {
 				r.ActualRoomTemp = 20
 			}
 		}
+
+		// No room light source? Be angry!
 		if !lightSet {
 			log.Errorf("Room %d (%s) does not have a main light source (device)!",
 				room.RoomID, room.RoomName)
@@ -81,6 +93,7 @@ func LoadFromDB() {
 // Start will start the simulation environment and make it Tick at TickSpeed.
 // This function will not return (halt).
 func Start() {
+	Env.SolarMaxPower = settings.Config.GetInt("Simulation.SolarCapacityKWH")
 	// Load current time for the simulation
 	Env.CurrentTime = time.Now().Unix()
 	// Load the forecast data
@@ -89,10 +102,17 @@ func Start() {
 		log.Error("Failed to get forecast!", err)
 		log.Error("Please make sure that the Darksky API key is correct.")
 		log.Error("You may use the group API key at: https://wiki.nacdlow.com/Accounts.html")
-		log.Error("Simulation will may not work properly!")
+		log.Error("Simulation may not work properly!")
+	} else {
+		Env.ForecastData = f
+		current := f.Currently
+		Env.Weather.OutdoorTemp = current.Temperature
+		Env.Weather.Humidity = current.Humidity
+		Env.Weather.CloudCover = current.CloudCover
 	}
-	Env.ForecastData = f
+	// Load the simulation environment from DB
 	LoadFromDB()
+	// This is the main simulation loop
 	for {
 		Tick()
 		time.Sleep(TickSleep * time.Millisecond)
@@ -106,9 +126,9 @@ func Start() {
 // This is used for making the room temperature move towards an "influence",
 // whether that'd be the air conditioning or the outside temperature (if the
 // window is opened).
-func getChange(current, influence, change float64) float64 {
+func getChange(current, influence, change, threshold float64) float64 {
 	diff := math.Abs(current - influence)
-	if diff <= 0.75 { // threshold
+	if diff <= threshold { // threshold
 		return influence
 	} else {
 		changed := diff / change
@@ -120,23 +140,35 @@ func getChange(current, influence, change float64) float64 {
 	}
 }
 
-// Tick will tick the environment one second.
+// Tick will tick the simulated environment one second.
 func Tick() {
 	Env.CurrentTime++
+	// Update room temperatures
 	outTemp := Env.Weather.OutdoorTemp
 	for _, room := range Env.Home.Rooms {
 		// Simulate cold/hot air from outside coming in room through windows
 		for _, window := range room.Windows {
 			if window.IsOpen {
-				room.ActualRoomTemp = getChange(room.ActualRoomTemp, outTemp, 25)
+				room.ActualRoomTemp = getChange(room.ActualRoomTemp, outTemp, 25, 0.75)
 			}
 		}
+
+		// Simulate the room heating/cooling from outside temperature "leak"
+		room.ActualRoomTemp = getChange(room.ActualRoomTemp, outTemp, 75, 0)
+
 		// Simulate the temperature control heating/cooling the room
 		tempCont, err := models.GetDevice(room.TempControlDeviceID)
 		if err == nil && tempCont.DeviceID == models.TempControl {
-			room.ActualRoomTemp = getChange(room.ActualRoomTemp, tempCont.Temp, 18)
+			room.ActualRoomTemp = getChange(room.ActualRoomTemp, tempCont.Temp, 18, 0.75)
 		}
 	}
+	// Update kWh solar generation value
+	change := float64(Env.SolarMaxPower) / Env.Weather.CloudCover
+	vMax, vMin := (float64(Env.SolarMaxPower) / 4), float64(0) // Will vary up to a 1/4 less
+	vary := rnd.Float64()*(vMax-vMin) + vMin
+	change -= vary
+
+	Env.PowerGenRate = change
 }
 
 // WeatherType represents the weather type.
@@ -164,15 +196,16 @@ type Environment struct {
 type WeatherStatus struct {
 	Type        WeatherType `json:"type"`
 	OutdoorTemp float64     `json:"outdoor_temp"` // In Celcius.
-	Humidity    float32     `json:"humidity"`     // In decimal, 0.5 = 50%.
-	CloudCover  float32     `json:"cloud_cover"`
+	Humidity    float64     `json:"humidity"`     // In decimal, 0.5 = 50%.
+	CloudCover  float64     `json:"cloud_cover"`
 }
 
 // Home represents a simulated home state.
 type Home struct {
-	MainDoorOpened bool   `json:"main_door_opened"` // Whether the main door is opened or not.
-	Rooms          []Room `json:"rooms"`
-	SolarMaxPower  int64  `json:"solar_max_power"` // Maximum solar panel generation capacity, in kWh.
+	MainDoorOpened bool    `json:"main_door_opened"` // Whether the main door is opened or not.
+	Rooms          []Room  `json:"rooms"`
+	PowerGenRate   float64 `json:"power_gen_rate"`
+	SolarMaxPower  int     `json:"solar_max_power"` // Maximum solar panel generation capacity, in kWh.
 }
 
 // Room represents a simulated room state.
