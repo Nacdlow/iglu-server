@@ -181,13 +181,16 @@ padding: .5rem 1rem;
       font-size: 0.7em !important;
   }
 
-  .modal-backdrop.in { 
-      z-index: auto !important;
-    }
+  .modal-backdrop { display: none !important; } 
 
-    .modal-backdrop {
-        z-index: 1020 !important;
-    }
+  .modal { background: rgba(0,0,0,0.5) !important; }
+
+  .addFile {
+      max-width: 50% !important;
+      float: center !important;
+      max-height: 60% !important;
+      padding-left: 4 !important;
+  }
   
   
 

@@ -34,7 +34,7 @@
             <h6 class="pt-2">Ben's Room</h6>
         </div>
         <div class="col-lg-2 col-md-3 col-4 text-center pb-3 pt-4">            
-            <a type="button" class="fas fa-plus pb-3" href="#" id="roomAvatar" data-toggle="modal" data-target="#centralModal" style="color: white; font-size: 50px;"></a>
+            <a type="button" class="fas fa-plus pb-3" href="#" id="roomAvatar" data-toggle="modal" data-target="#basicExampleModal" style="color: white; font-size: 50px;"></a>
             <h6 class="pt-2">Add Control Module</h6>
         </div>
     </div>
@@ -42,29 +42,38 @@
 
 
 
-<!-- Central Modal -->
-<div class="modal fade" id="centralModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-
-    <!-- Change class .modal-sm to change the size of the modal -->
-    <div class="modal-dialog modal" role="document">
-
-
-        <div class="modal-content elegant-color">
-            <div class="modal-header">
-                <h4 class="modal-title w-100" id="myModalLabel">New Bedroom</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span class="text-white" aria-hidden="true">&times;</span>
-                </button>
+<!-- Modal -->
+<div class="modal fade" id="basicExampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true" data-backdrop="false">
+  <div class="modal-dialog" role="document" data-backdrop="false">
+    <div class="modal-content" data-backdrop="false">
+      <div class="modal-header">
+        <h5 class="modal-title black-text" id="exampleModalLabel">Add new [roomType]</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <h6 class="text-center black-text">Enter a Room Name:</h6>
+            <div class="md-form text-center justify-content-center d-flex">
+                <input type="text" id="" class="form-control mb-4 text-center w-50" placeholder="e.g. John's Room" name="Room Name">
             </div>
-            <div class="modal-body">
-                Room name:
-            </div>
-            <div class="modal-footer justify-content-center">
-                <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary btn-sm">Save changes</button>
-            </div>
-        </div>
+        
+    <div class="text-center pt-0 pb-5">
+        <h6 class="text-center black-text">Avatar Image</h6>
+        <img src="" class="rounded-circle z-depth-2" alt="avatar image">
     </div>
+    <div class="custom-file justify-content-center d-flex addFile float-center pl-5">
+        <input type="file" class="custom-file-input black-text addFile" id="validatedCustomFile" required>
+        <label class="custom-file-label" for="validatedCustomFile">Choose file...</label>
+        <div class="invalid-feedback">Sorry this image is not valid</div>
+        </div>
+      </div>
+      <div class="modal-footer justify-content-center d-flex">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
 </div>
-<!-- Central Modal -->
 {{template "base/scripts" .}} {{template "base/footer" .}} {{template "base/tabnav" .}}
