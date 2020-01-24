@@ -2,8 +2,8 @@ package simulation
 
 import (
 	"github.com/adlio/darksky"
+	log "github.com/sirupsen/logrus"
 	"gitlab.com/group-nacdlow/nacdlow-server/modules/settings"
-	"log"
 	"time"
 )
 
@@ -41,10 +41,10 @@ func GetWeather() {
 	f, err := client.GetForecast(Env.Location.Latitude, Env.Location.Longitude,
 		darksky.Arguments{"units": "si", "extend": "hourly"})
 	if err != nil {
-		log.Print("Failed to get forecast! ", err)
-		log.Println("Please make sure the Darksky API key is correct.")
-		log.Println("You may use the group API key at: https://wiki.nacdlow.com/Accounts.html")
-		log.Println("Simulation will may not work properly!")
+		log.Error("Failed to get forecast!", err)
+		log.Error("Please make sure the Darksky API key is correct.")
+		log.Error("You may use the group API key at: https://wiki.nacdlow.com/Accounts.html")
+		log.Error("Simulation will may not work properly!")
 		return
 	}
 	Env.ForecastData = f

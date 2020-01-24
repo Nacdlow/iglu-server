@@ -2,7 +2,7 @@ package cmd
 
 import (
 	"fmt"
-	"log"
+	log "github.com/sirupsen/logrus"
 
 	"net/http"
 
@@ -76,7 +76,7 @@ func start(clx *cli.Context) (err error) {
 
 	})
 
-	log.Printf("Starting server on port %s!\n", clx.String("port"))
+	log.WithFields(log.Fields{"port": clx.String("port")}).Printf("Starting server.")
 	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%s", clx.String("port")), m))
 	return nil
 }
