@@ -183,6 +183,9 @@ func Tick() {
 	} else {
 		Env.PowerGenRate = change
 	}
+
+	now := time.Unix(Env.CurrentTime, 0)
+	Env.MinecraftTime = ((now.Hour() * 1000) - 6000 + (now.Minute() * 16))
 }
 
 // WeatherType represents the weather type.
@@ -199,10 +202,11 @@ const (
 // Environment represents an entire simulated environment state, which includes
 // the home, weather, time and location states.
 type Environment struct {
-	Home         `json:"home"`
-	Weather      WeatherStatus     `json:"weather"`
-	CurrentTime  int64             `json:"current_time"` // In Unix time.
-	ForecastData *darksky.Forecast `json:"-"`
+	Home          `json:"home"`
+	Weather       WeatherStatus     `json:"weather"`
+	CurrentTime   int64             `json:"current_time"` // In Unix time.
+	MinecraftTime int               `json:"minecraft_time"`
+	ForecastData  *darksky.Forecast `json:"-"`
 }
 
 // WeatherStatus represents a weather status state in the simulated
