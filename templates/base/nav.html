@@ -1,13 +1,14 @@
 <header>
 
-<nav class="navbar navbar-expand-lg navbar-dark default-color">
+  <nav class="navbar navbar-expand-lg navbar-dark default-color">
 
-  <!-- Additional container -->
-  <div class="container">
+    <!-- Additional container -->
+    <div class="container">
 
       <!-- Collapse button -->
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent41" aria-controls="navbarSupportedContent41" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent41"
+        aria-controls="navbarSupportedContent41" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
       </button>
 
       <!-- Navbar brand and Login Button -->
@@ -18,79 +19,82 @@
         <div class="nav-item" data-toggle="modal" data-target="#fullHeightModalRight">
           <a class="nav-link waves-effect waves-light" href="#"> <i class="far fa-bell"></i></a>
         </div>-->
-          <div class="nav-item avatar">
-            <a class="nav-link p-0 waves-effect waves-light" href="#">
-              <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-5.jpg" class="rounded-circle z-depth-0" alt="avatar image" height="45" width="45">
-            </a>
-          </div>
-          
+        <div class="nav-item avatar">
+          <a class="nav-link p-0 waves-effect waves-light" href="#">
+            <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-5.jpg" class="rounded-circle z-depth-0"
+              alt="avatar image" height="45" width="45">
+          </a>
+        </div>
+
       </div>
 
       <!-- Collapsible content -->
       <div class="navbar-collapse collapse" id="navbarSupportedContent41">
 
-          <!-- Links -->
-          <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-              <li class="nav-item{{if .IsDashboard}} active{{end}}">
-                  <a class="nav-link" href="/dashboard"><i class="fas fa-tachometer-alt"></i></a>
-              </li>
-              <li class="nav-item{{if .IsRooms}} active{{end}}">
-                  <a class="nav-link" href="/rooms"><i class="fas fa-bed"></i></a>
-              </li>
-              <li class="nav-item{{if .IsRooms}} active{{end}}">
-                <a class="nav-link" href="/settings"><i class="fas fa-cog"></i></a>
-              </li>
-          </ul>
-          <!-- Links -->
+        <!-- Links -->
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+          <li class="nav-item{{if .IsDashboard}} active{{end}}">
+            <a class="nav-link" href="/dashboard"><i class="fas fa-tachometer-alt"></i></a>
+          </li>
+          <li class="nav-item{{if .IsRooms}} active{{end}}">
+            <a class="nav-link" href="/rooms"><i class="fas fa-bed"></i></a>
+          </li>
+          <li class="nav-item{{if .IsRooms}} active{{end}}">
+            <a class="nav-link" href="/settings"><i class="fas fa-cog"></i></a>
+          </li>
+        </ul>
+        <!-- Links -->
 
-          <ul class="navbar-nav mobhide">
-            <li class="nav-item" data-toggle="modal" data-target="#fullHeightModalRight">
-              <a class="nav-link waves-effect waves-light" href="#"> <i class="far fa-bell"></i></a>
-            </li>
+        <ul class="navbar-nav mobhide">
+          <li class="nav-item" data-toggle="modal" data-target="#fullHeightModalRight">
+            <a class="nav-link waves-effect waves-light" href="#"> <i class="far fa-bell"></i></a>
+          </li>
 
-              <li class="nav-item">
-                <a class="nav-link p-0" href="#">
-                  <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-5.jpg"
-                      class="rounded-circle z-depth-0" alt="avatar image" height="45" width="45">
-              </a>
-              </li>
-          </ul>
+          <li class="nav-item">
+            <a class="nav-link p-0" href="#">
+              <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-5.jpg" class="rounded-circle z-depth-0"
+                alt="avatar image" height="45" width="45">
+            </a>
+          </li>
+        </ul>
       </div>
       <!-- Collapsible content -->
 
-  </div>
-  <!-- Additional container -->
-
-</nav>
-
-<!-- Full Height Modal Right -->
-<div class="modal fade right" id="fullHeightModalRight" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-  aria-hidden="true">
-
-  <!-- Add class .modal-full-height and then add class .modal-right (or other classes from list above) to set a position to the modal -->
-  <div class="modal-dialog modal-full-height modal-right" role="document">
+    </div>
+    <!-- Additional container -->
+  </nav>
 
 
-    <div class="modal-content elegant-color">
-      <div class="modal-header">
-        <h4 class="modal-title w-100" id="myModalLabel">Notifications</h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span class="text-white" aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        You have no notifications
-      </div>
-      <div class="modal-footer justify-content-center">
-        <button type="button" class="btn btn-primary">Clear All</button>
+
+
+  <!-- Full Height Modal Right -->
+  <div class="modal fade right" id="fullHeightModalRight" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+    aria-hidden="true">
+
+    <!-- Add class .modal-full-height and then add class .modal-right (or other classes from list above) to set a position to the modal -->
+    <div class="modal-dialog modal-full-height modal-right" role="document">
+
+
+      <div class="modal-content elegant-color">
+        <div class="modal-header">
+          <h4 class="modal-title w-100" id="myModalLabel">Notifications</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span class="text-white" aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          You have no notifications
+        </div>
+        <div class="modal-footer justify-content-center">
+          <button type="button" class="btn btn-primary">Clear All</button>
+        </div>
       </div>
     </div>
   </div>
-</div>
-<!-- Full Height Modal Right -->
+  <!-- Full Height Modal Right -->
 
 
-<!-- <nav class="navbar navbar-expand-lg navbar-dark default-color" >
+  <!-- <nav class="navbar navbar-expand-lg navbar-dark default-color" >
     <div class="container">
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"

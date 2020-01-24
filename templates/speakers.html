@@ -8,6 +8,7 @@
 
 <div class="card-deck">
 
+  {{range .Speakers}}{{if eq .Type 3}}
     <!--Card 1-->
     <div class="card m-3">
       <div class="card-body">
@@ -45,16 +46,16 @@
           <!-- Collapsible content -->
         </nav>
         <!--/.Navbar-->
-                <h5 class="card-title">Sonos</h5>
+                <h5 class="card-title">{{.Description}}</h5>
          <!-- Default switch -->
         <div class="">
-            <a type="button" class="fas fa-power-off pb-3 green-text " href="#" style="color: black; font-size: 2em;"></a>
+            <a type="button" class="fas fa-power-off pb-3 {{if .Status}} green-text {{else}} red-text {{end}}" href="#" style="color: black; font-size: 2em;"></a>
         </div>
         <p class="text-center pt-2">Volume</p>
         <div class="d-flex justify-content-center  ">
             <span class="font-weight-bold black-text mr-2 "><i class="fas fa-volume-mute" aria-hidden="true"></i></span>
             <form class="range-field w-35">
-              <input class="border-0" type="range" min="0" max="100" />
+              <input class="border-0" type="range" min="0" max="10" value="{{.Volume}}"/>
             </form>
             <span class="font-weight-bold black-text ml-2 "><i class="fas fa-volume-up" aria-hidden="true"></i></span>
           </div>
@@ -63,71 +64,7 @@
         <small class="text-muted">Connected to David's Iphone</small>
       </div>
     </div>
-
-    <!--Card 2-->
-    <div class="card m-3">
-      <div class="card-body">
-        
-        <!--Navbar-->
-        <nav class="navbar navbar-light navbar-1 white elipsesNav">
-
-          <!-- Navbar brand -->
-          <a class="navbar-brand w-10 float-right" href="#"></a>
-
-          <!-- Collapse button -->
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent15"
-            aria-controls="navbarSupportedContent15" aria-expanded="false" aria-label="Toggle navigation"><span
-              class="fas fa-ellipsis-h"></span></button>
-
-          <!-- Collapsible content -->
-          <div class="collapse navbar-collapse position-relative" id="navbarSupportedContent15">
-
-            <!-- Links -->
-            <ul class="navbar-nav mr-auto lilnav">
-              <li class="nav-item active">
-                <a class="nav-link black-text lilnav" type="button">Favourite<i class="fas fa-heart black-text"></i><span
-                    class="sr-only">(current)</span></a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link black-text lilnav" href="#" data-toggle="modal" data-target="#basicExampleModal">Options</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link black-text lilnav" href="#">Remove</a>
-              </li>
-            </ul>
-            <!-- Links -->
-
-          </div>
-          <!-- Collapsible content -->
-        </nav>
-        <!--/.Navbar-->
-        <h5 class="card-title">Sony Sound Bar</h5>
-         <!-- Default switch -->
-         <div class="">
-            <a type="button" class="fas fa-power-off pb-3 red-text" href="#" style="color: black; font-size: 2em; opacity: 50%;"></a>
-        </div>
-       <p class="text-center pt-2" style="opacity: 50%;">Volume</p>
-        <div class="d-flex justify-content-center" style="opacity: 50%;">
-            <span class="font-weight-bold black-text mr-2 "><i class="fas fa-volume-mute" aria-hidden="true"></i></span>
-            <form class="range-field w-35">
-              <input class="border-0" type="range" min="0" max="100" />
-            </form>
-            <span class="font-weight-bold black-text ml-2 mt-1"><i class="fas fa-volume-up" aria-hidden="true"></i></span>
-          </div>
-      </div>
-      <div class="card-footer" style="background-color: #FFA8A8;">
-        <small class="text-muted">Disconnected</small>
-      </div>
-    </div>
-
-    <div class="card m-3">
-      <div class="card-body d-flex align-items-center justify-content-center">
-        <div>
-          <a type="button" class="fas fa-plus black-text" style="font-size: 6em;" data-toggle="modal" data-target="#addModal"></a>
-        </div>
-        </div>
-    </div>
-</div>
+{{end}}{{end}}
 
 
 <!--OPTIONS MODAL1-->

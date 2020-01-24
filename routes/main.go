@@ -2,7 +2,9 @@ package routes
 
 import (
 	"fmt"
+	"math"
 	"gitlab.com/group-nacdlow/nacdlow-server/models"
+	"gitlab.com/group-nacdlow/nacdlow-server/models/simulation"
 	macaron "gopkg.in/macaron.v1"
 )
 
@@ -15,6 +17,8 @@ func NotFoundHandler(ctx *macaron.Context) {
 func DashboardHandler(ctx *macaron.Context) {
 	ctx.Data["NavTitle"] = "Dashboard"
 	ctx.Data["IsDashboard"] = 1
+	ctx.Data["Temperature"] = math.Round(simulation.Env.ForecastData.Currently.Temperature)
+	ctx.Data["Summary"] = simulation.Env.ForecastData.Currently.Summary
 	ctx.HTML(200, "dashboard")
 }
 
@@ -46,15 +50,18 @@ func DevicesHandler(ctx *macaron.Context) {
 
 //LightsHandler handles the lights page
 func LightsHandler(ctx *macaron.Context) {
+	ctx.Data["Lights"] = models.GetDevices()
 	ctx.HTML(200, "lights")
 }
 
 //HeatingHandler handles the temperature page
 func HeatingHandler(ctx *macaron.Context) {
+	ctx.Data["Heating"] = models.GetDevices()
 	ctx.HTML(200, "temperature")
 }
 
 //SpeakerHandler handles the speakers page
 func SpeakerHandler(ctx *macaron.Context) {
+	ctx.Data["Speakers"] = models.GetDevices()
 	ctx.HTML(200, "speakers")
 }
