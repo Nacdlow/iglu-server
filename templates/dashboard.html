@@ -4,23 +4,65 @@
 <div class="container animated fadeIn">
 
   <h2 class="pt-5 text-center" id="lblGreetings"></h2>
-  <div class="pt-3 pb-3"><hr></div>
 
-    <div class="row justify-content-center">
-      <div class="col-lg-6 d-flex justify-content-center">
+
+  <p class="" id="">{{.Temperature}}°C</p>
+  <p class="" id="">{{.Summary}}</p>
+  <p class="" id="">Icon</p>
+
+
+  <script src="/js/skycons.js"></script>
+  <canvas id="icon1" width="128" height="128"></canvas>
+  <canvas id="icon2" width="128" height="128"></canvas>
+  <script>
+    var skycons = new Skycons({ "color": "white" });
+    // on Android, a nasty hack is needed: {"resizeClear": true}
+
+    // you can add a canvas by it's ID...
+    skycons.add("icon1", Skycons.PARTLY_CLOUDY_DAY);
+
+    // ...or by the canvas DOM element itself.
+    skycons.add(document.getElementById("icon2"), Skycons.RAIN);
+
+    // if you're using the Forecast API, you can also supply
+    // strings: "partly-cloudy-day" or "rain".
+
+    // start animation!
+    skycons.play();
+
+    // you can also halt animation with skycons.pause()
+
+    // want to change the icon? no problem:
+    skycons.set("icon1", Skycons.PARTLY_CLOUDY_NIGHT);
+
+    // want to remove one altogether? no problem:
+    skycons.remove("icon2");
+  </script>
+
+
+
+
+
+  <div class="pt-3 pb-3">
+    <hr>
+  </div>
+  <div class="row justify-content-center">
+    <div class="col-lg-6 d-flex justify-content-center">
       <div class="card p-3 warning-color circle flex-center flex-column">
         <div class="card-body">
           <h5 class="card-title"><small>£</small> 0.52</h5>
           <p class="card-text">per hour</p>
         </div>
       </div>
+    </div>
+
+
+
+    <div class="col-lg-6">
+      <div class="pt-3 pb-3 deskhide">
+        <hr>
       </div>
-
-
-
-    <div class="col-lg-6">      
-      <div class="pt-3 pb-3 deskhide"><hr></div>
-    <h4 class="text-center pb-3">Favourites</h4>
+      <h4 class="text-center pb-3">Favourites</h4>
       <div class="row">
         <div class="col-4 d-flex justify-content-center">
           <div class="card p-1 circle circle-sm flex-center flex-column">
@@ -43,15 +85,17 @@
             </div>
           </div>
         </div>
-        </div>
       </div>
     </div>
+  </div>
 
-    <div class="pt-3 pb-3"><hr></div>
+  <div class="pt-3 pb-3">
+    <hr>
+  </div>
 
-    <h5><i class="fas fa-lightbulb"></i> Tips</h5>
-    <p>For every degree celcius that you have lower your heating, you may reduce
-      your energy bill by 10%!</p>
+  <h5><i class="fas fa-lightbulb"></i> Tips</h5>
+  <p>For every degree celcius that you have lower your heating, you may reduce
+    your energy bill by 10%!</p>
 
 </div>
 
@@ -128,14 +172,14 @@
   var greet;
 
   if (hrs < 12)
-      greet = '<i class="fas fa-sun"></i> Good Morning';
+    greet = '<i class="fas fa-sun"></i> Good Morning';
   else if (hrs >= 12 && hrs <= 17)
-      greet = '<i class="fas fa-mug-hot"></i> Good Afternoon';
+    greet = '<i class="fas fa-mug-hot"></i> Good Afternoon';
   else if (hrs >= 17 && hrs <= 24)
-      greet = '<i class="fas fa-cloud-moon"></i> Good Evening';
+    greet = '<i class="fas fa-cloud-moon"></i> Good Evening';
 
   document.getElementById('lblGreetings').innerHTML = greet + ", [Name]";
-</script> 
+</script>
 
 
 {{template "base/footer" .}}
