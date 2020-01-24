@@ -4,6 +4,7 @@ import (
 	"github.com/adlio/darksky"
 	log "github.com/sirupsen/logrus"
 	"gitlab.com/group-nacdlow/nacdlow-server/modules/settings"
+	"gitlab.com/group-nacdlow/nacdlow-server/modules/weather"
 	"time"
 )
 
@@ -15,7 +16,14 @@ var (
 func Start() {
 	Env.Location.Latitude = settings.Config.GetString("Location.Lat")
 	Env.Location.Longitude = settings.Config.GetString("Location.Lon")
-	GetWeather()
+	f, err := weather.GetWeather()
+	if err != nil {
+		log.Error("Failed to get forecast!", err)
+		log.Error("Please make sure the Darksky API key is correct.")
+		log.Error("You may use the group API key at: https://wiki.nacdlow.com/Accounts.html")
+		log.Error("Simulation will may not work properly!")
+	}
+	Env.ForecastData = f
 	for {
 		Tick()
 		time.Sleep(TickSleep * time.Millisecond)
@@ -33,21 +41,6 @@ func Tick() {
 			}
 		}
 	}
-}
-
-// GetWeather loads the forecast into the simulation.
-func GetWeather() {
-	client := darksky.NewClient(settings.Config.GetString("DarkskyAPIKey"))
-	f, err := client.GetForecast(Env.Location.Latitude, Env.Location.Longitude,
-		darksky.Arguments{"units": "si", "extend": "hourly"})
-	if err != nil {
-		log.Error("Failed to get forecast!", err)
-		log.Error("Please make sure the Darksky API key is correct.")
-		log.Error("You may use the group API key at: https://wiki.nacdlow.com/Accounts.html")
-		log.Error("Simulation will may not work properly!")
-		return
-	}
-	Env.ForecastData = f
 }
 
 // WeatherType represents the weather type.
