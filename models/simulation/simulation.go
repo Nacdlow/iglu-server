@@ -5,6 +5,7 @@ import (
 	log "github.com/sirupsen/logrus"
 	"gitlab.com/group-nacdlow/nacdlow-server/models"
 	"gitlab.com/group-nacdlow/nacdlow-server/modules/weather"
+	"math"
 	"time"
 )
 
@@ -18,6 +19,7 @@ var (
 
 // LoadFromDB loads the rooms from the database into
 func LoadFromDB() {
+	lacking := false
 	for _, room := range models.GetRooms() {
 		r := Room{
 			DBRoomID:    room.RoomID,
@@ -64,7 +66,15 @@ func LoadFromDB() {
 				room.RoomID, room.RoomName)
 		}
 
+		if !lightSet || !tempSet {
+			lacking = true
+		}
+
 		Env.Rooms = append(Env.Rooms, r)
+	}
+	if lacking {
+		log.Error("Some rooms may be lacking important devices which is required for the simulator to work properly!" +
+			" Please fix before continuing.")
 	}
 }
 
@@ -89,15 +99,42 @@ func Start() {
 	}
 }
 
+// getChange makes the current go closer to the influence temperature depending
+// on the change. The higher the change value is, the less (slower) it goes
+// towards to influence.
+//
+// This is used for making the room temperature move towards an "influence",
+// whether that'd be the air conditioning or the outside temperature (if the
+// window is opened).
+func getChange(current, influence, change float64) float64 {
+	diff := math.Abs(current - influence)
+	if diff <= 0.75 { // threshold
+		return influence
+	} else {
+		changed := diff / change
+		if influence > current {
+			return current + changed
+		} else {
+			return current - changed
+		}
+	}
+}
+
 // Tick will tick the environment one second.
 func Tick() {
 	Env.CurrentTime++
-	// TODO update room temperatures
+	outTemp := Env.Weather.OutdoorTemp
 	for _, room := range Env.Home.Rooms {
+		// Simulate cold/hot air from outside coming in room through windows
 		for _, window := range room.Windows {
 			if window.IsOpen {
-				// TODO get the difference between outdoor temp and room
+				room.ActualRoomTemp = getChange(room.ActualRoomTemp, outTemp, 25)
 			}
+		}
+		// Simulate the temperature control heating/cooling the room
+		tempCont, err := models.GetDevice(room.TempControlDeviceID)
+		if err == nil && tempCont.DeviceID == models.TempControl {
+			room.ActualRoomTemp = getChange(room.ActualRoomTemp, tempCont.Temp, 18)
 		}
 	}
 }
