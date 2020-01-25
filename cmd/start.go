@@ -78,6 +78,7 @@ func start(clx *cli.Context) (err error) {
 			routes_sim.PostOverrideWeatherHandler)
 		m.Post("/time_sleep", binding.Bind(forms_sim.ChangeTimeSleepForm{}),
 			routes_sim.PostChangeTimeSleepHandler)
+		m.Get("/env_status", routes_sim.EnvStatusHandler)
 	})
 
 	log.WithFields(log.Fields{"port": clx.String("port")}).Printf("Starting server.")

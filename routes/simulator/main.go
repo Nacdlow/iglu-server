@@ -17,7 +17,6 @@ var (
 func HomepageHandler(ctx *macaron.Context) {
 	ctx.Data["Env"] = simulation.Env
 	ctx.Data["TickSleep"] = simulation.TickSleep.Milliseconds()
-	ctx.Data["CurrentTime"] = time.Unix(simulation.Env.CurrentTime, 0).Format(layoutCurrentTime)
 	if lastMCPing != (time.Time{}) {
 		lastPing := time.Now().Sub(lastMCPing).Milliseconds()
 		ctx.Data["LastMCPing"] = lastPing
@@ -25,6 +24,14 @@ func HomepageHandler(ctx *macaron.Context) {
 		ctx.Data["MCVersion"] = mcVersion
 	}
 	ctx.HTML(200, "sim/index")
+}
+
+// EnvStatus handler handles loading the environment status for simulator page.
+func EnvStatusHandler(ctx *macaron.Context) {
+	ctx.Data["Env"] = simulation.Env
+	ctx.Data["TickSleep"] = simulation.TickSleep.Milliseconds()
+	ctx.Data["CurrentTime"] = time.Unix(simulation.Env.CurrentTime, 0).Format(layoutCurrentTime)
+	ctx.HTML(200, "sim/env_status")
 }
 
 // DataHandler handles posting the simulation data as JSON.

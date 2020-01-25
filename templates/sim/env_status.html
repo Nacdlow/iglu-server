@@ -1,0 +1,12 @@
+<dl>
+	<dt>Current simulation time</dt>
+	<dd>{{.CurrentTime}}</dd>
+	<dt>Outdoor temperature</dt>
+	<dd>{{.Env.Weather.OutdoorTemp}}</dd>
+	<dt>Outdoor humidity</dt>
+	<dd>{{.Env.Weather.Humidity}}</dd>
+	<dt>Cloud cover</dt>
+	<dd>{{.Env.Weather.CloudCover}}</dd>
+	<dt>Power generation</dt>
+	<dd>{{.Env.PowerGenRate}} kWh (capacity of {{.Env.SolarMaxPower}})</dd>
+</dl>
