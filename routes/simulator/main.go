@@ -1,6 +1,8 @@
 package simulator
 
 import (
+	"fmt"
+	"gitlab.com/group-nacdlow/nacdlow-server/models"
 	forms "gitlab.com/group-nacdlow/nacdlow-server/models/forms/sim"
 	"gitlab.com/group-nacdlow/nacdlow-server/models/simulation"
 	macaron "gopkg.in/macaron.v1"
@@ -40,6 +42,7 @@ func DataHandler(ctx *macaron.Context) {
 		lastMCPing = time.Now()
 		mcVersion = ctx.Query("server")
 	}
+	simulation.UpdateFromDB()
 	ctx.JSON(200, simulation.Env)
 }
 
@@ -53,4 +56,22 @@ func PostOverrideWeatherHandler(ctx *macaron.Context, form forms.OverrideWeather
 func PostChangeTimeSleepHandler(ctx *macaron.Context, form forms.ChangeTimeSleepForm) {
 	simulation.TickSleep = time.Duration(form.TickSleep) * time.Millisecond
 	ctx.Redirect("/sim")
+}
+
+func ToggleHandler(ctx *macaron.Context) {
+	for _, room := range simulation.Env.Rooms {
+		fmt.Println(room.MainLightDeviceID)
+		fmt.Println(ctx.ParamsInt64("id"))
+
+		if room.MainLightDeviceID == ctx.ParamsInt64("id") {
+			fmt.Println("A")
+			dev, err := models.GetDevice(room.MainLightDeviceID)
+			if err == nil && dev.Type == models.Light {
+				models.UpdateDeviceCols(&models.Device{
+					DeviceID: dev.DeviceID,
+					Status:   !dev.Status}, "status")
+			}
+			break
+		}
+	}
 }

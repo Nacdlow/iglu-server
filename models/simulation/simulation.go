@@ -25,6 +25,15 @@ func init() {
 	rnd = rand.New(rand.NewSource(time.Now().UnixNano()))
 }
 
+func UpdateFromDB() {
+	for i, room := range Env.Rooms {
+		device, err := models.GetDevice(room.MainLightDeviceID)
+		if err == nil && device.Type == models.Light {
+			Env.Rooms[i].LightStatus = device.Status
+		}
+	}
+}
+
 // LoadFromDB loads the rooms from the database into
 func LoadFromDB() {
 	lacking := false
