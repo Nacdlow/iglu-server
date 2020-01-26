@@ -182,18 +182,22 @@ func Tick() {
 		change = float64(Env.SolarMaxPower)
 	}
 
-	// TODO use sine function?
-	// TODO no sun at night.
-	vMax, vMin := (float64(Env.SolarMaxPower) / 5), float64(0) // Will vary up to a 1/4 less
-	vary := rnd.Float64()*(vMax-vMin) + vMin
-	change -= vary
+	now := time.Unix(Env.CurrentTime, 0)
+
+	change += math.Sin(float64(Env.CurrentTime%10000)) * 3
 	if change < 0 {
 		Env.PowerGenRate = 0
+	} else if change > float64(Env.SolarMaxPower) {
+		Env.PowerGenRate = float64(Env.SolarMaxPower)
 	} else {
 		Env.PowerGenRate = change
 	}
+	if now.Hour() < 6 || now.Hour() > 18 { // Night
+		Env.PowerGenRate = 0
+	} else if now.Hour() < 9 || now.Hour() > 17 { // Early morning/late afternoon
+		Env.PowerGenRate = Env.PowerGenRate / 4
+	}
 
-	now := time.Unix(Env.CurrentTime, 0)
 	Env.MinecraftTime = ((now.Hour() * 1000) - 6000 + (now.Minute() * 16))
 }
 
