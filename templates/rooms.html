@@ -65,6 +65,15 @@ aria-hidden="true" data-backdrop="false">
                 <option value="9" >Guest</option>
             </select>
         </div>
+          <h6 class="text-center black-text">Part of a room?</h6>
+          <div>
+            <select class="browser-default custom-select" id="select"
+			   name="part_of_room">
+                <option value="-1" selected>Not part of any room</option>
+				{{range .Rooms}}<option value="{{.RoomID}}">{{.RoomName}}</option>
+				{{end}}
+            </select>
+        </div>
           <h6 class="text-center black-text">Enter Number of Windows:</h6>
           <div class="md-form text-center justify-content-center d-flex">
               <input type="number" class="form-control mb-4 text-center w-50" placeholder="e.g. 2" name="windows_count">
