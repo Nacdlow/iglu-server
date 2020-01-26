@@ -151,21 +151,6 @@
 
 {{template "base/scripts" .}}
 <script>
-  $(function () {
-    $('.chart#chart-power').easyPieChart({
-      barColor: "#4caf50",
-      lineWidth: 5,
-      scaleLength: 8,
-      lineCap: 'butt',
-      rotate: 240,
-      onStep: function (from, to, percent) {
-        $(this.el).find('.percent').text(Math.round(percent));
-      }
-    });
-  });
-</script>
-
-<script>
   var myDate = new Date();
   var hrs = myDate.getHours();
 
