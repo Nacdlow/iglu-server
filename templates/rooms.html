@@ -18,11 +18,64 @@
         </div>
 		{{end}}{{end}}
         <div class="col-lg-2 col-md-3 col-4 text-center pb-3">
-            <a type="button" class="fas fa-plus pb-3" href="#" style="color: white; font-size: 50px;"></a>
+            <a type="button" class="fas fa-plus pb-3" href="#" data-toggle="modal" data-target="#addModal" style="color: white; font-size: 50px;"></a>
             <h6>Add Room</h6>
         </div>
     </div>
+
+
+    <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+aria-hidden="true" data-backdrop="false">
+<div class="modal-dialog" role="document" data-backdrop="false">
+  <div class="modal-content" data-backdrop="false" method="POST">
+    <div class="modal-header">
+      <h5 class="modal-title black-text" id="addModal">Add Room</h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+        <form method="POST">
+          <h6 class="text-center black-text">Enter Room Name:</h6>
+          <div class="md-form text-center justify-content-center d-flex">
+              <input type="text" class="form-control mb-4 text-center w-50" placeholder="e.g. Johns Room" name="room_name">
+          </div> 
+          <h6 class="text-center black-text">Enter Room Description:</h6>
+          <div class="md-form text-center justify-content-center d-flex">
+              <input type="text" class="form-control mb-4 text-center w-50" placeholder="Description" name="description">
+          </div>
+          <h6 class="text-center black-text">Select Room Type:</h6>
+          <div>
+            <select class="browser-default custom-select" id="select">
+                <option value="" disabled selected>Choose Type</option>
+                <option name="room_type" value="0" >Lounge</option>
+                <option name="room_type" value="1" >Bedroom</option>
+                <option name="room_type" value="2" >Dining Room</option>
+                <option name="room_type" value="3" >Kitchen</option>
+                <option name="room_type" value="4" >Bathroom</option>
+                <option name="room_type" value="5" >Hallway</option>
+                <option name="room_type" value="6" >Storage</option>
+                <option name="room_type" value="7" >Utility Room</option>
+                <option name="room_type" value="8" >Garage</option>
+                <option name="room_type" value="9" >Guest</option>
+            </select>
+        </div>
+          <h6 class="text-center black-text">Enter Number of Windows:</h6>
+          <div class="md-form text-center justify-content-center d-flex">
+              <input type="number" class="form-control mb-4 text-center w-50" placeholder="e.g. 2" name="windows_count">
+          </div> 
+    </div>
+    <div class="modal-footer justify-content-center d-flex">
+      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      <button type="submit" class="btn btn-primary">Save changes</button>
+    </div>
+</form>
+  </div>
 </div>
+</div>
+</div>
+
+
 
 {{template "base/scripts" .}}
 {{template "base/footer" .}}
