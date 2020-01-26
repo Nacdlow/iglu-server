@@ -60,11 +60,7 @@ func PostChangeTimeSleepHandler(ctx *macaron.Context, form forms.ChangeTimeSleep
 
 func ToggleHandler(ctx *macaron.Context) {
 	for _, room := range simulation.Env.Rooms {
-		fmt.Println(room.MainLightDeviceID)
-		fmt.Println(ctx.ParamsInt64("id"))
-
 		if room.MainLightDeviceID == ctx.ParamsInt64("id") {
-			fmt.Println("A")
 			dev, err := models.GetDevice(room.MainLightDeviceID)
 			if err == nil && dev.Type == models.Light {
 				models.UpdateDeviceCols(&models.Device{
