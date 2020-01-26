@@ -27,8 +27,7 @@ func passwd(c *cli.Context) (err error) {
 	fmt.Scanln(&username)
 	u, err := models.GetUser(username)
 	if err != nil {
-		fmt.Errorf("Cannot find user: ", err)
-		return
+		panic(err)
 	}
 	fmt.Printf("New password (will not echo): ")
 	inPass, _ := terminal.ReadPassword(0)
