@@ -63,8 +63,8 @@
 
           <!-- Default switch -->
           <div class="custom-control custom-switch float-left">
-              <input type="checkbox" class="custom-control-input" id="customSwitches-{{.DeviceID}}" checked>
-             <label class="custom-control-label" for="customSwitches-{{.DeviceID}}">Off</label>
+              <input type="checkbox" class="custom-control-input" id="customSwitches-{{.DeviceID}}" {{if eq .Status true}}checked{{else}}unchecked{{end}}>
+             <label class="custom-control-label" for="customSwitches-{{.DeviceID}}">{{if eq .Status true}}On{{else}}Off{{end}}</label>
          </div> 
          
        
