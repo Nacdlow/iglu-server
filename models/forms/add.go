@@ -6,6 +6,7 @@ type AddRoomForm struct {
 	Description  string `form:"description" binding:"Required"`
 	RoomType     int64  `form:"room_type"` // We don't use required because that would require number >0
 	WindowsCount int64  `form:"windows_count"`
+	PartOfRoom   int64  `form:"part_of_room"`
 }
 
 // AddDeviceForm represents a form to add a new Device to a room.

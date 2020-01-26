@@ -30,6 +30,8 @@ type Room struct {
 	Description string `fake:"{hacker.ingverb} {hacker.noun} {hacker.adjective}"`
 	RoomType    RType  `fake:"skip"`
 	WindowCount int64  `xorm:"null" fake:"skip"`
+	IsSubRoom   bool
+	PartOfRoom  int64 `xorm:"null" fake:"skip"`
 }
 
 // GetFakeRoom returns a new randomly generated Room. This is used for testing
