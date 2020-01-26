@@ -50,48 +50,59 @@
             <h6>Locks</h6>
         </div>
         <div class="col-lg-2 col-md-3 col-4 text-center pb-3">
-            <a type="button" class="fas fa-plus pb-3"
-				href="/room/{{.Room.RoomID}}/addmodule" style="color: white; font-size: 50px;"></a>
+            <a type="button" class="fas fa-plus pb-3" data-toggle="modal" data-target="#addModal" style="color: white; font-size: 50px;"></a>
             <h6>Add Control Module</h6>
         </div>
     </div>
-	{{end}}
-</div>
-
-
-
-<!-- Modal -->
-<div class="modal fade" id="basicExampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  {{end}}
+  
+  <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
   aria-hidden="true" data-backdrop="false">
   <div class="modal-dialog" role="document" data-backdrop="false">
-    <div class="modal-content" data-backdrop="false">
+    <div class="modal-content" data-backdrop="false" method="POST">
       <div class="modal-header">
-        <h5 class="modal-title black-text" id="exampleModalLabel">Add new [roomType]</h5>
+        <h5 class="modal-title black-text" id="addModal">Add Control Module</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <h6 class="text-center black-text">Enter a Room Name:</h6>
+          <form method="POST">
+                <input type="hidden" class="form-control mb-4 text-center w-50" name="room_id">
+                <h6 class="text-center black-text">Select Device Type:</h6>
+                <div class="pb-3">
+                  <select class="browser-default custom-select" id="select"
+               name="device_type">
+                      <option value="" disabled selected>Choose Type</option>
+                      <option value="0" >Lights</option>
+                      <option value="1" >Temperature Control</option>
+                      <option value="2" >TV</option>
+                      <option value="3" >Speaker</option>
+                  </select>
+              </div>
+            <h6 class="text-center black-text">Enter Description:</h6>
             <div class="md-form text-center justify-content-center d-flex">
-                <input type="text" id="" class="form-control mb-4 text-center w-50" placeholder="e.g. John's Room" name="Room Name">
+                <input type="text" class="form-control mb-3 text-center w-50" placeholder="Description" name="description">
             </div>
-        
-    <div class="text-center pt-0 pb-5">
-        <h6 class="text-center black-text">Avatar Image</h6>
-        <img src="" class="rounded-circle z-depth-2" alt="avatar image">
-    </div>
-    <div class="custom-file justify-content-center d-flex addFile float-center pl-5">
-        <input type="file" class="custom-file-input black-text addFile" id="validatedCustomFile" required>
-        <label class="custom-file-label" for="validatedCustomFile">Choose file...</label>
-        <div class="invalid-feedback">Sorry this image is not valid</div>
-        </div>
+            <div class="custom-control custom-checkbox text-center black-text">
+              <input type="checkbox" class="custom-control-input" id="defaultUnchecked" name="is_main_light_source">
+              <label class="custom-control-label" for="defaultUnchecked">Main Light</label>
+            </div>
       </div>
       <div class="modal-footer justify-content-center d-flex">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="submit" class="btn btn-primary">Save changes</button>
       </div>
+  </form>
     </div>
   </div>
+  </div>
+
+  
 </div>
+
+<script>
+//main light to only appear when light device is selected from options
+</script>
+
 {{template "base/scripts" .}} {{template "base/footer" .}} {{template "base/tabnav" .}}
