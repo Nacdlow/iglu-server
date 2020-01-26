@@ -1,42 +1,44 @@
 {{template "base/head" .}}
 
+<div class="container">
 <div class="row d-flex justify-content-center">
-    <div class="col-md-4 pt-5">
-<form class="text-center p-5" method="POST">
+<div class="col- pt-5">
+<form class="text-center pt-5" method="POST">
 
-    <p class="h4 mb-2">Sign Up<hr></p>
+    <h2>Create Account</h2>
+    <hr>
 
-    <div class="form-row mb-4">
-        <div class="col">
+    <div class="form-row">
+        <div class="col">       
             <!-- First name -->
             <div class="md-form">
-                <input type="text" id="defaultRegisterFormFirstName" class="form-control" placeholder="First name" name="fname">
+                <input type="text" id="defaultRegisterFormFirstName" class="form-control white-text" placeholder="First name" name="fname">
             </div>
         </div>
         <div class="col">
             <!-- Last name -->
             <div class="md-form">
-                <input type="text" id="defaultRegisterFormLastName" class="form-control" placeholder="Last name" name="lname">
+                <input type="text" id="defaultRegisterFormLastName" class="form-control white-text" placeholder="Last name" name="lname">
             </div>
         </div>
     </div>
 
     <!-- E-mail -->
     <div class="md-form">
-        <input type="email" id="defaultRegisterFormEmail" class="form-control mb-4" placeholder="E-mail" name="email">
+        <input type="email" id="defaultRegisterFormEmail" class="form-control white-text mb-4" placeholder="E-mail" name="email">
     </div>
     <!-- Password -->
     <div class="md-form">
-        <input type="password" id="defaultRegisterFormPassword" class="form-control" placeholder="Password" aria-describedby="defaultRegisterFormPasswordHelpBlock" name="password">
+        <input type="password" id="defaultRegisterFormPassword" class="form-control white-text" placeholder="Password" aria-describedby="defaultRegisterFormPasswordHelpBlock" name="password">
     </div>
 
      <!-- ReEnterPassword -->
      <div class="md-form">
-        <input type="password" id="defaultRegisterFormPassword" class="form-control" placeholder="Password" aria-describedby="defaultRegisterFormPasswordHelpBlock" name="repassword">
+        <input type="password" id="defaultRegisterFormPassword" class="form-control white-text" placeholder="Password" aria-describedby="defaultRegisterFormPasswordHelpBlock" name="repassword">
     </div>
 
     <small id="defaultRegisterFormPasswordHelpBlock" class="form-text text-muted mb-4">
-        At least 8 characters
+        At least 8 characters for Password
     </small>
 
     <!-- Sign up button -->
@@ -50,5 +52,5 @@
 </form>
 </div>
 </div>
-
+</div>
 {{template "base/footer" .}}
