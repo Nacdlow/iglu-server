@@ -30,7 +30,7 @@ func SpecificRoomsHandler(ctx *macaron.Context) {
 	ctx.Data["NavTitle"] = fmt.Sprintf("%s", ctx.Params("roomType"))
 	if ctx.Params("name") == "bedrooms" {
 		ctx.Data["Bedrooms"] = 1
-		ctx.Data["Room"] = models.GetRooms()
+		ctx.Data["Rooms"] = models.GetRooms()
 	} else {
 		room, err := models.GetRoom(ctx.ParamsInt64("name"))
 		if err != nil {
