@@ -3,6 +3,7 @@ package routes
 import (
 	"fmt"
 	"gitlab.com/group-nacdlow/nacdlow-server/models"
+	"gitlab.com/group-nacdlow/nacdlow-server/models/forms"
 	"gitlab.com/group-nacdlow/nacdlow-server/models/simulation"
 	macaron "gopkg.in/macaron.v1"
 	"math"
@@ -50,9 +51,15 @@ func RoomsHandler(ctx *macaron.Context) {
 	ctx.HTML(200, "rooms")
 }
 
-// AddRoomHandler handles rendering the add room page page.
-func AddRoomHandler(ctx *macaron.Context) {
-	ctx.HTML(200, "addroom")
+// PostRoomHandler handles post request for room page, to add a room.
+func PostRoomHandler(ctx *macaron.Context, form forms.AddRoomForm) {
+	models.AddRoom(&models.Room{
+		RoomName:    form.RoomName,
+		Description: form.Description,
+		RoomType:    models.RType(form.RoomType),
+		WindowCount: form.WindowsCount,
+	})
+	ctx.Redirect("/rooms")
 }
 
 // DevicesHandler handles the devices page
