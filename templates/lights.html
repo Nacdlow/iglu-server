@@ -50,7 +50,7 @@
         <h5 class="card-title">{{.Description}}</h5>
         <!-- Default switch -->
         <div class="custom-control custom-switch ">
-          <input type="checkbox" class="custom-control-input" id="customSwitches-{{.DeviceID}}" {{if .Status}} checked {{end}}>
+          <input type="checkbox" class="custom-control-input" id="customSwitches-{{.DeviceID}}" {{if .Status}} checked {{end}} method="POST">
           <label class="custom-control-label" for="customSwitches-{{.DeviceID}}">{{if .Status}}On{{else}}Off{{end}}</label>
         </div>
         <p class="text-center pt-3 position-absolute-center">Brightness</p>

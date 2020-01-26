@@ -43,6 +43,23 @@ func SpecificRoomsHandler(ctx *macaron.Context) {
 	ctx.HTML(200, "specificRooms")
 }
 
+func SpecificBathroomsHandler(ctx *macaron.Context) {
+	ctx.Data["NavTitle"] = fmt.Sprintf("%s", ctx.Params("roomType"))
+	if ctx.Params("name") == "bathrooms" {
+		ctx.Data["Bathrooms"] = 1
+		ctx.Data["Rooms"] = models.GetRooms()
+	} else {
+		room, err := models.GetRoom(ctx.ParamsInt64("name"))
+		if err != nil {
+			ctx.Redirect("/rooms")
+			return
+		}
+		ctx.Data["Room"] = room
+	}
+	ctx.Data["IsRooms"] = 1
+	ctx.HTML(200, "bathrooms")
+}
+
 // RoomsHandler handles rendering the rooms page
 func RoomsHandler(ctx *macaron.Context) {
 	ctx.Data["NavTitle"] = "Rooms"
