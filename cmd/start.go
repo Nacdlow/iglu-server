@@ -63,12 +63,8 @@ func start(clx *cli.Context) (err error) {
 		m.Group("/room", func() {
 			m.Group("/:name", func() {
 				m.Get("", routes.SpecificRoomsHandler)
-				m.Get("/lights", routes.LightsHandler)
-				m.Get("/temperature", routes.HeatingHandler)
-				m.Get("/speakers", routes.SpeakerHandler)
-			})
-			m.Group("/:name", func() {
-				m.Get("", routes.SpecificBathroomsHandler)
+				m.Post("", binding.Bind(forms.AddDeviceForm{}),
+					routes.AddDeviceRoomPostHandler)
 				m.Get("/lights", routes.LightsHandler)
 				m.Get("/temperature", routes.HeatingHandler)
 				m.Get("/speakers", routes.SpeakerHandler)
