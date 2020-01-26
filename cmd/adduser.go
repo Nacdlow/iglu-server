@@ -45,13 +45,12 @@ func adduser(c *cli.Context) (err error) {
 	fmt.Scanln(&u.FirstName)
 	fmt.Printf("Last name: ")
 	fmt.Scanln(&u.LastName)
-	fmt.Printf("Password (will not echo): ")
-	inPass, _ := terminal.ReadPassword(0)
-	fmt.Println()
+	fmt.Printf("Password (WILL echo): ")
+	var inPass, inPass2 string
+	fmt.Scanln(&inPass)
 	fmt.Printf("Confirm new password: ")
-	inPass2, _ := terminal.ReadPassword(0)
-	fmt.Println()
-	if string(inPass) != string(inPass2) {
+	fmt.Scanln(&inPass2)
+	if inPass != inPass2 {
 		fmt.Println("Does not match! User not added.")
 		return
 	}

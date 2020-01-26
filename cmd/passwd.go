@@ -29,13 +29,12 @@ func passwd(c *cli.Context) (err error) {
 	if err != nil {
 		panic(err)
 	}
-	fmt.Printf("New password (will not echo): ")
-	inPass, _ := terminal.ReadPassword(0)
-	fmt.Println()
+	var inPass, inPass2 string
+	fmt.Printf("New password (WILL echo): ")
+	fmt.Scanln(&inPass)
 	fmt.Printf("Confirm new password: ")
-	inPass2, _ := terminal.ReadPassword(0)
-	fmt.Println()
-	if string(inPass) != string(inPass2) {
+	fmt.Scanln(&inPass2)
+	if inPass != inPass2 {
 		fmt.Println("Does not match! Password remains unchanged.")
 		return
 	}
