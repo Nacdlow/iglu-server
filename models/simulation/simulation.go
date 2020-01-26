@@ -155,7 +155,9 @@ func getChange(current, influence, change, threshold float64) float64 {
 // Tick will tick the simulated environment one second.
 func Tick() {
 	Env.CurrentTime++
+	var runningTempCont, runningLights int
 	// Update room temperatures
+	UpdateFromDB()
 	outTemp := Env.Weather.OutdoorTemp
 	for _, room := range Env.Home.Rooms {
 		// Simulate cold/hot air from outside coming in room through windows
@@ -165,15 +167,21 @@ func Tick() {
 			}
 		}
 
+		if room.LightStatus {
+			runningLights++
+		}
+
 		// Simulate the room heating/cooling from outside temperature "leak"
 		room.ActualRoomTemp = getChange(room.ActualRoomTemp, outTemp, 75, 0)
 
 		// Simulate the temperature control heating/cooling the room
 		tempCont, err := models.GetDevice(room.TempControlDeviceID)
 		if err == nil && tempCont.DeviceID == models.TempControl && tempCont.Status {
+			runningTempCont++
 			room.ActualRoomTemp = getChange(room.ActualRoomTemp, tempCont.Temp, 18, 0.75)
 		}
 	}
+
 	// Update kWh solar generation value
 	var change float64
 	if Env.Weather.CloudCover > 0 {
@@ -184,7 +192,7 @@ func Tick() {
 
 	now := time.Unix(Env.CurrentTime, 0)
 
-	change += math.Sin(float64(Env.CurrentTime%10000)) * 3
+	change += math.Sin(float64(now.Second())) * 5
 	if change < 0 {
 		Env.PowerGenRate = 0
 	} else if change > float64(Env.SolarMaxPower) {
@@ -236,6 +244,7 @@ type Home struct {
 	MainDoorOpened bool    `json:"main_door_opened"` // Whether the main door is opened or not.
 	Rooms          []Room  `json:"rooms"`
 	PowerGenRate   float64 `json:"power_gen_rate"`
+	PowerConRate   float64 `json:"power_con_rate"`
 	SolarMaxPower  int     `json:"solar_max_power"` // Maximum solar panel generation capacity, in kWh.
 }
 

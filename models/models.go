@@ -42,6 +42,9 @@ func SetupEngine() *xorm.Engine {
 		log.Fatalln("Failed to sync schema!", err)
 	}
 
+	cacher := xorm.NewLRUCacher(xorm.NewMemoryStore(), 2000)
+	engine.SetDefaultCacher(cacher)
+
 	return engine
 }
 
