@@ -3,41 +3,59 @@
 
 <div class="container animated fadeIn">
 
+	{{if .Bedrooms}}
     <h2 class="pt-5 text-center">Bedrooms</h2>
     <div class="pt-3 pb-3">
         <hr>
     </div>
 
     <div class="row justify-content-center pt-4">
+        {{range .Rooms}}{{if eq .RoomType 1}}
         <div class="col-lg-2 col-md-3 col-4 text-center pb-3">
-            <a class="nav-link p-0" href="/devices" id="roomAvatar">
+			<a class="nav-link p-0" href="/room/{{.RoomID}}" id="roomAvatar">
                 <img src="https://www.scottishfriendly.co.uk/blog/wp-content/uploads/2018/06/Kevin-McFarlane_avatar_1528802862-96x96.jpg" class="  rounded-circle z-depth-2" alt="avatar image">
             </a>
-            <h6 class="pt-2">David's Room</h6>
+			<h6 class="pt-2">{{.RoomName}}</h6>
+        </div>
+		{{end}}{{end}}
+    </div>
+	{{else}}
+    <h2 class="pt-5 text-center">Room Control</h2>
+    <div class="pt-3 pb-3"><hr></div>
+
+    <div class="row justify-content-center pt-4 ">
+        <div class="col-lg-2 col-md-3 col-4 text-center pb-3">
+			<a type="button" class="far fa-lightbulb pb-3"
+				 href="/room/{{.Room.RoomID}}/lights" style="color: white; font-size: 50px;"></a>
+            <h6>Lights</h6>
         </div>
         <div class="col-lg-2 col-md-3 col-4 text-center pb-3">
-            <a class="nav-link p-0" href="/devices" id="roomAvatar">
-                <img src="https://careacademy.com/wp-content/uploads/2019/06/ErikaSessions-96x96.png" class=" rounded-circle z-depth-2" alt="avatar image">
-            </a>
-            <h6 class="pt-2">Janet's Room</h6>
+            <a type="button" class="fas fa-volume-up pb-3"
+				href="/room/{{.Room.RoomID}}/speakers" style="color: white; font-size: 50px;"></a>
+            <h6>Speakers</h6>
         </div>
         <div class="col-lg-2 col-md-3 col-4 text-center pb-3">
-            <a class="nav-link p-0" href="/devices" id="roomAvatar">
-                <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-5.jpg" class="  rounded-circle z-depth-2" alt="avatar image">
-            </a>
-            <h6 class="pt-2">Anna's Room</h6>
+            <a type="button" class="fas fa-tv pb-3"
+				href="/room/{{.Room.RoomID}}/tv" style="color: white; font-size: 50px;"></a>
+            <h6>TV</h6>
         </div>
         <div class="col-lg-2 col-md-3 col-4 text-center pb-3">
-            <a class="nav-link p-0" href="/devices" id="roomAvatar">
-            <img src="https://www.cityam.com/wp-content/uploads/2019/06/Joe-Curtis-96x96.jpg" class="  rounded-circle z-depth-2" alt="avatar image">
-            </a>
-            <h6 class="pt-2">Ben's Room</h6>
+            <a type="button" class="far fa-snowflake pb-3"
+				href="/room/{{.Room.RoomID}}/temperature" style="color: white; font-size: 50px;"></a>
+            <h6>Temperature</h6>
         </div>
-        <div class="col-lg-2 col-md-3 col-4 text-center pb-3 pt-4">            
-            <a type="button" class="fas fa-plus pb-3" href="#" id="roomAvatar" data-toggle="modal" data-target="#basicExampleModal" style="color: white; font-size: 50px;"></a>
-            <h6 class="pt-2">Add Control Module</h6>
+         <div class="col-lg-2 col-md-3 col-4 text-center pb-3">
+            <a type="button" class="fas fa-lock pb-3"
+				href="/room/{{.Room.RoomID}}/locks" style="color: white; font-size: 50px;"></a>
+            <h6>Locks</h6>
+        </div>
+        <div class="col-lg-2 col-md-3 col-4 text-center pb-3">
+            <a type="button" class="fas fa-plus pb-3"
+				href="/room/{{.Room.RoomID}}/addmodule" style="color: white; font-size: 50px;"></a>
+            <h6>Add Control Module</h6>
         </div>
     </div>
+	{{end}}
 </div>
 
 

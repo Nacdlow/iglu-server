@@ -17,14 +17,27 @@ func NotFoundHandler(ctx *macaron.Context) {
 func DashboardHandler(ctx *macaron.Context) {
 	ctx.Data["NavTitle"] = "Dashboard"
 	ctx.Data["IsDashboard"] = 1
-	ctx.Data["Temperature"] = math.Round(simulation.Env.ForecastData.Currently.Temperature)
-	ctx.Data["Summary"] = simulation.Env.ForecastData.Currently.Summary
+	if simulation.Env.ForecastData != nil {
+		ctx.Data["Temperature"] = math.Round(simulation.Env.ForecastData.Currently.Temperature)
+		ctx.Data["Summary"] = simulation.Env.ForecastData.Currently.Summary
+	}
 	ctx.HTML(200, "dashboard")
 }
 
 // SpecificRoomsHandler handles the specific rooms
 func SpecificRoomsHandler(ctx *macaron.Context) {
 	ctx.Data["NavTitle"] = fmt.Sprintf("%s", ctx.Params("roomType"))
+	if ctx.Params("name") == "bedrooms" {
+		ctx.Data["Bedrooms"] = 1
+		ctx.Data["Room"] = models.GetRooms()
+	} else {
+		room, err := models.GetRoom(ctx.ParamsInt64("name"))
+		if err != nil {
+			ctx.Redirect("/rooms")
+			return
+		}
+		ctx.Data["Room"] = room
+	}
 	ctx.Data["IsRooms"] = 1
 	ctx.HTML(200, "specificRooms")
 }
