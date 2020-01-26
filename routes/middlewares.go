@@ -20,7 +20,7 @@ const (
 // from the database, and set other page fields such as the app name.
 func ContextInit() macaron.Handler {
 	return func(ctx *macaron.Context, sess session.Store) {
-		ctx.Data["AppName"] = "AppName"
+		ctx.Data["AppName"] = "iGlu"
 		if sess.Get("auth") == LoggedIn {
 			if user, err := models.GetUser(sess.Get("username").(string)); err == nil {
 				ctx.Data["User"] = user

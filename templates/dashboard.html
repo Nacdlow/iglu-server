@@ -160,7 +160,7 @@
   else if (hrs >= 17 && hrs <= 24)
     greet = '<i class="fas fa-cloud-moon"></i> Good Evening';
 
-  document.getElementById('lblGreetings').innerHTML = greet + ", [Name]";
+document.getElementById('lblGreetings').innerHTML = greet + ", {{.User.FirstName}}";
 </script>
 
 
