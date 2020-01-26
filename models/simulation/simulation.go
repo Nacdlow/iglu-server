@@ -170,7 +170,7 @@ func Tick() {
 
 		// Simulate the temperature control heating/cooling the room
 		tempCont, err := models.GetDevice(room.TempControlDeviceID)
-		if err == nil && tempCont.DeviceID == models.TempControl {
+		if err == nil && tempCont.DeviceID == models.TempControl && tempCont.Status {
 			room.ActualRoomTemp = getChange(room.ActualRoomTemp, tempCont.Temp, 18, 0.75)
 		}
 	}
