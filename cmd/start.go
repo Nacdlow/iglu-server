@@ -61,7 +61,6 @@ func start(clx *cli.Context) (err error) {
 	m.Group("", func() {
 		m.Get("/dashboard", routes.DashboardHandler)
 		m.Group("/room", func() {
-			m.Get("/add", routes.AddRoomHandler)
 			m.Group("/:name", func() {
 				m.Get("", routes.SpecificRoomsHandler)
 				m.Get("/devices", routes.DevicesHandler)
@@ -71,6 +70,8 @@ func start(clx *cli.Context) (err error) {
 			})
 		})
 		m.Get("/rooms", routes.RoomsHandler)
+		m.Post("/rooms", binding.Bind(forms.AddRoomForm{}),
+			routes.PostRoomHandler)
 	}, routes.RequireLogin)
 
 	m.Group("/sim", func() {
