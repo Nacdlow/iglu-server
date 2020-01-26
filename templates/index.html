@@ -1,5 +1,4 @@
 {{template "base/head" .}}
-
     <div class="mobhide">
     <div class="split split-right">
     <div class="centered">
@@ -8,7 +7,9 @@
     
         <!-- E-mail -->
         <div class="md-form">
-            <input type="email" id="defaultRegisterFormEmail" class="form-control mb-4 white-text" placeholder="E-mail" name="email">
+            <input type="email" id="defaultRegisterFormEmail"
+			class="form-control mb-4 white-text" placeholder="E-mail"
+			name="email" autofocus="1">
         </div>
         <!-- Password -->
         <div class="md-form">
@@ -127,6 +128,4 @@
                     </div>
                   </div>
                 </div>
-
-
 {{template "base/footer" .}}
