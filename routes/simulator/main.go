@@ -1,7 +1,6 @@
 package simulator
 
 import (
-	"fmt"
 	"gitlab.com/group-nacdlow/nacdlow-server/models"
 	forms "gitlab.com/group-nacdlow/nacdlow-server/models/forms/sim"
 	"gitlab.com/group-nacdlow/nacdlow-server/models/simulation"
