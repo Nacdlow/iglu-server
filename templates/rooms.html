@@ -14,7 +14,7 @@
       <a type="button" class="fas fa-bath pb-3" href="room/bathrooms" style="color: white; font-size: 50px;"></a>
       <h6>Bathrooms</h6>
     </div>
-    {{range .Rooms}}{{if not (eq .RoomType 1)}}
+    {{range .Rooms}}{{if not (or (eq .RoomType 1) (eq .RoomType 4))}}
     <div class="col-md-4 row d-flex justify-content-center" id="roomAvatarDiv"><a class="nav-link p-0"
         href="/room/{{.RoomID}}" id="roomAvatar">
         <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-5.jpg" class="mt-3 rounded-circle z-depth-2"
