@@ -32,23 +32,28 @@
 aria-hidden="true" data-backdrop="false">
 <div class="modal-dialog" role="document" data-backdrop="false">
   <div class="modal-content" data-backdrop="false" method="POST">
-    <div class="modal-header">
-      <h5 class="modal-title black-text" id="addModal">Add Room</h5>
+    <div class="modal-header navcolor">
+      <h5 class="modal-title" id="addModal">Add Room</h5>
       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
-    <div class="modal-body">
-        <form method="POST">
-          <h6 class="text-center black-text">Enter Room Name:</h6>
-          <div class="md-form text-center justify-content-center d-flex">
-              <input type="text" class="form-control mb-4 text-center w-50" placeholder="e.g. Johns Room" name="room_name">
-          </div> 
-          <h6 class="text-center black-text">Enter Room Description:</h6>
-          <div class="md-form text-center justify-content-center d-flex">
-              <input type="text" class="form-control mb-4 text-center w-50" placeholder="Description" name="description">
-          </div>
-          <h6 class="text-center black-text">Select Room Type:</h6>
+    <div class="modal-body bodycolor">
+        <form method="POST">      
+                <h6 class="text-center pt-4">Enter Room Name:</h6>
+                <div class="md-form justify-content-center d-flex">
+                    <input type="text" class="form-control w-50 white-text text-center" placeholder="e.g. Johns Room" name="room_name">
+                </div>
+                <h6 class="text-center">Enter Room Description:</h6>
+                <div class="md-form justify-content-center d-flex">
+                    <input type="text" class="form-control w-50 white-text text-center" placeholder="Description" name="description">
+                </div>
+            
+        
+
+        <div class="form-row">
+            <div class="col">       
+                <h6 class="text-center ">Select Room Type:</h6>
           <div>
             <select class="browser-default custom-select" id="select"
 			   name="room_type">
@@ -65,7 +70,9 @@ aria-hidden="true" data-backdrop="false">
                 <option value="9" >Guest</option>
             </select>
         </div>
-          <h6 class="text-center black-text">Part of a room?</h6>
+            </div>
+            <div class="col">
+                <h6 class="text-center ">Part of a room?</h6>
           <div>
             <select class="browser-default custom-select" id="select"
 			   name="part_of_room">
@@ -74,14 +81,16 @@ aria-hidden="true" data-backdrop="false">
 				{{end}}
             </select>
         </div>
-          <h6 class="text-center black-text">Enter Number of Windows:</h6>
+            </div>
+        </div>
+          <h6 class="text-center pt-4">Enter Number of Windows:</h6>
           <div class="md-form text-center justify-content-center d-flex">
-              <input type="number" class="form-control mb-4 text-center w-50" placeholder="e.g. 2" name="windows_count">
+              <input type="number" class="form-control white-text text-center w-50" placeholder="e.g. 2" name="windows_count">
           </div> 
     </div>
-    <div class="modal-footer justify-content-center d-flex">
-      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      <button type="submit" class="btn btn-primary">Save changes</button>
+    <div class="modal-footer justify-content-center d-flex navcolor">
+      <button type="button" class="btn bodycolor" data-dismiss="modal">Close</button>
+      <button type="submit" class="btn white black-text">Save changes</button>
     </div>
 </form>
   </div>
