@@ -6,7 +6,9 @@ import (
 	"gitlab.com/group-nacdlow/nacdlow-server/models/forms"
 	"gitlab.com/group-nacdlow/nacdlow-server/models/simulation"
 	macaron "gopkg.in/macaron.v1"
+	"html/template"
 	"math"
+	"strings"
 )
 
 // NotFoundHandler handles 404 errors
@@ -21,6 +23,10 @@ func DashboardHandler(ctx *macaron.Context) {
 	if simulation.Env.ForecastData != nil {
 		ctx.Data["Temperature"] = math.Round(simulation.Env.ForecastData.Currently.Temperature)
 		ctx.Data["Summary"] = simulation.Env.ForecastData.Currently.Summary
+		icon := simulation.Env.ForecastData.Currently.Icon
+		icon = strings.ToUpper(icon)
+		icon = strings.ReplaceAll(icon, "-", "_")
+		ctx.Data["WeatherIcon"] = template.JS(icon)
 	}
 	ctx.HTML(200, "dashboard")
 }
