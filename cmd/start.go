@@ -58,6 +58,8 @@ func start(clx *cli.Context) (err error) {
 	m.Get("/register", routes.RegisterHandler)
 	m.Post("/register", routes.PostRegisterHandler)
 
+	m.Get("/settings", routes.SettingsHandler)
+
 	m.Group("", func() {
 		m.Get("/dashboard", routes.DashboardHandler)
 		m.Group("/room", func() {
