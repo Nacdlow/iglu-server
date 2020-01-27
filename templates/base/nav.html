@@ -3,6 +3,8 @@
     <!-- Additional container -->
     <div class="container">
       <!-- Collapse button -->
+	  {{if not .IsDashboard}}<a onclick="history.back()" class="back-button">
+		  <i class="fas fa-angle-left"></i></a>{{end}}
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent41"
         aria-controls="navbarSupportedContent41" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>

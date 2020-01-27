@@ -115,13 +115,23 @@ padding: .5rem 1rem;
 .deskhide{
     display: none;
 }
+.back-button {
+  display:none;
+}
 }
 
 @media (max-width: 992px) {
 .mobhide{
     display: none;
 }
+.navbar-toggler{
+  display: none;
+}
+}
 
+.back-button {
+  font-size: 2.2rem;
+  padding-right: 45px;
 }
 
 .navbar-brand {
