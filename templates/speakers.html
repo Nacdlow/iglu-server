@@ -22,12 +22,12 @@
           <a class="navbar-brand w-10 float-right" href="#"></a>
 
           <!-- Collapse button -->
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent14"
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-{{.DeviceID}}"
             aria-controls="navbarSupportedContent15" aria-expanded="false" aria-label="Toggle navigation"><span
               class="fas fa-ellipsis-h"></span></button>
 
           <!-- Collapsible content -->
-          <div class="collapse navbar-collapse position-relative" id="navbarSupportedContent14">
+          <div class="collapse navbar-collapse position-relative" id="navbar-{{.DeviceID}}">
 
             <!-- Links -->
             <ul class="navbar-nav mr-auto lilnav">
@@ -54,6 +54,7 @@
         <div class="">
           <a type="button" class="fas fa-power-off pb-3 {{if .Status}}green-text{{else}}red-text{{end}}" href="#"
             style="color: black; font-size: 2em;" onclick="$.get('/toggle_device/{{.DeviceID}}');"></a>
+            {{if .Status}}On{{else}}Off{{end}}
         </div>
         <p class="text-center pt-2">Volume</p>
         <div class="d-flex justify-content-center  ">
@@ -65,8 +66,8 @@
           <span class="font-weight-bold black-text ml-2 "><i class="fas fa-volume-up" aria-hidden="true"></i></span>
         </div>
       </div>
-      <div class="card-footer" style="background-color: #A8FFA8;">
-        <small class="text-muted">Connected to David's Iphone</small>
+      <div class="card-footer" {{if .Status}}style="background-color: #A8FFA8;"{{else}}style="background-color: #FF6666;"{{end}}>
+        <small class="text-muted">{{if .Status}}Connected to David's Iphone{{else}}Disconnected{{end}}</small>
       </div>
     </div>
     {{end}}{{end}}
