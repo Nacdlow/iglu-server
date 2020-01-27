@@ -36,12 +36,12 @@
           <a class="navbar-brand w-10 float-right" href="#"></a>
 
           <!-- Collapse button -->
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent14"
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-{{.DeviceID}}"
             aria-controls="navbarSupportedContent15" aria-expanded="false" aria-label="Toggle navigation"><span
               class="fas fa-ellipsis-h"></span></button>
 
           <!-- Collapsible content -->
-          <div class="collapse navbar-collapse position-relative" id="navbarSupportedContent14">
+          <div class="collapse navbar-collapse position-relative" id="navbar-{{.DeviceID}}">
 
             <!-- Links -->
             <ul class="navbar-nav mr-auto lilnav">
@@ -66,7 +66,7 @@
         <!-- Default switch -->
         <div class="custom-control custom-switch float-left">
           <input type="checkbox" class="custom-control-input" id="customSwitches-{{.DeviceID}}"
-            {{if eq .Status true}}checked{{else}}unchecked{{end}}>
+            {{if eq .Status true}}checked{{else}}unchecked{{end}} onclick="$.get('/toggle_device/{{.DeviceID}}');">
           <label class="custom-control-label"
             for="customSwitches-{{.DeviceID}}">{{if .Status}}On{{else}}Off{{end}}</label>
         </div>
@@ -77,13 +77,14 @@
         <div class="d-flex justify-content-center">
           <span class="font-weight-bold blue-text mr-2 ">0<small>&deg;C</small></span>
           <form class="range-field w-35">
-            <input class="border-0" type="range" min="0" max="28" value="{{.Temp}}" />
+            <input class="border-0" type="range" min="0" max="28" value="{{.Temp}}" id="slider-{{.DeviceID}}"
+            onclick="$.get('/toggle_slider/{{.DeviceID}}/'+ $('#slider-{{.DeviceID}}').val());"/>
           </form>
           <span class="font-weight-bold red-text ml-2">28<small>&deg;C</small></span>
         </div>
       </div>
-      <div class="card-footer" style="background-color: #A8FFA8;">
-        <small class="text-muted">Heating since 09:24 (3hrs)</small>
+      <div class="card-footer" {{if .Status}}style="background-color: #A8FFA8;"{{else}}style="background-color: #FF6666";{{end}}>
+        <small class="text-muted">{{if .Status}}Heating since 09:24 (3hrs){{else}}Last on: yesterday{{end}}</small>
       </div>
     </div>
     {{end}}{{end}}
