@@ -172,7 +172,7 @@ func Tick() {
 		}
 
 		// Simulate the room heating/cooling from outside temperature "leak"
-		room.ActualRoomTemp = getChange(room.ActualRoomTemp, outTemp, 75, 0)
+		room.ActualRoomTemp = getChange(room.ActualRoomTemp, outTemp, 45, 0)
 
 		// Simulate the temperature control heating/cooling the room
 		tempCont, err := models.GetDevice(room.TempControlDeviceID)
