@@ -1,5 +1,13 @@
 /* The global CSS file */
 
+.navcolor {
+    background-color: #2bbbad;
+}
+
+.bodycolor {
+    background-color: #34383b!important;
+}
+
 body {
     background-color: #34383b!important;
     color: white!important;
