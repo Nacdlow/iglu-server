@@ -112,3 +112,17 @@ func SpeakerHandler(ctx *macaron.Context) {
 	ctx.Data["Speakers"] = models.GetDevices()
 	ctx.HTML(200, "speakers")
 }
+
+func ToggleHandler(ctx *macaron.Context) {
+	for _, device := range models.GetDevices() {
+		if device.DeviceID == ctx.ParamsInt64("id") {
+			if device.Type == models.Light || device.Type == models.Speaker ||
+				device.Type == models.TempControl || device.Type == models.TV {
+				models.UpdateDeviceCols(&models.Device{
+					DeviceID: device.DeviceID,
+					Status:   !device.Status}, "status")
+			}
+			break
+		}
+	}
+}
