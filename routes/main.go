@@ -31,6 +31,12 @@ func DashboardHandler(ctx *macaron.Context) {
 	ctx.HTML(200, "dashboard")
 }
 
+// SettingsHandler handles the settings
+func SettingsHandler(ctx *macaron.Context) {
+	ctx.Data["NavTitle"] = "Settings"
+	ctx.HTML(200, "settings")
+}
+
 // SpecificRoomsHandler handles the specific rooms
 func SpecificRoomsHandler(ctx *macaron.Context) {
 	ctx.Data["NavTitle"] = fmt.Sprintf("%s", ctx.Params("roomType"))

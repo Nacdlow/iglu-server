@@ -1,4 +1,12 @@
 /* The global CSS file */
+.svghover {
+  transition: 0.5s ease;
+}
+
+.svghover:hover {
+  transition: 0.5s ease;
+  filter: invert(100%);;
+}
 
 .navcolor {
     background-color: #3766FF;
@@ -27,7 +35,7 @@ a {
 }
 
 a:hover {
-    color: palegreen!important;
+    color: rgb(0, 0, 0)!important;
 }
 
 .btn {
