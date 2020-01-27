@@ -2,13 +2,13 @@
 {{template "base/nav" .}}
 
 <div class="container animated fadeIn">
-  
+
   <div class="row justify-content-center pt-3">
 
-  <h2 class="pt-5 pr-3 text-center">Room Temperature</h2>
+    <h2 class="pt-5 pr-3 text-center">Room Temperature</h2>
 
 
-  {{range .Heating}}{{if eq .Type 1}}{{if eq .DeviceID 4}}
+    {{range .Heating}}{{if eq .Type 1}}{{if eq .DeviceID 4}}
     <div class="card warning-color circle d-flex">
       <div class="card-body d-flex align-items-center justify-content-center animated rotateIn">
         <h5 class="pt-1" style="font-size: 3em;">{{.Temp}}<small>°C</small></h5>
@@ -16,18 +16,20 @@
     </div>
   </div>
   {{end}}{{end}}{{end}}
-  
 
-  <div class="pt-3 pb-1"><hr></div>
-  
+
+  <div class="pt-3 pb-1">
+    <hr>
+  </div>
+
 
   <div class="card-deck">
     {{range .Heating}}{{if eq .Type 1}}
     <!--Card 1-->
     <div class="card m-3">
-        <div class="card-body">
+      <div class="card-body">
 
-           <!--Navbar-->
+        <!--Navbar-->
         <nav class="navbar navbar-light navbar-1 white elipsesNav">
 
           <!-- Navbar brand -->
@@ -44,8 +46,8 @@
             <!-- Links -->
             <ul class="navbar-nav mr-auto lilnav">
               <li class="nav-item active">
-                <a class="nav-link black-text lilnav" type="button">Favourite<i class="fas fa-heart black-text"></i><span
-                    class="sr-only">(current)</span></a>
+                <a class="nav-link black-text lilnav" type="button">Favourite<i
+                    class="fas fa-heart black-text"></i><span class="sr-only">(current)</span></a>
               </li>
               <li class="nav-item">
                 <a class="nav-link black-text lilnav" href="#">Options</a>
@@ -61,66 +63,69 @@
         </nav>
         <!--/.Navbar-->
 
-          <!-- Default switch -->
-          <div class="custom-control custom-switch float-left">
-              <input type="checkbox" class="custom-control-input" id="customSwitches-{{.DeviceID}}" {{if eq .Status true}}checked{{else}}unchecked{{end}}>
-             <label class="custom-control-label" for="customSwitches-{{.DeviceID}}">{{if .Status}}On{{else}}Off{{end}}</label>
-         </div> 
-         
-       
-          <h5 class="card-title text-center pr-5 pb-4">{{.Description}}</h5>
-         <p class="text-center pt-3">Temperature</p>
-          <div class="d-flex justify-content-center">
-              <span class="font-weight-bold blue-text mr-2 ">0<small>&deg;C</small></span>
-              <form class="range-field w-35">
-                <input class="border-0" type="range" min="0" max="28" value="{{.Temp}}"/>
-              </form>
-              <span class="font-weight-bold red-text ml-2">28<small>&deg;C</small></span>
-            </div>
+        <!-- Default switch -->
+        <div class="custom-control custom-switch float-left">
+          <input type="checkbox" class="custom-control-input" id="customSwitches-{{.DeviceID}}"
+            {{if eq .Status true}}checked{{else}}unchecked{{end}}>
+          <label class="custom-control-label"
+            for="customSwitches-{{.DeviceID}}">{{if .Status}}On{{else}}Off{{end}}</label>
         </div>
-        <div class="card-footer" style="background-color: #A8FFA8;">
-          <small class="text-muted">Heating since 09:24 (3hrs)</small>
+
+
+        <h5 class="card-title text-center pr-5 pb-4">{{.Description}}</h5>
+        <p class="text-center pt-3">Temperature</p>
+        <div class="d-flex justify-content-center">
+          <span class="font-weight-bold blue-text mr-2 ">0<small>&deg;C</small></span>
+          <form class="range-field w-35">
+            <input class="border-0" type="range" min="0" max="28" value="{{.Temp}}" />
+          </form>
+          <span class="font-weight-bold red-text ml-2">28<small>&deg;C</small></span>
         </div>
       </div>
-      {{end}}{{end}}
-    
+      <div class="card-footer" style="background-color: #A8FFA8;">
+        <small class="text-muted">Heating since 09:24 (3hrs)</small>
+      </div>
+    </div>
+    {{end}}{{end}}
+
     <!--Card 3-->
     <div class="card m-3">
       <div class="card-body d-flex align-items-center justify-content-center">
         <div>
-          <a type="button" class="fas fa-plus black-text" style="font-size: 6em;" data-toggle="modal" data-target="#addModal"></a></a>
+          <a type="button" class="fas fa-plus black-text" style="font-size: 6em;" data-toggle="modal"
+            data-target="#addModal"></a></a>
         </div>
-        </div>
-    </div>    
-</div>
-</div>
-
-<!-- ADD Device Modal -->
-<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-aria-hidden="true" data-backdrop="false">
-<div class="modal-dialog" role="document" data-backdrop="false">
-  <div class="modal-content" data-backdrop="false">
-    <div class="modal-header">
-      <h5 class="modal-title black-text" id="addModal">Add new Temperature Device</h5>
-      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    <div class="modal-body">
-      <h6 class="text-center black-text">Enter a name for your device:</h6>
-          <div class="md-form text-center justify-content-center d-flex">
-              <input type="text" id="" class="form-control mb-4 text-center w-50 pr-5" placeholder="e.g. Portable Heater" name="Room Name">
-          </div> 
-    </div>
-    <div class="modal-footer justify-content-center d-flex">
-      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
     </div>
   </div>
 </div>
+
+<!-- ADD Device Modal -->
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"
+  data-backdrop="false">
+  <div class="modal-dialog" role="document" data-backdrop="false">
+    <div class="modal-content" data-backdrop="false">
+      <div class="modal-header">
+        <h5 class="modal-title black-text" id="addModal">Add new Temperature Device</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <h6 class="text-center black-text">Enter a name for your device:</h6>
+        <div class="md-form text-center justify-content-center d-flex">
+          <input type="text" id="" class="form-control mb-4 text-center w-50 pr-5" placeholder="e.g. Portable Heater"
+            name="Room Name">
+        </div>
+      </div>
+      <div class="modal-footer justify-content-center d-flex">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
 </div>
 
 {{template "base/scripts" .}}
 {{template "base/footer" .}}
 {{template "base/tabnav"}}
-

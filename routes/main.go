@@ -31,6 +31,9 @@ func SpecificRoomsHandler(ctx *macaron.Context) {
 	if ctx.Params("name") == "bedrooms" {
 		ctx.Data["Bedrooms"] = 1
 		ctx.Data["Rooms"] = models.GetRooms()
+	} else if ctx.Params("name") == "bathrooms" {
+		ctx.Data["Bathrooms"] = 1
+		ctx.Data["Rooms"] = models.GetRooms()
 	} else {
 		room, err := models.GetRoom(ctx.ParamsInt64("name"))
 		if err != nil {
