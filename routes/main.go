@@ -126,3 +126,24 @@ func ToggleHandler(ctx *macaron.Context) {
 		}
 	}
 }
+
+func SliderHandler(ctx *macaron.Context) {
+	for _, device := range models.GetDevices() {
+		if device.DeviceID == ctx.ParamsInt64("id") {
+			if device.Type == models.Speaker {
+				models.UpdateDeviceCols(&models.Device{
+					DeviceID: device.DeviceID,
+					Volume:   ctx.ParamsInt64("value")}, "volume")
+			} else if device.Type == models.TempControl {
+				models.UpdateDeviceCols(&models.Device{
+					DeviceID: device.DeviceID,
+					Temp:     ctx.ParamsFloat64("value")}, "temp")
+			} else if device.Type == models.Light {
+				models.UpdateDeviceCols(&models.Device{
+					DeviceID:   device.DeviceID,
+					Brightness: ctx.ParamsInt64("value")}, "brightness")
+			}
+			break
+		}
+	}
+}

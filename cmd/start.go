@@ -74,6 +74,7 @@ func start(clx *cli.Context) (err error) {
 		m.Post("/rooms", binding.Bind(forms.AddRoomForm{}),
 			routes.PostRoomHandler)
 		m.Get("/toggle_device/:id", routes.ToggleHandler)
+		m.Get("toggle_slider/:id/:value", routes.SliderHandler)
 	}, routes.RequireLogin)
 
 	m.Group("/sim", func() {
