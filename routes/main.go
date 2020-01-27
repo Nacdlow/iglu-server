@@ -53,6 +53,7 @@ func AddDeviceRoomPostHandler(ctx *macaron.Context, form forms.AddDeviceForm) {
 		device.IsMainLight = true
 	}
 	models.AddDevice(device)
+	ctx.Redirect(fmt.Sprintf("/room/%d", form.RoomID))
 }
 
 // RoomsHandler handles rendering the rooms page

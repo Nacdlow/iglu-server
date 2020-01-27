@@ -68,7 +68,8 @@
       </div>
       <div class="modal-body">
           <form method="POST">
-                <input type="hidden" class="form-control mb-4 text-center w-50" name="room_id">
+                <input type="hidden" class="form-control mb-4 text-center w-50"
+ 					 name="room_id" value="{{.Room.RoomID}}">
                 <h6 class="text-center black-text">Select Device Type:</h6>
                 <div class="pb-3">
                   <select class="browser-default custom-select" id="select"
