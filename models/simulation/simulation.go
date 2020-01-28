@@ -190,6 +190,22 @@ func Tick() {
 			room.ActualRoomTemp = getChange(room.ActualRoomTemp, tempCont.Temp, 18, 0.75)
 		}
 	}
+	now := time.Unix(Env.CurrentTime, 0)
+
+	// Calculate power consumption
+	powerPerTempCont := (float64(15) / float64(len(Env.Home.Rooms))) // 15kW per entire house
+	Env.PowerConRate = 11                                            // Baseline kW consumption
+	conVary := math.Cos(float64(now.Second())) / 6
+	Env.PowerConRate += conVary
+	Env.PowerConRate += (float64(runningLights) * 0.20) // Light power consumption
+	Env.PowerConRate += (powerPerTempCont * float64(runningTempCont))
+
+	Env.NetPower = Env.PowerGenRate - Env.PowerConRate
+
+	Env.BatteryStore += Env.NetPower / 60 / 60
+	if Env.BatteryStore > settings.Config.GetFloat64("Simulation.BatteryCapacityKWH") {
+		Env.BatteryStore = settings.Config.GetFloat64("Simulation.BatteryCapacityKWH")
+	}
 
 	// Update kWh solar generation value
 	var change float64
@@ -198,8 +214,6 @@ func Tick() {
 	} else {
 		change = float64(Env.SolarMaxPower)
 	}
-
-	now := time.Unix(Env.CurrentTime, 0)
 
 	change += math.Sin(float64(now.Second())) * 5
 	if change < 0 {
@@ -255,6 +269,8 @@ type Home struct {
 	PowerGenRate   float64 `json:"power_gen_rate"`
 	PowerConRate   float64 `json:"power_con_rate"`
 	SolarMaxPower  int     `json:"solar_max_power"` // Maximum solar panel generation capacity, in kWh.
+	NetPower       float64
+	BatteryStore   float64 `json:"battery_store"`
 }
 
 // Room represents a simulated room state.
