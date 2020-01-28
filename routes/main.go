@@ -64,8 +64,16 @@ func AddDeviceRoomPostHandler(ctx *macaron.Context, form forms.AddDeviceForm) {
 		Type:        models.DeviceType(form.DeviceType),
 		Description: form.Description,
 	}
-	if form.DeviceType == models.Light && form.IsMainLight {
-		device.IsMainLight = true
+	switch device.Type {
+	case models.Light:
+		device.Brightness = 10
+		if form.IsMainLight {
+			device.IsMainLight = true
+		}
+	case models.TempControl:
+		device.Temp = 22.0
+	case models.Speaker:
+		device.Volume = 8
 	}
 	models.AddDevice(device)
 	ctx.Redirect(fmt.Sprintf("/room/%d", form.RoomID))
