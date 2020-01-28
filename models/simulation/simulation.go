@@ -195,7 +195,7 @@ func Tick() {
 	// Calculate power consumption
 	powerPerTempCont := (float64(15) / float64(len(Env.Home.Rooms))) // 15kW per entire house
 	Env.PowerConRate = 11                                            // Baseline kW consumption
-	conVary := math.Cos(float64(now.Second())) / 6
+	conVary := math.Sin(float64(now.Second())/10) / 6
 	Env.PowerConRate += conVary
 	Env.PowerConRate += (float64(runningLights) * 0.20) // Light power consumption
 	Env.PowerConRate += (powerPerTempCont * float64(runningTempCont))
@@ -215,7 +215,7 @@ func Tick() {
 		change = float64(Env.SolarMaxPower)
 	}
 
-	change += math.Sin(float64(now.Second())) * 5
+	change += math.Sin(float64(now.Second())/10) * 5
 	if change < 0 {
 		Env.PowerGenRate = 0
 	} else if change > float64(Env.SolarMaxPower) {
