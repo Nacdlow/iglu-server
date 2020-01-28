@@ -9,7 +9,7 @@
   </div>
 
   <div class="card-deck">
-    {{range .Lights}}{{if eq .Type 0}}
+	  {{range .Lights}}{{if and (eq .Type 0) (eq .RoomID $.Room.RoomID)}}
     <!--Card 1-->
     <div class="card m-3">
       <div class="card-body">

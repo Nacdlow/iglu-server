@@ -29,7 +29,11 @@ func UpdateFromDB() {
 	for i, room := range Env.Rooms {
 		device, err := models.GetDevice(room.MainLightDeviceID)
 		if err == nil && device.Type == models.Light {
-			Env.Rooms[i].LightStatus = device.Status
+			if device.Status && device.Brightness < 3 {
+				Env.Rooms[i].LightStatus = false
+			} else {
+				Env.Rooms[i].LightStatus = device.Status
+			}
 		}
 	}
 }
@@ -59,9 +63,14 @@ func LoadFromDB() {
 					tempSet = true
 				case models.Light:
 					if device.IsMainLight {
-						r.LightStatus = device.Status
 						r.MainLightDeviceID = device.DeviceID
 						lightSet = true
+						// brightness threshold (minecraft has no brightness for lights
+						if device.Status && device.Brightness < 3 {
+							r.LightStatus = false
+						} else {
+							r.LightStatus = device.Status
+						}
 					}
 				}
 			}

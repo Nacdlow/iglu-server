@@ -8,7 +8,7 @@
     <h2 class="pt-5 pr-3 text-center">Room Temperature</h2>
 
 
-    {{range .Heating}}{{if eq .Type 1}}{{if eq .DeviceID 4}}
+    {{range .Heating}}{{if eq .Type 1}}{{if and (eq .DeviceID 4) (eq .RoomID $.Room.RoomID)}}
     <div class="card warning-color circle d-flex">
       <div class="card-body d-flex align-items-center justify-content-center animated rotateIn">
         <h5 class="pt-1" style="font-size: 3em;">{{.Temp}}<small>°C</small></h5>
@@ -24,7 +24,7 @@
 
 
   <div class="card-deck">
-    {{range .Heating}}{{if eq .Type 1}}
+    {{range .Heating}}{{if and (eq .Type 1) (eq .RoomID $.Room.RoomID)}}
     <!--Card 1-->
     <div class="card m-3">
       <div class="card-body">
