@@ -1,10 +1,5 @@
 /* The global CSS file */
 
-/* Smoooooooooothhhhh */
-/* * {
-  transition: 0.5s ease;
-} */
-
 .list-group-item {
   color:black!important;
 }
@@ -162,7 +157,7 @@ padding: .5rem 1rem;
 }
 
 .nav-item {
-    font-size: 21px!important;
+    font-size: 18px!important;
 }
 
 .split {
@@ -232,26 +227,26 @@ padding: .5rem 1rem;
   }
 
 .glasseff {
-    z-index: 1;
-    background: inherit;
+    z-index: 0;
+    /*background: inherit;
     background-image: url(https://openweathermap.org/themes/openweathermap/assets/img/new-history-forecast-bulk.png);
     background-size: cover;
-    overflow: hidden;
+    overflow: hidden; */
+    color: white;
 }
 
 .glasseff:before {
     content: "";
     position: absolute;
     background: inherit;
-    z-index: -1;
+    z-index: 0;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    box-shadow: inset 0 0 2000px rgba(255, 253, 253, 0.55);
-    filter: blur(3px);
     margin: -10px;
-}
+    color: white;
+} 
 
 
   
