@@ -1,8 +1,12 @@
 /* The global CSS file */
 
 /* Smoooooooooothhhhh */
-* {
+/* * {
   transition: 0.5s ease;
+} */
+
+.list-group-item {
+  color:black!important;
 }
 
 .svghover {

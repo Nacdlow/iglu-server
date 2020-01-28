@@ -37,6 +37,12 @@ func SettingsHandler(ctx *macaron.Context) {
 	ctx.HTML(200, "settings")
 }
 
+// AccountSettingsHandler handles the settings
+func AccountSettingsHandler(ctx *macaron.Context) {
+	ctx.Data["NavTitle"] = "Account Settings"
+	ctx.HTML(200, "settings/accounts")
+}
+
 // SpecificRoomsHandler handles the specific rooms
 func SpecificRoomsHandler(ctx *macaron.Context) {
 	ctx.Data["NavTitle"] = fmt.Sprintf("%s", ctx.Params("roomType"))
