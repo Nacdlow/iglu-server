@@ -30,7 +30,7 @@ func LoadConfig() {
 	Config.SetDefault("Location.Lat", "25.371679")
 	Config.SetDefault("Location.Lon", "55.511716")
 	Config.SetDefault("Simulation.SolarCapacityKW", 45)
-	Config.SetDefault("Simulation.BatteryCapacityKWH", 45)
+	Config.SetDefault("Simulation.BatteryCapacityKWH", 135)
 
 	if err := Config.ReadInConfig(); err != nil {
 		if _, ok := err.(viper.ConfigFileNotFoundError); ok {

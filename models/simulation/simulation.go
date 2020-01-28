@@ -111,7 +111,7 @@ func LoadFromDB() {
 // Start will start the simulation environment and make it Tick at TickSpeed.
 // This function will not return (halt).
 func Start() {
-	Env.SolarMaxPower = settings.Config.GetInt("Simulation.SolarCapacityKWH")
+	Env.SolarMaxPower = settings.Config.GetInt("Simulation.SolarCapacityKW")
 	// Load current time for the simulation
 	Env.CurrentTime = time.Now().Unix()
 	// Load the forecast data
@@ -269,7 +269,7 @@ type Home struct {
 	PowerGenRate   float64 `json:"power_gen_rate"`
 	PowerConRate   float64 `json:"power_con_rate"`
 	SolarMaxPower  int     `json:"solar_max_power"` // Maximum solar panel generation capacity, in kWh.
-	NetPower       float64
+	NetPower       float64 `json:"net_power"`
 	BatteryStore   float64 `json:"battery_store"`
 }
 
