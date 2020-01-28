@@ -10,7 +10,11 @@ import (
 )
 
 // LoginHandler handles rendering the login page.
-func LoginHandler(ctx *macaron.Context) {
+func LoginHandler(ctx *macaron.Context, sess session.Store) {
+	if sess.Get("auth") == LoggedIn {
+		ctx.Redirect("/dashboard")
+		return
+	}
 	ctx.HTML(200, "index")
 }
 
@@ -41,11 +45,19 @@ func PostLoginHandler(ctx *macaron.Context, x csrf.CSRF, sess session.Store,
 }
 
 // RegisterHandler handles the registration page.
-func RegisterHandler(ctx *macaron.Context) {
+func RegisterHandler(ctx *macaron.Context, sess session.Store) {
+	if sess.Get("auth") == LoggedIn {
+		ctx.Redirect("/dashboard")
+		return
+	}
 	ctx.HTML(200, "register")
 }
 
 // PostRegisterHandler handles the post registration page.
-func PostRegisterHandler(ctx *macaron.Context) {
+func PostRegisterHandler(ctx *macaron.Context, sess session.Store) {
+	if sess.Get("auth") == LoggedIn {
+		ctx.Redirect("/dashboard")
+		return
+	}
 	ctx.Redirect("/login")
 }
