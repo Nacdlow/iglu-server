@@ -80,14 +80,38 @@
         <hr>
       </div>
       <h4 class="text-center pb-3"><i class="fas fa-lightbulb"></i> Tips</h4>
-      <p>For every degree celcius that you have lower your heating, you may reduce
-        your energy bill by 10%!</p>
+
+     <!-- To Add new tip create new div with id content-x, x being next digit-->
+      <div id="content-1">One minute less under the shower each day could shave £10 a year off your bills.</div>
+      <div id="content-2">Keep curtains and blinds open during the day to let the warmth of the sunshine into your home. Close them at night to keep the heat in and the cold out.</div>
+      <div id="content-3">If you’re entertaining guests, turn down the thermostat a few notches when they arrive. Their combined body heat will keep the room warm.</div>
+      <div id="content-4">Dust and vacuum your radiators. Layers of dust stop heat from flowing freely.</div>
+      <div id="content-5">Try to get into the habit of turning lights off when you leave a room. It could save between £50 and £90 a year just by remembering to flick a switch,</div>
+      <div id="content-6">if the sun warms some rooms but not others, leave internal doors open to let the warm air circulate throughout your home.</div>
+      <div id="content-7">If you’re cooking in the oven, don’t keep opening the oven door to check things, as you’ll let heat escape each time.</div>
+      
     </div>
   </div>
-
 </div>
 
+
+
+
 {{template "base/scripts" .}}
+<script>
+  var divs = $('div[id^="content-"]').hide(),
+    i = 0;
+
+(function cycle() { 
+
+    divs.eq(i).fadeIn(400)
+              .delay(10000)
+              .fadeOut(400, cycle);
+
+    i = ++i % divs.length;
+    })();
+</script>
+
 <script>
   var skycons = new Skycons({ "color": "black" });
   // on Android, a nasty hack is needed: {"resizeClear": true}
