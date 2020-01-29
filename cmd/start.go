@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"fmt"
+
 	log "github.com/sirupsen/logrus"
 
 	"net/http"
@@ -78,6 +79,9 @@ func start(clx *cli.Context) (err error) {
 
 		m.Get("/settings", routes.SettingsHandler)
 		m.Get("/settings/accounts", routes.AccountSettingsHandler)
+		m.Get("/settings/appearance", routes.AppearanceSettingsHandler)
+
+		m.Get("/battery_stat", routes.BatteryStatHandler)
 	}, routes.RequireLogin)
 
 	m.Group("/sim", func() {

@@ -143,6 +143,10 @@ padding: .5rem 1rem;
 .navbar-toggler{
   display: none;
 }
+
+.navbar {
+    max-height:65px !important
+}
 }
 
 .back-button {
@@ -252,9 +256,10 @@ padding: .5rem 1rem;
   max-width: 25%;
 }
 
+.activetab {
+   color: black!important;
+}
 
-  
-  
-
-
-
+.navbar {
+  padding-top: 2px!important; 
+}

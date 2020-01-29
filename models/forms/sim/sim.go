@@ -1,7 +1,7 @@
 package sim
 
 type ChangeTimeSleepForm struct {
-	TickSleep int `form:"tick_sleep" binding:"Required"`
+	TickSleep int `form:"tick_sleep"`
 }
 
 type OverrideWeatherForm struct {

@@ -5,6 +5,7 @@ import (
 	"gitlab.com/group-nacdlow/nacdlow-server/models"
 	"gitlab.com/group-nacdlow/nacdlow-server/models/forms"
 	"gitlab.com/group-nacdlow/nacdlow-server/models/simulation"
+	"gitlab.com/group-nacdlow/nacdlow-server/modules/settings"
 	macaron "gopkg.in/macaron.v1"
 	"html/template"
 	"math"
@@ -31,6 +32,27 @@ func DashboardHandler(ctx *macaron.Context) {
 	ctx.HTML(200, "dashboard")
 }
 
+func BatteryStatHandler(ctx *macaron.Context) {
+	perc := int64((simulation.Env.BatteryStore / settings.Config.GetFloat64("Simulation.BatteryCapacityKWH")) * 100)
+	if perc < 0 {
+		perc = 0
+	}
+	if perc < 15 {
+		ctx.Data["BatState"] = 0 // empty
+	} else if perc < 50 {
+		ctx.Data["BatState"] = 1 // quarter
+	} else if perc < 75 {
+		ctx.Data["BatState"] = 2 // half
+	} else if perc < 95 {
+		ctx.Data["BatState"] = 3 // three-quarter
+	} else {
+		ctx.Data["BatState"] = 4 // full
+	}
+
+	ctx.Data["BatteryPerc"] = perc
+	ctx.HTML(200, "battery")
+}
+
 // SettingsHandler handles the settings
 func SettingsHandler(ctx *macaron.Context) {
 	ctx.Data["NavTitle"] = "Settings"
@@ -41,6 +63,12 @@ func SettingsHandler(ctx *macaron.Context) {
 func AccountSettingsHandler(ctx *macaron.Context) {
 	ctx.Data["NavTitle"] = "Account Settings"
 	ctx.HTML(200, "settings/accounts")
+}
+
+// AppearanceSettingsHandler handles the settings
+func AppearanceSettingsHandler(ctx *macaron.Context) {
+	ctx.Data["NavTitle"] = "Appearance Settings"
+	ctx.HTML(200, "settings/appearance")
 }
 
 // SpecificRoomsHandler handles the specific rooms

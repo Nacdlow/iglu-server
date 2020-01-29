@@ -27,24 +27,15 @@
 
   
 
-  <div class="row justify-content-center">
+<div class="row justify-content-center">
     <div class="col-lg-6 col-6 align-items-center d-flex justify-content-center pb-2">
-      <div class="col-lg-6 col-6 align-items-center d-flex justify-content-center">
-       <div class="row justify-content-center">
-        <div class="col-12 justify-content-center d-flex">
-        <p>Current battery status:</p>
+        <div id="battery" class="col-lg-6 col-6 align-items-center d-flex justify-content-center">
         </div>
-        <div class="col-12 justify-content-center d-flex">
-          <h1 style="font-size: 6em;"> 15% </h1>
-        </div>
-        </div>
-      <div class="fas fa-battery-quarter fa-rotate-270 red-text" style="font-size: 7em;"></div>
-    </div>
     </div>
     <div class="col-lg-6 col-12 align-items-center">
-      <canvas id="lineChart"></canvas>
-      </div>
-  </div>
+        <canvas id="lineChart"></canvas>
+    </div>
+</div>
 
 
   <div class="pt-3 pb-3">
@@ -244,5 +235,12 @@ responsive: true
 }
 });
 </script>
+	<script>
+
+     (function(){
+           $("#battery").load("/battery_stat");
+		 setTimeout(arguments.callee, 1000);
+      })();
+	</script>
 {{template "base/footer" .}}
 {{template "base/tabnav" .}}
