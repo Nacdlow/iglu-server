@@ -79,6 +79,7 @@ func start(clx *cli.Context) (err error) {
 
 		m.Get("/settings", routes.SettingsHandler)
 		m.Get("/settings/accounts", routes.AccountSettingsHandler)
+		m.Get("/settings/appearance", routes.AppearanceSettingsHandler)
 	}, routes.RequireLogin)
 
 	m.Group("/sim", func() {
