@@ -40,10 +40,15 @@
         <p>Current battery status:</p>
         </div>
         <div class="col-12 justify-content-center d-flex">
-          <h1 style="font-size: 6em;"> 15% </h1>
+			<h1 style="font-size: 6em;"> {{.BatteryPerc}}% </h1>
         </div>
         </div>
-      <div class="fas fa-battery-quarter fa-rotate-270 red-text" style="font-size: 7em;"></div>
+		<div class="fas fa-rotate-270 {{if eq .BatState 0}}fa-battery-empty
+					red-text{{else if eq .BatState 1}}orange-text
+					fa-battery-quarter{{else if eq .BatState 2}}orange-text
+					fa-battery-half{{else if eq .BatState 3}}green-text
+					fa-battery-three-quarter{{else}}fa-battery-full
+					green-text{{end}}" style="font-size: 7em;"></div>
     </div>
     </div>
     <div class="col-lg-6 col-12 align-items-center">
