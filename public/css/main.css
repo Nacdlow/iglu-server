@@ -143,6 +143,10 @@ padding: .5rem 1rem;
 .navbar-toggler{
   display: none;
 }
+
+.navbar {
+    max-height:65px !important
+}
 }
 
 .back-button {
