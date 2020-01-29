@@ -145,7 +145,8 @@ padding: .5rem 1rem;
 }
 
 .navbar {
-    max-height:65px !important
+    max-height:65px !important;
+    padding-top: 2px!important;
 }
 }
 
@@ -258,8 +259,4 @@ padding: .5rem 1rem;
 
 .activetab {
    color: black!important;
-}
-
-.navbar {
-  padding-top: 2px!important; 
 }
