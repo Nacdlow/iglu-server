@@ -5,6 +5,7 @@ import (
 	"gitlab.com/group-nacdlow/nacdlow-server/models"
 	"gitlab.com/group-nacdlow/nacdlow-server/models/forms"
 	"gitlab.com/group-nacdlow/nacdlow-server/models/simulation"
+	"gitlab.com/group-nacdlow/nacdlow-server/modules/settings"
 	macaron "gopkg.in/macaron.v1"
 	"html/template"
 	"math"
@@ -28,6 +29,23 @@ func DashboardHandler(ctx *macaron.Context) {
 		icon = strings.ReplaceAll(icon, "-", "_")
 		ctx.Data["WeatherIcon"] = template.JS(icon)
 	}
+	perc := int64((simulation.Env.BatteryStore / settings.Config.GetFloat64("Simulation.BatteryCapacityKWH")) * 100)
+	if perc < 0 {
+		perc = 0
+	}
+	if perc < 25 {
+		ctx.Data["BatState"] = 0 // empty
+	} else if perc < 50 {
+		ctx.Data["BatState"] = 1 // quarter
+	} else if perc < 75 {
+		ctx.Data["BatState"] = 2 // half
+	} else if perc < 100 {
+		ctx.Data["BatState"] = 3 // three-quarter
+	} else {
+		ctx.Data["BatState"] = 3 // full
+	}
+
+	ctx.Data["BatteryPerc"] = perc
 	ctx.HTML(200, "dashboard")
 }
 
