@@ -29,24 +29,28 @@ func DashboardHandler(ctx *macaron.Context) {
 		icon = strings.ReplaceAll(icon, "-", "_")
 		ctx.Data["WeatherIcon"] = template.JS(icon)
 	}
+	ctx.HTML(200, "dashboard")
+}
+
+func BatteryStatHandler(ctx *macaron.Context) {
 	perc := int64((simulation.Env.BatteryStore / settings.Config.GetFloat64("Simulation.BatteryCapacityKWH")) * 100)
 	if perc < 0 {
 		perc = 0
 	}
-	if perc < 25 {
+	if perc < 15 {
 		ctx.Data["BatState"] = 0 // empty
 	} else if perc < 50 {
 		ctx.Data["BatState"] = 1 // quarter
 	} else if perc < 75 {
 		ctx.Data["BatState"] = 2 // half
-	} else if perc < 100 {
+	} else if perc < 95 {
 		ctx.Data["BatState"] = 3 // three-quarter
 	} else {
-		ctx.Data["BatState"] = 3 // full
+		ctx.Data["BatState"] = 4 // full
 	}
 
 	ctx.Data["BatteryPerc"] = perc
-	ctx.HTML(200, "dashboard")
+	ctx.HTML(200, "battery")
 }
 
 // SettingsHandler handles the settings
