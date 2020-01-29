@@ -103,6 +103,6 @@ func start(clx *cli.Context) (err error) {
 	})
 
 	log.WithFields(log.Fields{"port": clx.String("port")}).Printf("Starting server.")
-	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%s", clx.String("port")), m))
+	log.Fatal(http.ListenAndServeTLS(fmt.Sprintf(":%s", clx.String("port")), "fullchain.pem", "privkey.pem", m))
 	return nil
 }
