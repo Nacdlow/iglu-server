@@ -59,6 +59,7 @@ func SpecificRoomsHandler(ctx *macaron.Context) {
 			return
 		}
 		ctx.Data["Room"] = room
+		ctx.Data["Devices"] = models.GetDevices()
 	}
 	ctx.Data["IsRooms"] = 1
 	ctx.HTML(200, "specificRooms")

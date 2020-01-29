@@ -58,8 +58,6 @@ func start(clx *cli.Context) (err error) {
 	m.Get("/register", routes.RegisterHandler)
 	m.Post("/register", routes.PostRegisterHandler)
 
-
-
 	m.Group("", func() {
 		m.Get("/dashboard", routes.DashboardHandler)
 		m.Group("/room", func() {
@@ -77,7 +75,7 @@ func start(clx *cli.Context) (err error) {
 			routes.PostRoomHandler)
 		m.Get("/toggle_device/:id", routes.ToggleHandler)
 		m.Get("/toggle_slider/:id/:value", routes.SliderHandler)
-		
+
 		m.Get("/settings", routes.SettingsHandler)
 		m.Get("/settings/accounts", routes.AccountSettingsHandler)
 	}, routes.RequireLogin)
