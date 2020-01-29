@@ -252,9 +252,10 @@ padding: .5rem 1rem;
     color: white;
 } 
 
+.activetab {
+   color: black!important;
+}
 
-  
-  
-
-
-
+.navbar {
+  padding-top: 2px!important; 
+}
