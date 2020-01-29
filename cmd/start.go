@@ -6,6 +6,7 @@ import (
 	log "github.com/sirupsen/logrus"
 
 	"net/http"
+	"time"
 
 	"github.com/go-macaron/binding"
 	"github.com/go-macaron/csrf"
@@ -49,6 +50,12 @@ func start(clx *cli.Context) (err error) {
 	m.Use(macaron.Renderer())
 	m.Use(session.Sessioner())
 	m.Use(csrf.Csrfer())
+	m.Use(macaron.Static("public",
+		macaron.StaticOptions{
+			Expires: func() string {
+				return time.Now().Add(24 * 60 * time.Minute).UTC().Format("Mon, 02 Jan 2006 15:04:05 GMT")
+			},
+		}))
 
 	m.Use(routes.ContextInit())
 
