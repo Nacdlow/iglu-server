@@ -6,6 +6,7 @@ import (
 	log "github.com/sirupsen/logrus"
 
 	"net/http"
+	"time"
 
 	"github.com/go-macaron/binding"
 	"github.com/go-macaron/csrf"
@@ -49,6 +50,12 @@ func start(clx *cli.Context) (err error) {
 	m.Use(macaron.Renderer())
 	m.Use(session.Sessioner())
 	m.Use(csrf.Csrfer())
+	m.Use(macaron.Static("public",
+		macaron.StaticOptions{
+			Expires: func() string {
+				return time.Now().Add(24 * 60 * time.Minute).UTC().Format("Mon, 02 Jan 2006 15:04:05 GMT")
+			},
+		}))
 
 	m.Use(routes.ContextInit())
 
@@ -79,6 +86,7 @@ func start(clx *cli.Context) (err error) {
 
 		m.Get("/settings", routes.SettingsHandler)
 		m.Get("/settings/accounts", routes.AccountSettingsHandler)
+		m.Get("/settings/appearance", routes.AppearanceSettingsHandler)
 
 		m.Get("/battery_stat", routes.BatteryStatHandler)
 	}, routes.RequireLogin)
@@ -95,6 +103,6 @@ func start(clx *cli.Context) (err error) {
 	})
 
 	log.WithFields(log.Fields{"port": clx.String("port")}).Printf("Starting server.")
-	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%s", clx.String("port")), m))
+	log.Fatal(http.ListenAndServeTLS(fmt.Sprintf(":%s", clx.String("port")), "fullchain.pem", "privkey.pem", m))
 	return nil
 }

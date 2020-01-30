@@ -6,22 +6,24 @@
     <hr>
   </div>
 
-<!-- Search form -->
-<form class="form-inline md-form form-sm mt-0 justify-content-center">
-  <i class="fas fa-search" aria-hidden="true"></i>&nbsp; &nbsp;
-  <input class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Search"
-    aria-label="Search">
-</form>
+  <!-- Search form -->
+  <form class="form-inline md-form form-sm mt-0 justify-content-center">
+    <i class="fas fa-search" aria-hidden="true"></i>&nbsp; &nbsp;
+    <input class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Search" aria-label="Search">
+  </form>
 
   <div class="list-group">
+    <a type="button" href="http://www.market.nacdlow.com" class="list-group-item list-group-item-action">
+      <i class="fas fa-users-cog" style="font-size: 15px;"></i>&nbsp; &nbsp; Marketplace (Add-ons)
+    </a>
     <a type="button" href="/settings/accounts" class="list-group-item list-group-item-action">
       <i class="fas fa-users-cog" style="font-size: 15px;"></i>&nbsp; &nbsp; Accounts
     </a>
+    <a type="button" href="/settings/appearance" class="list-group-item list-group-item-action">
+      <i class="fas fa-palette" style="font-size: 15px;"></i>&nbsp; &nbsp; Appearance
+    </a>
     <a type="button" class="list-group-item list-group-item-action">
-      <i class="fas fa-palette" style="font-size: 15px;"></i>&nbsp; &nbsp; Look & Feel
-  </a>
-    <a type="button" class="list-group-item list-group-item-action">
-        <i class="fas fa-sliders-h" style="font-size: 15px;"></i>&nbsp; &nbsp; Devices
+      <i class="fas fa-sliders-h" style="font-size: 15px;"></i>&nbsp; &nbsp; Devices
     </a>
     <a type="button" class="list-group-item list-group-item-action">
       <i class="fas fa-bell" style="font-size: 15px;"></i>&nbsp; &nbsp; Notifications
@@ -32,76 +34,6 @@
     <a type="button" class="list-group-item list-group-item-action">
       <i class="fas fa-wrench" style="font-size: 15px;"></i>&nbsp; &nbsp; Developer Options
     </a>
-  </div>
-
-  <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true" data-backdrop="false">
-    <div class="modal-dialog" role="document" data-backdrop="false">
-      <div class="modal-content" data-backdrop="false" method="POST">
-        <div class="modal-header navcolor">
-          <h5 class="modal-title" id="addModal">Add Room</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body bodycolor">
-          <form method="POST">
-            <h6 class="text-center pt-4">Enter Room Name:</h6>
-            <div class="md-form justify-content-center d-flex">
-              <input type="text" class="form-control w-50 white-text text-center" placeholder="e.g. Johns Room"
-                name="room_name">
-            </div>
-            <h6 class="text-center">Enter Room Description:</h6>
-            <div class="md-form justify-content-center d-flex">
-              <input type="text" class="form-control w-50 white-text text-center" placeholder="Description"
-                name="description">
-            </div>
-
-
-
-            <div class="form-row">
-              <div class="col">
-                <h6 class="text-center ">Select Room Type:</h6>
-                <div>
-                  <select class="browser-default custom-select" id="select" name="room_type">
-                    <option value="" disabled selected>Choose Type</option>
-                    <option value="0">Lounge</option>
-                    <option value="1">Bedroom</option>
-                    <option value="2">Dining Room</option>
-                    <option value="3">Kitchen</option>
-                    <option value="4">Bathroom</option>
-                    <option value="5">Hallway</option>
-                    <option value="6">Storage</option>
-                    <option value="7">Utility Room</option>
-                    <option value="8">Garage</option>
-                    <option value="9">Guest</option>
-                  </select>
-                </div>
-              </div>
-              <div class="col">
-                <h6 class="text-center ">Part of a room?</h6>
-                <div>
-                  <select class="browser-default custom-select" id="select" name="part_of_room">
-                    <option value="-1" selected>Not part of any room</option>
-                    {{range .Rooms}}<option value="{{.RoomID}}">{{.RoomName}}</option>
-                    {{end}}
-                  </select>
-                </div>
-              </div>
-            </div>
-            <h6 class="text-center pt-4">Enter Number of Windows:</h6>
-            <div class="md-form text-center justify-content-center d-flex">
-              <input type="number" class="form-control white-text text-center w-50" placeholder="e.g. 2"
-                name="windows_count">
-            </div>
-        </div>
-        <div class="modal-footer justify-content-center d-flex navcolor">
-          <button type="button" class="btn bodycolor" data-dismiss="modal">Close</button>
-          <button type="submit" class="btn white black-text">Save changes</button>
-        </div>
-        </form>
-      </div>
-    </div>
   </div>
 </div>
 

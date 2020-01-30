@@ -65,6 +65,12 @@ func AccountSettingsHandler(ctx *macaron.Context) {
 	ctx.HTML(200, "settings/accounts")
 }
 
+// AppearanceSettingsHandler handles the settings
+func AppearanceSettingsHandler(ctx *macaron.Context) {
+	ctx.Data["NavTitle"] = "Appearance Settings"
+	ctx.HTML(200, "settings/appearance")
+}
+
 // SpecificRoomsHandler handles the specific rooms
 func SpecificRoomsHandler(ctx *macaron.Context) {
 	ctx.Data["NavTitle"] = fmt.Sprintf("%s", ctx.Params("roomType"))
@@ -81,6 +87,7 @@ func SpecificRoomsHandler(ctx *macaron.Context) {
 			return
 		}
 		ctx.Data["Room"] = room
+		ctx.Data["Devices"] = models.GetDevices()
 	}
 	ctx.Data["IsRooms"] = 1
 	ctx.HTML(200, "specificRooms")
