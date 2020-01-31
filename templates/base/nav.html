@@ -15,84 +15,64 @@
       <a class="navbar-brand pl-lg-4" id="brand" href="/dashboard"><img src="/img/iglu-smol.svg" class="svghover"
           alt="iglü" width="50"></a>
       <div class="nav deskhide">
-          <!-- Basic dropdown 
-          <a class="nav-link p-0 waves-effect waves-light" type="button" data-toggle="dropdown" aria-haspopup="true"
-            aria-expanded="false"><img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-5.jpg" class="rounded-circle z-depth-0"
-            alt="avatar image" height="45" width="45"></a>
-
-          <div class="dropdown-menu noleft black-text">
-            <a class="dropdown-item black-text" href="#">Account</a>
-            <a class="dropdown-item black-text" href="#">Settings</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item black-text" href="#">Log Out</a>
-          </div>-->
-          <!-- Basic dropdown -->
-          <div class="nav-item dropdown avatar">
-            <a class="nav-link p-0" id="navbarDropdownMenuLink-333" data-toggle="dropdown"
-              aria-haspopup="true" aria-expanded="false">
-              <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-5.jpg" class="mb-0 rounded-circle z-depth-0"
-                  alt="avatar image" height="45" width="45">
-            </a>
-            <div class="dropdown-menu dropdown-menu-right dropdown-default text-center"
-              aria-labelledby="navbarDropdownMenuLink-333">
-              <a class="dropdown-item black-text" href="/settings/accounts"><h5>Accounts</h5></a>
-              <a class="dropdown-item black-text" href="/settings/"><h5>Settings</h5></a>
-              <a class="dropdown-item black-text" href="#"><h5><i class="fas fa-sign-out-alt fa-rotate-180"></i> Log Out</h5></a>
-            </div>
-          </div>
-    </div>
-
-    <!-- Collapsible content -->
-    <div class="navbar-collapse collapse" id="navbarSupportedContent41">
-      <!-- Links -->
-      <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-        <li class="nav-item{{if .IsDashboard}} active{{end}}">
-          <a class="nav-link" href="/dashboard">Dashboard <i class="fas fa-tachometer-alt"></i></a>
-        </li>
-        <li class="nav-item{{if .IsRooms}} active{{end}}">
-          <a class="nav-link" href="/rooms">Rooms <i class="fas fa-bed"></i></a>
-        </li>
-        <li class="nav-item{{if .IsSettings}} active{{end}}">
-          <a class="nav-link" href="/settings">Settings <i class="fas fa-cog"></i></a>
-        </li>
-      </ul>
-      <!-- Links -->
-
-      <ul class="navbar-nav mobhide">
-        <li class="nav-item" data-toggle="modal" data-target="#fullHeightModalRight">
-          <a class="nav-link waves-effect waves-light" href="#"> <i class="far fa-bell"></i></a>
-        </li>
-
-        <li class="nav-item dropdown avatar">
-          <a class="nav-link p-0" id="navbarDropdownMenuLink-333" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">
+        <div class="nav-item dropdown avatar">
+          <a class="nav-link p-0" id="navbarDropdownMenuLink-333" data-toggle="dropdown" aria-haspopup="true"
+            aria-expanded="false">
             <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-5.jpg" class="mb-0 rounded-circle z-depth-0"
-                alt="avatar image" height="45" width="45">
+              alt="avatar image" height="45" width="45">
           </a>
           <div class="dropdown-menu dropdown-menu-right dropdown-default text-center"
             aria-labelledby="navbarDropdownMenuLink-333">
-            <a class="dropdown-item black-text" href="/settings/accounts">Accounts</a>
-            <a class="dropdown-item black-text" href="#"><i class="fas fa-sign-out-alt fa-rotate-180"></i> Log Out</a>
+            <a class="dropdown-item black-text" href="/settings/accounts">
+              <h5>Accounts</h5>
+            </a>
+            <a class="dropdown-item black-text" href="/settings/">
+              <h5>Settings</h5>
+            </a>
+            <a class="dropdown-item black-text" href="#">
+              <h5><i class="fas fa-sign-out-alt fa-rotate-180"></i> Log Out</h5>
+            </a>
           </div>
-        </li>
+        </div>
+      </div>
 
-        <!--<li class="nav-item avatar">
-            <a class="pt-1 waves-effect waves-light" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-5.jpg" class="rounded-circle z-depth-0"
+      <!-- Collapsible content -->
+      <div class="navbar-collapse collapse" id="navbarSupportedContent41">
+        <!-- Links -->
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+          <li class="nav-item{{if .IsDashboard}} active{{end}}">
+            <a class="nav-link" href="/dashboard">Dashboard <i class="fas fa-tachometer-alt"></i></a>
+          </li>
+          <li class="nav-item{{if .IsRooms}} active{{end}}">
+            <a class="nav-link" href="/rooms">Rooms <i class="fas fa-bed"></i></a>
+          </li>
+          <li class="nav-item{{if .IsSettings}} active{{end}}">
+            <a class="nav-link" href="/settings">Settings <i class="fas fa-cog"></i></a>
+          </li>
+        </ul>
+        <!-- Links -->
+
+        <ul class="navbar-nav mobhide">
+          <li class="nav-item" data-toggle="modal" data-target="#fullHeightModalRight">
+            <a class="nav-link waves-effect waves-light" href="#"> <i class="far fa-bell"></i></a>
+          </li>
+
+          <li class="nav-item dropdown avatar">
+            <a class="nav-link p-0" id="navbarDropdownMenuLink-333" data-toggle="dropdown" aria-haspopup="true"
+              aria-expanded="false">
+              <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-5.jpg" class="mb-0 rounded-circle z-depth-0"
                 alt="avatar image" height="45" width="45">
             </a>
-            <div class="dropdown-menu noleftdesk text-center">
+            <div class="dropdown-menu dropdown-menu-right dropdown-default text-center"
+              aria-labelledby="navbarDropdownMenuLink-333">
               <a class="dropdown-item black-text" href="/settings/accounts">Accounts</a>
-              <a class="dropdown-item black-text" href="#">Log Out</a>
-          </div>-->
-
-          <!--<a class="nav-link p-0" href="#"></a>
-            <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-5.jpg" class="rounded-circle z-depth-0"
-              alt="avatar image" height="45" width="45">-->
+              <a class="dropdown-item black-text" href="#"><i class="fas fa-sign-out-alt fa-rotate-180"></i> Log Out</a>
+            </div>
+          </li>
           </a>
-        </li>
-      </ul>
-    </div>
+          </li>
+        </ul>
+      </div>
     </div>
   </nav>
 
