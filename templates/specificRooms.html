@@ -54,20 +54,20 @@
   <ul class="nav nav-tabs nav-fill d-flex justify-content-center pt-3" id="myTab" role="tablist">
     <li class="nav-item">
       <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home"
-        aria-selected="true" style="background-color: #3766ff;"><i class="far fa-lightbulb fa-2x"></i><br>Lights</a>
+        aria-selected="true" style="background-color: #B2B2B2;"><i class="far fa-lightbulb fa-2x"></i><br>Lights</a>
     </li>
     <li class="nav-item">
       <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile"
-        aria-selected="false" style="background-color: #2444ae;"><i class="fas fa-volume-up fa-2x"></i><br>Speakers</a>
+        aria-selected="false" style="background-color: #818181;"><i class="fas fa-volume-up fa-2x"></i><br>Speakers</a>
     </li>
     <li class="nav-item">
       <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact"
-        aria-selected="false" style="background-color: #3766ff;"><i
+        aria-selected="false" style="background-color: #B2B2B2;"><i
           class="far fa-snowflake fa-2x"></i><br>Temperature</a>
     </li>
     <li class="nav-item">
       <a class="nav-link" id="tv-tab" data-toggle="tab" href="#tv" role="tab" aria-controls="tv" aria-selected="false"
-        style="background-color: #2444ae;"><i class="fas fa-tv fa-2x"></i><br>TV</a>
+        style="background-color: #818181;"><i class="fas fa-tv fa-2x"></i><br>TV</a>
     </li>
     <li class="nav-item">
       <a class="nav-link black-text" id="tv-tab" data-toggle="modal" data-target="#addModal" role="tab"
@@ -81,8 +81,7 @@
   <div class="tab-content" id="myTabContent">
 
     <!--light device tab cards-->
-    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab"
-      style="background-color: #3766ff;">
+    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
       <div class="row justify-content-center pt-5 pr-5 pl-5 pb-3">
         {{range .Devices}}{{if and (eq .Type 0) (eq .RoomID $.Room.RoomID)}}
         <div class="col-lg-4 col-md-6">
@@ -157,8 +156,7 @@
     <!--/light device tab cards-->
 
     <!--speaker device tab cards-->
-    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab"
-      style="background-color: #2444ae;">
+    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
       <div class="row justify-content-center pt-5 pr-5 pl-5 pb-3">
 
         {{range .Devices}}{{if and (eq .Type 3) (eq .RoomID $.Room.RoomID)}}
@@ -229,10 +227,13 @@
             </div>
           </div>
         </div>
+        {{end}}{{end}}
       </div>
-      {{end}}{{end}}
-
-      <!--OPTIONS MODAL1-->
+    </div>
+  
+    <!--/speaker device tab cards-->
+    <!--speaker options modal-->
+    <!--OPTIONS MODAL1-->
       <!-- Modal -->
       <div class="modal fade" id="basicExampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true" data-backdrop="false">
@@ -285,12 +286,10 @@
           </div>
         </div>
       </div>
-    </div>
-    <!--/speaker device tab cards-->
+      <!--/end speaker options modal-->
 
     <!--temp device tab cards-->
-    <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab"
-      style="background-color: #3766ff;">
+    <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
 
       <div class="row justify-content-center pt-5 pr-5 pl-5 pb-3">
         {{range .Devices}}{{if and (eq .Type 1) (eq .RoomID $.Room.RoomID)}}
@@ -362,9 +361,13 @@
         {{end}}{{end}}
       </div>
     </div>
+
+    <!--TV CARD-->
     <div class="tab-pane fade" id="tv" role="tabpanel" aria-labelledby="tv-tab" style="background-color: #2444ae;">
       <h1 class="d-flex justify-content-center">TV STUFF GOES HERE</h1>
     </div>
+    <!--/TV CARD-->
+    
   </div>
 </div>
 {{end}}
