@@ -40,354 +40,381 @@
     {{end}}{{end}}
   </div>
   {{else}}
-  <h2 class="pt-5 text-center">Room Control</h2>
   <div class="row justify-content-center pt-3">
-    <h3 class="pt-5 pr-3 text-center">Room Temperature</h3>
+    <!--<h2 class="pt-5 text-center">Room Control</h2>-->
+    <h2 class="pt-5 pr-3 text-center">Room Temperature</h2>
     <div class="card warning-color circle d-flex">
       <div class="card-body d-flex align-items-center justify-content-center animated rotateIn">
         <h5 class="pt-1" style="font-size: 3em;">{{.Temp}}17<small>°C</small></h5>
       </div>
     </div>
   </div>
-  <div class="pt-3 pb-3">
-    <hr>
-  </div>
-  </div>
-  {{end}}
 
-  <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true" data-backdrop="false">
-    <div class="modal-dialog" role="document" data-backdrop="false">
-      <div class="modal-content" data-backdrop="false" method="POST">
-        <div class="modal-header navcolor">
-          <h5 class="modal-title" id="addModal">Add Control Module</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body bodycolor">
-          <form method="POST">
-            <input type="hidden" class="form-control mb-4 text-center w-50" name="room_id" value="{{.Room.RoomID}}">
-            <h6 class="text-center">Select Device Type:</h6>
-            <div class="md-form pb-3 pr-5 pl-5">
-              <select class="browser-default custom-select" id="select" name="device_type">
-                <option value="" disabled selected>Choose Type</option>
-                <option value="0">Lights</option>
-                <option value="1">Temperature Control</option>
-                <option value="2">TV</option>
-                <option value="3">Speaker</option>
-              </select>
-            </div>
-            <h6 class="text-center">Enter Description:</h6>
-            <div class="md-form text-center justify-content-center d-flex">
-              <input type="text" class="form-control mb-3 text-center w-50" placeholder="Description"
-                name="description">
-            </div>
-            <div class="custom-control custom-checkbox text-center">
-              <input type="checkbox" class="custom-control-input" id="defaultUnchecked" name="is_main_light_source">
-              <label class="custom-control-label" for="defaultUnchecked">Main Light</label>
-            </div>
-        </div>
-        <div class="modal-footer justify-content-center d-flex navcolor">
-          <button type="button" class="btn bodycolor" data-dismiss="modal">Close</button>
-          <button type="submit" class="btn white black-text">Save changes</button>
-        </div>
-        </form>
-      </div>
-    </div>
-  </div>
-  <ul class="nav nav-tabs d-flex justify-content-center" id="myTab" role="tablist">
+  <!-- devices tabs-->
+  <ul class="nav nav-tabs nav-fill d-flex justify-content-center pt-3" id="myTab" role="tablist">
     <li class="nav-item">
       <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home"
-        aria-selected="true" style="background-color: #3766ff;">Lights</a>
+        aria-selected="true" style="background-color: #3766ff;"><i class="far fa-lightbulb fa-2x"></i><br>Lights</a>
     </li>
     <li class="nav-item">
       <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile"
-        aria-selected="false" style="background-color: #2444ae;">Speakers</a>
+        aria-selected="false" style="background-color: #2444ae;"><i class="fas fa-volume-up fa-2x"></i><br>Speakers</a>
     </li>
     <li class="nav-item">
       <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact"
-        aria-selected="false" style="background-color: #3766ff;">Temperature</a>
+        aria-selected="false" style="background-color: #3766ff;"><i
+          class="far fa-snowflake fa-2x"></i><br>Temperature</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" id="tv-tab" data-toggle="tab" href="#tv" role="tab" aria-controls="tv"
-        aria-selected="false" style="background-color: #2444ae;">TV</a>
+      <a class="nav-link" id="tv-tab" data-toggle="tab" href="#tv" role="tab" aria-controls="tv" aria-selected="false"
+        style="background-color: #2444ae;"><i class="fas fa-tv fa-2x"></i><br>TV</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link black-text" id="tv-tab" data-toggle="modal" data-target="#addModal" role="tab" aria-controls="tv"
-        aria-selected="false" style="background-color: #ffffff;">Add Device</a>
+      <a class="nav-link black-text" id="tv-tab" data-toggle="modal" data-target="#addModal" role="tab"
+        aria-controls="tv" aria-selected="false" style="background-color: #ffffff;"><i
+          class="fas fa-plus fa-2x"></i><br>Add Device</a>
     </li>
   </ul>
+  <!-- /devices tabs-->
+
+  <!-- devices' tab content (the devices cards)-->
   <div class="tab-content" id="myTabContent">
-    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-      <div class="card-deck d-flex justify-content-center col-12">
+
+    <!--light device tab cards-->
+    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab"
+      style="background-color: #3766ff;">
+      <div class="row justify-content-center pt-5 pr-5 pl-5 pb-3">
         {{range .Devices}}{{if and (eq .Type 0) (eq .RoomID $.Room.RoomID)}}
-        <!--Card 1-->
-        <div class="card m-3 d-flex justify-content-center cw">
-          <div class="card-body">
+        <div class="col-lg-4 col-md-6">
+          <div class="card mb-4">
+            <div class="card-body">
 
-            <!--Navbar-->
-            <nav class="navbar navbar-light navbar-1 white elipsesNav">
+              <!--Options for the device-->
+              <nav class="navbar navbar-light navbar-1 white elipsesNav">
 
-              <!-- Navbar brand -->
-              <a class="navbar-brand w-10 float-right" href="#"></a>
+                <!-- Navbar brand -->
+                <a class="navbar-brand w-10 float-right" href="#"></a>
 
-              <!-- Collapse button -->
-              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#options-{{.DeviceID}}"
-                aria-controls="navbarSupportedContent15" aria-expanded="false" aria-label="Toggle navigation"><span
-                  class="fas fa-ellipsis-h"></span></button>
+                <!-- Collapse button -->
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#options-{{.DeviceID}}"
+                  aria-controls="navbarSupportedContent15" aria-expanded="false" aria-label="Toggle navigation"><span
+                    class="fas fa-ellipsis-h"></span></button>
 
-              <!-- Collapsible content -->
-              <div class="collapse navbar-collapse position-relative" id="options-{{.DeviceID}}">
+                <!-- Collapsible content -->
+                <div class="collapse navbar-collapse position-relative" id="options-{{.DeviceID}}">
 
-                <!-- Links -->
-                <ul class="navbar-nav mr-auto lilnav">
-                  <li class="nav-item active">
-                    <a class="nav-link black-text lilnav" type="button">Favourite<i
-                        class="fas fa-heart black-text"></i><span class="sr-only">(current)</span></a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link black-text lilnav" href="#">Options</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link black-text lilnav" href="#">Remove</a>
-                  </li>
-                </ul>
-                <!-- Links -->
+                  <!-- Links -->
+                  <ul class="navbar-nav mr-auto lilnav">
+                    <li class="nav-item active">
+                      <a class="nav-link black-text lilnav" type="button">Favourite<i
+                          class="fas fa-heart black-text"></i><span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link black-text lilnav" href="#">Options</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link black-text lilnav" href="#">Remove</a>
+                    </li>
+                  </ul>
+                  <!-- Links -->
 
+                </div>
+                <!-- Collapsible content -->
+              </nav>
+              <!--/Options for the device-->
+
+              <!-- switch -->
+              <div class="custom-control custom-switch float-left">
+                <input type="checkbox" class="custom-control-input" id="customSwitches-{{.DeviceID}}" {{if .Status}}
+                  checked {{end}} onclick="$.get('/toggle_device/{{.DeviceID}}');" />
+                <label class="custom-control-label"
+                  for="customSwitches-{{.DeviceID}}">{{if .Status}}On{{else}}Off{{end}}</label>
               </div>
-              <!-- Collapsible content -->
-            </nav>
-            <!--/.Navbar-->
+              <!--/switch -->
 
-            <h5 class="card-title">{{.Description}}</h5>
-            <!-- Default switch -->
-            <div class="custom-control custom-switch ">
-              <input type="checkbox" class="custom-control-input" id="customSwitches-{{.DeviceID}}" {{if .Status}}
-                checked {{end}} onclick="$.get('/toggle_device/{{.DeviceID}}');" />
-              <label class="custom-control-label"
-                for="customSwitches-{{.DeviceID}}">{{if .Status}}On{{else}}Off{{end}}</label>
+              <h5 class="card-title text-center">{{.Description}}</h5>
+              <p class="text-center pt-4">Brightness</p>
+              <div class="d-flex justify-content-center">
+                <span class="blue-text mr-2"><i class="fas fa-moon fa-lg" aria-hidden="true"></i></span>
+                <form class="range-field">
+                  <input class="custom-range" type="range" min="0" max="10" value="{{.Brightness}}"
+                    id="slider-{{.DeviceID}}"
+                    onclick="$.get('/toggle_slider/{{.DeviceID}}/'+ $('#slider-{{.DeviceID}}').val());" />
+                </form>
+                <span class="blue-text ml-2 "><i class="fas fa-sun fa-lg" aria-hidden="true"></i></span>
+              </div>
             </div>
-            <p class="text-center pt-3 position-absolute-center">Brightness</p>
-            <div class="d-flex justify-content-center position-absolute-center">
-              <span class="font-weight-bold purple-text mr-2 "><i class="fas fa-moon" aria-hidden="true"></i></span>
-              <form class="range-field w-35">
-                <input class="border-0" type="range" min="0" max="10" value="{{.Brightness}}" id="slider-{{.DeviceID}}"
-                  onclick="$.get('/toggle_slider/{{.DeviceID}}/'+ $('#slider-{{.DeviceID}}').val());" />
-              </form>
-              <span class="font-weight-bold purple-text ml-2 "><i class="fas fa-sun" aria-hidden="true"></i></span>
+            <div class="card-footer" {{if .Status}}style="background-color: #FEFF9E;"
+              {{else}}style="background-color: #FF6666;" {{end}}>
+              <small class="text-muted black-text">{{if .Status}}This light has been on for 4hrs 15mins{{else}}Last on:
+                yesterday{{end}}</small>
             </div>
-          </div>
-          <div class="card-footer" {{if .Status}}style="background-color: #FEFF9E;"
-            {{else}}style="background-color: #FF6666;" {{end}}>
-            <small class="text-muted">{{if .Status}}This light has been on for 4hrs 15mins{{else}}Last on:
-              yesterday{{end}}</small>
           </div>
         </div>
         {{end}}{{end}}
       </div>
     </div>
+    <!--/light device tab cards-->
 
-    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-      <div class="card-deck d-flex justify-content-center col-12">
+    <!--speaker device tab cards-->
+    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab"
+      style="background-color: #2444ae;">
+      <div class="row justify-content-center pt-5 pr-5 pl-5 pb-3">
 
         {{range .Devices}}{{if and (eq .Type 3) (eq .RoomID $.Room.RoomID)}}
         <!--Card 1-->
-        <div class="card m-3 d-flex justify-content-center cw">
-          <div class="card-body">
+        <div class="col-lg-4 col-md-6">
+          <div class="card mb-4">
+            <div class="card-body">
 
-            <!--Navbar-->
-            <nav class="navbar navbar-light navbar-1 white elipsesNav">
+              <!--Navbar-->
+              <nav class="navbar navbar-light navbar-1 white elipsesNav">
 
-              <!-- Navbar brand -->
-              <a class="navbar-brand w-10 float-right" href="#"></a>
+                <!-- Navbar brand -->
+                <a class="navbar-brand w-10 float-right" href="#"></a>
 
-              <!-- Collapse button -->
-              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-{{.DeviceID}}"
-                aria-controls="navbarSupportedContent15" aria-expanded="false" aria-label="Toggle navigation"><span
-                  class="fas fa-ellipsis-h"></span></button>
+                <!-- Collapse button -->
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-{{.DeviceID}}"
+                  aria-controls="navbarSupportedContent15" aria-expanded="false" aria-label="Toggle navigation"><span
+                    class="fas fa-ellipsis-h"></span></button>
 
-              <!-- Collapsible content -->
-              <div class="collapse navbar-collapse position-relative" id="navbar-{{.DeviceID}}">
+                <!-- Collapsible content -->
+                <div class="collapse navbar-collapse position-relative" id="navbar-{{.DeviceID}}">
 
-                <!-- Links -->
-                <ul class="navbar-nav mr-auto lilnav">
-                  <li class="nav-item active">
-                    <a class="nav-link black-text lilnav" type="button">Favourite<i
-                        class="fas fa-heart black-text"></i><span class="sr-only">(current)</span></a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link black-text lilnav" href="#" data-toggle="modal"
-                      data-target="#basicExampleModal2">Options</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link black-text lilnav" href="#">Remove</a>
-                  </li>
-                </ul>
-                <!-- Links -->
+                  <!-- Links -->
+                  <ul class="navbar-nav mr-auto lilnav">
+                    <li class="nav-item active">
+                      <a class="nav-link black-text lilnav" type="button">Favourite<i
+                          class="fas fa-heart black-text"></i><span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link black-text lilnav" href="#" data-toggle="modal"
+                        data-target="#basicExampleModal2">Options</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link black-text lilnav" href="#">Remove</a>
+                    </li>
+                  </ul>
+                  <!-- Links -->
 
+                </div>
+                <!-- Collapsible content -->
+              </nav>
+
+              <!--/.Navbar-->
+              <!-- Default switch -->
+              <div class="float-left">
+                <a type="button" class="fas fa-power-off pb-3 {{if .Status}}green-text{{else}}red-text{{end}}" href="#"
+                  style="color: black; font-size: 2em;" onclick="$.get('/toggle_device/{{.DeviceID}}');"></a>
+                {{if .Status}}On{{else}}Off{{end}}
               </div>
-              <!-- Collapsible content -->
-            </nav>
-            <!--/.Navbar-->
-            <h5 class="card-title">{{.Description}}</h5>
-            <!-- Default switch -->
-            <div class="">
-              <a type="button" class="fas fa-power-off pb-3 {{if .Status}}green-text{{else}}red-text{{end}}" href="#"
-                style="color: black; font-size: 2em;" onclick="$.get('/toggle_device/{{.DeviceID}}');"></a>
-              {{if .Status}}On{{else}}Off{{end}}
+              <h5 class="card-title text-center">{{.Description}}</h5>
+              <p class="text-center pt-4">Volume</p>
+              <div class="d-flex justify-content-center">
+                <span class="font-weight-bold green-text mr-2"><i class="fas fa-volume-mute"
+                    aria-hidden="true"></i></span>
+                <form class="range-field">
+                  <input class="custom-range" type="range" min="0" max="10" value="{{.Volume}}"
+                    id="slider-{{.DeviceID}}"
+                    onclick="$.get('/toggle_slider/{{.DeviceID}}/'+ $('#slider-{{.DeviceID}}').val());" />
+                </form>
+                <span class="font-weight-bold green-text ml-2"><i class="fas fa-volume-up fa-lg"
+                    aria-hidden="true"></i></span>
+              </div>
             </div>
-            <p class="text-center pt-2">Volume</p>
-            <div class="d-flex justify-content-center  ">
-              <span class="font-weight-bold black-text mr-2 "><i class="fas fa-volume-mute"
-                  aria-hidden="true"></i></span>
-              <form class="range-field w-35">
-                <input class="border-0" type="range" min="0" max="10" value="{{.Volume}}" id="slider-{{.DeviceID}}"
-                  onclick="$.get('/toggle_slider/{{.DeviceID}}/'+ $('#slider-{{.DeviceID}}').val());" />
-              </form>
-              <span class="font-weight-bold black-text ml-2 "><i class="fas fa-volume-up" aria-hidden="true"></i></span>
+            <div class="card-footer" {{if .Status}}style="background-color: #A8FFA8;"
+              {{else}}style="background-color: #FF6666;" {{end}}>
+              <small class="text-muted black-text">{{if .Status}}Connected to David's
+                Iphone{{else}}Disconnected{{end}}</small>
             </div>
-          </div>
-          <div class="card-footer" {{if .Status}}style="background-color: #A8FFA8;"
-            {{else}}style="background-color: #FF6666;" {{end}}>
-            <small class="text-muted">{{if .Status}}Connected to David's Iphone{{else}}Disconnected{{end}}</small>
           </div>
         </div>
-        {{end}}{{end}}
+      </div>
+      {{end}}{{end}}
 
-        <!--OPTIONS MODAL1-->
-        <!-- Modal -->
-        <div class="modal fade" id="basicExampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-          aria-hidden="true" data-backdrop="false">
-          <div class="modal-dialog" role="document" data-backdrop="false">
-            <div class="modal-content" data-backdrop="false">
-              <div class="modal-header">
-                <h5 class="modal-title black-text" id="exampleModalLabel">Options</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
+      <!--OPTIONS MODAL1-->
+      <!-- Modal -->
+      <div class="modal fade" id="basicExampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true" data-backdrop="false">
+        <div class="modal-dialog" role="document" data-backdrop="false">
+          <div class="modal-content" data-backdrop="false">
+            <div class="modal-header">
+              <h5 class="modal-title black-text" id="exampleModalLabel">Options</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <h6 class="text-center black-text">Bass</h6>
+              <div class="d-flex justify-content-center" style="opacity: 50%;">
+                <span class="font-weight-bold black-text mr-2 "><i class="fas fa-minus" aria-hidden="true"></i></span>
+                <form class="range-field w-35">
+                  <input class="border-0" type="range" min="0" max="100" />
+                </form>
+                <span class="font-weight-bold black-text ml-2 mt-1"><i class="fas fa-plus"
+                    aria-hidden="true"></i></span>
               </div>
-              <div class="modal-body">
-                <h6 class="text-center black-text">Bass</h6>
-                <div class="d-flex justify-content-center" style="opacity: 50%;">
-                  <span class="font-weight-bold black-text mr-2 "><i class="fas fa-minus" aria-hidden="true"></i></span>
-                  <form class="range-field w-35">
-                    <input class="border-0" type="range" min="0" max="100" />
-                  </form>
-                  <span class="font-weight-bold black-text ml-2 mt-1"><i class="fas fa-plus"
-                      aria-hidden="true"></i></span>
-                </div>
-                <h6 class="text-center black-text pt-2">Midrange</h6>
-                <div class="d-flex justify-content-center" style="opacity: 50%;">
-                  <span class="font-weight-bold black-text mr-2 "><i class="fas fa-volume-minus"
-                      aria-hidden="true"></i></span>
-                  <form class="range-field w-35">
-                    <input class="border-0" type="range" min="0" max="100" />
-                  </form>
-                  <span class="font-weight-bold black-text ml-2 mt-1"><i class="fas fa-plus"
-                      aria-hidden="true"></i></span>
-                </div>
-                <h6 class="text-center black-text pt-2">Treble</h6>
-                <div class="d-flex justify-content-center" style="opacity: 50%;">
-                  <span class="font-weight-bold black-text mr-2 "><i class="fas fa-minus" aria-hidden="true"></i></span>
-                  <form class="range-field w-35">
-                    <input class="border-0" type="range" min="0" max="100" />
-                  </form>
-                  <span class="font-weight-bold black-text ml-2 mt-1"><i class="fas fa-plus"
-                      aria-hidden="true"></i></span>
-                </div>
-                <div class="text-center">
-                  <button class="default-button text-center mr-1">Connect</button><button
-                    class="default-button text-center ml-2">Disconnect</button>
-                </div>
+              <h6 class="text-center black-text pt-2">Midrange</h6>
+              <div class="d-flex justify-content-center" style="opacity: 50%;">
+                <span class="font-weight-bold black-text mr-2 "><i class="fas fa-volume-minus"
+                    aria-hidden="true"></i></span>
+                <form class="range-field w-35">
+                  <input class="border-0" type="range" min="0" max="100" />
+                </form>
+                <span class="font-weight-bold black-text ml-2 mt-1"><i class="fas fa-plus"
+                    aria-hidden="true"></i></span>
               </div>
-              <div class="modal-footer justify-content-center d-flex">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+              <h6 class="text-center black-text pt-2">Treble</h6>
+              <div class="d-flex justify-content-center" style="opacity: 50%;">
+                <span class="font-weight-bold black-text mr-2 "><i class="fas fa-minus" aria-hidden="true"></i></span>
+                <form class="range-field w-35">
+                  <input class="border-0" type="range" min="0" max="100" />
+                </form>
+                <span class="font-weight-bold black-text ml-2 mt-1"><i class="fas fa-plus"
+                    aria-hidden="true"></i></span>
               </div>
+              <div class="text-center">
+                <button class="default-button text-center mr-1">Connect</button><button
+                  class="default-button text-center ml-2">Disconnect</button>
+              </div>
+            </div>
+            <div class="modal-footer justify-content-center d-flex">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Save changes</button>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+    <!--/speaker device tab cards-->
 
-      <div class="card-deck d-flex justify-content-center">
+    <!--temp device tab cards-->
+    <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab"
+      style="background-color: #3766ff;">
+
+      <div class="row justify-content-center pt-5 pr-5 pl-5 pb-3">
         {{range .Devices}}{{if and (eq .Type 1) (eq .RoomID $.Room.RoomID)}}
         <!--Card 1-->
-        <div class="card m-3 d-flex justify-content-center cw">
-          <div class="card-body">
+        <div class="col-lg-4 col-md-6">
+          <div class="card mb-4">
+            <div class="card-body">
 
-            <!--Navbar-->
-            <nav class="navbar navbar-light navbar-1 white elipsesNav">
+              <!--Navbar-->
+              <nav class="navbar navbar-light navbar-1 white elipsesNav">
 
-              <!-- Navbar brand -->
-              <a class="navbar-brand w-10 float-right" href="#"></a>
+                <!-- Navbar brand -->
+                <a class="navbar-brand w-10 float-right" href="#"></a>
 
-              <!-- Collapse button -->
-              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-{{.DeviceID}}"
-                aria-controls="navbarSupportedContent15" aria-expanded="false" aria-label="Toggle navigation"><span
-                  class="fas fa-ellipsis-h"></span></button>
+                <!-- Collapse button -->
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-{{.DeviceID}}"
+                  aria-controls="navbarSupportedContent15" aria-expanded="false" aria-label="Toggle navigation"><span
+                    class="fas fa-ellipsis-h"></span></button>
 
-              <!-- Collapsible content -->
-              <div class="collapse navbar-collapse position-relative" id="navbar-{{.DeviceID}}">
+                <!-- Collapsible content -->
+                <div class="collapse navbar-collapse position-relative" id="navbar-{{.DeviceID}}">
 
-                <!-- Links -->
-                <ul class="navbar-nav mr-auto lilnav">
-                  <li class="nav-item active">
-                    <a class="nav-link black-text lilnav" type="button">Favourite<i
-                        class="fas fa-heart black-text"></i><span class="sr-only">(current)</span></a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link black-text lilnav" href="#">Options</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link black-text lilnav" href="#">Remove</a>
-                  </li>
-                </ul>
-                <!-- Links -->
+                  <!-- Links -->
+                  <ul class="navbar-nav mr-auto lilnav">
+                    <li class="nav-item active">
+                      <a class="nav-link black-text lilnav" type="button">Favourite<i
+                          class="fas fa-heart black-text"></i><span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link black-text lilnav" href="#">Options</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link black-text lilnav" href="#">Remove</a>
+                    </li>
+                  </ul>
+                  <!-- Links -->
 
+                </div>
+                <!-- Collapsible content -->
+              </nav>
+              <!--/.Navbar-->
+
+              <!-- Default switch -->
+              <div class="custom-control custom-switch float-left">
+                <input type="checkbox" class="custom-control-input" id="customSwitches-{{.DeviceID}}"
+                  {{if eq .Status true}}checked{{else}}unchecked{{end}}
+                  onclick="$.get('/toggle_device/{{.DeviceID}}');">
+                <label class="custom-control-label"
+                  for="customSwitches-{{.DeviceID}}">{{if .Status}}On{{else}}Off{{end}}</label>
               </div>
-              <!-- Collapsible content -->
-            </nav>
-            <!--/.Navbar-->
-
-            <!-- Default switch -->
-            <div class="custom-control custom-switch float-left">
-              <input type="checkbox" class="custom-control-input" id="customSwitches-{{.DeviceID}}"
-                {{if eq .Status true}}checked{{else}}unchecked{{end}} onclick="$.get('/toggle_device/{{.DeviceID}}');">
-              <label class="custom-control-label"
-                for="customSwitches-{{.DeviceID}}">{{if .Status}}On{{else}}Off{{end}}</label>
+              <h5 class="card-title text-center">{{.Description}}</h5>
+              <p class="text-center pt-4">Temperature</p>
+              <div class="d-flex justify-content-center">
+                <span class="font-weight-bold blue-text mr-2 ">0<small>&deg;C</small></span>
+                <form class="range-field">
+                  <input class="custom-range" type="range" min="0" max="28" value="{{.Temp}}" id="slider-{{.DeviceID}}"
+                    onclick="$.get('/toggle_slider/{{.DeviceID}}/'+ $('#slider-{{.DeviceID}}').val());" />
+                </form>
+                <span class="font-weight-bold red-text ml-2">28<small>&deg;C</small></span>
+              </div>
             </div>
-
-
-            <h5 class="card-title text-center pr-5 pb-4">{{.Description}}</h5>
-            <p class="text-center pt-3">Temperature</p>
-            <div class="d-flex justify-content-center">
-              <span class="font-weight-bold blue-text mr-2 ">0<small>&deg;C</small></span>
-              <form class="range-field w-35">
-                <input class="border-0" type="range" min="0" max="28" value="{{.Temp}}" id="slider-{{.DeviceID}}"
-                  onclick="$.get('/toggle_slider/{{.DeviceID}}/'+ $('#slider-{{.DeviceID}}').val());" />
-              </form>
-              <span class="font-weight-bold red-text ml-2">28<small>&deg;C</small></span>
+            <div class="card-footer" {{if .Status}}style="background-color: #A8FFA8;"
+              {{else}}style="background-color: #FF6666" ;{{end}}>
+              <small class="text-muted">{{if .Status}}Heating since 09:24 (3hrs){{else}}Last on:
+                yesterday{{end}}</small>
             </div>
-          </div>
-          <div class="card-footer" {{if .Status}}style="background-color: #A8FFA8;"
-            {{else}}style="background-color: #FF6666" ;{{end}}>
-            <small class="text-muted">{{if .Status}}Heating since 09:24 (3hrs){{else}}Last on: yesterday{{end}}</small>
           </div>
         </div>
         {{end}}{{end}}
       </div>
-      </div>
+    </div>
 
-      <div class="tab-pane fade" id="tv" role="tabpanel" aria-labelledby="tv-tab">
-        <h1 class="d-flex justify-content-center">TV STUFF GOES HERE</h1>
-      </div>
+    <div class="tab-pane fade" id="tv" role="tabpanel" aria-labelledby="tv-tab" style="background-color: #2444ae;">
+      <h1 class="d-flex justify-content-center">TV STUFF GOES HERE</h1>
     </div>
   </div>
-
 </div>
+{{end}}
+
+
+
+<!-- modal for adding devices-->
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"
+  data-backdrop="false">
+  <div class="modal-dialog" role="document" data-backdrop="false">
+    <div class="modal-content" data-backdrop="false" method="POST">
+      <div class="modal-header navcolor">
+        <h5 class="modal-title" id="addModal">Add Control Module</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body bodycolor">
+        <form method="POST">
+          <input type="hidden" class="form-control mb-4 text-center w-50" name="room_id" value="{{.Room.RoomID}}">
+          <h6 class="text-center">Select Device Type:</h6>
+          <div class="md-form pb-3 pr-5 pl-5">
+            <select class="browser-default custom-select" id="select" name="device_type">
+              <option value="" disabled selected>Choose Type</option>
+              <option value="0">Lights</option>
+              <option value="1">Temperature Control</option>
+              <option value="2">TV</option>
+              <option value="3">Speaker</option>
+            </select>
+          </div>
+          <h6 class="text-center">Enter Description:</h6>
+          <div class="md-form text-center justify-content-center d-flex">
+            <input type="text" class="form-control mb-3 text-center w-50" placeholder="Description" name="description">
+          </div>
+          <div class="custom-control custom-checkbox text-center">
+            <input type="checkbox" class="custom-control-input" id="defaultUnchecked" name="is_main_light_source">
+            <label class="custom-control-label" for="defaultUnchecked">Main Light</label>
+          </div>
+      </div>
+      <div class="modal-footer justify-content-center d-flex navcolor">
+        <button type="button" class="btn bodycolor" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn white black-text">Save changes</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!-- /modal for adding devices-->
+
 
 <script>
 //main light to only appear when light device is selected from options

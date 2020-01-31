@@ -260,3 +260,21 @@ padding: .5rem 1rem;
 .activetab {
    color: black!important;
 }
+
+.nav-link.active {
+  border: 1px solid white!important;
+  border-bottom-color: transparent!important;
+}
+
+.nav-link {
+  border-bottom-color: white!important;
+}
+
+.tab-pane {
+  border: 1px solid white;
+  border-top: transparent;
+}
+
+.range-field {
+  width: 75%;
+}
