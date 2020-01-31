@@ -1,5 +1,13 @@
 /* The global CSS file */
 
+.bottom-nav {
+  font-size: small;
+}
+
+small {
+  font-size: 1em;
+}
+
 .list-group-item {
   color:black!important;
 }

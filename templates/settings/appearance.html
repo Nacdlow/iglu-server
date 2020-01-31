@@ -7,11 +7,62 @@
   </div>
 
   <div class="list-group">
-    <button type="button" class="list-group-item list-group-item-action">
-      <i class="fas fa-sliders-h" style="font-size: 15px;"></i>&nbsp; &nbsp; Some Text
-    </button>
+    <a type="button" href="#" class="list-group-item list-group-item-action">
+      <!-- Default checked -->
+      <div class="custom-control custom-switch">
+        <input type="checkbox" class="custom-control-input" id="customSwitch1" checked>
+        <label class="custom-control-label" for="customSwitch1">Enable Dark Theme</label>
+      </div>
+    </a>
+    <a type="button" href="#" class="list-group-item list-group-item-action">
+      <label for="customRange2">Font Size</label>
+      <input type="range" class="custom-range" min="1" max="5" value="3" id="customRange">
+      <div class="text-center" id="fontsize">
+        Normal
+      </div>
+    </a>
   </div>
 </div>
+
+<script>
+  var slider = document.getElementById("customRange");
+  var output = document.getElementById("fontsize");
+
+  // Update the current slider value (each time you drag the slider handle)
+  slider.oninput = function () {
+    // output.innerHTML = this.value;
+
+    switch (this.value) {
+      case "1":
+        output.innerHTML = "Tiny"
+        output.style.fontSize = "x-small"
+        break;
+
+      case "2":
+        output.innerHTML = "Small"
+        output.style.fontSize = "small"
+        break;
+
+      case "3":
+        output.innerHTML = "Normal"
+        output.style.fontSize = "medium"
+        break;
+
+      case "4":
+        output.innerHTML = "Large"
+        output.style.fontSize = "x-large"
+        break;
+
+      case "5":
+        output.innerHTML = "Huge"
+        output.style.fontSize = "xxx-large"
+        break;
+
+      default:
+        break;
+    }
+  }
+</script>
 
 
 

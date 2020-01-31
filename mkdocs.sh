@@ -25,7 +25,7 @@ done
 # Generate home wiki page with navigation listing
 docs=$(cd $docpath && find -L . | grep \\.md)
 echo -e "# Welcome to the documentation wiki\n\n" > $docpath/home.md
-echo "This documentation is generated for commit
+echo -e "This documentation is generated for commit
 $(git rev-parse --short HEAD) (*$(git log -1 --pretty=%B)*).  \n\n" >> $docpath/home.md
 echo "### Documentation listing" >> $docpath/home.md
 echo 

@@ -1,15 +1,18 @@
 <div id="mobilenav" class="default-color"
-	style="box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 -5px 10px rgba(0,0,0,0.22);">
+	style="box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 -5px 10px rgba(0,0,0,0.22); padding-top: 2%; padding-bottom: 1%;">
 	<ul class="nav nav-pills nav-fill">
 		<li class="nav-item p-0">
-			<a class="nav-link p-0 text-center {{if .IsDashboard}} activetab{{end}}" href="/dashboard"><i class="fas fa-tachometer-alt" style="font-size: 25px;"></i><br><small>Dash</small> <span
+			<a class="nav-link bottom-nav p-0 text-center {{if .IsDashboard}} activetab{{end}}" href="/dashboard"><i
+					class="fas fa-tachometer-alt" style="font-size: 25px;"></i><br><small>Dash</small> <span
 					class="sr-only">(current)</span></a>
 		</li>
 		<li class="nav-item p-0">
-			<a class="nav-link p-0 text-center {{if .IsRooms}} activetab{{end}}" href="/rooms"><i class="fas fa-bed" style="font-size: 25px;"></i><br><small >Rooms</small></a>
+			<a class="nav-link bottom-nav p-0 text-center {{if .IsRooms}} activetab{{end}}" href="/rooms"><i class="fas fa-bed"
+					style="font-size: 25px;"></i><br><small>Rooms</small></a>
 		</li>
 		<li class="nav-item p-0" data-toggle="modal" data-target="#fullHeightModalRight">
-			<a class="nav-link p-0 text-center" href="#"> <i class="far fa-bell" style="font-size: 25px;"></i><br><small>Alerts</small></a>
+			<a class="nav-link bottom-nav p-0 text-center" href="#"> <i class="far fa-bell"
+					style="font-size: 25px;"></i><br><small>Alerts</small></a>
 		</li>
 	</ul>
 </div>
