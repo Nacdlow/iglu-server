@@ -2,14 +2,15 @@ package routes
 
 import (
 	"fmt"
+	"html/template"
+	"math"
+	"strings"
+
 	"gitlab.com/group-nacdlow/nacdlow-server/models"
 	"gitlab.com/group-nacdlow/nacdlow-server/models/forms"
 	"gitlab.com/group-nacdlow/nacdlow-server/models/simulation"
 	"gitlab.com/group-nacdlow/nacdlow-server/modules/settings"
 	macaron "gopkg.in/macaron.v1"
-	"html/template"
-	"math"
-	"strings"
 )
 
 // NotFoundHandler handles 404 errors
@@ -98,6 +99,13 @@ func SpecificRoomsHandler(ctx *macaron.Context) {
 	}
 	ctx.Data["IsRooms"] = 1
 	ctx.HTML(200, "specificRooms")
+}
+
+// OverviewHandler handles all the devices
+func OverviewHandler(ctx *macaron.Context) {
+	ctx.Data["NavTitle"] = "Overview"
+	ctx.Data["Devices"] = models.GetDevices()
+	ctx.HTML(200, "overview")
 }
 
 func AddDeviceRoomPostHandler(ctx *macaron.Context, form forms.AddDeviceForm) {

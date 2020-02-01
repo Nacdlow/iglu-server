@@ -78,6 +78,7 @@ func start(clx *cli.Context) (err error) {
 				m.Get("/speakers", routes.SpeakerHandler)
 			})
 		})
+		m.Get("/overview", routes.OverviewHandler)
 		m.Get("/rooms", routes.RoomsHandler)
 		m.Post("/rooms", binding.Bind(forms.AddRoomForm{}),
 			routes.PostRoomHandler)
