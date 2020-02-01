@@ -190,7 +190,6 @@ func Tick() {
 			Env.Home.Rooms[i].ActualRoomTemp = getChange(room.ActualRoomTemp, tempCont.Temp, 18, 0.75)
 		}
 	}
-	log.Infoln(runningTempCont)
 	now := time.Unix(Env.CurrentTime, 0)
 
 	// Calculate power consumption
