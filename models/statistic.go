@@ -14,6 +14,8 @@ type Statistic struct {
 	Powergen             float64 // Power generated, kWh
 	Powercon             float64 // Power conserved, kWh
 	MainDoorsOpenedCount int64   // How many times the doors opened
+	CreatedUnix          int64   `xorm:"created"`
+	UpdatedUnix          int64   `xorm:"updated"`
 }
 
 // GetFakeStat returns a new randomly generated statistic. This is used for

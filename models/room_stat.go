@@ -14,6 +14,8 @@ type RoomStat struct {
 	Temperature float64
 	Humidity    float64
 	OpenWindows int64
+	CreatedUnix int64 `xorm:"created"`
+	UpdatedUnix int64 `xorm:"updated"`
 }
 
 // GetFakeRoomStat returns a randomly generated room statistic. This is used
