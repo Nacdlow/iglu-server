@@ -40,25 +40,35 @@
     {{end}}{{end}}
   </div>
   {{else}}
+  <div class="row justify-content-center pt-3">
+    <!--<h2 class="pt-5 text-center">Room Control</h2>-->
+    <h2 class="pt-5 pr-3 text-center">Room Temperature</h2>
+    <div class="card warning-color circle d-flex">
+      <div class="card-body d-flex align-items-center justify-content-center animated rotateIn">
+        <h5 class="pt-1" style="font-size: 3em;">{{.Temp}}<small>°C</small></h5>
+      </div>
+    </div>
+  </div>
 
+  <div class="mobhide">
   <!-- devices tabs-->
-  <ul class="nav nav-tabs nav-fill d-flex justify-content-center pt-3 dev-tab" id="myTab" role="tablist">
+  <ul class="nav nav-tabs nav-fill d-flex justify-content-center pt-3" id="myTab" role="tablist">
     <li class="nav-item">
       <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home"
-        aria-selected="true"><i class="far fa-lightbulb fa-2x"></i><br>Lights</a>
+        aria-selected="true" style="background-color: #B2B2B2;"><i class="far fa-lightbulb fa-2x"></i><br>Lights</a>
     </li>
     <li class="nav-item">
       <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile"
-        aria-selected="false"><i class="fas fa-volume-up fa-2x"></i><br>Speakers</a>
+        aria-selected="false" style="background-color: #818181;"><i class="fas fa-volume-up fa-2x"></i><br>Speakers</a>
     </li>
     <li class="nav-item">
       <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact"
-        aria-selected="false"><i
+        aria-selected="false" style="background-color: #B2B2B2;"><i
           class="far fa-snowflake fa-2x"></i><br>Temperature</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" id="tv-tab" data-toggle="tab" href="#tv" role="tab" aria-controls="tv" aria-selected="false">
-		  <i class="fas fa-tv fa-2x"></i><br>TV</a>
+      <a class="nav-link" id="tv-tab" data-toggle="tab" href="#tv" role="tab" aria-controls="tv" aria-selected="false"
+        style="background-color: #818181;"><i class="fas fa-tv fa-2x"></i><br>TV</a>
     </li>
     <li class="nav-item">
       <a class="nav-link black-text" id="tv-tab" data-toggle="modal" data-target="#addModal" role="tab"
@@ -69,6 +79,7 @@
   <!-- /devices tabs-->
 
   <!-- devices' tab content (the devices cards)-->
+  
   <div class="tab-content" id="myTabContent">
 
     <!--light device tab cards-->
@@ -282,15 +293,6 @@
     <!--temp device tab cards-->
     <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
 
-  <div class="row justify-content-center pt-3">
-    <!--<h2 class="pt-5 text-center">Room Control</h2>-->
-    <h2 class="pt-5 pr-3 text-center">Room Temperature</h2>
-    <div class="card warning-color circle d-flex">
-      <div class="card-body d-flex align-items-center justify-content-center animated rotateIn">
-        <h5 class="pt-1" style="font-size: 3em;">{{.Temp}}<small>°C</small></h5>
-      </div>
-    </div>
-  </div>
       <div class="row justify-content-center pt-5 pr-5 pl-5 pb-3">
         {{range .Devices}}{{if and (eq .Type 1) (eq .RoomID $.Room.RoomID)}}
         <!--Card 1-->
@@ -369,6 +371,225 @@
     <!--/TV CARD-->
     
   </div>
+  </div>
+
+  <div class="deskhide">
+    <div class="pt-5">
+    <h3 class="text-center">Lights <i class="far fa-lightbulb"></i></h3>
+    <div class="scrolling-wrapper">
+      {{range .Devices}}{{if and (eq .Type 0) (eq .RoomID $.Room.RoomID)}}
+              <div class="card mr-3">
+                <div class="card-body">
+    
+                  <!--Options for the device-->
+                  <nav class="navbar navbar-light navbar-1 white elipsesNav">
+    
+                    <!-- Navbar brand -->
+                    <a class="navbar-brand w-10 float-right" href="#"></a>
+    
+                    <!-- Collapse button -->
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#options-{{.DeviceID}}"
+                      aria-controls="navbarSupportedContent15" aria-expanded="false" aria-label="Toggle navigation"><span
+                        class="fas fa-ellipsis-h"></span></button>
+    
+                    <!-- Collapsible content -->
+                    <div class="collapse navbar-collapse position-relative" id="options-{{.DeviceID}}">
+    
+                      <!-- Links -->
+                      <ul class="navbar-nav mr-auto lilnav">
+                        <li class="nav-item active">
+                          <a class="nav-link black-text lilnav" type="button">Favourite<i
+                              class="fas fa-heart black-text"></i><span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link black-text lilnav" href="#">Options</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link black-text lilnav" href="#">Remove</a>
+                        </li>
+                      </ul>
+                      <!-- Links -->
+    
+                    </div>
+                    <!-- Collapsible content -->
+                  </nav>
+                  <!--/Options for the device-->
+    
+                  <!-- switch -->
+                  <div class="custom-control custom-switch float-left">
+                    <input type="checkbox" class="custom-control-input" id="customSwitches-{{.DeviceID}}" {{if .Status}}
+                      checked {{end}} onclick="$.get('/toggle_device/{{.DeviceID}}');" />
+                    <label class="custom-control-label"
+                      for="customSwitches-{{.DeviceID}}">{{if .Status}}On{{else}}Off{{end}}</label>
+                  </div>
+                  <!--/switch -->
+    
+                  <h5 class="card-title text-center">{{.Description}}</h5>
+                  <p class="text-center pt-4">Brightness</p>
+                  <div class="d-flex justify-content-center">
+                    <span class="blue-text mr-2"><i class="fas fa-moon fa-lg" aria-hidden="true"></i></span>
+                    <form class="range-field">
+                      <input class="custom-range" type="range" min="0" max="10" value="{{.Brightness}}"
+                        id="slider-{{.DeviceID}}"
+                        onclick="$.get('/toggle_slider/{{.DeviceID}}/'+ $('#slider-{{.DeviceID}}').val());" />
+                    </form>
+                    <span class="blue-text ml-2 "><i class="fas fa-sun fa-lg" aria-hidden="true"></i></span>
+                  </div>
+                </div>
+                <div class="card-footer" {{if .Status}}style="background-color: #FEFF9E;"
+                  {{else}}style="background-color: #FF6666;" {{end}}>
+                  <small class="text-muted black-text">{{if .Status}}This light has been on for 4hrs 15mins{{else}}Last on:
+                    yesterday{{end}}</small>
+                </div>
+              </div>
+            {{end}}{{end}}
+  </div>
+    </div>
+    
+    <div class="pt-5">
+      <h3 class="text-center">Speakers <i class="fas fa-volume-up"></i></h3>
+    <div class="scrolling-wrapper">
+      {{range .Devices}}{{if and (eq .Type 3) (eq .RoomID $.Room.RoomID)}}
+      <div class="card mr-3">
+        <div class="card-body">
+    
+          <!--Navbar-->
+          <nav class="navbar navbar-light navbar-1 white elipsesNav">
+    
+            <!-- Navbar brand -->
+            <a class="navbar-brand w-10 float-right" href="#"></a>
+    
+            <!-- Collapse button -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-{{.DeviceID}}"
+              aria-controls="navbarSupportedContent15" aria-expanded="false" aria-label="Toggle navigation"><span
+                class="fas fa-ellipsis-h"></span></button>
+    
+            <!-- Collapsible content -->
+            <div class="collapse navbar-collapse position-relative" id="navbar-{{.DeviceID}}">
+    
+              <!-- Links -->
+              <ul class="navbar-nav mr-auto lilnav">
+                <li class="nav-item active">
+                  <a class="nav-link black-text lilnav" type="button">Favourite<i
+                      class="fas fa-heart black-text"></i><span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link black-text lilnav" href="#" data-toggle="modal"
+                    data-target="#basicExampleModal2">Options</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link black-text lilnav" href="#">Remove</a>
+                </li>
+              </ul>
+              <!-- Links -->
+    
+            </div>
+            <!-- Collapsible content -->
+          </nav>
+    
+          <!--/.Navbar-->
+          <!-- Default switch -->
+          <div class="float-left">
+            <a class="fas fa-power-off pb-3 {{if .Status}}green-text{{else}}red-text{{end}}" href="#"
+              style="color: black; font-size: 2em;" onclick="$.get('/toggle_device/{{.DeviceID}}');"></a>
+            {{if .Status}}On{{else}}Off{{end}}
+          </div>
+          <h5 class="card-title text-center">{{.Description}}</h5>
+          <p class="text-center pt-4">Volume</p>
+          <div class="d-flex justify-content-center">
+            <span class="font-weight-bold green-text mr-2"><i class="fas fa-volume-mute"
+                aria-hidden="true"></i></span>
+            <form class="range-field">
+              <input class="custom-range" type="range" min="0" max="10" value="{{.Volume}}"
+                id="slider-{{.DeviceID}}"
+                onclick="$.get('/toggle_slider/{{.DeviceID}}/'+ $('#slider-{{.DeviceID}}').val());" />
+            </form>
+            <span class="font-weight-bold green-text ml-2"><i class="fas fa-volume-up fa-lg"
+                aria-hidden="true"></i></span>
+          </div>
+        </div>
+        <div class="card-footer" {{if .Status}}style="background-color: #A8FFA8;"
+          {{else}}style="background-color: #FF6666;" {{end}}>
+          <small class="text-muted black-text">{{if .Status}}Connected to David's
+            Iphone{{else}}Disconnected{{end}}</small>
+        </div>
+      </div>
+      {{end}}{{end}}
+    </div>
+  </div>
+    
+  <div class="pt-5">
+    <h3 class="text-center">Temperature <i class="far fa-snowflake"></i></h3>
+    <div class="scrolling-wrapper">
+      {{range .Devices}}{{if and (eq .Type 1) (eq .RoomID $.Room.RoomID)}}
+              <div class="card mr-3">
+                <div class="card-body">
+    
+                  <!--Navbar-->
+                  <nav class="navbar navbar-light navbar-1 white elipsesNav">
+    
+                    <!-- Navbar brand -->
+                    <a class="navbar-brand w-10 float-right" href="#"></a>
+    
+                    <!-- Collapse button -->
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-{{.DeviceID}}"
+                      aria-controls="navbarSupportedContent15" aria-expanded="false" aria-label="Toggle navigation"><span
+                        class="fas fa-ellipsis-h"></span></button>
+    
+                    <!-- Collapsible content -->
+                    <div class="collapse navbar-collapse position-relative" id="navbar-{{.DeviceID}}">
+    
+                      <!-- Links -->
+                      <ul class="navbar-nav mr-auto lilnav">
+                        <li class="nav-item active">
+                          <a class="nav-link black-text lilnav" type="button">Favourite<i
+                              class="fas fa-heart black-text"></i><span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link black-text lilnav" href="#">Options</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link black-text lilnav" href="#">Remove</a>
+                        </li>
+                      </ul>
+                      <!-- Links -->
+    
+                    </div>
+                    <!-- Collapsible content -->
+                  </nav>
+                  <!--/.Navbar-->
+    
+                  <!-- Default switch -->
+                  <div class="custom-control custom-switch float-left">
+                    <input type="checkbox" class="custom-control-input" id="customSwitches-{{.DeviceID}}"
+                      {{if eq .Status true}}checked{{else}}unchecked{{end}}
+                      onclick="$.get('/toggle_device/{{.DeviceID}}');">
+                    <label class="custom-control-label"
+                      for="customSwitches-{{.DeviceID}}">{{if .Status}}On{{else}}Off{{end}}</label>
+                  </div>
+                  <h5 class="card-title text-center">{{.Description}}</h5>
+                  <p class="text-center pt-4">Temperature</p>
+                  <div class="d-flex justify-content-center">
+                    <span class="font-weight-bold blue-text mr-2 ">0<small>&deg;C</small></span>
+                    <form class="range-field">
+                      <input class="custom-range" type="range" min="0" max="28" value="{{.Temp}}" id="slider-{{.DeviceID}}"
+                        onclick="$.get('/toggle_slider/{{.DeviceID}}/'+ $('#slider-{{.DeviceID}}').val());" />
+                    </form>
+                    <span class="font-weight-bold red-text ml-2">28<small>&deg;C</small></span>
+                  </div>
+                </div>
+                <div class="card-footer" {{if .Status}}style="background-color: #A8FFA8;"
+                  {{else}}style="background-color: #FF6666" ;{{end}}>
+                  <small class="text-muted">{{if .Status}}Heating since 09:24 (3hrs){{else}}Last on:
+                    yesterday{{end}}</small>
+                </div>
+            </div>
+          {{end}}{{end}}
+    </div>
+  </div>
+
+
+</div>
 </div>
 {{end}}
 
@@ -418,8 +639,27 @@
 <!-- /modal for adding devices-->
 
 
+<!--<div class="scrollmenu">
+  <a href="#home">Home</a>
+  <a href="#news">News</a>
+  <a href="#contact">Contact</a>
+  <a href="#about">About</a>
+  <a href="#support">Support</a>
+  <a href="#blog">Blog</a>
+  <a href="#tools">Tools</a>  
+  <a href="#base">Base</a>
+  <a href="#custom">Custom</a>
+  <a href="#more">More</a>
+  <a href="#logo">Logo</a>
+  <a href="#friends">Friends</a>
+  <a href="#partners">Partners</a>
+  <a href="#people">People</a>
+  <a href="#work">Work</a>
+</div>-->
+
 <script>
 //main light to only appear when light device is selected from options
 </script>
 
 {{template "base/scripts" .}} {{template "base/footer" .}} {{template "base/tabnav" .}}
+
