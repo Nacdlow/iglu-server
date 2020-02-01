@@ -32,6 +32,8 @@ type Room struct {
 	WindowCount int64  `xorm:"null" fake:"skip"`
 	IsSubRoom   bool
 	PartOfRoom  int64 `xorm:"null" fake:"skip"`
+	CreatedUnix int64 `xorm:"created"`
+	UpdatedUnix int64 `xorm:"updated"`
 }
 
 // GetFakeRoom returns a new randomly generated Room. This is used for testing

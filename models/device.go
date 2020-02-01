@@ -28,6 +28,8 @@ type Device struct {
 	Volume      int64      `xorm:"null" fake:"skip"`
 	Brightness  int64      `xorm:"null" fake:"skip"`
 	IsMainLight bool       `fake:"skip"` // Whether the light device is the room's main light source
+	CreatedUnix int64      `xorm:"created"`
+	UpdatedUnix int64      `xorm:"updated"`
 }
 
 // GetFakeDevice returns a new randomly created Device. This is used for
