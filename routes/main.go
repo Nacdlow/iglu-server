@@ -205,3 +205,17 @@ func SliderHandler(ctx *macaron.Context) {
 		}
 	}
 }
+
+func FaveHandler(ctx *macaron.Context) {
+	for _, device := range models.GetDevices() {
+		if device.DeviceID == ctx.ParamsInt64("id") {
+			if device.Type == models.Light || device.Type == models.Speaker ||
+				device.Type == models.TempControl || device.Type == models.TV {
+				models.UpdateDeviceCols(&models.Device{
+					DeviceID: device.DeviceID,
+					IsFave:   !device.IsFave}, "is_fave")
+			}
+			break
+		}
+	}
+}
