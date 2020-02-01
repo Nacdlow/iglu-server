@@ -1,10 +1,17 @@
 {{template "base/head" .}}
 {{template "base/nav" .}}
 <div class="container animated fadeIn">
-<div class="row justify-content-center">
-<div class="col-lg-6 col-6 align-items-center d-flex justify-content-center">
-  <h2 class="pt-5 text-center" id="lblGreetings"></h2>
-</div>
+  <div class="row justify-content-center">
+    <div class="col-lg-6 col-6 align-items-center d-flex justify-content-center">
+      <div class="row">
+        <div class="col-12">
+          <h2 class="pt-5 text-center" id="lblGreetings"></h2>
+        </div>
+        <div class="col-12 mobhide text-center">
+          <a class="text-center btn navcolor" href="overview">Overview <i class="far fa-eye"></i></a>
+        </div>
+      </div>
+    </div>
     <div class="col-lg-6 col-6 align-items-center pt-4 d-flex justify-content-center">
       <div class="mr-lg-5 ml-lg-5 white-text" style="background-color: #34383b;">
         <div class="card-body d-flex align-items-center">
@@ -19,23 +26,23 @@
         </div>
       </div>
     </div>
-</div>
+  </div>
 
-<div class="pb-3 justify-content-center">
+  <div class="pb-3 justify-content-center">
     <hr>
-</div>
+  </div>
 
-  
 
-<div class="row justify-content-center">
+
+  <div class="row justify-content-center">
     <div class="col-lg-6 col-6 align-items-center d-flex justify-content-center pb-2">
-        <div id="battery" class="col-lg-6 col-6 align-items-center d-flex justify-content-center">
-        </div>
+      <div id="battery" class="col-lg-6 col-6 align-items-center d-flex justify-content-center">
+      </div>
     </div>
     <div class="col-lg-6 col-12 align-items-center">
-        <canvas id="lineChart"></canvas>
+      <canvas id="lineChart"></canvas>
     </div>
-</div>
+  </div>
 
 
   <div class="pt-3 pb-3">
@@ -64,20 +71,29 @@
       </div>
       <h4 class="text-center pb-3"><i class="fas fa-lightbulb"></i> Tips</h4>
 
-     <!-- To Add new tip create new div with id content-x, x being next digit-->
+      <!-- To Add new tip create new div with id content-x, x being next digit-->
       <div id="content-1">Almost half the money spent on energy bills is absorbed by heating and hot water costs!</div>
-      <div id="content-2">Try to reduce the amount of tumble drying you do – it uses a lot of energy, and line-drying is free!</div>
-      <div id="content-3">Keep curtains and blinds open during the day to let the warmth of the sunshine into your home. Close them at night to keep the heat in and the cold out.</div>
-      <div id="content-4">If you’re entertaining guests, turn down the thermostat a few notches when they arrive. Their combined body heat will keep the room warm.</div>
+      <div id="content-2">Try to reduce the amount of tumble drying you do – it uses a lot of energy, and line-drying is
+        free!</div>
+      <div id="content-3">Keep curtains and blinds open during the day to let the warmth of the sunshine into your home.
+        Close them at night to keep the heat in and the cold out.</div>
+      <div id="content-4">If you’re entertaining guests, turn down the thermostat a few notches when they arrive. Their
+        combined body heat will keep the room warm.</div>
       <div id="content-5">Dust and vacuum your radiators. Layers of dust stop heat from flowing freely.</div>
-      <div id="content-6">Try to get into the habit of turning lights off when you leave a room. It could save between £50 and £90 a year just by remembering to flick a switch,</div>
-      <div id="content-7">If the sun warms some rooms but not others, leave internal doors open to let the warm air circulate throughout your home.</div>
-      <div id="content-8">If you’re cooking in the oven, don’t keep opening the oven door to check things, as you’ll let heat escape each time.</div>
+      <div id="content-6">Try to get into the habit of turning lights off when you leave a room. It could save between
+        £50 and £90 a year just by remembering to flick a switch,</div>
+      <div id="content-7">If the sun warms some rooms but not others, leave internal doors open to let the warm air
+        circulate throughout your home.</div>
+      <div id="content-8">If you’re cooking in the oven, don’t keep opening the oven door to check things, as you’ll let
+        heat escape each time.</div>
       <div id="content-9">One minute less under the shower each day could shave £10 a year off your bills.</div>
       <div id="content-10">Almost half the money spent on energy bills is absorbed by heating and hot water costs!</div>
-      <div id="content-11">Defrosting food in advance typically halves the cooking time and also means that you don’t need to use the energy of a microwave to defrost more quickly.</div>
-      <div id="content-12">The energy it takes to conduct ten searches on Google could power a 60-watt light bulb. At any one time the energy used by the search engine could power 200,000 homes. Think of that the next time you go searching for sneezing pandas and performing hamsters.</div>
-      
+      <div id="content-11">Defrosting food in advance typically halves the cooking time and also means that you don’t
+        need to use the energy of a microwave to defrost more quickly.</div>
+      <div id="content-12">The energy it takes to conduct ten searches on Google could power a 60-watt light bulb. At
+        any one time the energy used by the search engine could power 200,000 homes. Think of that the next time you go
+        searching for sneezing pandas and performing hamsters.</div>
+
     </div>
   </div>
 </div>
@@ -90,14 +106,14 @@
   var divs = $('div[id^="content-"]').hide(),
     i = 0;
 
-(function cycle() { 
+  (function cycle() {
 
     divs.eq(i).fadeIn(400)
-              .delay(10000)
-              .fadeOut(400, cycle);
+      .delay(10000)
+      .fadeOut(400, cycle);
 
     i = ++i % divs.length;
-    })();
+  })();
 </script>
 
 <script>
@@ -192,48 +208,48 @@
     your energy bill by 10%!</p>
 -->
 <script>
-//line
-var ctxL = document.getElementById("lineChart").getContext('2d');
-var myLineChart = new Chart(ctxL, {
-type: 'line',
-data: {
-labels: ["6:00am", "9:00am", "12:00pm", "15:00pm", "18:00pm", "21:00pm", "12:00am"],
-datasets: [{
-label: "Power Usage (Kw)",
-data: [10, 30, 40, 19, 55, 42, 26],
-backgroundColor: [
-'rgba(	55, 102, 255, .5)',
-],
-borderColor: [
-'#fff',
-],
-borderWidth: 2,
-},
-{
-label: "Power Generation (Kw)",
-data: [5, 16, 27, 45, 32, 12, 0],
-backgroundColor: [
-'rgba(255,165,0, .5)',
-],
-borderColor: [
-'rgba(255,255,0, .7)',
-],
-borderWidth: 2
-}
-]
-},
+  //line
+  var ctxL = document.getElementById("lineChart").getContext('2d');
+  var myLineChart = new Chart(ctxL, {
+    type: 'line',
+    data: {
+      labels: ["6:00am", "9:00am", "12:00pm", "15:00pm", "18:00pm", "21:00pm", "12:00am"],
+      datasets: [{
+        label: "Power Usage (Kw)",
+        data: [10, 30, 40, 19, 55, 42, 26],
+        backgroundColor: [
+          'rgba(	55, 102, 255, .5)',
+        ],
+        borderColor: [
+          '#fff',
+        ],
+        borderWidth: 2,
+      },
+      {
+        label: "Power Generation (Kw)",
+        data: [5, 16, 27, 45, 32, 12, 0],
+        backgroundColor: [
+          'rgba(255,165,0, .5)',
+        ],
+        borderColor: [
+          'rgba(255,255,0, .7)',
+        ],
+        borderWidth: 2
+      }
+      ]
+    },
 
-options: {
-responsive: true
-}
-});
+    options: {
+      responsive: true
+    }
+  });
 </script>
-	<script>
+<script>
 
-     (function(){
-           $("#battery").load("/battery_stat");
-		 setTimeout(arguments.callee, 1000);
-      })();
-	</script>
+  (function () {
+    $("#battery").load("/battery_stat");
+    setTimeout(arguments.callee, 1000);
+  })();
+</script>
 {{template "base/footer" .}}
 {{template "base/tabnav" .}}
