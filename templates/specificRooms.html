@@ -1,6 +1,7 @@
 {{template "base/head" .}} {{template "base/nav" .}}
-<div class="container animated fadeIn">
+
   {{if .Bedrooms}}
+  <div class="container animated fadeIn">
   <h2 class="pt-5 text-center">Bedrooms</h2>
   <div class="pt-3 pb-3">
     <hr>
@@ -18,7 +19,9 @@
     </div>
     {{end}}{{end}}
   </div>
+  </div>
   {{else if .Bathrooms}}
+  <div class="container animated fadeIn">
   <h2 class="pt-5 text-center">Bathrooms</h2>
   <div class="pt-3 pb-3">
     <hr>
@@ -36,7 +39,9 @@
     </div>
     {{end}}{{end}}
   </div>
+  </div>
   {{else}}
+  <div class="container animated fadeIn">
   <div class="row justify-content-center pt-3">
     <!--<h2 class="pt-5 text-center">Room Control</h2>-->
     <h2 class="pt-5 pr-3 text-center">Room Temperature</h2>
