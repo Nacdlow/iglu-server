@@ -168,11 +168,11 @@ func Tick() {
 	// Update room temperatures
 	UpdateFromDB()
 	outTemp := Env.Weather.OutdoorTemp
-	for _, room := range Env.Home.Rooms {
+	for i, room := range Env.Home.Rooms {
 		// Simulate cold/hot air from outside coming in room through windows
 		for _, window := range room.Windows {
 			if window.IsOpen {
-				room.ActualRoomTemp = getChange(room.ActualRoomTemp, outTemp, 25, 0.75)
+				Env.Home.Rooms[i].ActualRoomTemp = getChange(room.ActualRoomTemp, outTemp, 25, 0.75)
 			}
 		}
 
@@ -181,15 +181,16 @@ func Tick() {
 		}
 
 		// Simulate the room heating/cooling from outside temperature "leak"
-		room.ActualRoomTemp = getChange(room.ActualRoomTemp, outTemp, 45, 0)
+		Env.Home.Rooms[i].ActualRoomTemp = getChange(room.ActualRoomTemp, outTemp, 45, 0)
 
 		// Simulate the temperature control heating/cooling the room
 		tempCont, err := models.GetDevice(room.TempControlDeviceID)
-		if err == nil && tempCont.DeviceID == models.TempControl && tempCont.Status {
+		if err == nil && tempCont.Type == models.TempControl && tempCont.Status {
 			runningTempCont++
-			room.ActualRoomTemp = getChange(room.ActualRoomTemp, tempCont.Temp, 18, 0.75)
+			Env.Home.Rooms[i].ActualRoomTemp = getChange(room.ActualRoomTemp, tempCont.Temp, 18, 0.75)
 		}
 	}
+	log.Infoln(runningTempCont)
 	now := time.Unix(Env.CurrentTime, 0)
 
 	// Calculate power consumption
