@@ -67,6 +67,16 @@ a:hover {
     height: 70px;
 }
 
+.circle-small {
+  background-color: #3766FF!important;
+  color: white;
+  border-radius: 100%;
+  width: 60px;
+  height: 60px;
+  border: none;
+  box-shadow: -1px -1px 20px 0px rgba(0,0,0,0.64);
+}
+
 #roomAvatarDiv {
     text-decoration-color: white ;
     margin-bottom: 2%;
@@ -155,6 +165,10 @@ padding: .5rem 1rem;
 .navbar {
     max-height:65px !important;
     padding-top: 2px!important;
+}
+
+.w300{
+  width: 300px;
 }
 }
 
@@ -306,11 +320,6 @@ div.scrollmenu a:hover {
   background-color: #777;
 }
 
-
-
-
-
-
 .scrolling-wrapper {
   overflow-x: scroll;
   overflow-y: hidden;
@@ -355,4 +364,13 @@ border: 0 !important;
 .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active, .nav-tabs .nav-link {
 	background-color: #fff !important;
 	color: #000 !important;
+}
+
+.btn-group-position {
+  position: fixed;
+  right: 15px; bottom: 77px;
+}
+
+.tab-content {
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 -5px 10px rgba(0,0,0,0.22);
 }

@@ -1,46 +1,37 @@
-<div class="card mb-4">
-	<div class="card-body">
-		<!--Navbar-->
-		<nav class="navbar navbar-light navbar-1 white elipsesNav">
-			<!-- Navbar brand -->
-			<a class="navbar-brand w-10 float-right" href="#"></a>
-			<!-- Collapse button -->
-			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-{{.DeviceID}}"
-				aria-controls="navbarSupportedContent15" aria-expanded="false" aria-label="Toggle navigation"><span
-				class="fas fa-ellipsis-h"></span></button>
-
-			<!-- Collapsible content -->
-			<div class="collapse navbar-collapse position-relative" id="navbar-{{.DeviceID}}">
-
-				<!-- Links -->
-				<ul class="navbar-nav mr-auto lilnav">
-					<li class="nav-item active">
-						<a class="nav-link black-text lilnav" type="button">Favourite<i
-															  class="fas fa-heart black-text"></i><span class="sr-only">(current)</span></a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link black-text lilnav" href="#">Options</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link black-text lilnav" href="#">Remove</a>
-					</li>
-				</ul>
-				<!-- Links -->
-
-			</div>
-			<!-- Collapsible content -->
-		</nav>
-		<!--/.Navbar-->
-
-		<!-- Default switch -->
-		<div class="custom-control custom-switch float-left">
-			<input type="checkbox" class="custom-control-input" id="customSwitches-{{.DeviceID}}"
+<div class="card mr-3 mr-lg-0 mb-4">
+	<div class="card-body w300">
+		<div class="row">
+			<!-- switch -->
+			<div class="col-4">
+			<div class="custom-control custom-switch float-left">
+				<input type="checkbox" class="custom-control-input" id="customSwitches-{{.DeviceID}}" 
 				{{if eq .Status true}}checked{{else}}unchecked{{end}}
 				onclick="$.get('/toggle_device/{{.DeviceID}}');">
-			<label class="custom-control-label"
-				   for="customSwitches-{{.DeviceID}}">{{if .Status}}On{{else}}Off{{end}}</label>
+				<label class="custom-control-label"
+					   for="customSwitches-{{.DeviceID}}">{{if .Status}}On{{else}}Off{{end}}</label>
+			</div>
+			<!--/switch -->
 		</div>
-		<h5 class="card-title text-center">{{.Description}}</h5>
+	
+			<div class="col-4">
+			<h5 class="card-title text-center">{{.Description}}</h5>
+		</div>
+	
+			<div class="col-4 text-right">
+			<a class="p-0" id="navbarDropdownMenuLink-333" data-toggle="dropdown" aria-haspopup="true"
+				  aria-expanded="false">
+				  <i class="fas fa-ellipsis-h black-text"></i>
+				</a>
+				<div class="dropdown-menu dropdown-menu-right dropdown-default text-center"
+				  aria-labelledby="navbarDropdownMenuLink-333">
+				  <a class="dropdown-item black-text" href="#">Favourite <i
+					class="fas fa-heart"></i></a>
+				  <a class="dropdown-item black-text" href="#">Edit</a>
+				  <a class="dropdown-item black-text" href="#">Remove</a>
+			</div>
+		</div>
+		</div>
+
 		<p class="text-center pt-4">Temperature</p>
 		<div class="d-flex justify-content-center">
 			<span class="font-weight-bold blue-text mr-2 ">0<small>&deg;C</small></span>

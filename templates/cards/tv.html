@@ -22,7 +22,7 @@
 				<div class="dropdown-menu dropdown-menu-right dropdown-default text-center"
 					aria-labelledby="navbarDropdownMenuLink-333">
 					<a class="dropdown-item black-text" href="#">Favourite <i class="fas fa-heart"></i></a>
-					<a class="dropdown-item black-text" data-toggle="modal" data-target="#options">Options</a>
+					<a class="dropdown-item black-text" href="#">Edit</a>
 					<a class="dropdown-item black-text" href="#">Remove</a>
 				</div>
 			</div>
@@ -41,7 +41,6 @@
 	</div>
 	<div class="card-footer" {{if .Status}}style="background-color: #A8FFA8;" {{else}}style="background-color: #FF6666;"
 		{{end}}>
-		<small class="text-muted black-text">{{if .Status}}Connected to David's
-			Iphone{{else}}Disconnected{{end}}</small>
+		<small class="text-muted black-text">{{if .Status}}Time On: 30 minutes{{else}}Disconnected{{end}}</small>
 	</div>
 </div>
