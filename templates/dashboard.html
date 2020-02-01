@@ -47,8 +47,8 @@
       <h4 class="text-center pb-3">Favourites</h4>
       <div class="row">
         <div class="col-4 d-flex justify-content-center">
-          {{range .Devices}}{{if eq .IsFave 1}}
-          <div class="card p-1 flex-center flex-column" id="device-{{.DedviceID}}">
+          {{range .Devices}}{{if .IsFave}}
+          <div class="card p-1 flex-center flex-column" id="device-{{.DeviceID}}">
             <div class="card-body">
               <h5 class="card-title">{{.Description}}</h5>
             </div>
