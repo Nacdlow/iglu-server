@@ -40,15 +40,6 @@
     {{end}}{{end}}
   </div>
   {{else}}
-  <div class="row justify-content-center pt-3">
-    <!--<h2 class="pt-5 text-center">Room Control</h2>-->
-    <h2 class="pt-5 pr-3 text-center">Room Temperature</h2>
-    <div class="card warning-color circle d-flex">
-      <div class="card-body d-flex align-items-center justify-content-center animated rotateIn">
-        <h5 class="pt-1" style="font-size: 3em;">{{.Temp}}17<small>°C</small></h5>
-      </div>
-    </div>
-  </div>
 
   <!-- devices tabs-->
   <ul class="nav nav-tabs nav-fill d-flex justify-content-center pt-3 dev-tab" id="myTab" role="tablist">
@@ -291,6 +282,15 @@
     <!--temp device tab cards-->
     <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
 
+  <div class="row justify-content-center pt-3">
+    <!--<h2 class="pt-5 text-center">Room Control</h2>-->
+    <h2 class="pt-5 pr-3 text-center">Room Temperature</h2>
+    <div class="card warning-color circle d-flex">
+      <div class="card-body d-flex align-items-center justify-content-center animated rotateIn">
+        <h5 class="pt-1" style="font-size: 3em;">{{.Temp}}<small>°C</small></h5>
+      </div>
+    </div>
+  </div>
       <div class="row justify-content-center pt-5 pr-5 pl-5 pb-3">
         {{range .Devices}}{{if and (eq .Type 1) (eq .RoomID $.Room.RoomID)}}
         <!--Card 1-->
