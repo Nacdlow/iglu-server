@@ -18,6 +18,7 @@ import (
 	"gitlab.com/group-nacdlow/nacdlow-server/models/forms"
 	forms_sim "gitlab.com/group-nacdlow/nacdlow-server/models/forms/sim"
 	"gitlab.com/group-nacdlow/nacdlow-server/models/simulation"
+	"gitlab.com/group-nacdlow/nacdlow-server/modules/plugin"
 	"gitlab.com/group-nacdlow/nacdlow-server/modules/settings"
 	"gitlab.com/group-nacdlow/nacdlow-server/routes"
 	routes_sim "gitlab.com/group-nacdlow/nacdlow-server/routes/simulator"
@@ -44,6 +45,7 @@ func start(clx *cli.Context) (err error) {
 	engine := models.SetupEngine()
 	defer engine.Close()
 	go simulation.Start()
+	plugin.LoadPlugins()
 
 	// Start the web server
 	m := macaron.Classic()
