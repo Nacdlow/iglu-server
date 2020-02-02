@@ -2,14 +2,16 @@ package routes
 
 import (
 	"fmt"
-	"gitlab.com/group-nacdlow/nacdlow-server/models"
-	"gitlab.com/group-nacdlow/nacdlow-server/models/forms"
-	"gitlab.com/group-nacdlow/nacdlow-server/models/simulation"
-	"gitlab.com/group-nacdlow/nacdlow-server/modules/settings"
-	macaron "gopkg.in/macaron.v1"
 	"html/template"
 	"math"
 	"strings"
+
+	"gitlab.com/group-nacdlow/nacdlow-server/models"
+	"gitlab.com/group-nacdlow/nacdlow-server/models/forms"
+	"gitlab.com/group-nacdlow/nacdlow-server/models/simulation"
+	"gitlab.com/group-nacdlow/nacdlow-server/modules/plugin"
+	"gitlab.com/group-nacdlow/nacdlow-server/modules/settings"
+	macaron "gopkg.in/macaron.v1"
 )
 
 // NotFoundHandler handles 404 errors
@@ -72,6 +74,13 @@ func AppearanceSettingsHandler(ctx *macaron.Context) {
 	ctx.HTML(200, "settings/appearance")
 }
 
+// PluginsSettingsHandler handles the settings
+func PluginsSettingsHandler(ctx *macaron.Context) {
+	ctx.Data["NavTitle"] = "Plugins"
+	ctx.Data["Plugins"] = plugin.LoadedPlugins
+	ctx.HTML(200, "settings/plugins")
+}
+
 // SpecificRoomsHandler handles the specific rooms
 func SpecificRoomsHandler(ctx *macaron.Context) {
 	ctx.Data["NavTitle"] = fmt.Sprintf("%s", ctx.Params("roomType"))
@@ -98,6 +107,13 @@ func SpecificRoomsHandler(ctx *macaron.Context) {
 	}
 	ctx.Data["IsRooms"] = 1
 	ctx.HTML(200, "specificRooms")
+}
+
+// OverviewHandler handles all the devices
+func OverviewHandler(ctx *macaron.Context) {
+	ctx.Data["NavTitle"] = "Overview"
+	ctx.Data["Devices"] = models.GetDevices()
+	ctx.HTML(200, "overview")
 }
 
 func AddDeviceRoomPostHandler(ctx *macaron.Context, form forms.AddDeviceForm) {

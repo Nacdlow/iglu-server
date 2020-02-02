@@ -26,6 +26,7 @@ func LoadConfig() {
 	if !Config.IsSet("CustomerID") {
 		Config.SetDefault("CustomerID", uniq.UUID())
 	}
+	Config.SetDefault("Timezone", "Europe/London")
 	Config.SetDefault("DarkskyAPIKey", "APIKEYHERE")
 	Config.SetDefault("Location.Lat", "25.371679")
 	Config.SetDefault("Location.Lon", "55.511716")

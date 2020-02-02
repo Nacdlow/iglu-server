@@ -18,6 +18,7 @@ import (
 	"gitlab.com/group-nacdlow/nacdlow-server/models/forms"
 	forms_sim "gitlab.com/group-nacdlow/nacdlow-server/models/forms/sim"
 	"gitlab.com/group-nacdlow/nacdlow-server/models/simulation"
+	"gitlab.com/group-nacdlow/nacdlow-server/modules/plugin"
 	"gitlab.com/group-nacdlow/nacdlow-server/modules/settings"
 	"gitlab.com/group-nacdlow/nacdlow-server/routes"
 	routes_sim "gitlab.com/group-nacdlow/nacdlow-server/routes/simulator"
@@ -44,6 +45,7 @@ func start(clx *cli.Context) (err error) {
 	engine := models.SetupEngine()
 	defer engine.Close()
 	go simulation.Start()
+	plugin.LoadPlugins()
 
 	// Start the web server
 	m := macaron.Classic()
@@ -58,6 +60,13 @@ func start(clx *cli.Context) (err error) {
 		}))
 
 	m.Use(routes.ContextInit())
+
+	// Load plugin middlewares
+	for _, pl := range plugin.LoadedPlugins {
+		if pl.Middleware != nil {
+			m.Use(pl.Middleware())
+		}
+	}
 
 	m.NotFound(routes.NotFoundHandler)
 
@@ -78,6 +87,7 @@ func start(clx *cli.Context) (err error) {
 				m.Get("/speakers", routes.SpeakerHandler)
 			})
 		})
+		m.Get("/overview", routes.OverviewHandler)
 		m.Get("/rooms", routes.RoomsHandler)
 		m.Post("/rooms", binding.Bind(forms.AddRoomForm{}),
 			routes.PostRoomHandler)
@@ -87,6 +97,7 @@ func start(clx *cli.Context) (err error) {
 		m.Get("/toggle_fave/:id", routes.FaveHandler) //set device as fave
 
 		m.Get("/settings", routes.SettingsHandler)
+		m.Get("/settings/plugins", routes.PluginsSettingsHandler)
 		m.Get("/settings/accounts", routes.AccountSettingsHandler)
 		m.Get("/settings/appearance", routes.AppearanceSettingsHandler)
 

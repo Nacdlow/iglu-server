@@ -303,7 +303,7 @@ padding: .5rem 1rem;
 
 
 div.scrollmenu {
-  background-color: #333;
+  display: block;
   overflow: auto;
   white-space: nowrap;
 }
