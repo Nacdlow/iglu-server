@@ -6,6 +6,7 @@ import (
 	"math"
 	"strings"
 
+	"github.com/go-macaron/session"
 	"gitlab.com/group-nacdlow/nacdlow-server/models"
 	"gitlab.com/group-nacdlow/nacdlow-server/models/forms"
 	"gitlab.com/group-nacdlow/nacdlow-server/models/simulation"
@@ -116,7 +117,7 @@ func OverviewHandler(ctx *macaron.Context) {
 	ctx.HTML(200, "overview")
 }
 
-func AddDeviceRoomPostHandler(ctx *macaron.Context, form forms.AddDeviceForm) {
+func AddDeviceRoomPostHandler(ctx *macaron.Context, form forms.AddDeviceForm, f *session.Flash) {
 	device := &models.Device{
 		RoomID:      form.RoomID,
 		Type:        models.DeviceType(form.DeviceType),
@@ -127,11 +128,13 @@ func AddDeviceRoomPostHandler(ctx *macaron.Context, form forms.AddDeviceForm) {
 			switch device.Type {
 			case models.Light: // We can't have two main lights
 				if form.IsMainLight && device.IsMainLight {
-					ctx.PlainText(200, []byte("There can only be one main light"))
+					f.Error("There can only be one main light per room.")
+					ctx.Redirect(fmt.Sprintf("/rooms/%d", device.RoomID))
 					return
 				}
 			case models.TempControl: // We can't have two temperature controls
-				ctx.PlainText(200, []byte("There can only be one temperature control per room"))
+				f.Error("There can only be one temperature control per room.")
+				ctx.Redirect(fmt.Sprintf("/rooms/%d", device.RoomID))
 				return
 			}
 		}
@@ -180,27 +183,6 @@ func PostRoomHandler(ctx *macaron.Context, form forms.AddRoomForm) {
 func DevicesHandler(ctx *macaron.Context) {
 	ctx.Data["NavTitle"] = "Devices"
 	ctx.HTML(200, "devices")
-}
-
-//LightsHandler handles the lights page
-func LightsHandler(ctx *macaron.Context) {
-	ctx.Data["Lights"] = models.GetDevices()
-	ctx.Data["Room"], _ = models.GetDevice(ctx.ParamsInt64("name"))
-	ctx.HTML(200, "lights")
-}
-
-//HeatingHandler handles the temperature page
-func HeatingHandler(ctx *macaron.Context) {
-	ctx.Data["Heating"] = models.GetDevices()
-	ctx.Data["Room"], _ = models.GetDevice(ctx.ParamsInt64("name"))
-	ctx.HTML(200, "temperature")
-}
-
-//SpeakerHandler handles the speakers page
-func SpeakerHandler(ctx *macaron.Context) {
-	ctx.Data["Speakers"] = models.GetDevices()
-	ctx.Data["Room"], _ = models.GetDevice(ctx.ParamsInt64("name"))
-	ctx.HTML(200, "speakers")
 }
 
 func ToggleHandler(ctx *macaron.Context) {
