@@ -23,7 +23,7 @@
 					aria-labelledby="navbarDropdownMenuLink-333">
 					<a class="dropdown-item black-text" href="#" onclick="$.get('/toggle_fave/{{.DeviceID}}');">Favourite <i class="fas fa-heart"></i></a>
 					<a class="dropdown-item black-text" href="#">Edit</a>
-					<a class="dropdown-item black-text" href="#">Remove</a>
+					<a class="dropdown-item black-text" href="#" id="remove-{{.DeviceID}}" data-toggle="modal" data-target="#removeDevice">Remove</a>
 				</div>
 			</div>
 		</div>
@@ -44,3 +44,28 @@
 		<small class="text-muted black-text">{{if .Status}}Time On: 30 minutes{{else}}Disconnected{{end}}</small>
 	</div>
 </div>
+
+<!-- Remove Device -->
+<div class="modal fade" id="removeDevice" tabindex="-1" role="dialog" aria-labelledby="removeDevice"
+  aria-hidden="true">
+
+  <!-- Change class .modal-sm to change the size of the modal -->
+  <div class="modal-dialog modal-sm" role="document">
+
+
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title w-100 black-text" id="removeDevice">Are you sure you want to remove this device?</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+	  </div>
+      <div class="modal-footer justify-content-center">
+        <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Cancel</button>
+		<button type="submit" data-dismiss="modal" class="btn btn-primary btn-sm" id="remove-{{.DeviceID}}"
+		onclick="$.get('/remove_device/{{.DeviceID}}');location.reload();">Remove Device</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /Remove Device -->

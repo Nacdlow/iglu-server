@@ -233,3 +233,12 @@ func FaveHandler(ctx *macaron.Context) {
 		}
 	}
 }
+
+func RemoveHandler(ctx *macaron.Context) {
+	for _, device := range models.GetDevices() {
+		if device.DeviceID == ctx.ParamsInt64("id") {
+			models.DeleteDevice(ctx.ParamsInt64("id"))
+			break
+		}
+	}
+}

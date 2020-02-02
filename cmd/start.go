@@ -94,7 +94,8 @@ func start(clx *cli.Context) (err error) {
 		m.Get("/toggle_device/:id", routes.ToggleHandler)
 		m.Get("/toggle_slider/:id/:value", routes.SliderHandler)
 
-		m.Get("/toggle_fave/:id", routes.FaveHandler) //set device as fave
+		m.Get("/toggle_fave/:id", routes.FaveHandler)     //set device as fave
+		m.Get("/remove_device/:id", routes.RemoveHandler) //remove a device
 
 		m.Get("/settings", routes.SettingsHandler)
 		m.Get("/settings/plugins", routes.PluginsSettingsHandler)
