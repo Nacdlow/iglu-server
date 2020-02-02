@@ -122,6 +122,21 @@ func AddDeviceRoomPostHandler(ctx *macaron.Context, form forms.AddDeviceForm) {
 		Type:        models.DeviceType(form.DeviceType),
 		Description: form.Description,
 	}
+	for _, d := range models.GetDevices() {
+		if d.RoomID == device.RoomID && d.Type == device.Type {
+			switch device.Type {
+			case models.Light: // We can't have two main lights
+				if form.IsMainLight && device.IsMainLight {
+					ctx.PlainText(200, []byte("There can only be one main light"))
+					return
+				}
+			case models.TempControl: // We can't have two temperature controls
+				ctx.PlainText(200, []byte("There can only be one temperature control per room"))
+				return
+			}
+		}
+	}
+
 	switch device.Type {
 	case models.Light:
 		device.Brightness = 10
