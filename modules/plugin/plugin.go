@@ -6,6 +6,7 @@ import (
 	"io/ioutil"
 	"log"
 	"plugin"
+	"runtime"
 )
 
 type IgluPlugin struct {
@@ -21,6 +22,11 @@ type IgluPlugin struct {
 var LoadedPlugins []IgluPlugin
 
 func LoadPlugins() {
+	if runtime.GOOS != "linux" {
+		log.Println("Plugins only supported on Linux!")
+		log.Println("Plugins will not be loaded.")
+		return
+	}
 	log.Println("Loading plugins...")
 	files, err := ioutil.ReadDir("./plugins")
 	if err == nil {
