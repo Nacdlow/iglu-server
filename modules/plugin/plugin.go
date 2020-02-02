@@ -9,6 +9,7 @@ import (
 	"runtime"
 )
 
+// IgluPlugin represents a loaded Iglu plugin.
 type IgluPlugin struct {
 	ID            string // Unique ID, for updates, etc
 	Name          string
@@ -19,11 +20,13 @@ type IgluPlugin struct {
 	Middleware    (func() macaron.Handler)
 }
 
+// LoadedPlugins is an array of all loaded plugins.
 var LoadedPlugins []IgluPlugin
 
+// LoadPlugins will load all plugins in the `./plugins` folder.
 func LoadPlugins() {
-	if runtime.GOOS != "linux" {
-		log.Println("Plugins only supported on Linux!")
+	if !(runtime.GOOS == "linux" || runtime.GOOS == "darwin") {
+		log.Println("Plugins only supported on Linux and macOS!")
 		log.Println("Plugins will not be loaded.")
 		return
 	}
@@ -78,5 +81,4 @@ func LoadPlugins() {
 		}
 	}
 	log.Printf("%d plugins loaded!\n", len(LoadedPlugins))
-
 }
