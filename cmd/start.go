@@ -40,14 +40,7 @@ var CmdStart = &cli.Command{
 	Action: start,
 }
 
-func start(clx *cli.Context) (err error) {
-	settings.LoadConfig()
-	engine := models.SetupEngine()
-	defer engine.Close()
-	go simulation.Start()
-	plugin.LoadPlugins()
-
-	// Start the web server
+func getMacaron() *macaron.Macaron {
 	m := macaron.Classic()
 	m.Use(macaron.Renderer())
 	m.Use(session.Sessioner())
@@ -112,6 +105,18 @@ func start(clx *cli.Context) (err error) {
 		m.Get("/env_status", routes_sim.EnvStatusHandler)
 		m.Get("/toggle/:id", routes_sim.ToggleHandler)
 	})
+	return m
+}
+
+func start(clx *cli.Context) (err error) {
+	settings.LoadConfig()
+	engine := models.SetupEngine()
+	defer engine.Close()
+	go simulation.Start()
+	plugin.LoadPlugins()
+
+	// Start the web server
+	m := getMacaron()
 
 	log.WithFields(log.Fields{"port": clx.String("port")}).Printf("Starting server.")
 	log.Fatal(http.ListenAndServeTLS(fmt.Sprintf(":%s", clx.String("port")), "fullchain.pem", "privkey.pem", m))

@@ -129,12 +129,12 @@ func AddDeviceRoomPostHandler(ctx *macaron.Context, form forms.AddDeviceForm, f 
 			case models.Light: // We can't have two main lights
 				if form.IsMainLight && device.IsMainLight {
 					f.Error("There can only be one main light per room.")
-					ctx.Redirect(fmt.Sprintf("/rooms/%d", device.RoomID))
+					ctx.Redirect(fmt.Sprintf("/room/%d", device.RoomID))
 					return
 				}
 			case models.TempControl: // We can't have two temperature controls
 				f.Error("There can only be one temperature control per room.")
-				ctx.Redirect(fmt.Sprintf("/rooms/%d", device.RoomID))
+				ctx.Redirect(fmt.Sprintf("/room/%d", device.RoomID))
 				return
 			}
 		}
