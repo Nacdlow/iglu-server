@@ -1,5 +1,7 @@
 {{template "base/head" .}} {{template "base/nav" .}}
 
+{{template "base/flash" .}}
+
 {{if .Bedrooms}}
 <div class="container animated fadeIn">
   <h2 class="pt-5 text-center">Bedrooms</h2>
@@ -278,9 +280,6 @@
     </div>
   </div>
 </div>
-
-
-
 
 {{template "base/scripts" .}}
 {{template "base/footer" .}}
