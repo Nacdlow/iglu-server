@@ -9,10 +9,9 @@ import (
 // Statistic represents a statistic log at a period of time, which spans an
 // hour.
 type Statistic struct {
-	StatID               int64   `xorm:"pk"`
-	Timestamp            int64   `xorm:"created"`
-	Powergen             float64 // Power generated, kWh
-	Powercon             float64 // Power conserved, kWh
+	StatID               int64   `xorm:"pk autoincr"`
+	PowerGen             float64 // Power generated, kWh
+	PowerCon             float64 // Power conserved, kWh
 	MainDoorsOpenedCount int64   // How many times the doors opened
 	CreatedUnix          int64   `xorm:"created"`
 	UpdatedUnix          int64   `xorm:"updated"`
@@ -22,9 +21,9 @@ type Statistic struct {
 // testing purposes.
 func GetFakeStat() (s *Statistic) {
 	s = new(Statistic)
-	s.Timestamp = time.Now().UnixNano() - int64(gofakeit.Number(0, 99999))
-	s.Powergen = gofakeit.Float64Range(0, 45)
-	s.Powercon = gofakeit.Float64Range(0, s.Powergen)
+	s.CreatedUnix = time.Now().UnixNano() - int64(gofakeit.Number(0, 99999))
+	s.PowerGen = gofakeit.Float64Range(0, 45)
+	s.PowerCon = gofakeit.Float64Range(0, s.PowerGen)
 	return
 }
 

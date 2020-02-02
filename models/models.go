@@ -5,6 +5,8 @@ import (
 
 	"github.com/brianvoe/gofakeit/v4"
 	log "github.com/sirupsen/logrus"
+	"gitlab.com/group-nacdlow/nacdlow-server/modules/settings"
+	"time"
 	"xorm.io/core"
 	"xorm.io/xorm"
 )
@@ -32,18 +34,23 @@ func SetupEngine() *xorm.Engine {
 	var err error
 	engine, err = xorm.NewEngine("sqlite3", sqlitePath)
 	if err != nil {
-		log.Fatalln("Failed to setup engine!", err)
+		log.Fatalln("Failed to setup engine! ", err)
 	}
 
 	engine.SetMapper(core.GonicMapper{})
 	err = engine.Sync(tables...)
 
 	if err != nil {
-		log.Fatalln("Failed to sync schema!", err)
+		log.Fatalln("Failed to sync schema! ", err)
 	}
 
 	cacher := xorm.NewLRUCacher(xorm.NewMemoryStore(), 2000)
 	engine.SetDefaultCacher(cacher)
+	location, err := time.LoadLocation(settings.Config.GetString("Timezone"))
+	if err != nil {
+		log.Fatalln("Failed to load timezone! ", err)
+	}
+	engine.TZLocation = location
 
 	return engine
 }
@@ -54,14 +61,14 @@ func SetupTestEngine() *xorm.Engine {
 	var err error
 	engine, err = xorm.NewEngine("sqlite3", ":memory:")
 	if err != nil {
-		log.Fatalln("Failed to setup test engine!", err)
+		log.Fatalln("Failed to setup test engine! ", err)
 	}
 
 	engine.SetMapper(core.GonicMapper{})
 	err = engine.Sync(tables...)
 
 	if err != nil {
-		log.Fatalln("Failed to sync schema with testing database!", err)
+		log.Fatalln("Failed to sync schema with testing database! ", err)
 	}
 
 	return engine
