@@ -61,6 +61,13 @@ func start(clx *cli.Context) (err error) {
 
 	m.Use(routes.ContextInit())
 
+	// Load plugin middlewares
+	for _, pl := range plugin.LoadedPlugins {
+		if pl.Middleware != nil {
+			m.Use(pl.Middleware())
+		}
+	}
+
 	m.NotFound(routes.NotFoundHandler)
 
 	m.Get("/", routes.LoginHandler)
@@ -90,6 +97,7 @@ func start(clx *cli.Context) (err error) {
 		m.Get("/toggle_fave/:id", routes.FaveHandler) //set device as fave
 
 		m.Get("/settings", routes.SettingsHandler)
+		m.Get("/settings/plugins", routes.PluginsSettingsHandler)
 		m.Get("/settings/accounts", routes.AccountSettingsHandler)
 		m.Get("/settings/appearance", routes.AppearanceSettingsHandler)
 

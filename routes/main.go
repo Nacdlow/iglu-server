@@ -9,6 +9,7 @@ import (
 	"gitlab.com/group-nacdlow/nacdlow-server/models"
 	"gitlab.com/group-nacdlow/nacdlow-server/models/forms"
 	"gitlab.com/group-nacdlow/nacdlow-server/models/simulation"
+	"gitlab.com/group-nacdlow/nacdlow-server/modules/plugin"
 	"gitlab.com/group-nacdlow/nacdlow-server/modules/settings"
 	macaron "gopkg.in/macaron.v1"
 )
@@ -71,6 +72,13 @@ func AccountSettingsHandler(ctx *macaron.Context) {
 func AppearanceSettingsHandler(ctx *macaron.Context) {
 	ctx.Data["NavTitle"] = "Appearance Settings"
 	ctx.HTML(200, "settings/appearance")
+}
+
+// PluginsSettingsHandler handles the settings
+func PluginsSettingsHandler(ctx *macaron.Context) {
+	ctx.Data["NavTitle"] = "Plugins"
+	ctx.Data["Plugins"] = plugin.LoadedPlugins
+	ctx.HTML(200, "settings/plugins")
 }
 
 // SpecificRoomsHandler handles the specific rooms
