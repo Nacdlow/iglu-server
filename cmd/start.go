@@ -17,9 +17,9 @@ import (
 	"gitlab.com/group-nacdlow/nacdlow-server/models"
 	"gitlab.com/group-nacdlow/nacdlow-server/models/forms"
 	forms_sim "gitlab.com/group-nacdlow/nacdlow-server/models/forms/sim"
-	"gitlab.com/group-nacdlow/nacdlow-server/models/simulation"
 	"gitlab.com/group-nacdlow/nacdlow-server/modules/plugin"
 	"gitlab.com/group-nacdlow/nacdlow-server/modules/settings"
+	"gitlab.com/group-nacdlow/nacdlow-server/modules/simulation"
 	"gitlab.com/group-nacdlow/nacdlow-server/routes"
 	routes_sim "gitlab.com/group-nacdlow/nacdlow-server/routes/simulator"
 )

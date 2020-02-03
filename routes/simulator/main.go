@@ -3,7 +3,7 @@ package simulator
 import (
 	"gitlab.com/group-nacdlow/nacdlow-server/models"
 	forms "gitlab.com/group-nacdlow/nacdlow-server/models/forms/sim"
-	"gitlab.com/group-nacdlow/nacdlow-server/models/simulation"
+	"gitlab.com/group-nacdlow/nacdlow-server/modules/simulation"
 	macaron "gopkg.in/macaron.v1"
 	"time"
 )
