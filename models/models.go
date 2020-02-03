@@ -4,8 +4,8 @@ import (
 	_ "github.com/mattn/go-sqlite3" // SQLite driver support
 
 	"github.com/brianvoe/gofakeit/v4"
-	log "github.com/sirupsen/logrus"
 	"gitlab.com/group-nacdlow/nacdlow-server/modules/settings"
+	"log"
 	"time"
 	"xorm.io/core"
 	"xorm.io/xorm"

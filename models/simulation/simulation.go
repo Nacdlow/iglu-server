@@ -2,10 +2,10 @@ package simulation
 
 import (
 	"github.com/adlio/darksky"
-	log "github.com/sirupsen/logrus"
 	"gitlab.com/group-nacdlow/nacdlow-server/models"
 	"gitlab.com/group-nacdlow/nacdlow-server/modules/settings"
 	"gitlab.com/group-nacdlow/nacdlow-server/modules/weather"
+	"log"
 	"math"
 	"math/rand"
 	"time"
@@ -80,11 +80,11 @@ func LoadFromDB() {
 		// to something else.
 		if !tempSet {
 			if Env.ForecastData != nil {
-				log.Errorf("Room %d (%s) does not have a temperature control device! Using outside temp...",
+				log.Printf("Room %d (%s) does not have a temperature control device! Using outside temp...\n",
 					room.RoomID, room.RoomName)
 				r.ActualRoomTemp = Env.ForecastData.Currently.Temperature
 			} else {
-				log.Errorf("Room %d (%s) does not have a temperature control device! Cannot use outside temp either! Setting to 20C.",
+				log.Printf("Room %d (%s) does not have a temperature control device! Cannot use outside temp either! Setting to 20C.\n",
 					room.RoomID, room.RoomName)
 				r.ActualRoomTemp = 20
 			}
@@ -92,7 +92,7 @@ func LoadFromDB() {
 
 		// No room light source? Be angry!
 		if !lightSet {
-			log.Errorf("Room %d (%s) does not have a main light source (device)!",
+			log.Printf("Room %d (%s) does not have a main light source (device)!\n",
 				room.RoomID, room.RoomName)
 		}
 
@@ -103,7 +103,7 @@ func LoadFromDB() {
 		Env.Rooms = append(Env.Rooms, r)
 	}
 	if lacking {
-		log.Error("Some rooms may be lacking important devices which is required for the simulator to work properly!" +
+		log.Println("Some rooms may be lacking important devices which is required for the simulator to work properly!" +
 			" Please fix before continuing.")
 	}
 }
@@ -117,10 +117,10 @@ func Start() {
 	// Load the forecast data
 	f, err := weather.GetWeather()
 	if err != nil {
-		log.Error("Failed to get forecast!", err)
-		log.Error("Please make sure that the Darksky API key is correct.")
-		log.Error("You may use the group API key at: https://wiki.nacdlow.com/Accounts.html")
-		log.Error("Simulation may not work properly!")
+		log.Println("Failed to get forecast! ", err)
+		log.Println("Please make sure that the Darksky API key is correct.")
+		log.Println("You may use the group API key at: https://wiki.nacdlow.com/Accounts.html")
+		log.Println("Simulation may not work properly!")
 		Env.Weather.OutdoorTemp = 4
 		Env.Weather.Humidity = 0.12
 		Env.Weather.CloudCover = 0.45

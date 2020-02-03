@@ -2,6 +2,7 @@
 *.db-journal
 config.toml
 plugins/
+*.log
 
 # For those folks using macOS
 .DS_Store

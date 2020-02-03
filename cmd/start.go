@@ -1,18 +1,18 @@
 package cmd
 
 import (
-	"fmt"
-
-	log "github.com/sirupsen/logrus"
-
-	"net/http"
-	"time"
-
 	"github.com/go-macaron/binding"
 	"github.com/go-macaron/csrf"
 	"github.com/go-macaron/session"
 	"github.com/urfave/cli/v2"
 	macaron "gopkg.in/macaron.v1"
+
+	"fmt"
+	"io"
+	"log"
+	"net/http"
+	"os"
+	"time"
 
 	"gitlab.com/group-nacdlow/nacdlow-server/models"
 	"gitlab.com/group-nacdlow/nacdlow-server/models/forms"
@@ -109,6 +109,14 @@ func getMacaron() *macaron.Macaron {
 }
 
 func start(clx *cli.Context) (err error) {
+	file, err := os.OpenFile("iglu.log", os.O_CREATE|os.O_APPEND|os.O_WRONLY, 0600)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer file.Close()
+	multi := io.MultiWriter(os.Stdout, file)
+	log.SetOutput(multi)
+
 	settings.LoadConfig()
 	engine := models.SetupEngine()
 	defer engine.Close()
@@ -118,7 +126,7 @@ func start(clx *cli.Context) (err error) {
 	// Start the web server
 	m := getMacaron()
 
-	log.WithFields(log.Fields{"port": clx.String("port")}).Printf("Starting server.")
+	log.Printf("Starting TLS web server on :%s\n", clx.String("port"))
 	log.Fatal(http.ListenAndServeTLS(fmt.Sprintf(":%s", clx.String("port")), "fullchain.pem", "privkey.pem", m))
 	return nil
 }

@@ -21,7 +21,7 @@ func NotFoundHandler(ctx *macaron.Context) {
 }
 
 // DashboardHandler handles rendering the dashboard.
-func DashboardHandler(ctx *macaron.Context) {
+func DashboardHandler(ctx *macaron.Context, f *session.Flash) {
 	ctx.Data["NavTitle"] = "Dashboard"
 	ctx.Data["IsDashboard"] = 1
 	if simulation.Env.ForecastData != nil {
