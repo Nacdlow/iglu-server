@@ -5,7 +5,7 @@
 			<!-- switch -->
 			<div class="col-4">
 				<a class="fas fa-power-off pb-3 {{if .Status}}green-text{{else}}red-text{{end}}" href="#"
-					style="color: black; font-size: 2em;" onclick="$.get('/toggle_device/{{.DeviceID}}');"></a>
+					style="color: black; font-size: 2em;" onclick="$.get('/toggle_device/{{.DeviceID}}');location.reload().delay(800);"></a>
 				{{if .Status}}On{{else}}Off{{end}}
 				<!--/switch -->
 			</div>
@@ -23,7 +23,7 @@
 					aria-labelledby="navbarDropdownMenuLink-333">
 					<a class="dropdown-item black-text" href="#" onclick="$.get('/toggle_fave/{{.DeviceID}}');">Favourite <i class="fas fa-heart"></i></a>
 					<a class="dropdown-item black-text" href="#">Edit</a>
-					<a class="dropdown-item black-text" href="#" id="remove-{{.DeviceID}}" data-toggle="modal" data-target="#removeDevice">Remove</a>
+					<a class="dropdown-item black-text" href="#" id="remove-{{.DeviceID}}" data-toggle="modal" data-target="#removeDevice-{{.DeviceID}}">Remove</a>
 				</div>
 			</div>
 		</div>
@@ -46,7 +46,7 @@
 </div>
 
 <!-- Remove Device -->
-<div class="modal fade" id="removeDevice" tabindex="-1" role="dialog" aria-labelledby="removeDevice"
+<div class="modal fade" id="removeDevice-{{.DeviceID}}" tabindex="-1" role="dialog" aria-labelledby="removeDevice-{{.DeviceID}}"
   aria-hidden="true">
 
   <!-- Change class .modal-sm to change the size of the modal -->

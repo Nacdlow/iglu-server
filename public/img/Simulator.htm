@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="/css/normalize-8.0.1.min.css" />
+        <link rel="stylesheet" href="/css/simulator.main.css" />
+		<title>Simulator</title>
+        <link rel="icon" href="/favicon.ico" />
+	</head>
+	<body>
+		<div class="container">
+			<div class="nav">
+				<div class="nav-left">
+				<a href="/" class="nav-title">
+					<span class="nav-extra">Simulator</span></a>
+				</div>
+				<div class="nav-right">
+					<a href="/" target="_blank">Go to app</a>
+				</div>
+			</div>
+<div class="content">
+
+<h2>Simulator</h2>
+<h3>Environment Status</h3>
+<div id="env_status"></div>
+<h3>Environment Model</h3>
+<p>Regenerate simulation model from the database? <a class="btn" href="/sim/reload_db">Regenerate</a></p>
+<h3>Override Weather</h3>
+<form method="post" action="/sim/override_weather">
+	<label>Outdoor Temperature</label>
+	<input type="number" name="outdoor_temp"
+	value="18.7" min="-89" max="58" step=".01">
+	<br>
+	<label>Humidity</label>
+	<input type="number" name="humidity" value="0.58"
+	min="0" max="1" step=".01">
+	<br>
+	<label>Cloud cover</label>
+	<input type="number" name="cloud_cover" value="0"
+	min="0" max="1" step=".01">
+	<br>
+	<button class="btn" type="submit">Override</button>
+</form>
+<p><a href="/sim/pull_weather" class="btn">Pull weather from ext. API</a></p>
+<h3>Change Time</h3>
+<form method="post" action="/sim/time_sleep">
+	<label>Tick sleep (in ms)</label>
+	<input type="number" name="tick_sleep" value="1000" min="0"
+				 max="10000">
+	<br>
+	<button class="btn" type="submit">Change</button>
+</form>
+
+<h3>Minecraft Simulation Status</h3>
+<dl>
+	<dt>Status</dt>
+	<dd>Disconnected
+	</dd>
+	<dt>Server Implementation</dt>
+	<dd>Unknown
+	</dd>
+</dl>
+<script type="text/javascript" src="/js/jquery.min.js"></script>
+<script>
+     (function(){
+           $("#env_status").load("/sim/env_status");
+		 setTimeout(arguments.callee,  1000 );
+      })();
+</script>
+</div>
+</div>
+</body>
+</head>	
+
+

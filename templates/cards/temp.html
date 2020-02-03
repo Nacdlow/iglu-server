@@ -6,7 +6,7 @@
 			<div class="custom-control custom-switch float-left">
 				<input type="checkbox" class="custom-control-input" id="customSwitches-{{.DeviceID}}" 
 				{{if eq .Status true}}checked{{else}}unchecked{{end}}
-				onclick="$.get('/toggle_device/{{.DeviceID}}');">
+				onclick="$.get('/toggle_device/{{.DeviceID}}');location.reload().delay(800);">
 				<label class="custom-control-label"
 					   for="customSwitches-{{.DeviceID}}">{{if .Status}}On{{else}}Off{{end}}</label>
 			</div>
@@ -27,7 +27,7 @@
 				  <a class="dropdown-item black-text" href="#" onclick="$.get('/toggle_fave/{{.DeviceID}}');">Favourite <i
 					class="fas fa-heart"></i></a>
 				  <a class="dropdown-item black-text" href="#">Edit</a>
-				  <a class="dropdown-item black-text" href="#" id="remove-{{.DeviceID}}" data-toggle="modal" data-target="#removeDevice">Remove</a>
+				  <a class="dropdown-item black-text" href="#" id="remove-{{.DeviceID}}" data-toggle="modal" data-target="#removeDevice-{{.DeviceID}}">Remove</a>
 			</div>
 		</div>
 		</div>
@@ -51,7 +51,7 @@
 </div>
 
 <!-- Remove Device -->
-<div class="modal fade" id="removeDevice" tabindex="-1" role="dialog" aria-labelledby="removeDevice"
+<div class="modal fade" id="removeDevice-{{.DeviceID}}" tabindex="-1" role="dialog" aria-labelledby="removeDevice-{{.DeviceID}}"
   aria-hidden="true">
 
   <!-- Change class .modal-sm to change the size of the modal -->
@@ -68,7 +68,7 @@
       <div class="modal-footer justify-content-center">
         <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Cancel</button>
 		<button type="submit" data-dismiss="modal" class="btn btn-primary btn-sm" id="remove-{{.DeviceID}}"
-		onclick="$.get('/remove_device/{{.DeviceID}}');location.reload();">Remove Device</button>
+		onclick="$.get('/remove_device/{{.DeviceID}}');location.reload().delay(800);">Remove Device</button>
       </div>
     </div>
   </div>

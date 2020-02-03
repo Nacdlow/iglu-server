@@ -55,14 +55,14 @@
       <div class="row">
         <div class="col-4 d-flex justify-content-center">
           {{range .Devices}}{{if .IsFave}}
-          <div class="card p-1 flex-center flex-column" id="device-{{.DeviceID}}">
+          <div class="card p-2 flex-center flex-column" id="device-{{.DeviceID}}">
             <div class="card-body">
               <h4></h4>
               <h5 class="card-title">{{.Description}}</h5>
               <!--Switch-->
                 <div class="custom-control custom-switch float-left">
                   <input type="checkbox" class="custom-control-input" id="customSwitches-{{.DeviceID}}" {{if .Status}}
-                                            checked {{end}} onclick="$.get('/toggle_device/{{.DeviceID}}');" />
+                                            checked {{end}} onclick="$.get('/toggle_device/{{.DeviceID}}');location.reload().delay(800);" />
                   <label class="custom-control-label"
                        for="customSwitches-{{.DeviceID}}">{{if .Status}}On{{else}}Off{{end}}</label>
                 </div>
