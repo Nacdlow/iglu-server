@@ -279,6 +279,10 @@ padding: .5rem 1rem;
   max-width: 25%;
 }
 
+.nav-tabs, .nav-link {
+  width: 100%!important;
+}
+
 .activetab {
    color: black!important;
 }
@@ -312,7 +316,6 @@ div.scrollmenu a {
   display: inline-block;
   color: white;
   text-align: center;
-  padding: 14px;
   text-decoration: none;
 }
 
