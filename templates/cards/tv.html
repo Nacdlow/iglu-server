@@ -5,7 +5,7 @@
 			<!-- switch -->
 			<div class="col-4">
 				<a class="fas fa-power-off pb-3 {{if .Status}}green-text{{else}}red-text{{end}}" href="#"
-					style="color: black; font-size: 2em;" onclick="$.get('/toggle_device/{{.DeviceID}}');location.reload().delay(800);"></a>
+					style="color: black; font-size: 2em;" onclick="$.get('/toggle_device/{{.DeviceID}}');location.reload().delay(1000);"></a>
 				{{if .Status}}On{{else}}Off{{end}}
 				<!--/switch -->
 			</div>
@@ -63,7 +63,7 @@
       <div class="modal-footer justify-content-center">
         <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Cancel</button>
 		<button type="submit" data-dismiss="modal" class="btn btn-primary btn-sm" id="remove-{{.DeviceID}}"
-		onclick="$.get('/remove_device/{{.DeviceID}}');location.reload();">Remove Device</button>
+		onclick="$.get('/remove_device/{{.DeviceID}}');location.reload().delay(1000);">Remove Device</button>
       </div>
     </div>
   </div>

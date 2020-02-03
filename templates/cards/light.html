@@ -5,7 +5,7 @@
 		<div class="col-4">
 		<div class="custom-control custom-switch float-left">
 			<input type="checkbox" class="custom-control-input" id="customSwitches-{{.DeviceID}}" {{if .Status}}
-																checked {{end}} onclick="$.get('/toggle_device/{{.DeviceID}}');location.reload().delay(800);" />
+																checked {{end}} onclick="$.get('/toggle_device/{{.DeviceID}}');location.reload().delay(1000);" />
 			<label class="custom-control-label"
 				   for="customSwitches-{{.DeviceID}}">{{if .Status}}On{{else}}Off{{end}}</label>
 		</div>
@@ -44,7 +44,7 @@
 	</div>
 	<div class="card-footer" {{if .Status}}style="background-color: #FEFF9E;"
 		 {{else}}style="background-color: #FF6666;" {{end}}>
-		<small class="text-muted black-text">{{if .Status}}Time on: for 4hrs 15mins{{else}}Last on:
+		<small class="text-muted black-text">{{if .Status}}Time on: 4hrs 15mins{{else}}Last on:
 			yesterday{{end}}</small>
 	</div>
 </div>
@@ -56,7 +56,6 @@
   <!-- Change class .modal-sm to change the size of the modal -->
   <div class="modal-dialog modal-sm" role="document">
 
-
     <div class="modal-content">
       <div class="modal-header">
         <h4 class="modal-title w-100 black-text" id="removeDevice">Are you sure you want to remove this device?</h4>
@@ -67,7 +66,7 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Cancel</button>
 		<button type="submit" data-dismiss="modal" class="btn btn-primary btn-sm" id="remove-{{.DeviceID}}"
-		onclick="$.get('/remove_device/{{.DeviceID}}');location.reload().delay(800);">Remove Device</button>
+		onclick="$.get('/remove_device/{{.DeviceID}}');location.reload().delay(1000);">Remove Device</button>
       </div>
     </div>
   </div>
