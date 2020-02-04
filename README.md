@@ -14,12 +14,14 @@ $ git clone git@gitlab.com:group-nacdlow/nacdlow-server.git
 $ cd nacdlow-server
 ```
 
-And to run the application
+And to run the web server
 ```
 $ make
-$ ./nacdlow-server
+$ ./nacdlow-server run [--port 443]
 ```
 
 ## Configuration
 
-*To-do...*
+A configuration file is created `./config.toml`. New fields will be
+automatically added. You might need to set the Dark Sky API key, which you can
+find on our Internal Wiki.
