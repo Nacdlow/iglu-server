@@ -232,5 +232,16 @@ func FaveHandler(ctx *macaron.Context) {
 }
 
 func RemoveHandler(ctx *macaron.Context) {
-			models.DeleteDevice(ctx.ParamsInt64("id"))
+	models.DeleteDevice(ctx.ParamsInt64("id"))
+}
+
+func AddUserHandler(ctx *macaron.Context, form forms.RegisterForm) {
+	user := &models.User{
+		Username:  form.Email,
+		Password:  form.Password,
+		FirstName: form.FirstName,
+		LastName:  form.LastName,
+	}
+	models.AddUser(user)
+	ctx.Redirect("/dashboard")
 }
