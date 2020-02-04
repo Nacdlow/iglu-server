@@ -12,6 +12,8 @@ import (
 	"gitlab.com/group-nacdlow/nacdlow-server/modules/plugin"
 	"gitlab.com/group-nacdlow/nacdlow-server/modules/settings"
 	"gitlab.com/group-nacdlow/nacdlow-server/modules/simulation"
+
+	"golang.org/x/crypto/bcrypt"
 	macaron "gopkg.in/macaron.v1"
 )
 
@@ -236,9 +238,13 @@ func RemoveHandler(ctx *macaron.Context) {
 }
 
 func AddUserHandler(ctx *macaron.Context, form forms.RegisterForm) {
+	pass, err := bcrypt.GenerateFromPassword([]byte(form.Password), 10)
+	if err != nil {
+		panic(err)
+	}
 	user := &models.User{
 		Username:  form.Email,
-		Password:  form.Password,
+		Password:  string(pass),
 		FirstName: form.FirstName,
 		LastName:  form.LastName,
 	}
