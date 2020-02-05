@@ -6,7 +6,7 @@
 			<div class="custom-control custom-switch float-left">
 				<input type="checkbox" class="custom-control-input" id="customSwitches-{{.DeviceID}}" 
 				{{if eq .Status true}}checked{{else}}unchecked{{end}}
-				onclick="$.get('/toggle_device/{{.DeviceID}}');location.reload().delay(1000);">
+				onclick="$.get('/toggle_device/{{.DeviceID}}');location.reload().delay(1500);">
 				<label class="custom-control-label"
 					   for="customSwitches-{{.DeviceID}}">{{if .Status}}On{{else}}Off{{end}}</label>
 			</div>

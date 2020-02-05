@@ -5,7 +5,7 @@
 			<!-- switch -->
 			<div class="col-4">
 				<a class="fas fa-power-off pb-3 {{if .Status}}green-text{{else}}red-text{{end}}" href="#"
-					style="color: black; font-size: 2em;" onclick="$.get('/toggle_device/{{.DeviceID}}');location.reload().delay(1000);"></a>
+					style="color: black; font-size: 2em;" onclick="$.get('/toggle_device/{{.DeviceID}}');location.reload().delay(1500);"></a>
 				{{if .Status}}On{{else}}Off{{end}}
 				<!--/switch -->
 			</div>
