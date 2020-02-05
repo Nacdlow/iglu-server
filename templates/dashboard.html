@@ -63,7 +63,7 @@
                <!-- <h5 class="card-title float-right pr-4">{{if eq .Type 0}}Light:{{else if eq .Type 1}}Temp Control:{{else if eq .Type 2}}TV:{{else if eq .Type 3}}Speaker:{{end}}</h5>-->
                 <div class="custom-control custom-switch">
                   <input type="checkbox" class="custom-control-input" id="customSwitches-{{.DeviceID}}" {{if .Status}}
-                                            checked {{end}} onclick="$.get('/toggle_device/{{.DeviceID}}');location.reload().delay(2000);" />
+                                            checked {{end}} onclick="$.get('/toggle_device/{{.DeviceID}}');history.go(0).delay(1500);" />
                   <label class="custom-control-label"
                        for="customSwitches-{{.DeviceID}}">{{if .Status}}On{{else}}Off{{end}}</label>
                 </div>

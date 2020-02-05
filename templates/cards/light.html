@@ -5,7 +5,7 @@
 		<div class="col-4">
 		<div class="custom-control custom-switch float-left">
 			<input type="checkbox" class="custom-control-input" id="customSwitches-{{.DeviceID}}" {{if .Status}}
-																checked {{end}} onclick="$.get('/toggle_device/{{.DeviceID}}');location.reload().delay(2000);" />
+																checked {{end}} onclick="$.get('/toggle_device/{{.DeviceID}}');history.go(0).delay(2000);" />
 			<label class="custom-control-label"
 				   for="customSwitches-{{.DeviceID}}">{{if .Status}}On{{else}}Off{{end}}</label>
 		</div>
