@@ -54,10 +54,10 @@ func RegisterHandler(ctx *macaron.Context, sess session.Store) {
 }
 
 // PostRegisterHandler handles the post registration page.
-func PostRegisterHandler(ctx *macaron.Context, sess session.Store) {
+/*func PostRegisterHandler(ctx *macaron.Context, sess session.Store) {
 	if sess.Get("auth") == LoggedIn {
 		ctx.Redirect("/dashboard")
 		return
 	}
 	ctx.Redirect("/login")
-}
+} */
