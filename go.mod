@@ -3,6 +3,7 @@ module gitlab.com/group-nacdlow/nacdlow-server
 go 1.13
 
 require (
+	github.com/BurntSushi/toml v0.3.1
 	github.com/adlio/darksky v0.0.0-20190219023837-63c8e8a7fabe
 	github.com/brianvoe/gofakeit/v4 v4.2.1
 	github.com/cpuguy83/go-md2man/v2 v2.0.0 // indirect
@@ -26,8 +27,8 @@ require (
 	github.com/unknwon/com v1.0.1 // indirect
 	github.com/urfave/cli/v2 v2.1.1
 	gitlab.com/skilstak/code/go/uniq v0.0.0-20190715184642-a9672d63d2d8
-	golang.org/x/crypto v0.0.0-20200128174031-69ecbb4d6d5d
-	golang.org/x/sys v0.0.0-20200124204421-9fbb57f87de9 // indirect
+	golang.org/x/crypto v0.0.0-20200204104054-c9f3fb736b72
+	golang.org/x/sys v0.0.0-20200202164722-d101bd2416d5 // indirect
 	gopkg.in/check.v1 v1.0.0-20190902080502-41f04d3bba15 // indirect
 	gopkg.in/ini.v1 v1.52.0 // indirect
 	gopkg.in/macaron.v1 v1.3.4

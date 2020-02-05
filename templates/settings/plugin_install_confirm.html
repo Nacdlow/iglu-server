@@ -1,0 +1,23 @@
+{{template "base/head" .}}
+{{template "base/nav" .}}
+<div class="container animated fadeIn">
+	<h2 class="pt-5 text-center">Confirm installation</h2>
+  <div class="pt-3 pb-3">
+    <hr>
+  </div>
+
+<ul class="list-group list-group-flush">
+	<li class="list-group-item"><b>ID:</b> {{.Plugin.ID}}</li>
+	<li class="list-group-item"><b>Name:</b> {{.Plugin.Name}}</li>
+	<li class="list-group-item"><b>Author:</b> {{.Plugin.Author}}</li>
+	<li class="list-group-item"><b>Version:</b> {{.Plugin.Version}}</li>
+</ul>
+	  <p class="pt-2">Are you sure you want to install this plugin?</p>
+
+	  <a href="/settings/plugins/confirm/{{.Plugin.ID}}" class="btn
+		  btn-success">Confirm</a>
+<a href="/settings/plugins" class="btn btn-danger">Cancel</a>
+</div>
+{{template "base/scripts" .}}
+{{template "base/footer" .}}
+{{template "base/tabnav" .}}

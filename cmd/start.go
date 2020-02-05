@@ -88,7 +88,11 @@ func getMacaron() *macaron.Macaron {
 		m.Get("/remove_device/:id", routes.RemoveHandler) //remove a device
 
 		m.Get("/settings", routes.SettingsHandler)
-		m.Get("/settings/plugins", routes.PluginsSettingsHandler)
+		m.Group("/settings/plugins", func() {
+			m.Get("", routes.PluginsSettingsHandler)
+			m.Get("/:id", routes.InstallPluginSettingsHandler)
+			m.Get("/confirm/:id", routes.InstallPluginConfirmSettingsHandler) // TODO use POST so it is secure
+		})
 		m.Get("/settings/accounts", routes.AccountSettingsHandler)
 		m.Get("/settings/appearance", routes.AppearanceSettingsHandler)
 
