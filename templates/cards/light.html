@@ -3,12 +3,14 @@
 		<div class="row">
 		<!-- switch -->
 		<div class="col-4">
+			<div id="toggle">
 		<div class="custom-control custom-switch float-left">
 			<input type="checkbox" class="custom-control-input" id="customSwitches-{{.DeviceID}}" {{if .Status}}
-																checked {{end}} onclick="$.get('/toggle_device/{{.DeviceID}}');history.go(0).delay(2000);" />
+																checked {{end}} onclick="$.get('/toggle_device/{{.DeviceID}}');reload();" />
 			<label class="custom-control-label"
-				   for="customSwitches-{{.DeviceID}}">{{if .Status}}On{{else}}Off{{end}}</label>
+				   for="customSwitches-{{.DeviceID}}" id="label-{{.DeviceID}}">{{if .Status}}On{{else}}Off{{end}}</label>
 		</div>
+	</div>
 		<!--/switch -->
 		</div>
 
@@ -23,8 +25,9 @@
             </a>
             <div class="dropdown-menu dropdown-menu-right dropdown-default text-center"
               aria-labelledby="navbarDropdownMenuLink-333">
-			  <a class="dropdown-item black-text" href="#" id="fave-{{.DeviceID}}" onclick="$.get('/toggle_fave/{{.DeviceID}}');">
-				Favourite <i class="fas fa-heart"></i></a>
+			  <a class="dropdown-item {{if .IsFave}}red-text{{else}}black-text{{end}}" href="#" id="fave-{{.DeviceID}}"
+			  	onclick="$.get('/toggle_fave/{{.DeviceID}}');reload();">
+				  {{if .IsFave}}Un-favourite{{else}}Favourite{{end}} <i class="fas fa-heart red-text"></i></a>
 			  <a class="dropdown-item black-text" href="#">Edit</a>
 			  <a class="dropdown-item black-text" href="#" id="remove-{{.DeviceID}}" data-toggle="modal" data-target="#removeDevice-{{.DeviceID}}">Remove</a>
         </div>
@@ -37,7 +40,7 @@
 			<form class="range-field">
 				<input class="custom-range" type="range" min="0" max="10" value="{{.Brightness}}"
 					  id="slider-{{.DeviceID}}"
-					  onclick="$.get('/toggle_slider/{{.DeviceID}}/'+ $('#slider-{{.DeviceID}}').val());" />
+					  onclick="$.get('/toggle_slider/{{.DeviceID}}/'+ $('#slider-{{.DeviceID}}').val());reload();" />
 			</form>
 			<span class="blue-text ml-2 "><i class="fas fa-sun fa-lg" aria-hidden="true"></i></span>
 		</div>
@@ -66,9 +69,16 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Cancel</button>
 		<button type="submit" data-dismiss="modal" class="btn btn-primary btn-sm" id="remove-{{.DeviceID}}"
-		onclick="$.get('/remove_device/{{.DeviceID}}');location.reload().delay(1000);">Remove Device</button>
+		onclick="$.get('/remove_device/{{.DeviceID}}');reload();">Remove Device</button>
       </div>
     </div>
   </div>
 </div>
 <!-- /Remove Device -->
+
+<!--<script type="text/javascript">
+	setInterval("my_function();",2000); 
+		function my_function(){
+		  $('#label-{{.DeviceID}}').load(location.href + ' #label-{{.DeviceID}}');
+		}
+	</script>-->
