@@ -7,11 +7,14 @@ import (
 	"github.com/urfave/cli/v2"
 	macaron "gopkg.in/macaron.v1"
 
+	"context"
 	"fmt"
 	"io"
 	"log"
 	"net/http"
+	"net/http/pprof"
 	"os"
+	"os/signal"
 	"time"
 
 	"gitlab.com/group-nacdlow/nacdlow-server/models"
@@ -111,10 +114,33 @@ func getMacaron() *macaron.Macaron {
 		m.Get("/env_status", routes_sim.EnvStatusHandler)
 		m.Get("/toggle/:id", routes_sim.ToggleHandler)
 	})
+
+	m.Group("/debug/pprof", func() {
+		m.Get("/", pprofHandler(pprof.Index))
+		m.Get("/cmdline", pprofHandler(pprof.Cmdline))
+		m.Get("/profile", pprofHandler(pprof.Profile))
+		m.Post("/symbol", pprofHandler(pprof.Symbol))
+		m.Get("/symbol", pprofHandler(pprof.Symbol))
+		m.Get("/trace", pprofHandler(pprof.Trace))
+		m.Get("/allocs", pprofHandler(pprof.Handler("allocs").ServeHTTP))
+		m.Get("/block", pprofHandler(pprof.Handler("block").ServeHTTP))
+		m.Get("/goroutine", pprofHandler(pprof.Handler("goroutine").ServeHTTP))
+		m.Get("/heap", pprofHandler(pprof.Handler("heap").ServeHTTP))
+		m.Get("/mutex", pprofHandler(pprof.Handler("mutex").ServeHTTP))
+		m.Get("/threadcreate", pprofHandler(pprof.Handler("threadcreate").ServeHTTP))
+	})
 	return m
 }
 
+func pprofHandler(h http.HandlerFunc) macaron.Handler {
+	handler := http.HandlerFunc(h)
+	return func(c *macaron.Context) {
+		handler.ServeHTTP(c.Resp, c.Req.Request)
+	}
+}
+
 func start(clx *cli.Context) (err error) {
+	// Log both to a file and to stdout
 	file, err := os.OpenFile("iglu.log", os.O_CREATE|os.O_APPEND|os.O_WRONLY, 0600)
 	if err != nil {
 		log.Fatal(err)
@@ -133,6 +159,21 @@ func start(clx *cli.Context) (err error) {
 	m := getMacaron()
 
 	log.Printf("Starting TLS web server on :%s\n", clx.String("port"))
-	log.Fatal(http.ListenAndServeTLS(fmt.Sprintf(":%s", clx.String("port")), "fullchain.pem", "privkey.pem", m))
+	server := &http.Server{Addr: fmt.Sprintf(":%s", clx.String("port")), Handler: m}
+	go func() {
+		log.Fatal(server.ListenAndServeTLS("fullchain.pem", "privkey.pem"))
+	}()
+
+	// Capture system interrupt
+	stop := make(chan os.Signal, 1)
+	signal.Notify(stop, os.Interrupt)
+	<-stop
+
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancel()
+	if err := server.Shutdown(ctx); err != nil {
+		panic(err)
+	}
+
 	return nil
 }

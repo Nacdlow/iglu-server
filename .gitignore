@@ -3,6 +3,7 @@
 config.toml
 plugins/
 *.log
+*.prof
 
 # For those folks using macOS
 .DS_Store
