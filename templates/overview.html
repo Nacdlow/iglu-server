@@ -1,14 +1,175 @@
 {{template "base/head" .}} {{template "base/nav" .}}
 
-<div class="container animated fadeIn">
-  
-  <h1 class="display-1 text-center pt-5"><i class="fas fa-hard-hat"></i></h1>
+<div class="container">
+<h1 class="display-1 text-center pt-5"><i class="fas fa-hard-hat"></i></h1>
   <h1 class="display-1 text-center mobhide pb-3">Under Construction!</h1>
   <h1 class="text-center deskhide pb-3">Under Construction!</h1>
   <h1 class="text-center">This page will be available soon.</h1>
-
+  <hr>
 </div>
 
+<div class="container">
+<h1 class="text-center">Prototype Floorplan</h1>
+<div class="card">
+<div class="main-content">
+  <div class="door-hor"></div>
+  <div class="utility">
+    <div class="door-hor"></div>
+    <div class="name">utility room</div>
+  </div>
+  <div class="kitchen">
+    <div class="ref"></div>
+    <div class="rug"></div>
+    <div class="cabinets">
+      <div class="stove"></div>
+    </div>
+    <div class="sink">
+      <div class="sink-tap-1"></div>
+      <div class="sink-tap-2"></div>
+    </div>
+    <div class="island">
+      <div class="chair"></div>
+    </div>
+    <div class="name">kitchen</div>
+  </div>
+  <div class="bathroom-2">
+    <div class="window-hor"></div>
+    <div class="door-hor"></div>
+    <div class="shower"></div>
+    <div class="toilet"></div>
+    <div class="vanity"></div>
+    <div class="rug"></div>
+    <div class="name">bath #1</div>
+  </div>
+  <div class="bedroom-2">
+    <div class="door-ver"></div>
+    <div class="window-hor"></div>
+    <div class="bed-table"></div>
+    <div class="bed">
+      <div class="blanket"></div>
+      <div class="pillow"></div>
+    </div>
+    <div class="table"></div>
+    <div class="name">guest bedroom</div>
+  </div>
+  <div class="living-room">
+    <div class="rug"></div>
+    <div class="window-ver"></div>
+    <div class="sofa"></div>
+    <div class="coffee-table"></div>
+    <div class="tv-set"></div>
+    <div class="name">living room</div>
+  </div>
+  <div class="bedroom-1">
+    <div class="rug"></div>
+    <div class="door-hor"></div>
+    <div class="window-hor"></div>
+    <div class="bed">
+      <div class="blanket"></div>
+      <div class="pillow"></div>
+      <div class="pillow"></div>
+    </div>
+    <div class="bed-table grow">
+      <a class="far fa-lightbulb m-1 " data-toggle="modal" data-target="#basicExampleModal" style="color: #3766ff!important;"></a>
+    </div>
+    <div class="bed-table grow">
+      <a class="far fa-lightbulb m-1" data-toggle="modal" data-target="#basicExampleModal" style="color: #3766ff!important;"></a>
+    </div>
+    <div class="name">
+      <a data-toggle="modal" data-target="#basicExampleModal" style="color: #3766ff!important;">
+        Master Bedroom
+      </a>
+    </div>
+  </div>
+  <div class="closet">
+    <div class="wall-gap"></div>
+    <div class="name">walk-in closet</div>
+  </div>
+  <div class="bathroom-1">
+    <div class="door-ver"></div>
+    <div class="door-ver"></div>
+    <div class="window-hor"></div>
+    <div class="rug"></div>
+    <div class="bathtub"></div>
+    <div class="vanity"></div>
+    <div class="toilet"></div>
+    <div class="name">bath #2</div>
+  </div>
+  <div class="office">
+    <div class="door-hor"></div>
+    <div class="window-hor"></div>
+    <div class="table"></div>
+    <div class="name">home office</div>
+  </div>
+  <div class="patio">
+    <div class="door-sliding"></div>
+    <div class="real-patio">
+      <div class="name">balcony</div>
+    </div>
+    <div class="patio-table"></div>
+    <div class="patio-chair"></div>
+    <div class="patio-chair"></div>
+  </div>
+</div>
+</div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="basicExampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body m-3 black-text">
+        <div class="row">
+          <!-- switch -->
+          <div class="col-4">
+            <div id="toggle">
+              <div class="custom-control custom-switch float-left">
+                <input type="checkbox" class="custom-control-input" id="customSwitches-{{.DeviceID}}" {{if .Status}}
+                                          checked {{end}} onclick="$.get('/toggle_device/{{.DeviceID}}');reload();" />
+                <label class="custom-control-label"
+                     for="customSwitches-{{.DeviceID}}" id="label-{{.DeviceID}}">{{if .Status}}On{{else}}Off{{end}}</label>
+              </div>
+            </div>
+          </div>
+    
+          <div class="col-4">
+            <h4 class="text-center black-text">Lamp</h4>
+          </div>
+    
+          <div class="col-4 text-right">
+            <a class="p-0" id="navbarDropdownMenuLink-333" data-toggle="dropdown" aria-haspopup="true"
+              aria-expanded="false">
+              <i class="fas fa-ellipsis-h black-text"></i>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right dropdown-default text-center"
+              aria-labelledby="navbarDropdownMenuLink-333">
+              <a class="dropdown-item {{if .IsFave}}red-text{{else}}black-text{{end}}" href="#" id="fave-{{.DeviceID}}"
+              onclick="$.get('/toggle_fave/{{.DeviceID}}');reload();">
+              {{if .IsFave}}Un-favourite{{else}}Favourite{{end}} <i class="fas fa-heart red-text"></i></a>
+              <a class="dropdown-item black-text" data-toggle="modal" data-target="#options">Options</a>
+              <a class="dropdown-item black-text" href="#" id="remove-{{.DeviceID}}" data-toggle="modal" data-target="#removeDevice-{{.DeviceID}}">Remove</a>
+            </div>
+          </div>
+        </div>
+        <p class="text-center pt-4">Brightness</p>
+		<div class="d-flex justify-content-center">
+			<span class="blue-text mr-2"><i class="fas fa-moon fa-lg" aria-hidden="true"></i></span>
+			<form class="range-field">
+				<input class="custom-range" type="range" min="0" max="10" value="{{.Brightness}}"
+					  id="slider-{{.DeviceID}}"
+					  onclick="$.get('/toggle_slider/{{.DeviceID}}/'+ $('#slider-{{.DeviceID}}').val());reload();" />
+			</form>
+			<span class="blue-text ml-2 "><i class="fas fa-sun fa-lg" aria-hidden="true"></i></span>
+		</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 {{template "base/flash" .}}
