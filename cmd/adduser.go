@@ -59,7 +59,10 @@ func adduser(c *cli.Context) (err error) {
 		panic(err)
 	}
 	u.Password = string(pass)
-	models.AddUser(u)
+	err = models.AddUser(u)
+	if err != nil {
+		panic(err)
+	}
 
 	fmt.Println()
 	fmt.Println("User added!")

@@ -163,7 +163,7 @@ func InstallPluginSettingsHandler(ctx *macaron.Context) {
 
 // SpecificRoomsHandler handles the specific rooms
 func SpecificRoomsHandler(ctx *macaron.Context) {
-	ctx.Data["NavTitle"] = fmt.Sprintf("%s", ctx.Params("roomType"))
+	ctx.Data["NavTitle"] = ctx.Params("roomType")
 	if ctx.Params("name") == "bedrooms" {
 		ctx.Data["Bedrooms"] = 1
 		ctx.Data["Rooms"] = models.GetRooms()

@@ -56,6 +56,10 @@ func LoadPlugins() {
 				continue
 			}
 			version, err := p.Lookup("VERSION")
+			if err != nil {
+				log.Printf("Failed to load variables for plugin '%s'!\n", f.Name())
+				continue
+			}
 			log.Printf("Loading %s %s...", *name.(*string), *version.(*string))
 			load, err := p.Lookup("Load")
 			if err != nil {

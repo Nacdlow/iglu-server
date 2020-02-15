@@ -19,7 +19,7 @@ func HomepageHandler(ctx *macaron.Context) {
 	ctx.Data["Env"] = simulation.Env
 	ctx.Data["TickSleep"] = simulation.TickSleep.Milliseconds()
 	if lastMCPing != (time.Time{}) {
-		lastPing := time.Now().Sub(lastMCPing).Milliseconds()
+		lastPing := time.Since(lastMCPing).Milliseconds()
 		ctx.Data["LastMCPing"] = lastPing
 		ctx.Data["MCConnected"] = (lastPing < 2000)
 		ctx.Data["MCVersion"] = mcVersion

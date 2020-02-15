@@ -43,6 +43,9 @@ func LoadConfig() {
 			panic(err)
 		}
 	}
-	Config.WriteConfig()
+	err := Config.WriteConfig()
+	if err != nil {
+		panic(err)
+	}
 
 }

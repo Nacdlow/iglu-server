@@ -38,8 +38,15 @@ func PostLoginHandler(ctx *macaron.Context, x csrf.CSRF, sess session.Store,
 		ctx.Redirect("/")
 		return
 	}
-	sess.Set("auth", LoggedIn)
-	sess.Set("username", u.Username)
+
+	err = sess.Set("auth", LoggedIn)
+	if err != nil {
+		panic(err)
+	}
+	err = sess.Set("username", u.Username)
+	if err != nil {
+		panic(err)
+	}
 
 	ctx.Redirect("/dashboard")
 }

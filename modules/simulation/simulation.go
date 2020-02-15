@@ -7,7 +7,6 @@ import (
 	"gitlab.com/group-nacdlow/nacdlow-server/modules/weather"
 	"log"
 	"math"
-	"math/rand"
 	"time"
 )
 
@@ -17,13 +16,7 @@ var (
 	// TickSleep is the length of a second in the simulation world, in
 	// milliseconds.
 	TickSleep time.Duration = 1000 * time.Millisecond
-	rnd       *rand.Rand
 )
-
-func init() {
-	// Create and seed a new randomiser
-	rnd = rand.New(rand.NewSource(time.Now().UnixNano()))
-}
 
 func UpdateFromDB() {
 	for i, room := range Env.Rooms {
