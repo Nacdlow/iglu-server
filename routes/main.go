@@ -204,9 +204,10 @@ func SpecificRoomsHandler(ctx *macaron.Context) {
 	ctx.HTML(200, "specificRooms")
 }
 
-// OverviewHandler handles all the devices
+// OverviewHandler handles the overview page
 func OverviewHandler(ctx *macaron.Context) {
 	ctx.Data["NavTitle"] = "Overview"
+	ctx.Data["IsOverview"] = 1
 	ctx.Data["Devices"] = models.GetDevices()
 	ctx.HTML(200, "overview")
 }
