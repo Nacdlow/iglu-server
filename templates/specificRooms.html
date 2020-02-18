@@ -177,58 +177,9 @@
         {{end}}{{end}}
       </div>
     </div>
-
-    <div class="btn-group-position" role="group" aria-label="FAB Menu">
-      <a class="card btn-primary circle-small d-flex align-items-center justify-content-center" data-placement="left"
-        data-toggle="modal" data-target="#addModal">
-        <i class="fa fa-plus fa-lg white-text"></i></a>
-    </div>
-
   </div>
 </div>
 {{end}}
-
-<!-- modal for adding devices-->
-<div class="modal bottom fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-  aria-hidden="true" data-backdrop="false">
-  <div class="modal-dialog modal-dialog-centered" role="document" data-backdrop="false">
-    <div class="modal-content" data-backdrop="false" method="POST">
-      <div class="modal-header navcolor">
-        <h5 class="modal-title">Add Control Module</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true"><i class="fas fa-times white-text"></i></span>
-        </button>
-      </div>
-      <div class="modal-body bodycolor">
-        <form method="POST">
-          <input type="hidden" class="form-control mb-4 text-center w-50" name="room_id" value="{{.Room.RoomID}}">
-          <h6 class="text-center">Select Device Type:</h6>
-          <div class="md-form pb-3 pr-5 pl-5">
-            <select class="browser-default custom-select" id="select" name="device_type">
-              <option value="" disabled selected>Choose Type</option>
-              <option value="0">Lights</option>
-              <option value="1">Temperature Control</option>
-              <option value="2">TV</option>
-              <option value="3">Speaker</option>
-            </select>
-          </div>
-          <h6 class="text-center">Enter Description:</h6>
-          <div class="md-form text-center justify-content-center d-flex">
-            <input type="text" class="form-control mb-3 text-center w-50" placeholder="Description" name="description">
-          </div>
-          <div class="custom-control custom-checkbox text-center">
-            <input type="checkbox" class="custom-control-input" id="defaultUnchecked" name="is_main_light_source">
-            <label class="custom-control-label" for="defaultUnchecked">Main Light</label>
-          </div>
-      </div>
-      <div class="modal-footer justify-content-center d-flex navcolor">
-        <button type="button" class="btn bodycolor" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn white black-text">Save changes</button>
-      </div>
-      </form>
-    </div>
-  </div>
-</div>
 
 <div class="modal bottom fade" id="options" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
   aria-hidden="true" data-backdrop="false">

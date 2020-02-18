@@ -78,21 +78,27 @@ func getMacaron() *macaron.Macaron {
 		m.Group("/room", func() {
 			m.Group("/:name", func() {
 				m.Get("", routes.SpecificRoomsHandler)
-				m.Post("", binding.Bind(forms.AddDeviceForm{}),
-					routes.AddDeviceRoomPostHandler)
 			})
 		})
 		m.Get("/overview", routes.OverviewHandler)
 		m.Get("/rooms", routes.RoomsHandler)
-		m.Post("/rooms", binding.Bind(forms.AddRoomForm{}),
-			routes.PostRoomHandler)
 		m.Get("/toggle_device/:id", routes.ToggleHandler)
 		m.Get("/toggle_slider/:id/:value", routes.SliderHandler)
+		m.Get("/alerts", routes.AlertsHandler)
 
 		m.Get("/toggle_fave/:id", routes.FaveHandler)     //set device as fave
 		m.Get("/remove_device/:id", routes.RemoveHandler) //remove a device
 
 		m.Group("", func() {
+			m.Group("/add", func() {
+				m.Get("", routes.AddHandler)
+				m.Get("/room", routes.AddRoomHandler)
+				m.Post("/room", binding.Bind(forms.AddRoomForm{}),
+					routes.PostRoomHandler)
+				m.Get("/device", routes.AddDeviceHandler)
+				m.Post("/device", binding.Bind(forms.AddDeviceForm{}),
+					routes.AddDeviceRoomPostHandler)
+			})
 			m.Get("/settings", routes.SettingsHandler)
 			m.Group("/settings/plugins", func() {
 				m.Get("", routes.PluginsSettingsHandler)

@@ -4,8 +4,8 @@
     <div class="container">
       <!-- Collapse button -->
 
-      {{if not .IsDashboard}}<a onclick="history.back()" class="back-button">
-        <i class="fas fa-angle-left"></i></a>{{else}}<a class="deskhide"><span
+	  {{if not .IsDashboard}}<a {{if .BackLink}}href="{{.BackLink}}"{{else}}onclick="history.back()"{{end}} class="back-button">
+		  <i class="{{if .CrossBack}}fas fa-times{{else}}fas fa-angle-left{{end}}"></i></a>{{else}}<a class="deskhide"><span
           style="padding-right:60px;"></span></a>{{end}}
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent41"
         aria-controls="navbarSupportedContent41" aria-expanded="false" aria-label="Toggle navigation">
@@ -53,8 +53,13 @@
         <!-- Links -->
 
         <ul class="navbar-nav mobhide">
-          <li class="nav-item" data-toggle="modal" data-target="#fullHeightModalRight">
-            <a class="nav-link waves-effect waves-light" href="#"> <i class="far fa-bell"></i></a>
+          <li class="nav-item">
+            <a class="nav-link waves-effect waves-light" href="/add"> <i
+					class="fa fa-plus"></i></a>
+          </li>
+        <ul class="navbar-nav mobhide">
+          <li class="nav-item">
+            <a class="nav-link waves-effect waves-light" href="/alerts"> <i class="far fa-bell"></i></a>
           </li>
           <li class="nav-item dropdown avatar">
             <a class="nav-link p-0" id="navbarDropdownMenuLink-333" data-toggle="dropdown" aria-haspopup="true"
@@ -75,27 +80,6 @@
       </div>
     </div>
   </nav>
-
-  <div class="modal fade right" id="fullHeightModalRight" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog modal-full-height modal-right" role="document">
-      <div class="modal-content elegant-color">
-        <div class="modal-header">
-          <h4 class="modal-title w-100" id="myModalLabel">Notifications</h4>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span class="text-white" aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          You have no notifications
-        </div>
-        <div class="modal-footer justify-content-center">
-          <button type="button" class="btn btn-primary">Clear All</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
 </header>
 
 {{ template "base/flash" .}}
