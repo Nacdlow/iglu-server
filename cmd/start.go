@@ -84,6 +84,7 @@ func getMacaron() *macaron.Macaron {
 		m.Get("/rooms", routes.RoomsHandler)
 		m.Get("/toggle_device/:id", routes.ToggleHandler)
 		m.Get("/toggle_slider/:id/:value", routes.SliderHandler)
+		m.Get("/alerts", routes.AlertsHandler)
 
 		m.Get("/toggle_fave/:id", routes.FaveHandler)     //set device as fave
 		m.Get("/remove_device/:id", routes.RemoveHandler) //remove a device

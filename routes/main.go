@@ -85,7 +85,13 @@ func AddRoomHandler(ctx *macaron.Context) {
 	ctx.HTML(200, "add_room")
 }
 
-// AddDeviceHandler handles the add room page
+// AlertsHandler handles the alerts page
+func AlertsHandler(ctx *macaron.Context) {
+	ctx.Data["CrossBack"] = 1
+	ctx.HTML(200, "alerts")
+}
+
+// AddDeviceHandler handles the add device page
 func AddDeviceHandler(ctx *macaron.Context) {
 	ctx.Data["BackLink"] = "/add"
 	ctx.Data["Rooms"] = models.GetRooms()
