@@ -95,7 +95,12 @@ a {
 }
 
 .card {
-  color: black!important;
+  color: #fff!important;
+  background-color: var(--top-bar);
+}
+
+.card-footer .text-muted {
+  color: #000!important;
 }
 
 .btn {
