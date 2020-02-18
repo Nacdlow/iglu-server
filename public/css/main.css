@@ -5,6 +5,7 @@
   --top-bar: #1c1b20;
   --bottom-bar: #1c1b20;
   --iglu-colour: #3766ff;
+  --light: #454452;
 }
 
 .bottom-nav {
@@ -20,7 +21,20 @@ small {
 }
 
 .list-group-item {
-  color:black!important;
+  background-color: var(--light);
+  color:#fff!important;
+}
+.list-group-item:hover {
+  background-color: var(--bottom-bar);
+}
+
+.room-icon a {
+  font-size: 50px;
+  color: white;
+}
+
+.room-icon a:hover {
+  color: var(--iglu-colour)!important;
 }
 
 .svghover {

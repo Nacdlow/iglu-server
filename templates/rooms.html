@@ -6,27 +6,25 @@
     <hr>
   </div>
   <div class="row justify-content-center pt-4">
-    <div class="col-lg-2 col-md-3 col-4 text-center pb-3">
-      <a class="fas fa-bed pb-3" href="room/bedrooms" style="color: white; font-size: 50px;"></a>
+    <div class="room-icon col-lg-2 col-md-3 col-4 text-center pb-3">
+      <a class="fas fa-bed pb-3" href="room/bedrooms"></a>
       <h6>Bedrooms</h6>
     </div>
-    <div class="col-lg-2 col-md-3 col-4 text-center pb-3">
-      <a class="fas fa-bath pb-3" href="room/bathrooms" style="color: white; font-size: 50px;"></a>
+    <div class="room-icon col-lg-2 col-md-3 col-4 text-center pb-3">
+      <a class="fas fa-bath pb-3" href="room/bathrooms"></a>
       <h6>Bathrooms</h6>
     </div>
     {{range .Rooms}}{{if not (eq .RoomType 1)}}
-    <div class="col-lg-2 col-md-3 col-4 text-center pb-3" id="roomAvatarDiv">
+    <div class="room-icon col-lg-2 col-md-3 col-4 text-center pb-3" id="roomAvatarDiv">
       <a class="nav-link p-0 pb-3 {{if eq .RoomType 0}}fas fa-couch{{else if eq .RoomType 1}}fas fa-bed{{else if eq .RoomType 2}}
       fas fa-coffee{{else if eq .RoomType 3}}fas fa-utensils{{else if eq .RoomType 4}}fas fa-bath{{else if eq .RoomType 5}}
       fas fa-door-open{{else if eq .RoomType 6}}fas fa-toolbox{{else if eq .RoomType 7}}fas fa-socks{{else if eq .RoomType 8}}
-      fas fa-warehouse{{else if eq .RoomType 9}}fas fa-user{{end}}" href="/room/{{.RoomID}}" id="roomAvatar"
-        style="color: white; font-size: 50px;"></a>
+      fas fa-warehouse{{else if eq .RoomType 9}}fas fa-user{{end}}" href="/room/{{.RoomID}}" id="roomAvatar"></a>
       <h6>{{.RoomName}}</h6>
     </div>
     {{end}}{{end}}
-    <div class="col-lg-2 col-md-3 col-4 text-center pb-3 mobhide">
-      <a type="button" class="fas fa-plus pb-3" href="#" data-toggle="modal" data-target="#addModal"
-        style="color: white; font-size: 50px;"></a>
+    <div class="room-icon col-lg-2 col-md-3 col-4 text-center pb-3 mobhide">
+      <a type="button" class="fas fa-plus pb-3" href="#" data-toggle="modal" data-target="#addModal"></a>
       <h6>Add Room</h6>
     </div>
   </div>
