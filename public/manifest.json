@@ -1,8 +1,8 @@
 {
-  "name": "iglu",
-  "short_name": "iglu",
-  "theme_color": "#008eff",
-  "background_color": "#505050",
+  "name": "iglü",
+  "short_name": "iglü",
+  "theme_color": "#1c1b20",
+  "background_color": "#121116",
   "display": "standalone",
   "orientation": "portrait",
   "Scope": "/",
