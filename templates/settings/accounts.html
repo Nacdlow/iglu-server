@@ -5,11 +5,20 @@
   <div class="pt-3 pb-3">
     <hr>
   </div>
+  <form method="POST">
+	  <input type="hidden" name="action" value="get_invite" />
+	  <button type="submit" class="btn btn-success">Generate an invite code</button>
+  </form>
 
   <div class="list-group">
+	  {{range .Accounts}}
     <button type="button" class="list-group-item list-group-item-action">
-      <i class="fas fa-sliders-h" style="font-size: 15px;"></i>&nbsp; &nbsp; Some Text
+		<i class="fas fa-user" style="font-size: 15px;"></i>&nbsp; &nbsp;
+		{{.FirstName}}{{if .LastName}} {{.LastName}}{{end}} ({{.Username}})
+		{{if eq .Role 1}}<span class="badge badge-danger">Admin</span>
+		{{else if eq .Role 2}}<span class="badge badge-info">Guest</span>{{end}}
     </button>
+	{{end}}
   </div>
 
   <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"

@@ -2,7 +2,6 @@ package routes
 
 import (
 	"fmt"
-	"github.com/BurntSushi/toml"
 	"html/template"
 	"io"
 	"io/ioutil"
@@ -12,13 +11,15 @@ import (
 	"runtime"
 	"strings"
 
-	"github.com/go-macaron/session"
 	"gitlab.com/group-nacdlow/nacdlow-server/models"
 	"gitlab.com/group-nacdlow/nacdlow-server/models/forms"
 	"gitlab.com/group-nacdlow/nacdlow-server/modules/plugin"
 	"gitlab.com/group-nacdlow/nacdlow-server/modules/settings"
 	"gitlab.com/group-nacdlow/nacdlow-server/modules/simulation"
+	"gitlab.com/group-nacdlow/nacdlow-server/modules/tokens"
 
+	"github.com/BurntSushi/toml"
+	"github.com/go-macaron/session"
 	"golang.org/x/crypto/bcrypt"
 	macaron "gopkg.in/macaron.v1"
 )
@@ -74,7 +75,21 @@ func SettingsHandler(ctx *macaron.Context) {
 // AccountSettingsHandler handles the settings
 func AccountSettingsHandler(ctx *macaron.Context) {
 	ctx.Data["NavTitle"] = "Account Settings"
+	ctx.Data["Accounts"] = models.GetUsers()
 	ctx.HTML(200, "settings/accounts")
+}
+
+// PostAccountSettingsHandler handles the settings
+func PostAccountSettingsHandler(ctx *macaron.Context, f *session.Flash) {
+	switch ctx.Query("action") {
+	case "get_invite":
+		code := tokens.GenerateInviteKey()
+		f.Info(fmt.Sprintf("Your new invitation code is: %s", code))
+		break
+	default:
+		f.Error("Unknown action")
+	}
+	ctx.Redirect("/settings/accounts")
 }
 
 // AppearanceSettingsHandler handles the settings
@@ -314,7 +329,13 @@ func RemoveHandler(ctx *macaron.Context) {
 	models.DeleteDevice(ctx.ParamsInt64("id"))
 }
 
-func AddUserHandler(ctx *macaron.Context, form forms.RegisterForm) {
+func AddUserHandler(ctx *macaron.Context, form forms.RegisterForm, f *session.Flash) {
+	ok := tokens.CheckAndConsumeKey(form.InviteCode)
+	if !ok {
+		f.Error("Invalid invite code. Please ask for an invite code from the home owner.")
+		ctx.Redirect("/register")
+		return
+	}
 	pass, err := bcrypt.GenerateFromPassword([]byte(form.Password), 10)
 	if err != nil {
 		panic(err)
