@@ -1,4 +1,15 @@
 {{template "base/head" .}}
+<script>
+    if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/js/sw.js')
+        .then((reg) => {
+          console.log('Service worker registered.', reg);
+        });
+  });
+}
+</script>
+
 <div class="mobhide">
     <div class="split split-right">
         <div class="centered">
@@ -121,11 +132,5 @@
 </div>
 </div>
 
-<script>
-    if('serviceWorker' in navigator) {
-      navigator.serviceWorker
-               .register('/js/sw.js')
-               .then(function() { console.log("Service Worker Registered"); });
-    }
-</script>
+
 {{template "base/footer" .}}

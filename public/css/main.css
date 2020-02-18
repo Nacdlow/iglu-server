@@ -1,10 +1,18 @@
-/* Floorplan CSS file */
-@import "floorplan.css";
-
 /* The global CSS file */
+
+:root {
+  --back: #121116;
+  --top-bar: #1c1b20;
+  --bottom-bar: #06050a;
+  --iglu-colour: #3766ff;
+}
 
 .bottom-nav {
   font-size: small;
+}
+
+.bottom-colour {
+  background-color: var(--bottom-bar);
 }
 
 small {
@@ -25,15 +33,15 @@ small {
 }
 
 .navcolor {
-    background-color: #3766FF;
+    background-color: var(--top-bar);
 }
 
 .bodycolor {
-    background-color: #34383b!important;
+    background-color: var(--back) !important;
 }
 
 body {
-    background-color: #34383b!important;
+    background-color: var(--back)!important;
     color: white!important;
     margin-bottom: 100px;
 }
@@ -48,10 +56,6 @@ a {
 
 .card {
   color: black!important;
-}
-
-a:hover {
-    color: rgb(0, 0, 0)!important;
 }
 
 .btn {
@@ -71,7 +75,7 @@ a:hover {
 }
 
 .circle-small {
-  background-color: #3766FF!important;
+  background-color: var(--top-bar)!important;
   color: white;
   border-radius: 100%;
   width: 60px;
@@ -133,7 +137,7 @@ padding: .5rem 1rem;
 }
 
 .btn-default, .default-color {
-  background-color: #3766FF !important;
+  background-color: var(--top-bar)!important;
 }
 
 @media (min-width: 992px) {
@@ -201,13 +205,13 @@ padding: .5rem 1rem;
   .split-left {
     left: 0;
     width: 60%;
-    background-color: #3766FF;
+    background-color: var(--top-bar);
   }
   
   .split-right {
     right: 0;
     width: 40%;
-    background-color: #34383b;
+    background-color: var(--back);
   }
   
   .centered {
@@ -227,14 +231,14 @@ padding: .5rem 1rem;
   .split-top {
     top: 0;
     height: 25%;
-    background-color: #3766FF;
+    background-color: var(--top-bar);
     overflow-x: auto;
   }
   
   .split-bottom {
     bottom: 0;
     height: 75%;
-    background-color: #34383b;
+    background-color: var(--back);
   }
 
   .centered-bottom {
@@ -287,7 +291,7 @@ padding: .5rem 1rem;
 }
 
 .activetab {
-   color: black!important;
+   color: var(--iglu-colour)!important;
 }
 
 .nav-link.active {
@@ -364,7 +368,7 @@ div.scrollmenu a:hover {
 }
 .nav-link.active {
 border: 0 !important;
-  border-bottom: 4px solid #3766ff !important;
+  border-bottom: 4px solid var(--top-bar) !important;
 }
 
 .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active, .nav-tabs .nav-link {
