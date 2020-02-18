@@ -6,10 +6,36 @@
   --bottom-bar: #1c1b20;
   --iglu-colour: #3766ff;
   --light: #454452;
+  --cool-button: #26272c;
 }
 
 .bottom-nav {
   font-size: small;
+}
+
+.btn {
+  background-color: var(--top-bar);
+  text-transform: none !important;
+  border-radius: 10px !important;
+}
+
+.btn:hover {
+  color: #fff;
+}
+
+.btn-new {
+  background-color: var(--top-bar);
+  border-radius: 30px !important;
+  text-align: left;
+  font-weight: bold;
+  font-size: 20px;
+  margin-bottom: 20px !important;
+}
+
+.plus-button {
+  background-color: var(--cool-button);
+  border-radius: 20px;
+  padding: 3px 0;
 }
 
 .bottom-colour {

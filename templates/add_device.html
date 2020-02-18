@@ -1,0 +1,40 @@
+{{template "base/head" .}}
+{{template "base/nav" .}}
+<div class="container">
+<form method="POST">
+  <h6 class="text-center">Select Device Type:</h6>
+  <div class="md-form pb-3 pr-5 pl-5">
+    <select class="browser-default custom-select" id="select" name="device_type">
+      <option value="" disabled selected>Choose Type</option>
+      <option value="0">Lights</option>
+      <option value="1">Temperature Control</option>
+      <option value="2">TV</option>
+      <option value="3">Speaker</option>
+    </select>
+  </div>
+  <h6 class="text-center">Enter Description:</h6>
+  <div class="md-form text-center justify-content-center d-flex">
+    <input type="text" class="form-control mb-3 text-center w-50" placeholder="Description" name="description">
+  </div>
+	<div class="col">
+	  <h6 class="text-center ">Belongs to room</h6>
+	  <div>
+		<select class="browser-default custom-select" id="select" name="room_id">
+		  <option value="-1" selected>Please select a room</option>
+		  {{range .Rooms}}<option value="{{.RoomID}}">{{.RoomName}}</option>
+		  {{end}}
+		</select>
+	  </div>
+	</div>
+  <div class="custom-control custom-checkbox text-center">
+    <input type="checkbox" class="custom-control-input" id="defaultUnchecked" name="is_main_light_source">
+    <label class="custom-control-label" for="defaultUnchecked">Main Light</label>
+  </div>
+        <button type="submit" class="btn btn-block mt-4">Add Device</button>
+      </div>
+      </div>
+      </form>
+</div>
+{{template "base/scripts" .}}
+{{template "base/footer" .}}
+{{template "base/tabnav" .}}

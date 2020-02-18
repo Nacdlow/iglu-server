@@ -72,6 +72,26 @@ func SettingsHandler(ctx *macaron.Context) {
 	ctx.HTML(200, "settings")
 }
 
+// AddHandler handles the add page
+func AddHandler(ctx *macaron.Context) {
+	ctx.Data["CrossBack"] = 1
+	ctx.HTML(200, "add")
+}
+
+// AddRoomHandler handles the add room page
+func AddRoomHandler(ctx *macaron.Context) {
+	ctx.Data["BackLink"] = "/add"
+	ctx.Data["Rooms"] = models.GetRooms()
+	ctx.HTML(200, "add_room")
+}
+
+// AddDeviceHandler handles the add room page
+func AddDeviceHandler(ctx *macaron.Context) {
+	ctx.Data["BackLink"] = "/add"
+	ctx.Data["Rooms"] = models.GetRooms()
+	ctx.HTML(200, "add_device")
+}
+
 // AccountSettingsHandler handles the settings
 func AccountSettingsHandler(ctx *macaron.Context) {
 	ctx.Data["NavTitle"] = "Account Settings"
