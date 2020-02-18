@@ -92,18 +92,22 @@ func getMacaron() *macaron.Macaron {
 		m.Get("/toggle_fave/:id", routes.FaveHandler)     //set device as fave
 		m.Get("/remove_device/:id", routes.RemoveHandler) //remove a device
 
-		m.Get("/settings", routes.SettingsHandler)
-		m.Group("/settings/plugins", func() {
-			m.Get("", routes.PluginsSettingsHandler)
-			m.Get("/:id", routes.InstallPluginSettingsHandler)
-			m.Get("/confirm/:id", routes.InstallPluginConfirmSettingsHandler) // TODO use POST so it is secure
-		})
-		m.Get("/settings/accounts", routes.AccountSettingsHandler)
-		m.Get("/settings/appearance", routes.AppearanceSettingsHandler)
+		m.Group("", func() {
+			m.Get("/settings", routes.SettingsHandler)
+			m.Group("/settings/plugins", func() {
+				m.Get("", routes.PluginsSettingsHandler)
+				m.Get("/:id", routes.InstallPluginSettingsHandler)
+				m.Get("/confirm/:id", routes.InstallPluginConfirmSettingsHandler) // TODO use POST so it is secure
+			})
+			m.Get("/settings/accounts", routes.AccountSettingsHandler)
+			m.Post("/settings/accounts", routes.PostAccountSettingsHandler)
+			m.Get("/settings/appearance", routes.AppearanceSettingsHandler)
+		}, routes.RequireAdmin)
 
 		m.Get("/battery_stat", routes.BatteryStatHandler)
 	}, routes.RequireLogin)
 
+	// Simulator routes (no auth)
 	m.Group("/sim", func() {
 		m.Get("/", routes_sim.HomepageHandler)
 		m.Get("/data.json", routes_sim.DataHandler)
@@ -115,6 +119,7 @@ func getMacaron() *macaron.Macaron {
 		m.Get("/toggle/:id", routes_sim.ToggleHandler)
 	})
 
+	// For debugging purposes.
 	m.Group("/debug/pprof", func() {
 		m.Get("/", pprofHandler(pprof.Index))
 		m.Get("/cmdline", pprofHandler(pprof.Cmdline))

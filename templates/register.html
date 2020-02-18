@@ -12,7 +12,8 @@
         <div class="col">       
             <!-- First name -->
             <div class="md-form">
-                <input type="text" id="fn" class="form-control white-text" placeholder="First name" name="fname">
+                <input type="text" id="fn" class="form-control white-text"
+				placeholder="First name" name="fname" autofocus="1">
             </div>
         </div>
         <div class="col">
@@ -34,12 +35,19 @@
 
      <!-- ReEnterPassword -->
      <div class="md-form">
-        <input type="password" id="pw2" class="form-control white-text" placeholder="Password" aria-describedby="defaultRegisterFormPasswordHelpBlock" name="repassword">
+        <input type="password" id="pw2" class="form-control white-text"
+		placeholder="Confirm Password" aria-describedby="defaultRegisterFormPasswordHelpBlock" name="repassword">
     </div>
 
     <small id="defaultRegisterFormPasswordHelpBlock" class="form-text text-muted mb-4">
-        At least 8 characters for Password
+        Passwords must be at least 8 characters
     </small>
+     
+	<!-- InviteCode -->
+     <div class="md-form">
+        <input type="text" id="invite" class="form-control white-text"
+		placeholder="Invite Code" name="invite">
+    </div>
 
     <!-- Sign up button -->
     <button class="btn btn-default my-4 btn-block" id="registeruser" type="submit">Sign up</button>

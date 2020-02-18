@@ -15,6 +15,7 @@ type RegisterForm struct {
 	Email      string `form:"email" binding:"Required;Email"`
 	Password   string `form:"password" binding:"Required;MinSize(8);MaxSize(50)"`
 	RePassword string `form:"repassword" binding:"Required;MinSize(8);MaxSize(50)"`
+	InviteCode string `form:"invite" binding:"Required"`
 }
 
 // ForgotPassword ...

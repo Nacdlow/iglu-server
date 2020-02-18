@@ -17,11 +17,12 @@ func LoadConfig() {
 	Config.AddConfigPath("$HOME/.config/nacdlow")
 	Config.AddConfigPath(".")
 
+	// Fill configuration with default
 	Config.SetDefault("Port", "8080")
 	Config.SetDefault("HouseName", "My House")
 	Config.SetDefault("Address", "Heriot-Watt University, Edinburgh, Scotland. EH14 4AS")
 	Config.SetDefault("Engineer.Name", "Nacdlow Support")
-	Config.SetDefault("Engineer.Phone", "074 123 4567")
+	Config.SetDefault("Engineer.Phone", "0131 496 0143")
 	Config.SetDefault("Engineer.Email", "support@nacdlow.com")
 	if !Config.IsSet("CustomerID") {
 		Config.SetDefault("CustomerID", uniq.UUID())
@@ -33,6 +34,7 @@ func LoadConfig() {
 	Config.SetDefault("Simulation.SolarCapacityKW", 45)
 	Config.SetDefault("Simulation.BatteryCapacityKWH", 135)
 
+	// Read configuration
 	if err := Config.ReadInConfig(); err != nil {
 		if _, ok := err.(viper.ConfigFileNotFoundError); ok {
 			err := Config.WriteConfigAs("config.toml")
@@ -43,9 +45,10 @@ func LoadConfig() {
 			panic(err)
 		}
 	}
+
+	// We write to make sure that the default configuration values are stored
 	err := Config.WriteConfig()
 	if err != nil {
 		panic(err)
 	}
-
 }

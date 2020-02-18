@@ -12,17 +12,16 @@ type UserRole int64
 
 // UserRole enums.
 const (
-	NormalRole = iota
-	AdminRole
-	GuestRole
-	RestrictedRole
+	NormalRole     = iota // 0
+	AdminRole             // 1
+	GuestRole             // 2
+	RestrictedRole        // 3
 )
 
 // User is a smart home system user whom may interact with the system.
 type User struct {
 	Username     string   `xorm:"pk" fake:"{animal.petname}###"`
 	Password     string   `fake:"skip"`
-	TOTPKey      string   `xorm:"null" fake:"skip"`
 	FirstName    string   `fake:"{person.first}"`
 	LastName     string   `fake:"{person.last}"`
 	Role         UserRole `fake:"skip"`
