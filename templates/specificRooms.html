@@ -21,7 +21,7 @@
   </div>
 </div>
 {{else if .Bathrooms}}
-<div class="container animated fadeIn">
+<div class="container">
   <h2 class="pt-5 text-center">Bathrooms</h2>
   <div class="pt-3 pb-3">
     <hr>
@@ -41,7 +41,7 @@
   </div>
 </div>
 {{else}}
-<div class="container animated fadeIn">
+<div class="container">
   <div class="row justify-content-center pt-3">
     <!--<h2 class="pt-5 text-center">Room Control</h2>-->
     <h2 class="pt-5 pr-3 text-center">Room Temperature</h2>
@@ -86,7 +86,7 @@
     <div class="tab-content" id="myTabContent">
 
       <!--light device tab cards-->
-      <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+      <div class="tab-pane show active" id="home" role="tabpanel" aria-labelledby="home-tab">
         <div class="row justify-content-center pt-5 pr-5 pl-5 pb-3">
           {{range .Devices}}{{if and (eq .Type 0) (eq .RoomID $.Room.RoomID)}}
           <div class="col-lg-4 col-md-6">
@@ -98,7 +98,7 @@
       <!--/light device tab cards-->
 
       <!--speaker device tab cards-->
-      <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+      <div class="tab-pane" id="profile" role="tabpanel" aria-labelledby="profile-tab">
         <div class="row justify-content-center pt-5 pr-5 pl-5 pb-3">
 
           {{range .Devices}}{{if and (eq .Type 3) (eq .RoomID $.Room.RoomID)}}
@@ -112,7 +112,7 @@
       <!--/speaker device tab cards-->
 
       <!--temp device tab cards-->
-      <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+      <div class="tab-pane" id="contact" role="tabpanel" aria-labelledby="contact-tab">
 
         <div class="row justify-content-center pt-5 pr-5 pl-5 pb-3">
           {{range .Devices}}{{if and (eq .Type 1) (eq .RoomID $.Room.RoomID)}}
@@ -125,7 +125,7 @@
       </div>
 
       <!--tv device tab cards-->
-      <div class="tab-pane fade" id="tv" role="tabpanel" aria-labelledby="contact-tab">
+      <div class="tab-pane" id="tv" role="tabpanel" aria-labelledby="contact-tab">
 
         <div class="row justify-content-center pt-5 pr-5 pl-5 pb-3">
           {{range .Devices}}{{if and (eq .Type 2) (eq .RoomID $.Room.RoomID)}}
@@ -189,7 +189,7 @@
 {{end}}
 
 <!-- modal for adding devices-->
-<div class="modal fade bottom" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+<div class="modal bottom fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
   aria-hidden="true" data-backdrop="false">
   <div class="modal-dialog modal-dialog-centered" role="document" data-backdrop="false">
     <div class="modal-content" data-backdrop="false" method="POST">
@@ -230,7 +230,7 @@
   </div>
 </div>
 
-<div class="modal fade bottom" id="options" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+<div class="modal bottom fade" id="options" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
   aria-hidden="true" data-backdrop="false">
   <div class="modal-dialog modal-dialog-centered" role="document" data-backdrop="false">
     <div class="modal-content" data-backdrop="false" method="POST">
