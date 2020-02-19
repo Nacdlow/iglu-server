@@ -220,12 +220,6 @@ func SpecificRoomsHandler(ctx *macaron.Context) {
 		}
 		ctx.Data["Room"] = room
 		ctx.Data["Devices"] = models.GetDevices()
-		for _, r := range simulation.Env.Rooms {
-			if r.DBRoomID == room.RoomID {
-				ctx.Data["Temp"] = int64(r.ActualRoomTemp)
-				break
-			}
-		}
 	}
 
 	ctx.Data["ArrowBack"] = 1

@@ -34,6 +34,7 @@ type Room struct {
 	PartOfRoom  int64 `xorm:"null" fake:"skip"`
 	CreatedUnix int64 `xorm:"created"`
 	UpdatedUnix int64 `xorm:"updated"`
+	CurrentTemp int64
 }
 
 // GetFakeRoom returns a new randomly generated Room. This is used for testing
