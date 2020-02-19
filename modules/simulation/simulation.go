@@ -182,6 +182,8 @@ func Tick() {
 			runningTempCont++
 			Env.Home.Rooms[i].ActualRoomTemp = getChange(room.ActualRoomTemp, tempCont.Temp, 240, 0.75)
 		}
+		models.UpdateRoomCols(&models.Room{RoomID: room.DBRoomID,
+			CurrentTemp: int64(Env.Home.Rooms[i].ActualRoomTemp)}, "current_temp")
 	}
 	now := time.Unix(Env.CurrentTime, 0)
 
