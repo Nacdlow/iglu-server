@@ -5,11 +5,11 @@
     <div class="col-lg-6 col-6 align-items-center d-flex justify-content-center">
       <div class="row">
         <div class="col-12">
-          <h2 class="pt-5 text-center" id="lblGreetings"></h2>
+          <h2 class="text-center" id="lblGreetings"></h2>
         </div>
       </div>
     </div>
-    <div class="col-lg-6 col-6 align-items-center pt-4 d-flex justify-content-center">
+    <div class="col-lg-6 col-6 align-items-center d-flex justify-content-center">
       <div class="mr-lg-5 ml-lg-5 white-text">
         <div class="card-body d-flex align-items-center">
           <div class="col-lg-6 col-12 text-center white-text">
@@ -60,7 +60,7 @@
                 <!-- <h5 class="card-title float-right pr-4">{{if eq .Type 0}}Light:{{else if eq .Type 1}}Temp Control:{{else if eq .Type 2}}TV:{{else if eq .Type 3}}Speaker:{{end}}</h5>-->
                 <div class="custom-control custom-switch" id="div">
                   <input type="checkbox" class="custom-control-input" id="customSwitches-{{.DeviceID}}" {{if .Status}}
-                    checked {{end}} onclick="$.get('/toggle_device/{{.DeviceID}}');" />
+                    checked {{end}} onclick="$.get('/toggle_device/{{.DeviceID}}');update();" />
 
                   <label class="custom-control-label" for="customSwitches-{{.DeviceID}}"></label>
                 </div>
