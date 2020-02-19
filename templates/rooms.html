@@ -44,13 +44,19 @@
           <hr>
           <div class="row">
             <div class="col-6">
-              <div class="row">
+              <div class="row pt-3">
                 <div class="col-6 text-center p-0">
-                  <p>toggle</p>
+                  <!-- MAKE IT WORK PLEASE HUMAID -->
+                  <a class="far fa-lightbulb fa-2x" href="#"
+                    onclick="$.get('/toggle_main_light/{{.RoomID}}');reload();"></a>
+                  <h6>Off</h6>
                 </div>
                 <div class="col-6 text-center p-0">
-                  <p>toggle</p>
+                  <a class="fas fa-power-off red-text fa-2x" href="#"
+                    onclick="$.get('/toggle_device/{{.RoomID}}');reload();"></a>
+                  <h6>Off</h6>
                 </div>
+                <!--// MAKE IT WORK PLEASE HUMAID -->
                 <div class="col-12 d-flex justify-content-center pt-3">
                   <a class="btn-new-1 text-center p-3 " href="/room/{{.RoomID}}">
                     View Room</a>
@@ -61,7 +67,7 @@
             <div class="col-6 d-flex align-items-center justify-content-end">
               <div class="card bodycolor circle-1 d-flex">
                 <div class="card-body d-flex align-items-center justify-content-center">
-
+                  <!-- ROOM TEMP TO BE ADDED -->
                   <h3 class="pt-1 white-text"><small>°C</small></h3>
                 </div>
               </div>
@@ -77,7 +83,7 @@
   <!--TEMPLATE WITH LIGHT AND HEATING TOGGLES, ALL STATIC-->
   <!-- DELETE LATER-->
   <div class="row d-flex justify-content-center pt-5">
-    
+
     <div class="col-lg-4 col-md-6">
       <div class="card mr-lg-0 mb-4">
         <div class="card-body">
@@ -102,7 +108,7 @@
             <div class="col-6">
               <div class="row pt-3">
                 <div class="col-6 text-center p-0">
-                  <div class="{{if .Status}}fas fa-lightbulb{{else}}far fa-lightbulb{{end}} fa-2x"
+                   <div class="{{if .Status}}fas fa-lightbulb{{else}}far fa-lightbulb{{end}} fa-2x"
                     onclick="$.get('/toggle_device/{{.DeviceID}}');reload();"></div>
                   <br>{{if .Status}}On{{else}}Off{{end}}
                 </div>

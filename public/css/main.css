@@ -85,7 +85,7 @@ small {
 
 .svghover:hover {
   transition: 0.5s ease;
-  filter: invert(100%);;
+  filter: brightness(50%);;
 }
 
 .navcolor {
@@ -358,6 +358,8 @@ padding: .5rem 1rem;
 
 .nav-tabs, .nav-link {
   width: 100%!important;
+  border-radius: 50px !important;
+	border: 0 !important;
 }
 
 .activetab {
@@ -369,8 +371,12 @@ padding: .5rem 1rem;
   border-bottom-color: transparent!important;
 }
 
-.nav-link {
+.nav-link{
   border-bottom-color: white!important;
+}
+
+.nav-link:hover {
+  filter: brightness(50%);
 }
 
 .tab-pane {
@@ -427,10 +433,6 @@ div.scrollmenu a:hover {
 .scrolling-wrapper, .scrolling-wrapper-flexbox {
   width: 100%;
   -webkit-overflow-scrolling: touch;
-}
-.nav-tabs, .nav-link {
-	border-radius: 0 !important;
-	border: 0 !important;
 }
 
 .tab-pane {
