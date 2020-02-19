@@ -1,11 +1,13 @@
 {{template "base/head" .}}
 {{template "base/nav" .}}
 <div class="container">
-  <h2 class="pt-3 text-center">Rooms</h2>
-  <div class="pt-3 pb-3">
+  <div class="mobhide">
+  <h2 class="pt-4 text-center">All Rooms</h2>
+  <div class="pt-3">
     <hr>
   </div>
-  <div class="row justify-content-center pt-4">
+  <!--
+  <div class="row justify-content-center pt-3">
     <div class="room-icon col-lg-2 col-md-3 col-4 text-center pb-3">
       <a class="fas fa-bed pb-3" href="room/bedrooms"></a>
       <h6>Bedrooms</h6>
@@ -23,9 +25,10 @@
       fas fa-warehouse{{else if eq .RoomType 9}}fas fa-user{{end}}" href="/room/{{.RoomID}}" id="roomAvatar"></a>
       <h6>{{.RoomName}}</h6>
     </div>
-    {{end}}{{end}}-->
-  </div>
-  <div class="row justify-content-center pb-3">
+    {{end}}{{end}}
+  </div>-->
+</div>
+  <div class="row justify-content-center pt-3 pb-3">
     {{range .Rooms}}
     <div class="col-lg-4 col-md-6">
       <div class="card mr-lg-0 mb-4">
