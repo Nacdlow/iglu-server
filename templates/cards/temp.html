@@ -6,9 +6,12 @@
 			<div class="custom-control custom-switch float-left">
 				<input type="checkbox" class="custom-control-input" id="customSwitches-{{.DeviceID}}" 
 				{{if eq .Status true}}checked{{else}}unchecked{{end}}
-				onclick="$.get('/toggle_device/{{.DeviceID}}');reload();">
-				<label class="custom-control-label"
-					   for="customSwitches-{{.DeviceID}}">{{if .Status}}On{{else}}Off{{end}}</label>
+				onclick="$.get('/toggle_device/{{.DeviceID}}');">
+				
+				<label class="custom-control-label" for="customSwitches-{{.DeviceID}}"></label>
+			</div>
+			<div class="labeldiv-{{.DeviceID}}" id="labeldiv-{{.DeviceID}}">
+				<label class="">{{if .Status}}On{{else}}Off{{end}}</label>
 			</div>
 			<!--/switch -->
 		</div>
@@ -25,8 +28,10 @@
 				<div class="dropdown-menu dropdown-menu-right dropdown-default text-center"
 				  aria-labelledby="navbarDropdownMenuLink-333">
 				  <a class="dropdown-item {{if .IsFave}}red-text{{else}}black-text{{end}}" href="#" id="fave-{{.DeviceID}}"
-			  	onclick="$.get('/toggle_fave/{{.DeviceID}}');reload();">
+				  onclick="$.get('/toggle_fave/{{.DeviceID}}');">
+				  <div class="favediv-{{.DeviceID}}" id="favediv-{{.DeviceID}}">
 				  {{if .IsFave}}Un-favourite{{else}}Favourite{{end}} <i class="fas fa-heart red-text"></i></a>
+				</div>
 				  <a class="dropdown-item black-text" href="#">Edit</a>
 				  <a class="dropdown-item black-text" href="#" id="remove-{{.DeviceID}}" data-toggle="modal" data-target="#removeDevice-{{.DeviceID}}">Remove</a>
 			</div>
@@ -37,17 +42,19 @@
 		<div class="d-flex justify-content-center">
 			<span class="font-weight-bold blue-text mr-2 ">0<small>&deg;C</small></span>
 			<form class="range-field text-center" 
-			oninput="$.get('/toggle_slider/{{.DeviceID}}/'+ $('#slider-{{.DeviceID}}').val());reload();">
+			oninput="$.get('/toggle_slider/{{.DeviceID}}/'+ $('#slider-{{.DeviceID}}').val());">
 				<input class="custom-range" type="range" min="0" max="28" value="{{.Temp}}" id="slider-{{.DeviceID}}"/>
 				<output for="slider-{{.DeviceID}}">{{.Temp}}<small>&deg;C</small></output>
 			</form>
 			<span class="font-weight-bold red-text ml-2">28<small>&deg;C</small></span>
 		</div>
 	</div>
+	<div class="footerdiv-{{.DeviceID}}" id="footerdiv-{{.DeviceID}}">
 	<div class="card-footer" {{if .Status}}style="background-color: #A8FFA8;"
 		 {{else}}style="background-color: #FF6666" ;{{end}}>
-		<small class="text-muted">{{if .Status}}Heating since 09:24 (3hrs){{else}}Last on:
-			yesterday{{end}}</small>
+		<small class="text-muted">{{if .Status}}Running Since: {{CalcSince .ToggledUnix}}{{else}}Last on:
+					{{CalcSince .ToggledUnix}}{{end}}</small>
+	</div>
 	</div>
 </div>
 

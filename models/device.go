@@ -31,6 +31,7 @@ type Device struct {
 	CreatedUnix int64      `xorm:"created"`
 	UpdatedUnix int64      `xorm:"updated"`
 	IsFave      bool       `fake:"skip"` //whether the device has been favourited or not
+	ToggledUnix int64
 }
 
 // GetFakeDevice returns a new randomly created Device. This is used for

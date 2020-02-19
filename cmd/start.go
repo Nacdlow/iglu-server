@@ -9,6 +9,7 @@ import (
 
 	"context"
 	"fmt"
+	"html/template"
 	"io"
 	"log"
 	"net/http"
@@ -45,7 +46,23 @@ var CmdStart = &cli.Command{
 
 func getMacaron() *macaron.Macaron {
 	m := macaron.Classic()
-	m.Use(macaron.Renderer())
+	m.Use(macaron.Renderer(macaron.RenderOptions{
+		Funcs: []template.FuncMap{map[string]interface{}{
+			"CalcSince": func(unix int64) string {
+				dur := time.Since(time.Unix(unix, 0)).Round(time.Minute)
+				hour := dur / time.Hour
+				nomin := dur - hour*time.Hour
+				min := nomin / time.Minute
+				var str string
+				if hour == 0 {
+					str = fmt.Sprintf("%dmins", min)
+				} else {
+					str = fmt.Sprintf("%dhrs %dmins", hour, min)
+				}
+				return str
+			},
+		}},
+	}))
 	m.Use(session.Sessioner())
 	m.Use(csrf.Csrfer())
 	m.Use(macaron.Static("public",
