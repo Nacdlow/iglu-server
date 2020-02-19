@@ -1,15 +1,23 @@
 {{template "base/head" .}}
 {{template "base/nav" .}}
 <div class="container">
+  <div class="d-flex d-flex justify-content-center pt-4">
+  <div class="col-lg-6 col-md-8 col-sm-12">
+  <div class="card mr-lg-0 mb-4">
+    <div class="card-body">
+      <div class="d-flex justify-content-center">
+          <h2>Add Your Room</h2>
+      </div>
+      <hr>
         <form method="POST">
           <h6 class="text-center pt-4">Enter Room Name:</h6>
-          <div class="md-form justify-content-center d-flex">
-            <input type="text" class="form-control w-50 white-text text-center" placeholder="e.g. Johns Room"
+          <div class="md-form justify-content-center d-flex mr-lg-5 ml-lg-5 mr-sm-0 ml-sm-0">
+            <input type="text" class="form-control white-text text-center" placeholder="e.g. Johns Room"
               name="room_name">
           </div>
           <h6 class="text-center">Enter Room Description:</h6>
-          <div class="md-form justify-content-center d-flex">
-            <input type="text" class="form-control w-50 white-text text-center" placeholder="Description"
+          <div class="md-form justify-content-center d-flex mr-lg-5 ml-lg-5 mr-sm-0 ml-sm-0">
+            <input type="text" class="form-control white-text text-center" placeholder="Description"
               name="description">
           </div>
           <div class="form-row">
@@ -43,14 +51,20 @@
             </div>
           </div>
           <h6 class="text-center pt-4">Enter Number of Windows:</h6>
-          <div class="md-form text-center justify-content-center d-flex">
-            <input type="number" class="form-control white-text text-center w-50" placeholder="e.g. 2"
+          <div class="md-form text-center justify-content-center d-flex mr-lg-5 ml-lg-5 mr-sm-0 ml-sm-0">
+            <input type="number" class="form-control white-text text-center " placeholder="e.g. 2"
               name="windows_count">
           </div>
-        <button type="submit" class="btn btn-block">Save changes</button>
+          <div class="d-flex justify-content-center">
+        <button type="submit" class="btn btn-new-1 btn-block bodycolor w-50">Save changes</button>
       </div>
       </form>
+    </div>
+  </div>
+  </div>
+  </div>
 </div>
 {{template "base/scripts" .}}
-{{template "base/footer" .}}
 {{template "base/tabnav" .}}
+{{template "base/footer" .}}
+
