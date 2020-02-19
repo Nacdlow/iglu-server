@@ -9,6 +9,12 @@ import (
 	macaron "gopkg.in/macaron.v1"
 )
 
+// LogoutHandler handles logging out.
+func LogoutHandler(ctx *macaron.Context, sess session.Store) {
+	sess.Set("auth", Unauthenticated)
+	ctx.Redirect("/")
+}
+
 // LoginHandler handles rendering the login page.
 func LoginHandler(ctx *macaron.Context, sess session.Store) {
 	if sess.Get("auth") == LoggedIn {

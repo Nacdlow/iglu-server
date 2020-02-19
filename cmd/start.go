@@ -75,6 +75,7 @@ func getMacaron() *macaron.Macaron {
 
 	m.Group("", func() {
 		m.Get("/dashboard", routes.DashboardHandler)
+		m.Get("/logout", routes.LogoutHandler)
 		m.Group("/room", func() {
 			m.Group("/:name", func() {
 				m.Get("", routes.SpecificRoomsHandler)
