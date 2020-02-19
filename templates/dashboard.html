@@ -73,9 +73,9 @@
             <div class="footerdiv-{{.DeviceID}}" id="footerdiv-{{.DeviceID}}">
               <div class="card-footer pb-2 pr-2 pl-2 pt-1" {{if .Status}}style="background-color: #A8FFA8;"
                 {{else}}style="background-color: #FF6666;" {{end}} id="footer">
-                <small class="text-muted black-text" style="font-size: 0.7rem;">{{if .Status}}Time on: 4hrs
-                  15mins{{else}}Last on:
-                  yesterday{{end}}</small>
+                <small class="text-muted black-text" style="font-size: 0.7rem;">
+					{{if .Status}}Time on: {{CalcSince .ToggledUnix}}{{else}}Last on:
+					{{CalcSince .ToggledUnix}}{{end}}</small>
               </div>
             </div>
           </div>

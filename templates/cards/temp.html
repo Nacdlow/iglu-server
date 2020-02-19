@@ -52,8 +52,8 @@
 	<div class="footerdiv-{{.DeviceID}}" id="footerdiv-{{.DeviceID}}">
 	<div class="card-footer" {{if .Status}}style="background-color: #A8FFA8;"
 		 {{else}}style="background-color: #FF6666" ;{{end}}>
-		<small class="text-muted">{{if .Status}}Heating since 09:24 (3hrs){{else}}Last on:
-			yesterday{{end}}</small>
+		<small class="text-muted">{{if .Status}}Running Since: {{CalcSince .ToggledUnix}}{{else}}Last on:
+					{{CalcSince .ToggledUnix}}{{end}}</small>
 	</div>
 	</div>
 </div>
