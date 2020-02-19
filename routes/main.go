@@ -10,6 +10,7 @@ import (
 	"os"
 	"runtime"
 	"strings"
+	"time"
 
 	"gitlab.com/group-nacdlow/nacdlow-server/models"
 	"gitlab.com/group-nacdlow/nacdlow-server/models/forms"
@@ -312,8 +313,9 @@ func ToggleHandler(ctx *macaron.Context) {
 			if device.Type == models.Light || device.Type == models.Speaker ||
 				device.Type == models.TempControl || device.Type == models.TV {
 				models.UpdateDeviceCols(&models.Device{
-					DeviceID: device.DeviceID,
-					Status:   !device.Status}, "status")
+					DeviceID:    device.DeviceID,
+					Status:      !device.Status,
+					ToggledUnix: time.Now().Unix()}, "status", "toggled_unix")
 			}
 			break
 		}
