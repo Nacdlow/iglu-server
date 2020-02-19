@@ -4,19 +4,38 @@
     <div class="container">
       <!-- Collapse button -->
 
-	  {{if not .IsDashboard}}<a {{if .BackLink}}href="{{.BackLink}}"{{else}}onclick="history.back()"{{end}} class="back-button">
-		  <i class="{{if .CrossBack}}fas fa-times{{else}}fas fa-angle-left{{end}}"></i></a>{{else}}<a class="deskhide"><span
-          style="padding-right:60px;"></span></a>{{end}}
+      
+    {{if .ArrowBack}}
+    <a {{if .BackLink}}href="{{.BackLink}}"{{else}}onclick="history.back()"{{end}} class="back-button">
+      <i class="fas fa-angle-left"></i></a>
+    {{end}}
+
+    {{if .CrossBack}}
+    <a {{if .BackLink}}href="{{.BackLink}}"{{else}}onclick="history.back()"{{end}} class="back-button">
+      <i class="fas fa-times"></i></a>
+    {{end}}
+
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent41"
         aria-controls="navbarSupportedContent41" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <!-- Navbar brand and Login Button -->
-      <a class="navbar-brand pl-lg-4" id="brand" href="/dashboard"><img src="/img/iglu-light.svg" class="svghover"
+      <div class="deskhide">
+      {{if not .IsDashboard}}
+      <a class="navbar-brand pt-2" href="#"><strong>{{.NavTitle}}</strong></a>
+      {{else}}
+      <a class="navbar-brand pl-2" href="/dashboard"><img src="/img/iglu-light.svg" class="svghover"
           alt="iglü" width="50"></a>
+      {{end}}
+    </div>
+    <a class="navbar-brand mobhide pl-lg-4" id="brand" href="/dashboard"><img src="/img/iglu-light.svg" class="svghover"
+      alt="iglü" width="50"></a>
+
+
+
       <div class="nav deskhide">
         <div class="nav-item dropdown avatar">
-          <a class="nav-link p-0" id="navbarDropdownMenuLink-333" data-toggle="dropdown" aria-haspopup="true"
+          <a class="nav-link p-0 {{if not .IsDashboard}} pt-1 {{end}}" id="navbarDropdownMenuLink-333" data-toggle="dropdown" aria-haspopup="true"
             aria-expanded="false">
             <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-5.jpg" class="mb-0 rounded-circle z-depth-0"
               alt="avatar image" height="45" width="45">
