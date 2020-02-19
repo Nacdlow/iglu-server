@@ -226,5 +226,18 @@
 </div>
 
 {{template "base/scripts" .}}
+<script>
+	function update() {
+    {{range .Devices}}
+    $(" #labeldiv-{{.DeviceID}}").load(location.href + " #labeldiv-{{.DeviceID}}>*", "");
+    $(" #footerdiv-{{.DeviceID}}").load(location.href + " #footerdiv-{{.DeviceID}}>*", "");
+    $(" #favediv-{{.DeviceID}}").load(location.href + " #favediv-{{.DeviceID}}>*", "");
+    {{end}}
+	}
+	update(); // This will run on page load
+	setInterval(function () {
+		update() // this will run after every 1 seconds
+	}, 1000);
+</script>
 {{template "base/footer" .}}
 {{template "base/tabnav" .}}
