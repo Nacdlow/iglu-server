@@ -90,7 +90,6 @@ func AddRoomHandler(ctx *macaron.Context) {
 func AlertsHandler(ctx *macaron.Context) {
 	ctx.Data["CrossBack"] = 1
 	ctx.HTML(200, "alerts")
-	ctx.Data["IsAlerts"] = 1
 }
 
 // AddDeviceHandler handles the add device page
@@ -228,6 +227,8 @@ func SpecificRoomsHandler(ctx *macaron.Context) {
 			}
 		}
 	}
+
+	ctx.Data["ArrowBack"] = 1
 	ctx.Data["IsRooms"] = 1
 	ctx.HTML(200, "specificRooms")
 }
