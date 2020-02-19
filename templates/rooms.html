@@ -14,6 +14,7 @@
       <a class="fas fa-bath pb-3" href="room/bathrooms"></a>
       <h6>Bathrooms</h6>
     </div>
+    <!--
     {{range .Rooms}}{{if not (eq .RoomType 1)}}
     <div class="room-icon col-lg-2 col-md-3 col-4 text-center pb-3" id="roomAvatarDiv">
       <a class="nav-link p-0 pb-3 {{if eq .RoomType 0}}fas fa-couch{{else if eq .RoomType 1}}fas fa-bed{{else if eq .RoomType 2}}
@@ -22,9 +23,117 @@
       fas fa-warehouse{{else if eq .RoomType 9}}fas fa-user{{end}}" href="/room/{{.RoomID}}" id="roomAvatar"></a>
       <h6>{{.RoomName}}</h6>
     </div>
-    {{end}}{{end}}
+    {{end}}{{end}}-->
   </div>
-</div>
+  <div class="row justify-content-center pb-3">
+    {{range .Rooms}}
+    <div class="col-lg-4 col-md-6">
+      <div class="card mr-lg-0 mb-4">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-6">
+              <h4>{{.RoomName}}</h4>
+            </div>
+            <div class="col-6 text-right">
+              <i class="{{if eq .RoomType 0}}fas fa-couch{{else if eq .RoomType 1}}fas fa-bed{{else if eq .RoomType 2}}
+          fas fa-coffee{{else if eq .RoomType 3}}fas fa-utensils{{else if eq .RoomType 4}}fas fa-bath{{else if eq .RoomType 5}}
+          fas fa-door-open{{else if eq .RoomType 6}}fas fa-toolbox{{else if eq .RoomType 7}}fas fa-socks{{else if eq .RoomType 8}}
+          fas fa-warehouse{{else if eq .RoomType 9}}fas fa-user{{end}} fa-2x"></i>
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-6">
+              <div class="row">
+                <div class="col-6 text-center p-0">
+                  <p>toggle</p>
+                </div>
+                <div class="col-6 text-center p-0">
+                  <p>toggle</p>
+                </div>
+                <div class="col-12 d-flex justify-content-center pt-3">
+                  <a class="btn-new-1 text-center p-3 " href="/room/{{.RoomID}}">
+                    View Room</a>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-6 d-flex align-items-center justify-content-end">
+              <div class="card bodycolor circle-1 d-flex">
+                <div class="card-body d-flex align-items-center justify-content-center">
+
+                  <h3 class="pt-1 white-text"><small>°C</small></h3>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    {{end}}
+  </div>
+
+  <!--TEMPLATE WITH LIGHT AND HEATING TOGGLES, ALL STATIC-->
+  <!-- DELETE LATER-->
+  <div class="row d-flex justify-content-center pt-5">
+    
+    <div class="col-lg-4 col-md-6">
+      <div class="card mr-lg-0 mb-4">
+        <div class="card-body">
+
+          <div class="row">
+
+            <div class="col-6">
+              <h4>TEST</h4>
+            </div>
+            <div class="col-6 text-right">
+              <div class="text-right">
+                <i class="text-right fas fa-bed fa-2x"></i>
+              </div>
+            </div>
+
+          </div>
+
+          <hr>
+
+          <div class="row">
+
+            <div class="col-6">
+              <div class="row pt-3">
+                <div class="col-6 text-center p-0">
+                  <div class="{{if .Status}}fas fa-lightbulb{{else}}far fa-lightbulb{{end}} fa-2x"
+                    onclick="$.get('/toggle_device/{{.DeviceID}}');reload();"></div>
+                  <br>{{if .Status}}On{{else}}Off{{end}}
+                </div>
+                <div class="col-6 text-center p-0">
+                  <div class="fas fa-power-off {{if .Status}}green-text{{else}}red-text{{end}} fa-2x" href="#"
+                    onclick="$.get('/toggle_device/{{.DeviceID}}');reload();"></div>
+                  <br>{{if .Status}}On{{else}}Off{{end}}
+                </div>
+                <div class="col-12 d-flex justify-content-center pt-3">
+                  <a class="btn-new-1 text-center p-3 " href="/room/{{.RoomID}}">
+                    View Room</a>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-6 d-flex align-items-center justify-content-end">
+              <div class="card bodycolor circle-1 d-flex">
+                <div class="card-body d-flex align-items-center justify-content-center">
+                  <h3 class="pt-1 white-text">12<small>°C</small></h3>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
 </div>
 {{template "base/scripts" .}}
 {{template "base/footer" .}}

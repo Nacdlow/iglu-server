@@ -32,10 +32,22 @@
   margin-bottom: 20px !important;
 }
 
+.btn-new-1 {
+  background-color: var(--back);
+  border-radius: 30px !important;
+  width: 100%; 
+  /*border:solid; 
+  border-color:#3677ff; 
+  border-width: 1.5px;*/
+}
+
 .plus-button {
   background-color: var(--cool-button);
   border-radius: 20px;
   padding: 3px 0;
+  border:solid; 
+  border-color:#3677ff; 
+  border-width: 1px;
 }
 
 .bottom-colour {
@@ -112,6 +124,15 @@ a {
     border-radius: 100%;
     width: 140px;
     height: 140px;
+}
+
+.circle-1{
+  width: 115px;
+  border-radius: 100%; 
+  height: 115px; 
+  border:solid; 
+  border-color: #3677ff; 
+  border-width: 5px;
 }
 
 .circle-sm {
