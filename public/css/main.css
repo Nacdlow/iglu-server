@@ -9,6 +9,10 @@
   --cool-button: #26272c;
 }
 
+html {
+  overflow-y: scroll;
+}
+
 .bottom-nav {
   font-size: small;
 }
