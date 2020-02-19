@@ -1,24 +1,41 @@
 <div id="mobilenav" class="bottom-colour"
 	style="box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 -5px 10px rgba(0,0,0,0.22); padding-top: 2%; padding-bottom: 1%;">
-	<ul class="nav nav-pills nav-fill">
+	<ul class="nav row">
+		<div class="col-2 p-0">
 		<li class="nav-item p-0">
 			<a class="nav-link bottom-nav p-0 text-center {{if .IsDashboard}} activetab{{end}}" href="/dashboard"><i
 					class="fas fa-tachometer-alt" style="font-size: 25px;"></i><br><small>Dash</small> <span
 					class="sr-only">(current)</span></a>
 		</li>
+		</div>
+		<div class="col-2 p-0">
 		<li class="nav-item p-0">
 			<a class="nav-link bottom-nav p-0 text-center {{if .IsRooms}} activetab{{end}}" href="/rooms"><i class="fas fa-bed"
 					style="font-size: 25px;"></i><br><small>Rooms</small></a>
 		</li>
-		<li class="nav-item p-0">
-			<a class="nav-link bottom-nav p-0 text-center" href="/alerts"> <i class="far fa-bell"
-					style="font-size: 25px;"></i><br><small>Alerts</small></a>
-		</li>
+		</div>
+		<div class="col-4 pl-3 pr-3">
 		<li class="nav-item p-0">
 			<div class="plus-button">
 			<a class="nav-link bottom-nav p-0 pt-2 pb-1 text-center" href="/add">
 				<i class="fa fa-plus" style="font-size: 15px;"></i></a>
 			</div>
 		</li>
+		</div>
+
+		<div class="col-2 p-0">
+		<li class="nav-item p-0">
+			<a class="nav-link bottom-nav p-0 text-center {{if .IsOverview}} activetab{{end}}" href="/overview">
+				<i class="far fa-eye"style="font-size: 25px;"></i><br><small>Overview</small></a>
+		</li>
+		</div>
+
+		<div class="col-2 p-0">
+		<li class="nav-item p-0">
+			<a class="nav-link bottom-nav p-0 text-center" href="/alerts"> <i class="far fa-bell"
+					style="font-size: 25px;"></i><br><small>Alerts</small></a>
+		</li>
+		</div>
 	</ul>
 </div>
+
