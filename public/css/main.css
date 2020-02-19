@@ -413,12 +413,21 @@ div.scrollmenu a:hover {
 }
 .nav-link.active {
 border: 0 !important;
-  border-bottom: 4px solid var(--top-bar) !important;
+  border-bottom: 4px solid var(--iglu-colour) !important;
+}
+
+.blue-text{
+  color: var(--iglu-colour) !important;
+}
+
+.custom-control-input:checked~.custom-control-label::before {
+  background-color: var(--iglu-colour)!important;
+  border-color: var(--iglu-colour)!important;
 }
 
 .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active, .nav-tabs .nav-link {
-	background-color: #fff !important;
-	color: #000 !important;
+  background-color: var(--light)!important;
+	color: #fff !important;
 }
 
 .btn-group-position {
