@@ -1,4 +1,4 @@
-<header>
+<dheader>
   <nav class="navbar navbar-expand-lg navbar-dark default-color">
     <!-- Additional container -->
     <div class="container">
@@ -54,8 +54,8 @@
 
         <ul class="navbar-nav mobhide">
           <li class="nav-item">
-            <a class="nav-link waves-effect waves-light" href="/add"> <i
-					class="fa fa-plus"></i></a>
+            <a class="nav-link waves-effect waves-light" href="{{if .IsSpecificRoom}}/add/device/{{.Room.RoomID}}{{else}}/add{{end}}">
+				<i class="fa fa-plus"></i></a>
           </li>
         <ul class="navbar-nav mobhide">
           <li class="nav-item">

@@ -97,6 +97,10 @@ func AlertsHandler(ctx *macaron.Context) {
 func AddDeviceHandler(ctx *macaron.Context) {
 	ctx.Data["BackLink"] = "/add"
 	ctx.Data["Rooms"] = models.GetRooms()
+	if ctx.Params("id") != "" {
+		ctx.Data["RoomSelected"] = 1
+		ctx.Data["RoomID"] = ctx.Params("id")
+	}
 	ctx.HTML(200, "add_device")
 }
 
@@ -223,6 +227,7 @@ func SpecificRoomsHandler(ctx *macaron.Context) {
 		ctx.Data["Devices"] = models.GetDevices()
 	}
 	ctx.Data["IsRooms"] = 1
+	ctx.Data["IsSpecificRoom"] = 1
 	ctx.HTML(200, "specificRooms")
 }
 
@@ -239,6 +244,7 @@ func AddDeviceRoomPostHandler(ctx *macaron.Context, form forms.AddDeviceForm, f 
 		RoomID:      form.RoomID,
 		Type:        models.DeviceType(form.DeviceType),
 		Description: form.Description,
+		ToggledUnix: time.Now().Unix(),
 	}
 	for _, d := range models.GetDevices() {
 		if d.RoomID == device.RoomID && d.Type == device.Type {
@@ -276,7 +282,11 @@ func AddDeviceRoomPostHandler(ctx *macaron.Context, form forms.AddDeviceForm, f 
 func RoomsHandler(ctx *macaron.Context) {
 	ctx.Data["NavTitle"] = "Rooms"
 	ctx.Data["IsRooms"] = 1
-	ctx.Data["Rooms"] = models.GetRooms()
+	rooms := models.GetRooms()
+	for i, _ := range rooms {
+		rooms[i].LoadMainDevices()
+	}
+	ctx.Data["Rooms"] = rooms
 	ctx.HTML(200, "rooms")
 }
 

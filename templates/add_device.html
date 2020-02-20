@@ -16,16 +16,17 @@
   <div class="md-form text-center justify-content-center d-flex">
     <input type="text" class="form-control mb-3 text-center w-50" placeholder="Description" name="description">
   </div>
+  {{if not .RoomSelected}}
 	<div class="col">
 	  <h6 class="text-center ">Belongs to room</h6>
 	  <div>
 		<select class="browser-default custom-select" id="select" name="room_id">
 		  <option value="-1" selected>Please select a room</option>
-		  {{range .Rooms}}<option value="{{.RoomID}}">{{.RoomName}}</option>
-		  {{end}}
+		  {{range .Rooms}}<option value="{{.RoomID}}">{{.RoomName}}</option>{{end}}
 		</select>
 	  </div>
 	</div>
+	{{else}}<input name="room_id" value="{{.RoomID}}" type="hidden" />{{end}}
   <div class="custom-control custom-checkbox text-center">
     <input type="checkbox" class="custom-control-input" id="defaultUnchecked" name="is_main_light_source">
     <label class="custom-control-label" for="defaultUnchecked">Main Light</label>

@@ -114,7 +114,10 @@ func getMacaron() *macaron.Macaron {
 				m.Post("/room", binding.Bind(forms.AddRoomForm{}),
 					routes.PostRoomHandler)
 				m.Get("/device", routes.AddDeviceHandler)
+				m.Get("/device/:id", routes.AddDeviceHandler)
 				m.Post("/device", binding.Bind(forms.AddDeviceForm{}),
+					routes.AddDeviceRoomPostHandler)
+				m.Post("/device/:id", binding.Bind(forms.AddDeviceForm{}),
 					routes.AddDeviceRoomPostHandler)
 			})
 			m.Get("/settings", routes.SettingsHandler)

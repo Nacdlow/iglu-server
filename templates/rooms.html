@@ -27,17 +27,15 @@
             <div class="col-6">
               <div class="row pt-3">
                 <div class="col-6 text-center p-0">
-                  <!-- MAKE IT WORK PLEASE HUMAID -->
-                  <a class="far fa-lightbulb fa-2x" href="#"
-                    onclick="$.get('/toggle_main_light/{{.RoomID}}');reload();"></a>
-                  <h6>Off</h6>
+				  <a class="far fa-lightbulb {{if not .HasLight}}grey-text {{end}}fa-2x"
+					 onclick="{{if .HasLight}}$.get('/toggle_device/{{.MainLight.DeviceID}}');reload();{{end}}"></a>
+				  <h6>{{if .HasLight}}{{if.MainLight.Status}}On{{else}}Off{{end}}{{else}}None{{end}}</h6>
                 </div>
                 <div class="col-6 text-center p-0">
-                  <a class="fas fa-power-off red-text fa-2x" href="#"
-                    onclick="$.get('/toggle_device/{{.RoomID}}');reload();"></a>
-                  <h6>Off</h6>
+					<a class="fas fa-power-off {{if not .HasTemp}}grey-text {{else}}{{if .MainTemp.Status}}green-text{{else}}red-text{{end}}{{end}} fa-2x"
+					 onclick="{{if .HasTemp}}$.get('/toggle_device/{{.MainTemp.DeviceID}}');reload();{{end}}"></a>
+                  <h6>{{if .HasTemp}}{{if.MainTemp.Status}}On{{else}}Off{{end}}{{else}}None{{end}}</h6>
                 </div>
-                <!--// MAKE IT WORK PLEASE HUMAID -->
                 <div class="col-12 d-flex justify-content-center pt-3">
                   <a class="btn-new-1 text-center p-3 " href="/room/{{.RoomID}}">
                     View Room</a>
@@ -48,7 +46,6 @@
             <div class="col-6 d-flex align-items-center justify-content-end">
               <div class="card bodycolor circle-1 d-flex">
                 <div class="card-body d-flex align-items-center justify-content-center">
-                  <!-- ROOM TEMP TO BE ADDED -->
 				  <h3 class="pt-1 white-text">{{.CurrentTemp}}<small>°C</small></h3>
                 </div>
               </div>

@@ -31,10 +31,36 @@ type Room struct {
 	RoomType    RType  `fake:"skip"`
 	WindowCount int64  `xorm:"null" fake:"skip"`
 	IsSubRoom   bool
-	PartOfRoom  int64 `xorm:"null" fake:"skip"`
-	CreatedUnix int64 `xorm:"created"`
-	UpdatedUnix int64 `xorm:"updated"`
-	CurrentTemp int64
+	PartOfRoom  int64  `xorm:"null" fake:"skip"`
+	CreatedUnix int64  `xorm:"created"`
+	UpdatedUnix int64  `xorm:"updated"`
+	CurrentTemp int64  `xorm:"null"`
+	HasLight    bool   `xorm:"-"`
+	MainLight   Device `xorm:"-"`
+	HasTemp     bool   `xorm:"-"`
+	MainTemp    Device `xorm:"-"`
+}
+
+// LoadMainDevices loads the main light and temperature control variables of
+// the room.
+func (r *Room) LoadMainDevices() {
+	devices := GetDevices()
+	light, temp := false, false
+	for _, l := range devices {
+		if l.RoomID == r.RoomID && l.Type == Light && l.IsMainLight {
+			r.MainLight = l
+			r.HasLight = true
+			light = true
+		}
+		if l.RoomID == r.RoomID && l.Type == TempControl {
+			r.MainTemp = l
+			r.HasTemp = true
+			temp = true
+		}
+		if light && temp {
+			break
+		}
+	}
 }
 
 // GetFakeRoom returns a new randomly generated Room. This is used for testing
