@@ -2,12 +2,14 @@ package plugin
 
 import (
 	"fmt"
+	hclog "github.com/hashicorp/go-hclog"
+	"github.com/hashicorp/go-plugin"
+	api "gitlab.com/group-nacdlow/plugin-api"
+	macaron "gopkg.in/macaron.v1"
 	"io/ioutil"
 	"log"
-	"plugin"
-	"runtime"
-
-	macaron "gopkg.in/macaron.v1"
+	"os"
+	"os/exec"
 )
 
 // IgluPlugin represents a loaded Iglu plugin.
@@ -21,67 +23,57 @@ type IgluPlugin struct {
 	Middleware    (func() macaron.Handler)
 }
 
+var handshakeConfig = plugin.HandshakeConfig{
+	ProtocolVersion:  1,
+	MagicCookieKey:   "IGLU_PLUGIN",
+	MagicCookieValue: "MzlK0OGpIRs",
+}
+
+var pluginMap = map[string]plugin.Plugin{
+	"iglu_plugin": &api.IgluPlugin{},
+}
+
 // LoadedPlugins is an array of all loaded plugins.
 var LoadedPlugins []IgluPlugin
 
 // LoadPlugins will load all plugins in the `./plugins` folder.
 func LoadPlugins() {
-	if !(runtime.GOOS == "linux" || runtime.GOOS == "darwin") {
-		log.Println("Plugins only supported on Linux and macOS!")
-		log.Println("Plugins will not be loaded.")
-		return
-	}
+
 	log.Println("Loading plugins...")
 	files, err := ioutil.ReadDir("./plugins")
 	if err == nil {
 		for _, f := range files {
-			p, err := plugin.Open(fmt.Sprintf("./plugins/%s", f.Name()))
+			// Create an hclog.Logger
+			logger := hclog.New(&hclog.LoggerOptions{
+				Name:   "plugin",
+				Output: os.Stdout,
+				Level:  hclog.Debug,
+			})
+			// We're a host! Start by launching the plugin process.
+			client := plugin.NewClient(&plugin.ClientConfig{
+				HandshakeConfig: handshakeConfig,
+				Plugins:         pluginMap,
+				Cmd:             exec.Command(fmt.Sprintf("./plugins/%s", f.Name())),
+				Logger:          logger,
+			})
+			defer client.Kill()
+
+			// Connect via RPC
+			rpcClient, err := client.Client()
 			if err != nil {
-				log.Printf("Failed to load plugin '%s'!\n", f.Name())
-				log.Println(err)
-				continue
+				log.Fatal(err)
 			}
-			id, err := p.Lookup("ID")
+
+			// Request the plugin
+			raw, err := rpcClient.Dispense("greeter")
 			if err != nil {
-				log.Printf("Failed to load variables for plugin '%s'!\n", f.Name())
-				continue
+				log.Fatal(err)
 			}
-			name, err := p.Lookup("NAME")
-			if err != nil {
-				log.Printf("Failed to load variables for plugin '%s'!\n", f.Name())
-				continue
-			}
-			author, err := p.Lookup("AUTHOR")
-			if err != nil {
-				log.Printf("Failed to load variables for plugin '%s'!\n", f.Name())
-				continue
-			}
-			version, err := p.Lookup("VERSION")
-			if err != nil {
-				log.Printf("Failed to load variables for plugin '%s'!\n", f.Name())
-				continue
-			}
-			log.Printf("Loading %s %s...", *name.(*string), *version.(*string))
-			load, err := p.Lookup("Load")
-			if err != nil {
-				log.Printf("Failed to run Load for plugin '%s'!\n", f.Name())
-				continue
-			}
-			load.(func())()
-			pl := IgluPlugin{
-				ID:      *id.(*string),
-				Name:    *name.(*string),
-				Author:  *author.(*string),
-				Version: *version.(*string),
-			}
-			route, err := p.Lookup("ROUTE")
-			if err == nil {
-				pl.SettingsRoute = *route.(*string)
-			}
-			middleware, err := p.Lookup("Middleware")
-			if err == nil {
-				pl.Middleware = middleware.(func() macaron.Handler)
-			}
+
+			// We should have a Greeter now! This feels like a normal interface
+			// implementation but is in fact over an RPC connection.
+			greeter := raw.(example.Greeter)
+			fmt.Println(greeter.Greet())
 			LoadedPlugins = append(LoadedPlugins, pl)
 		}
 	}

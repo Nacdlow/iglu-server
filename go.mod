@@ -13,6 +13,8 @@ require (
 	github.com/go-macaron/session v0.0.0-20191101041208-c5d57a35f512
 	github.com/go-sql-driver/mysql v1.5.0 // indirect
 	github.com/gopherjs/gopherjs v0.0.0-20191106031601-ce3c9ade29de // indirect
+	github.com/hashicorp/go-hclog v0.12.0
+	github.com/hashicorp/go-plugin v1.0.1
 	github.com/kr/pretty v0.2.0 // indirect
 	github.com/lib/pq v1.3.0 // indirect
 	github.com/mattn/go-sqlite3 v2.0.3+incompatible
