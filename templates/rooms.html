@@ -28,15 +28,21 @@
             <div class="col-6">
               <div class="row pt-3">
                 <div class="col-6 text-center p-0">
+         <div id="labeldiv-{{.MainLight.DeviceID}}" class="labeldiv-{{.MainLight.DeviceID}}">
 				  <a class="far fa-lightbulb {{if not .HasLight}}grey-text {{end}}fa-2x"
-					 onclick="{{if .HasLight}}$.get('/toggle_device/{{.MainLight.DeviceID}}');reload();{{end}}"></a>
-				  <h6>{{if .HasLight}}{{if.MainLight.Status}}On{{else}}Off{{end}}{{else}}None{{end}}</h6>
-                </div>
-                <div class="col-6 text-center p-0">
+					 onclick="{{if .HasLight}}$.get('/toggle_device/{{.MainLight.DeviceID}}');updateRoom();{{end}}"></a>
+           <h6>{{if .HasLight}}{{if.MainLight.Status}}On{{else}}Off{{end}}{{else}}None{{end}}</h6>
+          </div>
+          </div>
+            
+          <div class="col-6 text-center p-0">
+            
+            <div id="labeldiv2-{{.MainTemp.DeviceID}}" class="labeldiv2-{{.MainTemp.DeviceID}}">
 					<a class="fas fa-power-off {{if not .HasTemp}}grey-text {{else}}{{if .MainTemp.Status}}green-text{{else}}red-text{{end}}{{end}} fa-2x"
-					 onclick="{{if .HasTemp}}$.get('/toggle_device/{{.MainTemp.DeviceID}}');reload();{{end}}"></a>
-                  <h6>{{if .HasTemp}}{{if.MainTemp.Status}}On{{else}}Off{{end}}{{else}}None{{end}}</h6>
-                </div>
+					 onclick="{{if .HasTemp}}$.get('/toggle_device/{{.MainTemp.DeviceID}}');updateRoom();{{end}}"></a>
+           <h6>{{if .HasTemp}}{{if.MainTemp.Status}}On{{else}}Off{{end}}{{else}}None{{end}}</h6>
+            </div>
+            </div>
                 <div class="col-12 d-flex justify-content-center pt-3">
                   <a class="btn-new-1 text-center p-3 " href="/room/{{.RoomID}}">
                     View Room</a>
@@ -64,5 +70,22 @@
 
 </div>
 {{template "base/scripts" .}}
+<script>
+  function updateRoom() {
+    {{range .Rooms}}
+    {{if .HasLight}}
+    $("#labeldiv-{{.MainLight.DeviceID}}").load(location.href + " #labeldiv-{{.MainLight.DeviceID}}>*", "");
+    {{end}}
+    {{if .HasTemp}}
+    $("#labeldiv2-{{.MainTemp.DeviceID}}").load(location.href + " #labeldiv2-{{.MainTemp.DeviceID}}>*", "");
+    {{end}}
+    {{end}}
+  }
+  
+  updateRoom(); // This will run on page load
+  setInterval(function () {
+    updateRoom() // this will run after every 1 seconds
+  }, 1000);
+</script>
 {{template "base/footer" .}}
 {{template "base/tabnav" .}}

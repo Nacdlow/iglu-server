@@ -39,6 +39,7 @@ func DashboardHandler(ctx *macaron.Context, f *session.Flash) {
 // AlertsHandler handles the alerts page
 func AlertsHandler(ctx *macaron.Context) {
 	ctx.Data["CrossBack"] = 1
+	ctx.Data["IsAlerts"] = 1
 	ctx.HTML(200, "alerts")
 }
 

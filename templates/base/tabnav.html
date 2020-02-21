@@ -17,7 +17,7 @@
 		<div class="col-3">
 		<li class="nav-item p-0">
 			<div class="plus-button">
-				<a class="nav-link bottom-nav p-0 pt-2 pb-1 text-center"
+				<a class="nav-link bottom-nav p-0 pt-2 pb-1 text-center {{if .IsAdd}} activetab{{end}}"
 				   href="{{if .IsSpecificRoom}}/add/device/{{.Room.RoomID}}{{else}}/add{{end}}">
 				<i class="fa fa-plus" style="font-size: 15px;"></i></a>
 			</div>
@@ -33,7 +33,7 @@
 
 		<div class="col-2 p-0 pl-3">
 		<li class="nav-item p-0">
-			<a class="nav-link bottom-nav p-0 text-center" href="/alerts"> <i class="far fa-bell"
+			<a class="nav-link bottom-nav p-0 text-center {{if .IsAlerts}} activetab{{end}}" href="/alerts"> <i class="far fa-bell"
 					style="font-size: 25px;"></i><br><small>Alerts</small></a>
 		</li>
 		</div>
