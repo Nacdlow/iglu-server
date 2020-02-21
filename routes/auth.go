@@ -5,6 +5,8 @@ import (
 	"github.com/go-macaron/session"
 	"gitlab.com/group-nacdlow/nacdlow-server/models"
 	"gitlab.com/group-nacdlow/nacdlow-server/models/forms"
+	"gitlab.com/group-nacdlow/nacdlow-server/modules/tokens"
+
 	"golang.org/x/crypto/bcrypt"
 	macaron "gopkg.in/macaron.v1"
 )
@@ -66,11 +68,23 @@ func RegisterHandler(ctx *macaron.Context, sess session.Store) {
 	ctx.HTML(200, "register")
 }
 
-// PostRegisterHandler handles the post registration page.
-/*func PostRegisterHandler(ctx *macaron.Context, sess session.Store) {
-	if sess.Get("auth") == LoggedIn {
-		ctx.Redirect("/dashboard")
+func AddUserHandler(ctx *macaron.Context, form forms.RegisterForm, f *session.Flash) {
+	ok := tokens.CheckAndConsumeKey(form.InviteCode)
+	if !ok {
+		f.Error("Invalid invite code. Please ask for an invite code from the home owner.")
+		ctx.Redirect("/register")
 		return
 	}
-	ctx.Redirect("/login")
-} */
+	pass, err := bcrypt.GenerateFromPassword([]byte(form.Password), 10)
+	if err != nil {
+		panic(err)
+	}
+	user := &models.User{
+		Username:  form.Email,
+		Password:  string(pass),
+		FirstName: form.FirstName,
+		LastName:  form.LastName,
+	}
+	models.AddUser(user)
+	ctx.Redirect("/dashboard")
+}
