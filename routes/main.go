@@ -76,6 +76,7 @@ func SettingsHandler(ctx *macaron.Context) {
 // AddHandler handles the add page
 func AddHandler(ctx *macaron.Context) {
 	ctx.Data["CrossBack"] = 1
+	ctx.Data["IsAdd"] = 1
 	ctx.HTML(200, "add")
 }
 
@@ -89,6 +90,7 @@ func AddRoomHandler(ctx *macaron.Context) {
 // AlertsHandler handles the alerts page
 func AlertsHandler(ctx *macaron.Context) {
 	ctx.Data["CrossBack"] = 1
+	ctx.Data["IsAlerts"] = 1
 	ctx.HTML(200, "alerts")
 }
 
