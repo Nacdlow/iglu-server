@@ -2,14 +2,15 @@ package plugin
 
 import (
 	"fmt"
-	hclog "github.com/hashicorp/go-hclog"
-	"github.com/hashicorp/go-plugin"
-	api "gitlab.com/group-nacdlow/plugin-api"
-	macaron "gopkg.in/macaron.v1"
 	"io/ioutil"
 	"log"
 	"os"
 	"os/exec"
+
+	hclog "github.com/hashicorp/go-hclog"
+	"github.com/hashicorp/go-plugin"
+	api "gitlab.com/group-nacdlow/nacdlow-server/modules/plugin/commons"
+	macaron "gopkg.in/macaron.v1"
 )
 
 // IgluPlugin represents a loaded Iglu plugin.
@@ -34,7 +35,7 @@ var pluginMap = map[string]plugin.Plugin{
 }
 
 // LoadedPlugins is an array of all loaded plugins.
-var LoadedPlugins []IgluPlugin
+var LoadedPlugins []api.Iglu
 
 // LoadPlugins will load all plugins in the `./plugins` folder.
 func LoadPlugins() {
@@ -65,16 +66,15 @@ func LoadPlugins() {
 			}
 
 			// Request the plugin
-			raw, err := rpcClient.Dispense("greeter")
+			raw, err := rpcClient.Dispense("iglu_plugin")
 			if err != nil {
 				log.Fatal(err)
 			}
 
-			// We should have a Greeter now! This feels like a normal interface
-			// implementation but is in fact over an RPC connection.
-			greeter := raw.(example.Greeter)
-			fmt.Println(greeter.Greet())
-			LoadedPlugins = append(LoadedPlugins, pl)
+			plugin := raw.(api.Iglu)
+			plugin.OnLoad()
+
+			LoadedPlugins = append(LoadedPlugins, plugin)
 		}
 	}
 	log.Printf("%d plugins loaded!\n", len(LoadedPlugins))
