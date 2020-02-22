@@ -1,0 +1,19 @@
+{{template "base/head" .}}
+
+<div class="container">
+<div class="row d-flex justify-content-center">
+<div class="col- pt-5">
+
+    <h2>Forgot your password?</h2>
+    <hr>
+	<p>Contact the home owner to get a password reset.</p>
+	<p>If you are the home owner and you got locked out of the system, please
+	contact:</p>
+	<p>{{.EngineerName}}</p>
+	<p><a href="mailto:{{.EngineerEmail}}">{{.EngineerEmail}}</a></p>
+	<p><a href="tel:{{.EngineerPhone}}">{{.EngineerPhone}}</a></p>
+	<p><a href="/" class="btn btn-block">Back to login</a></p>
+</div>
+</div>
+</div>
+{{template "base/footer" .}}

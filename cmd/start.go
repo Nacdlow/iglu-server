@@ -89,6 +89,7 @@ func getMacaron() *macaron.Macaron {
 	m.Get("/register", routes.RegisterHandler)
 	//m.Post("/register", routes.PostRegisterHandler)
 	m.Post("/register", binding.Bind(forms.RegisterForm{}), routes.AddUserHandler) //registers a user
+	m.Get("/forgot", routes.ForgotHandler)
 
 	m.Group("", func() {
 		m.Get("/dashboard", routes.DashboardHandler)
@@ -106,6 +107,7 @@ func getMacaron() *macaron.Macaron {
 
 		m.Get("/toggle_fave/:id", routes.FaveHandler)     //set device as fave
 		m.Get("/remove_device/:id", routes.RemoveHandler) //remove a device
+		m.Get("/remove_room/:id", routes.RemoveRoomHandler)//removes a room
 
 		m.Group("", func() {
 			m.Group("/add", func() {
