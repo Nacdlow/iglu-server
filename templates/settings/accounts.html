@@ -1,31 +1,47 @@
 {{template "base/head" .}}
 {{template "base/nav" .}}
 <div class="container">
-  <h2 class="pt-5 text-center">Account Settings</h2>
-  <div class="pt-3 pb-3">
-    <hr>
-  </div>
-  <form method="POST">
-	  <input type="hidden" name="action" value="get_invite" />
-	  <button type="submit" class="btn btn-success">Generate an invite code</button>
-  </form>
+	<div class="mobhide">
+		<h2 class="pt-4 text-center">Account Settings</h2>
+		<div class="pt-3">
+			<hr>
+		</div>
+	</div>
+	<div class="list-group pt-3">
+		{{range .Accounts}}
+		<div class="list-group-item list-group-item-action">
+			<div class="row align-items-center">
+				<div class="col-lg-9 col-8">
+					<i class="fas fa-user fa-lg pr-2"></i>
+					{{.FirstName}}{{if .LastName}} {{.LastName}}{{end}} ({{.Username}})
+					{{if eq .Role 1}}<span class="badge badge-danger">Admin</span>
+					{{else if eq .Role 2}}<span class="badge badge-info">Guest</span>{{end}}
+				</div>
+				<div class="col-lg-3 col-4 text-right">
+					<a href="/settings/accounts/edit/{{.Username}}">
+						<i class="fas fa-edit fa-lg mr-lg-0 mr-2"></i>
+						<span class="mobhide pr-3">Edit</span>
+					</a>
+					<a href="/settings/accounts/delete/{{.Username}}">
+						<i class="fas fa-user-times fa-lg"></i>
+						<span class="mobhide">Delete</span>
+					</a>
+				</div>
+			</div>
+		</div>
+		{{end}}
+	</div>
+	<div class="d-flex justify-content-center pt-3">
+		<form method="POST">
+			<input type="hidden" name="action" value="get_invite"/>
+			<button type="submit" class="deskhide circle-small btn-group-position">
+				<i class="fas fa-user-plus fa-lg"></i></button>
+			<button type="submit" class="mobhide btn btn-success-new">
+					Generate an invite code</button>
 
-  <div class="list-group">
-	  {{range .Accounts}}
-    <button type="button" class="list-group-item list-group-item-action">
-		<i class="fas fa-user" style="font-size: 15px;"></i>&nbsp; &nbsp;
-		{{.FirstName}}{{if .LastName}} {{.LastName}}{{end}} ({{.Username}})
-		{{if eq .Role 1}}<span class="badge badge-danger">Admin</span>
-		{{else if eq .Role 2}}<span class="badge badge-info">Guest</span>{{end}}
-		<!-- SUMMON NUMAN: MAKE THIS LOOK NICE -->
-		<a class="btn btn-danger" href="/settings/accounts/delete/{{.Username}}">DELETE</a>
-		<a class="btn btn-success" href="/settings/accounts/edit/{{.Username}}">EDIT</a>
-    </button>
-	{{end}}
-  </div>
-
+		</form>
+	</div>
 </div>
-
 {{template "base/scripts" .}}
-{{template "base/footer" .}}
 {{template "base/tabnav" .}}
+{{template "base/footer" .}}

@@ -45,6 +45,28 @@ html {
   border-width: 1.5px;*/
 }
 
+.btn-success-new {
+  background-color: var(--top-bar);
+  font-size: large;
+  font-weight: 300;
+  color:  rgb(0, 255, 0)!important;
+  border-radius: 30px !important;
+  border:solid; 
+  border-color: rgb(0, 233, 0); 
+  border-width: 2px;
+}
+
+.btn-danger-new {
+  background-color: var(--top-bar);
+  font-size: large;
+  font-weight: 300;
+  color:  rgb(255, 28, 28)!important;
+  border-radius: 30px !important;
+  border:solid; 
+  border-color: rgb(255, 28, 28); 
+  border-width: 2px;
+}
+
 .plus-button {
   background-color: var(--cool-button);
   border-radius: 20px;
@@ -154,13 +176,15 @@ a {
 
 .circle-small {
   background-color: var(--top-bar)!important;
-  color: white;
+  color:  rgb(0, 255, 0);
+  border:solid; 
+  border-color: rgb(0, 233, 0); 
+  border-width: 2px;
   border-radius: 100%;
   width: 60px;
-  height: 60px;
-  border: none;
+  height: 60px; 
   box-shadow: -1px -1px 20px 0px rgba(0,0,0,0.64);
-}
+} 
 
 #roomAvatarDiv {
     text-decoration-color: white ;
