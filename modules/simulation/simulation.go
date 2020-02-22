@@ -16,6 +16,14 @@ var (
 	// TickSleep is the length of a second in the simulation world, in
 	// milliseconds.
 	TickSleep time.Duration = 1000 * time.Millisecond
+	// SinceLog is the time since last logged a statistic.
+	SinceLog int64 = 0
+	// PowerGenSum is the sum of Power Generation. We divide this by SinceLog
+	// to get an average.
+	PowerGenSum int64 = 0
+	// PowerConSum is the sum of Power Consumption. We divide this by SinceLog
+	// to get an average.
+	PowerConSum int64 = 0
 )
 
 func UpdateFromDB() {
@@ -225,6 +233,29 @@ func Tick() {
 	}
 
 	Env.MinecraftTime = ((now.Hour() * 1000) - 6000 + (now.Minute() * 16))
+
+	// Update data for next statistic
+	SinceLog++
+	PowerConSum += int64(Env.PowerConRate)
+	PowerGenSum += int64(Env.PowerGenRate)
+
+	// Log a statistic
+	rounded := roundStatTime(now)
+	exists := models.StatExists(rounded.Unix())
+	if !exists && SinceLog >= 3600 {
+		stat := models.Statistic{
+			StatTime:    rounded.Unix(),
+			PowerGenAvg: float64(PowerGenSum) / float64(SinceLog),
+			PowerConAvg: float64(PowerConSum) / float64(SinceLog),
+		}
+		models.AddStat(&stat)
+		SinceLog, PowerConSum, PowerGenSum = 0, 0, 0
+	}
+}
+
+// roundStatTime floors the time to the hour.
+func roundStatTime(t time.Time) time.Time {
+	return time.Date(t.Year(), t.Month(), t.Day(), t.Hour(), 0, 0, 0, t.Location())
 }
 
 // WeatherType represents the weather type.

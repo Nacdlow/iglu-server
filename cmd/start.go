@@ -61,6 +61,10 @@ func getMacaron() *macaron.Macaron {
 				}
 				return str
 			},
+			"HourStamp": func(unix int64) string {
+				time := time.Unix(unix, 0)
+				return time.Format("3:04pm")
+			},
 		}},
 	}))
 	m.Use(session.Sessioner())
