@@ -89,6 +89,7 @@ func getMacaron() *macaron.Macaron {
 	m.Get("/register", routes.RegisterHandler)
 	//m.Post("/register", routes.PostRegisterHandler)
 	m.Post("/register", binding.Bind(forms.RegisterForm{}), routes.AddUserHandler) //registers a user
+	m.Get("/forgot", routes.ForgotHandler)
 
 	m.Group("", func() {
 		m.Get("/dashboard", routes.DashboardHandler)

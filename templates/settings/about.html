@@ -7,19 +7,10 @@
     <hr>
   </div>
 <ul class="list-group">
-  <a class="list-group-item" href="">MDBootstrap</a>
-  <li class="list-group-item" href="">jQuery</li>
-  <li class="list-group-item">Darksky's Skycons</li>
-  <li class="list-group-item">Polyfill</li>
-  <li class="list-group-item">Popper.js</li>
-  <li class="list-group-item">go-macaron</li>
-  <li class="list-group-item">xorm</li>
-  <li class="list-group-item">urfave's cli</li>
-  <li class="list-group-item">spf13's viper</li>
-  <li class="list-group-item">go-sqlite</li>
-  <li class="list-group-item">adlio's darksky API</li>
-  <li class="list-group-item">BurntSushi's TOML</li>
-  <li class="list-group-item">Brian's gofakeit</li>
+	{{range $k, $v :=  .Libraries}}
+	<a class="list-group-item" href="{{$v.ProjectURL}}">{{$k}}{{if $v.Author}}
+		<span class="text-muted">by {{$v.Author}}</span>{{end}}</a>
+	{{end}}
 </ul>
 
 

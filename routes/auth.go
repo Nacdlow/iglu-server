@@ -5,6 +5,7 @@ import (
 	"github.com/go-macaron/session"
 	"gitlab.com/group-nacdlow/nacdlow-server/models"
 	"gitlab.com/group-nacdlow/nacdlow-server/models/forms"
+	"gitlab.com/group-nacdlow/nacdlow-server/modules/settings"
 	"gitlab.com/group-nacdlow/nacdlow-server/modules/tokens"
 
 	"golang.org/x/crypto/bcrypt"
@@ -24,6 +25,18 @@ func LoginHandler(ctx *macaron.Context, sess session.Store) {
 		return
 	}
 	ctx.HTML(200, "index")
+}
+
+// ForgotHandler handles rendering the forgot password page.
+func ForgotHandler(ctx *macaron.Context, sess session.Store) {
+	if sess.Get("auth") == LoggedIn {
+		ctx.Redirect("/dashboard")
+		return
+	}
+	ctx.Data["EngineerName"] = settings.Config.Get("Engineer.Name")
+	ctx.Data["EngineerEmail"] = settings.Config.Get("Engineer.Email")
+	ctx.Data["EngineerPhone"] = settings.Config.Get("Engineer.Phone")
+	ctx.HTML(200, "forgot")
 }
 
 // PostLoginHandler handles the post login page.

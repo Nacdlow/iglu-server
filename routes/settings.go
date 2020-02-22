@@ -129,8 +129,31 @@ func SettingsHandler(ctx *macaron.Context) {
 	ctx.HTML(200, "settings")
 }
 
+// LibraryDesc represents the description of an open-source library.
+type LibraryDesc struct {
+	Author     string
+	ProjectURL string
+}
+
+// Libraries contains the list of the libraries used in this application.
+var Libraries = map[string]LibraryDesc{
+	"MDBootstrap":        {ProjectURL: "https://mdbootstrap.com/"},
+	"jQuery":             {ProjectURL: "https://jquery.com/"},
+	"Skycons":            {Author: "Dark Sky", ProjectURL: "https://darkskyapp.github.io/skycons/"},
+	"Polyfill.io":        {Author: "Financial Times", ProjectURL: "https://polyfill.io"},
+	"Popper.js":          {Author: "Federico Zivolo", ProjectURL: "https://popper.js.org/"},
+	"Macaron":            {Author: "Jiahua Chen (Unknwon)", ProjectURL: "https://github.com/go-macaron/macaron"},
+	"xorm":               {ProjectURL: "https://gitea.com/xorm/xorm"},
+	"cli":                {Author: "Jeremy Saenz", ProjectURL: "https://github.com/urfave/cli"},
+	"viper":              {Author: "Steve Francia", ProjectURL: "https://github.com/spf13/viper"},
+	"Go Dark Sky API":    {Author: "Aaron Longwell", ProjectURL: "https://github.com/adlio/darksky"},
+	"TOML parser for Go": {Author: "Andrew Gallant", ProjectURL: "https://github.com/BurntSushi/toml"},
+	"gofakeit":           {Author: "Brian Voelker", ProjectURL: "https://github.com/brianvoe/gofakeit"},
+}
+
 // AboutSettingsHandler handles the about settings page
 func AboutSettingsHandler(ctx *macaron.Context) {
 	ctx.Data["NavTitle"] = "About"
+	ctx.Data["Libraries"] = Libraries
 	ctx.HTML(200, "settings/about")
 }
