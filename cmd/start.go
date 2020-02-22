@@ -120,23 +120,26 @@ func getMacaron() *macaron.Macaron {
 				m.Post("/device/:id", binding.Bind(forms.AddDeviceForm{}),
 					routes.AddDeviceRoomPostHandler)
 			})
-			m.Get("/settings", routes.SettingsHandler)
-			m.Group("/settings/plugins", func() {
-				m.Get("", routes.PluginsSettingsHandler)
-				m.Get("/:id", routes.InstallPluginSettingsHandler)
-				m.Get("/confirm/:id", routes.InstallPluginConfirmSettingsHandler) // TODO use POST so it is secure
-			})
+			m.Group("/settings", func() {
+				m.Get("", routes.SettingsHandler)
+				m.Group("/plugins", func() {
+					m.Get("", routes.PluginsSettingsHandler)
+					m.Get("/:id", routes.InstallPluginSettingsHandler)
+					m.Get("/confirm/:id", routes.InstallPluginConfirmSettingsHandler) // TODO use POST so it is secure
+				})
 
-			m.Group("/settings/accounts", func() {
-				m.Get("", routes.AccountSettingsHandler)
-				m.Post("", routes.PostAccountSettingsHandler)
-				m.Get("/delete/:username", routes.DeleteAccountHandler)
-				m.Post("/delete/:username", routes.PostDeleteAccountHandler)
-				m.Get("/edit/:username", routes.EditAccountHandler)
-				m.Post("/edit/:username", routes.PostEditAccountHandler)
-			})
+				m.Group("/accounts", func() {
+					m.Get("", routes.AccountSettingsHandler)
+					m.Post("", routes.PostAccountSettingsHandler)
+					m.Get("/delete/:username", routes.DeleteAccountHandler)
+					m.Post("/delete/:username", routes.PostDeleteAccountHandler)
+					m.Get("/edit/:username", routes.EditAccountHandler)
+					m.Post("/edit/:username", routes.PostEditAccountHandler)
+				})
 
-			m.Get("/settings/appearance", routes.AppearanceSettingsHandler)
+				m.Get("/appearance", routes.AppearanceSettingsHandler)
+				m.Get("/about", routes.AboutSettingsHandler)
+			})
 		}, routes.RequireAdmin)
 
 		m.Get("/battery_stat", routes.BatteryStatHandler)

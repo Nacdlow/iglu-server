@@ -94,3 +94,9 @@ func SettingsHandler(ctx *macaron.Context) {
 	ctx.Data["NavTitle"] = "Settings"
 	ctx.HTML(200, "settings")
 }
+
+// AboutSettingsHandler handles the about settings page
+func AboutSettingsHandler(ctx *macaron.Context) {
+	ctx.Data["NavTitle"] = "About"
+	ctx.HTML(200, "settings/about")
+}
