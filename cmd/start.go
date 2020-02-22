@@ -134,7 +134,8 @@ func getMacaron() *macaron.Macaron {
 					m.Get("/delete/:username", routes.DeleteAccountHandler)
 					m.Post("/delete/:username", routes.PostDeleteAccountHandler)
 					m.Get("/edit/:username", routes.EditAccountHandler)
-					m.Post("/edit/:username", routes.PostEditAccountHandler)
+					m.Post("/edit/:username", binding.Bind(forms.EditAccountForm{}),
+						routes.PostEditAccountHandler)
 				})
 
 				m.Get("/appearance", routes.AppearanceSettingsHandler)
