@@ -366,8 +366,12 @@ padding: .5rem 1rem;
 
 .nav-tabs, .nav-link {
   width: 100%!important;
-  border-radius: 50px !important;
 	border: 0 !important;
+border-radius: 0 !important;
+}
+
+.nav-rounded {
+  border-radius: 7px !important;
 }
 
 .activetab {
