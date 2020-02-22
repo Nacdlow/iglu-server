@@ -13,29 +13,24 @@
       <div class="card mr-lg-0 mb-4">
         <div class="card-body">
           <div class="row">
-          <div class="col-12 text-right">
-            <a class="p-0 text-right" id="navbarDropdownMenuLink-333" data-toggle="dropdown" aria-haspopup="true"
+            <div class="col-6">
+              <h4>{{.RoomName}}</h4>
+            </div>
+            <div class="col-6 d-flex align-items-center justify-content-end">
+              <i class="{{if eq .RoomType 0}}fas fa-couch{{else if eq .RoomType 1}}fas fa-bed{{else if eq .RoomType 2}}
+          fas fa-coffee{{else if eq .RoomType 3}}fas fa-utensils{{else if eq .RoomType 4}}fas fa-bath{{else if eq .RoomType 5}}
+          fas fa-door-open{{else if eq .RoomType 6}}fas fa-toolbox{{else if eq .RoomType 7}}fas fa-socks{{else if eq .RoomType 8}}
+          fas fa-warehouse{{else if eq .RoomType 9}}fas fa-user{{end}} fa-2x"></i>
+          <a class="pl-3 p-0" id="navbarDropdownMenuLink-333" data-toggle="dropdown" aria-haspopup="true"
               aria-expanded="false">
-              <i class="fas fa-ellipsis-h"></i>
-            </a>
-            <div class="dropdown-menu dropdown-menu-right dropdown-default text-center"
+              <i class="fas fa-ellipsis-v fa-lg"></i></a>
+              <div class="dropdown-menu dropdown-menu-right dropdown-default text-center"
               aria-labelledby="navbarDropdownMenuLink-333">
               <a class="dropdown-item black-text" href="#">Edit</a>
               <a class="dropdown-item black-text" href="#" id="remove-{{.RoomID}}" data-toggle="modal"
                 data-target="#removeRoom-{{.RoomID}}">Remove</a>
             </div>
-          </div>
-          </div>
-          <hr>
-          <div class="row">
-            <div class="col-6">
-              <h4>{{.RoomName}}</h4>
-            </div>
-            <div class="col-6 text-right">
-              <i class="{{if eq .RoomType 0}}fas fa-couch{{else if eq .RoomType 1}}fas fa-bed{{else if eq .RoomType 2}}
-          fas fa-coffee{{else if eq .RoomType 3}}fas fa-utensils{{else if eq .RoomType 4}}fas fa-bath{{else if eq .RoomType 5}}
-          fas fa-door-open{{else if eq .RoomType 6}}fas fa-toolbox{{else if eq .RoomType 7}}fas fa-socks{{else if eq .RoomType 8}}
-          fas fa-warehouse{{else if eq .RoomType 9}}fas fa-user{{end}} fa-2x"></i>
+            </a>
             </div>
           </div>
           <hr>

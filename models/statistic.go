@@ -10,8 +10,9 @@ import (
 // hour.
 type Statistic struct {
 	StatID               int64   `xorm:"pk autoincr"`
-	PowerGen             float64 // Power generated, kWh
-	PowerCon             float64 // Power conserved, kWh
+	StatTime             int64   `xorm:"unique index"`
+	PowerGenAvg          float64 // Power generated, kWh
+	PowerConAvg          float64 // Power conserved, kWh
 	MainDoorsOpenedCount int64   // How many times the doors opened
 	CreatedUnix          int64   `xorm:"created"`
 	UpdatedUnix          int64   `xorm:"updated"`
@@ -22,9 +23,26 @@ type Statistic struct {
 func GetFakeStat() (s *Statistic) {
 	s = new(Statistic)
 	s.CreatedUnix = time.Now().UnixNano() - int64(gofakeit.Number(0, 99999))
-	s.PowerGen = gofakeit.Float64Range(0, 45)
-	s.PowerCon = gofakeit.Float64Range(0, s.PowerGen)
+	s.PowerGenAvg = gofakeit.Float64Range(0, 45)
+	s.PowerConAvg = gofakeit.Float64Range(0, s.PowerGenAvg)
 	return
+}
+
+// GetLatestStats returns the latest stats (from the past 24 hours).
+func GetLatestStats() (s []Statistic) {
+	minTime := time.Now().Add(-(24 * time.Hour))
+	for _, stat := range GetStats() {
+		if stat.StatTime > minTime.Unix() {
+			s = append(s, stat)
+		}
+	}
+	return
+}
+
+// StatExists checks whether a statistic exists based on statistic time.
+func StatExists(time int64) bool {
+	total, _ := engine.Where("stat_time = ?", time).Count(new(Statistic))
+	return total > 0
 }
 
 // GetStat gets a Statistic based on its ID from the database.

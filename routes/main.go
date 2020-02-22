@@ -33,6 +33,7 @@ func DashboardHandler(ctx *macaron.Context, f *session.Flash) {
 		ctx.Data["WeatherIcon"] = template.JS(icon)
 	}
 	ctx.Data["Devices"] = models.GetDevices()
+	ctx.Data["Stats"] = models.GetLatestStats()
 	ctx.HTML(200, "dashboard")
 }
 
