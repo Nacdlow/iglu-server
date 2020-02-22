@@ -13,6 +13,21 @@
       <div class="card mr-lg-0 mb-4">
         <div class="card-body">
           <div class="row">
+          <div class="col-12 text-right">
+            <a class="p-0 text-right" id="navbarDropdownMenuLink-333" data-toggle="dropdown" aria-haspopup="true"
+              aria-expanded="false">
+              <i class="fas fa-ellipsis-h"></i>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right dropdown-default text-center"
+              aria-labelledby="navbarDropdownMenuLink-333">
+              <a class="dropdown-item black-text" href="#">Edit</a>
+              <a class="dropdown-item black-text" href="#" id="remove-{{.RoomID}}" data-toggle="modal"
+                data-target="#removeRoom-{{.RoomID}}">Remove</a>
+            </div>
+          </div>
+          </div>
+          <hr>
+          <div class="row">
             <div class="col-6">
               <h4>{{.RoomName}}</h4>
             </div>
@@ -29,7 +44,7 @@
               <div class="row pt-3">
                 <div class="col-6 text-center p-0">
          <div id="labeldiv-{{.MainLight.DeviceID}}" class="labeldiv-{{.MainLight.DeviceID}}">
-				  <a class="far fa-lightbulb {{if not .HasLight}}grey-text {{end}}fa-2x"
+				  <a class="far fa-lightbulb {{if.MainLight.Status}}yellow-text fa-2x{{else}}grey-text fa-2x{{end}}"
 					 onclick="{{if .HasLight}}$.get('/toggle_device/{{.MainLight.DeviceID}}');updateRoom();{{end}}"></a>
            <h6>{{if .HasLight}}{{if.MainLight.Status}}On{{else}}Off{{end}}{{else}}None{{end}}</h6>
           </div>
@@ -65,10 +80,33 @@
     </div>
     {{end}}
   </div>
+  <!-- Remove room -->
+<div class="modal fade" id="removeRoom-{{.RoomID}}" tabindex="-1" role="dialog"
+aria-labelledby="removeRoom-{{.RoomID}}" aria-hidden="true">
 
+<!-- Change class .modal-sm to change the size of the modal -->
+<div class="modal-dialog modal-sm" role="document">
 
-
+  <div class="modal-content">
+    <div class="modal-header">
+      <h4 class="modal-title w-100 black-text" id="removeDevice">Are you sure you want to remove this device?
+      </h4>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Cancel</button>
+      <button type="submit" data-dismiss="modal" class="btn btn-primary btn-sm" id="remove-{{.RoomID}}"
+        onclick="$.get('/remove_room/{{.RoomID}}');reload();">Remove Device</button>
+    </div>
+  </div>
 </div>
+</div>
+<!-- /Remove room -->
+</div>
+
+
 {{template "base/scripts" .}}
 <script>
   function updateRoom() {

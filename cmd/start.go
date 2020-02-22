@@ -109,8 +109,9 @@ func getMacaron() *macaron.Macaron {
 		m.Get("/toggle_slider/:id/:value", routes.SliderHandler)
 		m.Get("/alerts", routes.AlertsHandler)
 
-		m.Get("/toggle_fave/:id", routes.FaveHandler)     //set device as fave
-		m.Get("/remove_device/:id", routes.RemoveHandler) //remove a device
+		m.Get("/toggle_fave/:id", routes.FaveHandler)       //set device as fave
+		m.Get("/remove_device/:id", routes.RemoveHandler)   //remove a device
+		m.Get("/remove_room/:id", routes.RemoveRoomHandler) //removes a room
 
 		m.Group("", func() {
 			m.Group("/add", func() {

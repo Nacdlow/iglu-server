@@ -75,7 +75,7 @@
                 {{else}}style="background-color: #FF6666;" {{end}} id="footer">
                 <small class="text-muted black-text" style="font-size: 0.7rem;">
 					{{if .Status}}Time on: {{CalcSince .ToggledUnix}}{{else}}Last on:
-					{{CalcSince .ToggledUnix}}{{end}}</small>
+					{{CalcSince .ToggledUnix}} ago{{end}}</small>
               </div>
             </div>
           </div>
