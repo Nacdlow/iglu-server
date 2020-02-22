@@ -80,3 +80,7 @@ func FaveHandler(ctx *macaron.Context) {
 func RemoveHandler(ctx *macaron.Context) {
 	models.DeleteDevice(ctx.ParamsInt64("id"))
 }
+
+func RemoveRoomHandler(ctx *macaron.Context) {
+	models.DeleteRoom(ctx.ParamsInt64("id"))
+}
