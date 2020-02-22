@@ -1,0 +1,60 @@
+{{template "base/head" .}}
+{{template "base/nav" .}}
+<div class="container">
+  <div class="d-flex d-flex justify-content-center pt-4">
+  <div class="col-lg-6 col-md-8 col-sm-12">
+  <div class="card mr-lg-0 mb-4">
+    <div class="card-body">
+      <div class="d-flex justify-content-center">
+          <h2>Edit user</h2>
+      </div>
+      <hr>
+        <form method="POST">
+
+    <div class="form-row">
+        <div class="col">       
+            <!-- First name -->
+            <div class="md-form">
+                <input type="text" id="fn" class="form-control white-text"
+				   placeholder="First name" name="fname" autofocus="1" value="{{.EditUser.FirstName}}">
+            </div>
+        </div>
+        <div class="col">
+            <!-- Last name -->
+            <div class="md-form">
+				<input type="text" id="ln" class="form-control white-text" placeholder="Last name" name="lname" value="{{.EditUser.LastName}}">
+            </div>
+        </div>
+    </div>
+
+    <!-- E-mail -->
+    <div class="md-form">
+		<input type="email" id="em" class="form-control white-text mb-4" placeholder="E-mail" name="email" value="{{.EditUser.Username}}" disabled="1">
+    </div>
+
+    <div class="md-form">
+        <input type="password" id="pw1" class="form-control white-text" placeholder="Password" aria-describedby="defaultRegisterFormPasswordHelpBlock" name="password">
+    </div>
+
+     <div class="md-form">
+        <input type="password" id="pw2" class="form-control white-text"
+		placeholder="Confirm Password" aria-describedby="defaultRegisterFormPasswordHelpBlock" name="repassword">
+    </div>
+
+    <small id="defaultRegisterFormPasswordHelpBlock" class="form-text text-muted mb-4">
+        Passwords must be at least 8 characters
+    </small>
+
+    <button class="btn btn-success my-4 btn-block" id="registeruser"
+		type="submit">Update User</button>
+
+      </form>
+    </div>
+  </div>
+  </div>
+  </div>
+</div>
+{{template "base/scripts" .}}
+{{template "base/tabnav" .}}
+{{template "base/footer" .}}
+

@@ -1,0 +1,28 @@
+{{template "base/head" .}}
+{{template "base/nav" .}}
+<div class="container">
+  <div class="d-flex d-flex justify-content-center pt-4">
+  <div class="col-lg-6 col-md-8 col-sm-12">
+  <div class="card mr-lg-0 mb-4">
+    <div class="card-body">
+      <div class="d-flex justify-content-center">
+		  <!-- SUMMON NUMAN: make this not look horrible -->
+          <h2>Are you sure do you want to delete?</h2>
+		  <p>You want to delete {{.DelUser.FirstName}}{{if .DelUser.LastName}}
+		  {{.DelUser.LastName}}{{end}} ({{.DelUser.Username}})?</p>
+      </div>
+      <hr>
+        <form method="POST">
+			<input type="hidden" name="username" value="{{.DelUser.Username}}" />
+			<a class="btn btn-success btn-block" href="/settings/accounts">Cancel</a>
+			<button type="submit" class="btn btn-danger btn-block">Confirm</button>
+      </form>
+    </div>
+  </div>
+  </div>
+  </div>
+</div>
+{{template "base/scripts" .}}
+{{template "base/tabnav" .}}
+{{template "base/footer" .}}
+

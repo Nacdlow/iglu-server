@@ -17,82 +17,14 @@
 		{{.FirstName}}{{if .LastName}} {{.LastName}}{{end}} ({{.Username}})
 		{{if eq .Role 1}}<span class="badge badge-danger">Admin</span>
 		{{else if eq .Role 2}}<span class="badge badge-info">Guest</span>{{end}}
+		<!-- SUMMON NUMAN: MAKE THIS LOOK NICE -->
+		<a class="btn btn-danger" href="/settings/accounts/delete/{{.Username}}">DELETE</a>
+		<a class="btn btn-success" href="/settings/accounts/edit/{{.Username}}">EDIT</a>
     </button>
 	{{end}}
   </div>
 
-  <div class="modal" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true" data-backdrop="false">
-    <div class="modal-dialog" role="document" data-backdrop="false">
-      <div class="modal-content" data-backdrop="false" method="POST">
-        <div class="modal-header navcolor">
-          <h5 class="modal-title" id="addModal">Add Room</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body bodycolor">
-          <form method="POST">
-            <h6 class="text-center pt-4">Enter Room Name:</h6>
-            <div class="md-form justify-content-center d-flex">
-              <input type="text" class="form-control w-50 white-text text-center" placeholder="e.g. Johns Room"
-                name="room_name">
-            </div>
-            <h6 class="text-center">Enter Room Description:</h6>
-            <div class="md-form justify-content-center d-flex">
-              <input type="text" class="form-control w-50 white-text text-center" placeholder="Description"
-                name="description">
-            </div>
-
-
-
-            <div class="form-row">
-              <div class="col">
-                <h6 class="text-center ">Select Room Type:</h6>
-                <div>
-                  <select class="browser-default custom-select" id="select" name="room_type">
-                    <option value="" disabled selected>Choose Type</option>
-                    <option value="0">Lounge</option>
-                    <option value="1">Bedroom</option>
-                    <option value="2">Dining Room</option>
-                    <option value="3">Kitchen</option>
-                    <option value="4">Bathroom</option>
-                    <option value="5">Hallway</option>
-                    <option value="6">Storage</option>
-                    <option value="7">Utility Room</option>
-                    <option value="8">Garage</option>
-                    <option value="9">Guest</option>
-                  </select>
-                </div>
-              </div>
-              <div class="col">
-                <h6 class="text-center ">Part of a room?</h6>
-                <div>
-                  <select class="browser-default custom-select" id="select" name="part_of_room">
-                    <option value="-1" selected>Not part of any room</option>
-                    {{range .Rooms}}<option value="{{.RoomID}}">{{.RoomName}}</option>
-                    {{end}}
-                  </select>
-                </div>
-              </div>
-            </div>
-            <h6 class="text-center pt-4">Enter Number of Windows:</h6>
-            <div class="md-form text-center justify-content-center d-flex">
-              <input type="number" class="form-control white-text text-center w-50" placeholder="e.g. 2"
-                name="windows_count">
-            </div>
-        </div>
-        <div class="modal-footer justify-content-center d-flex navcolor">
-          <button type="button" class="btn bodycolor" data-dismiss="modal">Close</button>
-          <button type="submit" class="btn white black-text">Save changes</button>
-        </div>
-        </form>
-      </div>
-    </div>
-  </div>
 </div>
-
-
 
 {{template "base/scripts" .}}
 {{template "base/footer" .}}

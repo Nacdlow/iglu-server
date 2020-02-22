@@ -31,6 +31,51 @@ func PostAccountSettingsHandler(ctx *macaron.Context, f *session.Flash) {
 	ctx.Redirect("/settings/accounts")
 }
 
+func DeleteAccountHandler(ctx *macaron.Context) {
+	for _, u := range models.GetUsers() {
+		if u.Username == ctx.Params("username") {
+			ctx.Data["DelUser"] = u
+			ctx.HTML(200, "settings/del_account")
+			return
+		}
+	}
+	ctx.Redirect("/settings/accounts")
+}
+
+func PostDeleteAccountHandler(ctx *macaron.Context, f *session.Flash) {
+	for _, u := range models.GetUsers() {
+		if u.Username == ctx.Query("username") {
+			err := models.DeleteUser(ctx.Query("username"))
+			if err != nil {
+				f.Error("Failed to delete user!")
+			} else {
+				f.Success("User deleted!")
+			}
+		}
+	}
+	ctx.Redirect("/settings/accounts")
+}
+
+func EditAccountHandler(ctx *macaron.Context) {
+	for _, u := range models.GetUsers() {
+		if u.Username == ctx.Params("username") {
+			ctx.Data["EditUser"] = u
+			ctx.HTML(200, "settings/edit_account")
+			return
+		}
+	}
+	ctx.Redirect("/settings/accounts")
+}
+
+func PostEditAccountHandler(ctx *macaron.Context, f *session.Flash) {
+	for _, u := range models.GetUsers() {
+		if u.Username == ctx.Query("username") {
+			//models.UpdateUser(...
+		}
+	}
+	ctx.Redirect("/settings/accounts")
+}
+
 // AppearanceSettingsHandler handles the settings
 func AppearanceSettingsHandler(ctx *macaron.Context) {
 	ctx.Data["NavTitle"] = "Appearance Settings"

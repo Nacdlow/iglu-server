@@ -126,8 +126,16 @@ func getMacaron() *macaron.Macaron {
 				m.Get("/:id", routes.InstallPluginSettingsHandler)
 				m.Get("/confirm/:id", routes.InstallPluginConfirmSettingsHandler) // TODO use POST so it is secure
 			})
-			m.Get("/settings/accounts", routes.AccountSettingsHandler)
-			m.Post("/settings/accounts", routes.PostAccountSettingsHandler)
+
+			m.Group("/settings/accounts", func() {
+				m.Get("", routes.AccountSettingsHandler)
+				m.Post("", routes.PostAccountSettingsHandler)
+				m.Get("/delete/:username", routes.DeleteAccountHandler)
+				m.Post("/delete/:username", routes.PostDeleteAccountHandler)
+				m.Get("/edit/:username", routes.EditAccountHandler)
+				m.Post("/edit/:username", routes.PostEditAccountHandler)
+			})
+
 			m.Get("/settings/appearance", routes.AppearanceSettingsHandler)
 		}, routes.RequireAdmin)
 
