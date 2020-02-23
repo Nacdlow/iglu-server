@@ -2,18 +2,37 @@
 
 <div class="container">
 <div class="row d-flex justify-content-center">
-<div class="col- pt-5">
+<div class="col-lg-7 col-12 pt-5">
 
     <h2>Forgot your password?</h2>
     <hr>
 	<p>Contact the home owner to get a password reset.</p>
 	<p>If you are the home owner and you got locked out of the system, please
 	contact:</p>
-	<p>{{.EngineerName}}</p>
-	<p><a href="mailto:{{.EngineerEmail}}">{{.EngineerEmail}}</a></p>
-	<p><a href="tel:{{.EngineerPhone}}">{{.EngineerPhone}}</a></p>
-	<p><a href="/" class="btn btn-block">Back to login</a></p>
+	<div class="card p-4">
+	<div class="row text-center justify-content-center">
+		<div class="col-lg-4 col-12 p-0">
+			<i class="fas fa-tools fa-2x mt-lg-3 mt-2"></i>
+			<p>{{.EngineerName}}</p>
+		</div>
+		<div class="col-lg-4 col-6 p-0">
+			<i class="fas fa-envelope mt-3 fa-2x"></i>
+			<p><a href="mailto:{{.EngineerEmail}}">{{.EngineerEmail}}</a></p>
+		</div>
+		<div class="col-lg-4 col-6 pl-3 p-0">
+			<i class="fas fa-phone mt-3 fa-2x"></i>
+			<p><a href="tel:{{.EngineerPhone}}">{{.EngineerPhone}}</a></p>
+		</div>
+
+		
+	</div>
 </div>
+</div>
+</div>
+<div class="row d-flex justify-content-center">
+	<div class="col-lg-4 col-9 d-flex justify-content-center pt-3">
+	<a href="/" class="btn btn-new-1 navcolor p-3 text-center">Back to login</a>
+	</div>
 </div>
 </div>
 {{template "base/footer" .}}

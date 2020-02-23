@@ -39,7 +39,8 @@ html {
 .btn-new-1 {
   background-color: var(--back);
   border-radius: 30px !important;
-  width: 100%;
+  width: 100%; 
+  font-size: 16px;
   /*border:solid; 
   border-color:#3677ff; 
   border-width: 1.5px;*/
