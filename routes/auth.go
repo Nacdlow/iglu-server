@@ -84,6 +84,7 @@ func RegisterHandler(ctx *macaron.Context, sess session.Store) {
 	ctx.HTML(200, "register")
 }
 
+// AddUserHandler handles adding a new user from registeration.
 func AddUserHandler(ctx *macaron.Context, form forms.RegisterForm, f *session.Flash) {
 	ok := tokens.CheckAndConsumeKey(form.InviteCode)
 	if !ok {

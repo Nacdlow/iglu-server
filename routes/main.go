@@ -77,6 +77,7 @@ func OverviewHandler(ctx *macaron.Context) {
 	ctx.HTML(200, "overview")
 }
 
+// AddDeviceRoomPostHandler handles post for adding a device to a room.
 func AddDeviceRoomPostHandler(ctx *macaron.Context, form forms.AddDeviceForm, f *session.Flash) {
 	device := &models.Device{
 		RoomID:      form.RoomID,

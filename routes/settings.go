@@ -32,6 +32,7 @@ func PostAccountSettingsHandler(ctx *macaron.Context, f *session.Flash) {
 	ctx.Redirect("/settings/accounts")
 }
 
+// DeleteAccountHandler handles deleting accounts.
 func DeleteAccountHandler(ctx *macaron.Context) {
 	for _, u := range models.GetUsers() {
 		if u.Username == ctx.Params("username") {
@@ -43,6 +44,7 @@ func DeleteAccountHandler(ctx *macaron.Context) {
 	ctx.Redirect("/settings/accounts")
 }
 
+// PostDeleteAccountHandler handles post for deleting accounts.
 func PostDeleteAccountHandler(ctx *macaron.Context, f *session.Flash) {
 	for _, u := range models.GetUsers() {
 		if u.Username == ctx.Query("username") {
@@ -57,6 +59,7 @@ func PostDeleteAccountHandler(ctx *macaron.Context, f *session.Flash) {
 	ctx.Redirect("/settings/accounts")
 }
 
+// EditAccountHandler handles editing accounts.
 func EditAccountHandler(ctx *macaron.Context) {
 	for _, u := range models.GetUsers() {
 		if u.Username == ctx.Params("username") {
@@ -68,6 +71,7 @@ func EditAccountHandler(ctx *macaron.Context) {
 	ctx.Redirect("/settings/accounts")
 }
 
+// PostEditAccountHandler handles post for editing accounts.
 func PostEditAccountHandler(ctx *macaron.Context, f *session.Flash,
 	form forms.EditAccountForm) {
 	for _, u := range models.GetUsers() {

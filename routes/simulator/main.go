@@ -27,7 +27,7 @@ func HomepageHandler(ctx *macaron.Context) {
 	ctx.HTML(200, "sim/index")
 }
 
-// EnvStatus handler handles loading the environment status for simulator page.
+// EnvStatusHandler handles loading the environment status for simulator page.
 func EnvStatusHandler(ctx *macaron.Context) {
 	ctx.Data["Env"] = simulation.Env
 	ctx.Data["TickSleep"] = simulation.TickSleep.Milliseconds()
@@ -45,6 +45,7 @@ func DataHandler(ctx *macaron.Context) {
 	ctx.JSON(200, simulation.Env)
 }
 
+// PostOverrideWeatherHandler handles post for overriding simulation's weather.
 func PostOverrideWeatherHandler(ctx *macaron.Context, form forms.OverrideWeatherForm) {
 	simulation.Env.Weather.OutdoorTemp = form.OutdoorTemp
 	simulation.Env.Weather.Humidity = form.Humidity
@@ -52,11 +53,14 @@ func PostOverrideWeatherHandler(ctx *macaron.Context, form forms.OverrideWeather
 	ctx.Redirect("/sim")
 }
 
+// PostChangeTimeSleepHandler handles post for changing simulation's tick speed.
 func PostChangeTimeSleepHandler(ctx *macaron.Context, form forms.ChangeTimeSleepForm) {
 	simulation.TickSleep = time.Duration(form.TickSleep) * time.Millisecond
 	ctx.Redirect("/sim")
 }
 
+// ToggleHandler handles toggling a device in the simulation. This is mostly
+// used by the Minecraft simulation plugin.
 func ToggleHandler(ctx *macaron.Context) {
 	for _, room := range simulation.Env.Rooms {
 		if room.MainLightDeviceID == ctx.ParamsInt64("id") {

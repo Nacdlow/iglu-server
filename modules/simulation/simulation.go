@@ -26,6 +26,7 @@ var (
 	PowerConSum int64 = 0
 )
 
+// UpdateFromDB updates the simulation model based on database.
 func UpdateFromDB() {
 	for i, room := range Env.Rooms {
 		device, err := models.GetDevice(room.MainLightDeviceID)
@@ -152,14 +153,14 @@ func getChange(current, influence, change, threshold float64) float64 {
 	diff := math.Abs(current - influence)
 	if diff <= threshold { // threshold
 		return influence
-	} else {
-		changed := diff / change
-		if influence > current {
-			return current + changed
-		} else {
-			return current - changed
-		}
 	}
+
+	changed := diff / change
+	if influence > current {
+		return current + changed
+	}
+
+	return current - changed
 }
 
 // Tick will tick the simulated environment one second.

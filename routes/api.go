@@ -9,6 +9,7 @@ import (
 	macaron "gopkg.in/macaron.v1"
 )
 
+// BatteryStatHandler handles rendering battery card.
 func BatteryStatHandler(ctx *macaron.Context) {
 	perc := int64((simulation.Env.BatteryStore / settings.Config.GetFloat64("Simulation.BatteryCapacityKWH")) * 100)
 	if perc < 0 {
@@ -30,6 +31,7 @@ func BatteryStatHandler(ctx *macaron.Context) {
 	ctx.HTML(200, "battery")
 }
 
+// ToggleHandler handles toggling devices.
 func ToggleHandler(ctx *macaron.Context) {
 	for _, device := range models.GetDevices() {
 		if device.DeviceID == ctx.ParamsInt64("id") {
@@ -48,6 +50,7 @@ func ToggleHandler(ctx *macaron.Context) {
 	}
 }
 
+// SliderHandler handles modifying device values based on sliders.
 func SliderHandler(ctx *macaron.Context) {
 	for _, device := range models.GetDevices() {
 		if device.DeviceID == ctx.ParamsInt64("id") {
@@ -73,6 +76,7 @@ func SliderHandler(ctx *macaron.Context) {
 	}
 }
 
+// FaveHandler handles favouriting or unfavouriting devices.
 func FaveHandler(ctx *macaron.Context) {
 	for _, device := range models.GetDevices() {
 		if device.DeviceID == ctx.ParamsInt64("id") {
@@ -87,6 +91,7 @@ func FaveHandler(ctx *macaron.Context) {
 	}
 }
 
+// RemoveHandler handles removing devices.
 func RemoveHandler(ctx *macaron.Context) {
 	err := models.DeleteDevice(ctx.ParamsInt64("id"))
 	if err != nil {
@@ -94,6 +99,7 @@ func RemoveHandler(ctx *macaron.Context) {
 	}
 }
 
+// RemoveRoomHandler handles removing rooms.
 func RemoveRoomHandler(ctx *macaron.Context) {
 	err := models.DeleteRoom(ctx.ParamsInt64("id"))
 	if err != nil {
