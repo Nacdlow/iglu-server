@@ -50,7 +50,7 @@ html {
   background-color: var(--top-bar);
   font-size: large;
   font-weight: 300;
-  color: rgb(0, 255, 0)!important;
+  color: white!important;
   border-radius: 30px !important;
   border: solid;
   border-color: rgb(0, 233, 0);
@@ -61,7 +61,7 @@ html {
   background-color: var(--top-bar);
   font-size: large;
   font-weight: 300;
-  color: rgb(255, 28, 28)!important;
+  color:white!important;
   border-radius: 30px !important;
   border: solid;
   border-color: rgb(255, 28, 28);
