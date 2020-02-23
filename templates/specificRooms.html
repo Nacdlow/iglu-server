@@ -83,11 +83,13 @@
       <!--light device tab cards-->
       <div class="tab-pane show active" id="home" role="tabpanel" aria-labelledby="home-tab">
         <div class="row justify-content-center pt-5 pr-5 pl-5 pb-3">
-          {{range .Devices}}{{if and (eq .Type 0) (eq .RoomID $.Room.RoomID)}}
+          {{range .Devices}}
+          {{if and (eq .Type 0) (eq .RoomID $.Room.RoomID)}}
           <div class="col-lg-4 col-md-6">
             {{template "cards/light" .}}
           </div>
-          {{end}}{{end}}
+          {{end}}
+          {{end}}
         </div>
       </div>
       <!--/light device tab cards-->
