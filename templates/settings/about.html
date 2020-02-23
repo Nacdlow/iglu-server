@@ -1,7 +1,12 @@
 {{template "base/head" .}}
 {{template "base/nav" .}}
 <div class="container">
-  <h2 class="pt-5 text-center">Licenses</h2>
+  <div class="">
+    <row class="col-12">
+      <a class="fas fa-arrow-circle-left d-flex text-left fa-2x w-10" href="/settings"></a>
+      <h2 class="text-center">Licences</h2>
+      </row>
+  </div>
   <p>iglü is built on open-source software and libraries.</p>
   <div class="pt-3 pb-3">
     <hr>
@@ -12,7 +17,7 @@
 		<span class="text-muted">by {{$v.Author}}</span>{{end}}</a>
 	{{end}}
 </ul>
-
+</div>
 
 
 {{template "base/scripts" .}}
