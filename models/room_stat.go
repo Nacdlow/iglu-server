@@ -45,8 +45,8 @@ func GetRoomStat(id int64) (*RoomStat, error) {
 }
 
 // GetRoomStats returns an array of all RoomStats from the database.
-func GetRoomStats() (roomStats []RoomStat) {
-	engine.Find(&roomStats)
+func GetRoomStats() (roomStats []RoomStat, err error) {
+	err = engine.Find(&roomStats)
 	return
 }
 

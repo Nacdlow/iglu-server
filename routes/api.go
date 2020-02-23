@@ -34,7 +34,11 @@ func BatteryStatHandler(ctx *macaron.Context) {
 
 // ToggleHandler handles toggling devices.
 func ToggleHandler(ctx *macaron.Context) {
-	for _, device := range models.GetDevices() {
+	devices, err := models.GetDevices()
+	if err != nil {
+		panic(err)
+	}
+	for _, device := range devices {
 		if device.DeviceID == ctx.ParamsInt64("id") {
 			if device.Type == models.Light || device.Type == models.Speaker ||
 				device.Type == models.TempControl || device.Type == models.TV {
@@ -53,7 +57,11 @@ func ToggleHandler(ctx *macaron.Context) {
 
 // SliderHandler handles modifying device values based on sliders.
 func SliderHandler(ctx *macaron.Context) {
-	for _, device := range models.GetDevices() {
+	devices, err := models.GetDevices()
+	if err != nil {
+		panic(err)
+	}
+	for _, device := range devices {
 		if device.DeviceID == ctx.ParamsInt64("id") {
 			var err error
 			if device.Type == models.Speaker {
@@ -79,7 +87,11 @@ func SliderHandler(ctx *macaron.Context) {
 
 // FaveHandler handles favouriting or unfavouriting devices.
 func FaveHandler(ctx *macaron.Context) {
-	for _, device := range models.GetDevices() {
+	devices, err := models.GetDevices()
+	if err != nil {
+		panic(err)
+	}
+	for _, device := range devices {
 		if device.DeviceID == ctx.ParamsInt64("id") {
 			err := models.UpdateDeviceCols(&models.Device{
 				DeviceID: device.DeviceID,

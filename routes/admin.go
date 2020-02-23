@@ -9,7 +9,11 @@ import (
 // AddDeviceHandler handles the add device page
 func AddDeviceHandler(ctx *macaron.Context) {
 	ctx.Data["BackLink"] = "/add"
-	ctx.Data["Rooms"] = models.GetRooms()
+	var err error
+	ctx.Data["Rooms"], err = models.GetRooms()
+	if err != nil {
+		panic(err)
+	}
 	if ctx.Params("id") != "" {
 		ctx.Data["RoomSelected"] = 1
 		ctx.Data["RoomID"] = ctx.Params("id")
@@ -27,6 +31,10 @@ func AddHandler(ctx *macaron.Context) {
 // AddRoomHandler handles the add room page
 func AddRoomHandler(ctx *macaron.Context) {
 	ctx.Data["BackLink"] = "/add"
-	ctx.Data["Rooms"] = models.GetRooms()
+	var err error
+	ctx.Data["Rooms"], err = models.GetRooms()
+	if err != nil {
+		panic(err)
+	}
 	ctx.HTML(http.StatusOK, "add_room")
 }

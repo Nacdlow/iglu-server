@@ -43,7 +43,15 @@ func UpdateFromDB() {
 // LoadFromDB loads the rooms from the database into
 func LoadFromDB() {
 	lacking := false
-	for _, room := range models.GetRooms() {
+	rooms, err := models.GetRooms()
+	if err != nil {
+		panic(err)
+	}
+	devices, err := models.GetDevices()
+	if err != nil {
+		panic(err)
+	}
+	for _, room := range rooms {
 		r := Room{
 			DBRoomID:    room.RoomID,
 			LightStatus: false, // Assume lights are off
@@ -56,7 +64,7 @@ func LoadFromDB() {
 
 		// Get room temp and light status from the devices of that room
 		tempSet, lightSet := false, false
-		for _, device := range models.GetDevices() {
+		for _, device := range devices {
 			if device.RoomID == room.RoomID {
 				switch device.Type {
 				case models.TempControl:

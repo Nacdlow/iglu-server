@@ -91,6 +91,7 @@ func PostEditAccountHandler(ctx *macaron.Context, f *session.Flash,
 				if err != nil {
 					panic(err)
 				}
+
 				updateCols = append(updateCols, "password")
 				user.Password = string(pass)
 			}

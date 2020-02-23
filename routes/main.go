@@ -33,7 +33,11 @@ func DashboardHandler(ctx *macaron.Context, f *session.Flash) {
 		icon = strings.ReplaceAll(icon, "-", "_")
 		ctx.Data["WeatherIcon"] = template.JS(icon)
 	}
-	ctx.Data["Devices"] = models.GetDevices()
+	var err error
+	ctx.Data["Devices"], err = models.GetDevices()
+	if err != nil {
+		panic(err)
+	}
 	ctx.Data["Stats"] = models.GetLatestStats()
 	ctx.HTML(http.StatusOK, "dashboard")
 }
@@ -48,12 +52,16 @@ func AlertsHandler(ctx *macaron.Context) {
 // SpecificRoomsHandler handles the specific rooms
 func SpecificRoomsHandler(ctx *macaron.Context) {
 	ctx.Data["NavTitle"] = ctx.Params("roomType")
+	rooms, err := models.GetRooms()
+	if err != nil {
+		panic(err)
+	}
 	if ctx.Params("name") == "bedrooms" {
 		ctx.Data["Bedrooms"] = 1
-		ctx.Data["Rooms"] = models.GetRooms()
+		ctx.Data["Rooms"] = rooms
 	} else if ctx.Params("name") == "bathrooms" {
 		ctx.Data["Bathrooms"] = 1
-		ctx.Data["Rooms"] = models.GetRooms()
+		ctx.Data["Rooms"] = rooms
 	} else {
 		room, err := models.GetRoom(ctx.ParamsInt64("name"))
 		if err != nil {
@@ -61,7 +69,7 @@ func SpecificRoomsHandler(ctx *macaron.Context) {
 			return
 		}
 		ctx.Data["Room"] = room
-		ctx.Data["Devices"] = models.GetDevices()
+		ctx.Data["Devices"] = rooms
 	}
 
 	ctx.Data["ArrowBack"] = 1
@@ -74,7 +82,11 @@ func SpecificRoomsHandler(ctx *macaron.Context) {
 func OverviewHandler(ctx *macaron.Context) {
 	ctx.Data["NavTitle"] = "Overview"
 	ctx.Data["IsOverview"] = 1
-	ctx.Data["Devices"] = models.GetDevices()
+	var err error
+	ctx.Data["Devices"], err = models.GetDevices()
+	if err != nil {
+		panic(err)
+	}
 	ctx.HTML(http.StatusOK, "overview")
 }
 
@@ -86,7 +98,11 @@ func AddDeviceRoomPostHandler(ctx *macaron.Context, form forms.AddDeviceForm, f 
 		Description: form.Description,
 		ToggledUnix: time.Now().Unix(),
 	}
-	for _, d := range models.GetDevices() {
+	devices, err := models.GetDevices()
+	if err != nil {
+		panic(err)
+	}
+	for _, d := range devices {
 		if d.RoomID == device.RoomID && d.Type == device.Type {
 			switch device.Type {
 			case models.Light: // We can't have two main lights
@@ -114,7 +130,7 @@ func AddDeviceRoomPostHandler(ctx *macaron.Context, form forms.AddDeviceForm, f 
 	case models.Speaker:
 		device.Volume = 8
 	}
-	err := models.AddDevice(device)
+	err = models.AddDevice(device)
 	if err != nil {
 		panic(err)
 	}
@@ -125,7 +141,10 @@ func AddDeviceRoomPostHandler(ctx *macaron.Context, form forms.AddDeviceForm, f 
 func RoomsHandler(ctx *macaron.Context) {
 	ctx.Data["NavTitle"] = "Rooms"
 	ctx.Data["IsRooms"] = 1
-	rooms := models.GetRooms()
+	rooms, err := models.GetRooms()
+	if err != nil {
+		panic(err)
+	}
 	for i := range rooms {
 		rooms[i].LoadMainDevices()
 	}

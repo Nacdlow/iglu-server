@@ -65,8 +65,8 @@ func GetDevice(id int64) (*Device, error) {
 }
 
 // GetDevices returns an array of all devices from the database.
-func GetDevices() (devices []Device) {
-	engine.Find(&devices)
+func GetDevices() (devices []Device, err error) {
+	err = engine.Find(&devices)
 	return
 }
 

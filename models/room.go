@@ -44,7 +44,10 @@ type Room struct {
 // LoadMainDevices loads the main light and temperature control variables of
 // the room.
 func (r *Room) LoadMainDevices() {
-	devices := GetDevices()
+	devices, err := GetDevices()
+	if err != nil {
+		panic(err)
+	}
 	light, temp := false, false
 	for _, l := range devices {
 		if l.RoomID == r.RoomID && l.Type == Light && l.IsMainLight {
@@ -86,9 +89,9 @@ func GetRoom(id int64) (*Room, error) {
 }
 
 // GetRooms returns an array of all Rooms from the database.
-func GetRooms() (room []Room) {
-	engine.Find(&room)
-	return room
+func GetRooms() (room []Room, err error) {
+	err = engine.Find(&room)
+	return
 }
 
 // AddRoom adds a Room in the database.
