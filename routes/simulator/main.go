@@ -4,7 +4,10 @@ import (
 	"gitlab.com/group-nacdlow/nacdlow-server/models"
 	forms "gitlab.com/group-nacdlow/nacdlow-server/models/forms/sim"
 	"gitlab.com/group-nacdlow/nacdlow-server/modules/simulation"
+
 	macaron "gopkg.in/macaron.v1"
+
+	"net/http"
 	"time"
 )
 
@@ -24,7 +27,7 @@ func HomepageHandler(ctx *macaron.Context) {
 		ctx.Data["MCConnected"] = (lastPing < 2000)
 		ctx.Data["MCVersion"] = mcVersion
 	}
-	ctx.HTML(200, "sim/index")
+	ctx.HTML(http.StatusOK, "sim/index")
 }
 
 // EnvStatusHandler handles loading the environment status for simulator page.
@@ -32,7 +35,7 @@ func EnvStatusHandler(ctx *macaron.Context) {
 	ctx.Data["Env"] = simulation.Env
 	ctx.Data["TickSleep"] = simulation.TickSleep.Milliseconds()
 	ctx.Data["CurrentTime"] = time.Unix(simulation.Env.CurrentTime, 0).Format(layoutCurrentTime)
-	ctx.HTML(200, "sim/env_status")
+	ctx.HTML(http.StatusOK, "sim/env_status")
 }
 
 // DataHandler handles posting the simulation data as JSON.

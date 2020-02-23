@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"html/template"
 	"math"
+	"net/http"
 	"strings"
 	"time"
 
@@ -34,14 +35,14 @@ func DashboardHandler(ctx *macaron.Context, f *session.Flash) {
 	}
 	ctx.Data["Devices"] = models.GetDevices()
 	ctx.Data["Stats"] = models.GetLatestStats()
-	ctx.HTML(200, "dashboard")
+	ctx.HTML(http.StatusOK, "dashboard")
 }
 
 // AlertsHandler handles the alerts page
 func AlertsHandler(ctx *macaron.Context) {
 	ctx.Data["CrossBack"] = 1
 	ctx.Data["IsAlerts"] = 1
-	ctx.HTML(200, "alerts")
+	ctx.HTML(http.StatusOK, "alerts")
 }
 
 // SpecificRoomsHandler handles the specific rooms
@@ -66,7 +67,7 @@ func SpecificRoomsHandler(ctx *macaron.Context) {
 	ctx.Data["ArrowBack"] = 1
 	ctx.Data["IsRooms"] = 1
 	ctx.Data["IsSpecificRoom"] = 1
-	ctx.HTML(200, "specificRooms")
+	ctx.HTML(http.StatusOK, "specificRooms")
 }
 
 // OverviewHandler handles the overview page
@@ -74,7 +75,7 @@ func OverviewHandler(ctx *macaron.Context) {
 	ctx.Data["NavTitle"] = "Overview"
 	ctx.Data["IsOverview"] = 1
 	ctx.Data["Devices"] = models.GetDevices()
-	ctx.HTML(200, "overview")
+	ctx.HTML(http.StatusOK, "overview")
 }
 
 // AddDeviceRoomPostHandler handles post for adding a device to a room.
@@ -129,7 +130,7 @@ func RoomsHandler(ctx *macaron.Context) {
 		rooms[i].LoadMainDevices()
 	}
 	ctx.Data["Rooms"] = rooms
-	ctx.HTML(200, "rooms")
+	ctx.HTML(http.StatusOK, "rooms")
 }
 
 // PostRoomHandler handles post request for room page, to add a room.
@@ -154,5 +155,5 @@ func PostRoomHandler(ctx *macaron.Context, form forms.AddRoomForm) {
 // DevicesHandler handles the devices page
 func DevicesHandler(ctx *macaron.Context) {
 	ctx.Data["NavTitle"] = "Devices"
-	ctx.HTML(200, "devices")
+	ctx.HTML(http.StatusOK, "devices")
 }

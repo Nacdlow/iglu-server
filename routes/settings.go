@@ -2,6 +2,7 @@ package routes
 
 import (
 	"fmt"
+	"net/http"
 
 	"gitlab.com/group-nacdlow/nacdlow-server/models"
 	"gitlab.com/group-nacdlow/nacdlow-server/models/forms"
@@ -17,7 +18,7 @@ import (
 func AccountSettingsHandler(ctx *macaron.Context) {
 	ctx.Data["NavTitle"] = "Account Settings"
 	ctx.Data["Accounts"] = models.GetUsers()
-	ctx.HTML(200, "settings/accounts")
+	ctx.HTML(http.StatusOK, "settings/accounts")
 }
 
 // PostAccountSettingsHandler handles the settings
@@ -37,7 +38,7 @@ func DeleteAccountHandler(ctx *macaron.Context) {
 	for _, u := range models.GetUsers() {
 		if u.Username == ctx.Params("username") {
 			ctx.Data["DelUser"] = u
-			ctx.HTML(200, "settings/del_account")
+			ctx.HTML(http.StatusOK, "settings/del_account")
 			return
 		}
 	}
@@ -64,7 +65,7 @@ func EditAccountHandler(ctx *macaron.Context) {
 	for _, u := range models.GetUsers() {
 		if u.Username == ctx.Params("username") {
 			ctx.Data["EditUser"] = u
-			ctx.HTML(200, "settings/edit_account")
+			ctx.HTML(http.StatusOK, "settings/edit_account")
 			return
 		}
 	}
@@ -120,20 +121,20 @@ func PostEditAccountHandler(ctx *macaron.Context, f *session.Flash,
 // AppearanceSettingsHandler handles the settings
 func AppearanceSettingsHandler(ctx *macaron.Context) {
 	ctx.Data["NavTitle"] = "Appearance Settings"
-	ctx.HTML(200, "settings/appearance")
+	ctx.HTML(http.StatusOK, "settings/appearance")
 }
 
 // PluginsSettingsHandler handles the settings
 func PluginsSettingsHandler(ctx *macaron.Context) {
 	ctx.Data["NavTitle"] = "Plugins"
 	ctx.Data["Plugins"] = plugin.LoadedPlugins
-	ctx.HTML(200, "settings/plugins")
+	ctx.HTML(http.StatusOK, "settings/plugins")
 }
 
 // SettingsHandler handles the settings
 func SettingsHandler(ctx *macaron.Context) {
 	ctx.Data["NavTitle"] = "Settings"
-	ctx.HTML(200, "settings")
+	ctx.HTML(http.StatusOK, "settings")
 }
 
 // LibraryDesc represents the description of an open-source library.
@@ -162,5 +163,5 @@ var Libraries = map[string]LibraryDesc{
 func AboutSettingsHandler(ctx *macaron.Context) {
 	ctx.Data["NavTitle"] = "About"
 	ctx.Data["Libraries"] = Libraries
-	ctx.HTML(200, "settings/about")
+	ctx.HTML(http.StatusOK, "settings/about")
 }

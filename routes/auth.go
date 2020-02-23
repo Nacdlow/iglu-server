@@ -10,6 +10,7 @@ import (
 
 	"golang.org/x/crypto/bcrypt"
 	macaron "gopkg.in/macaron.v1"
+	"net/http"
 )
 
 // LogoutHandler handles logging out.
@@ -27,7 +28,7 @@ func LoginHandler(ctx *macaron.Context, sess session.Store) {
 		ctx.Redirect("/dashboard")
 		return
 	}
-	ctx.HTML(200, "index")
+	ctx.HTML(http.StatusOK, "index")
 }
 
 // ForgotHandler handles rendering the forgot password page.
@@ -39,7 +40,7 @@ func ForgotHandler(ctx *macaron.Context, sess session.Store) {
 	ctx.Data["EngineerName"] = settings.Config.Get("Engineer.Name")
 	ctx.Data["EngineerEmail"] = settings.Config.Get("Engineer.Email")
 	ctx.Data["EngineerPhone"] = settings.Config.Get("Engineer.Phone")
-	ctx.HTML(200, "forgot")
+	ctx.HTML(http.StatusOK, "forgot")
 }
 
 // PostLoginHandler handles the post login page.
@@ -81,7 +82,7 @@ func RegisterHandler(ctx *macaron.Context, sess session.Store) {
 		ctx.Redirect("/dashboard")
 		return
 	}
-	ctx.HTML(200, "register")
+	ctx.HTML(http.StatusOK, "register")
 }
 
 // AddUserHandler handles adding a new user from registeration.

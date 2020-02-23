@@ -81,5 +81,5 @@ func InstallPluginSettingsHandler(ctx *macaron.Context) {
 	}
 	ctx.Data["Plugin"] = desc
 
-	ctx.HTML(200, "settings/plugin_install_confirm")
+	ctx.HTML(http.StatusOK, "settings/plugin_install_confirm")
 }

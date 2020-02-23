@@ -1,6 +1,7 @@
 package routes
 
 import (
+	"net/http"
 	"time"
 
 	"gitlab.com/group-nacdlow/nacdlow-server/models"
@@ -28,7 +29,7 @@ func BatteryStatHandler(ctx *macaron.Context) {
 	}
 
 	ctx.Data["BatteryPerc"] = perc
-	ctx.HTML(200, "battery")
+	ctx.HTML(http.StatusOK, "battery")
 }
 
 // ToggleHandler handles toggling devices.
