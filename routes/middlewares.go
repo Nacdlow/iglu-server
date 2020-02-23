@@ -27,7 +27,10 @@ func ContextInit() macaron.Handler {
 				ctx.Data["LoggedIn"] = 1
 			} else {
 				// Logged in user does not exist
-				sess.Set("auth", Unauthenticated)
+				err := sess.Set("auth", Unauthenticated)
+				if err != nil {
+					panic(err)
+				}
 				ctx.Redirect("/")
 				return
 			}

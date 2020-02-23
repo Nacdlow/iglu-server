@@ -43,7 +43,10 @@ func passwd(c *cli.Context) (err error) {
 		panic(err)
 	}
 	u.Password = string(pass)
-	models.UpdateUser(u)
+	err = models.UpdateUser(u)
+	if err != nil {
+		panic(err)
+	}
 
 	fmt.Println()
 	fmt.Println("Password updated!")

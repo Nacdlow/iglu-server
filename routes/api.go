@@ -35,10 +35,13 @@ func ToggleHandler(ctx *macaron.Context) {
 		if device.DeviceID == ctx.ParamsInt64("id") {
 			if device.Type == models.Light || device.Type == models.Speaker ||
 				device.Type == models.TempControl || device.Type == models.TV {
-				models.UpdateDeviceCols(&models.Device{
+				err := models.UpdateDeviceCols(&models.Device{
 					DeviceID:    device.DeviceID,
 					Status:      !device.Status,
 					ToggledUnix: time.Now().Unix()}, "status", "toggled_unix")
+				if err != nil {
+					panic(err)
+				}
 			}
 			break
 		}
@@ -48,18 +51,22 @@ func ToggleHandler(ctx *macaron.Context) {
 func SliderHandler(ctx *macaron.Context) {
 	for _, device := range models.GetDevices() {
 		if device.DeviceID == ctx.ParamsInt64("id") {
+			var err error
 			if device.Type == models.Speaker {
-				models.UpdateDeviceCols(&models.Device{
+				err = models.UpdateDeviceCols(&models.Device{
 					DeviceID: device.DeviceID,
 					Volume:   ctx.ParamsInt64("value")}, "volume")
 			} else if device.Type == models.TempControl {
-				models.UpdateDeviceCols(&models.Device{
+				err = models.UpdateDeviceCols(&models.Device{
 					DeviceID: device.DeviceID,
 					Temp:     ctx.ParamsFloat64("value")}, "temp")
 			} else if device.Type == models.Light {
-				models.UpdateDeviceCols(&models.Device{
+				err = models.UpdateDeviceCols(&models.Device{
 					DeviceID:   device.DeviceID,
 					Brightness: ctx.ParamsInt64("value")}, "brightness")
+			}
+			if err != nil {
+				panic(err)
 			}
 			break
 		}
@@ -69,18 +76,27 @@ func SliderHandler(ctx *macaron.Context) {
 func FaveHandler(ctx *macaron.Context) {
 	for _, device := range models.GetDevices() {
 		if device.DeviceID == ctx.ParamsInt64("id") {
-			models.UpdateDeviceCols(&models.Device{
+			err := models.UpdateDeviceCols(&models.Device{
 				DeviceID: device.DeviceID,
 				IsFave:   !device.IsFave}, "is_fave")
+			if err != nil {
+				panic(err)
+			}
 			break
 		}
 	}
 }
 
 func RemoveHandler(ctx *macaron.Context) {
-	models.DeleteDevice(ctx.ParamsInt64("id"))
+	err := models.DeleteDevice(ctx.ParamsInt64("id"))
+	if err != nil {
+		panic(err)
+	}
 }
 
 func RemoveRoomHandler(ctx *macaron.Context) {
-	models.DeleteRoom(ctx.ParamsInt64("id"))
+	err := models.DeleteRoom(ctx.ParamsInt64("id"))
+	if err != nil {
+		panic(err)
+	}
 }

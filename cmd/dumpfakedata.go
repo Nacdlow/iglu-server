@@ -61,23 +61,38 @@ func dumpfakes(c *cli.Context) (err error) {
 		switch table {
 		case "device":
 			for i := 0; i < entries; i++ {
-				models.AddDevice(models.GetFakeDevice())
+				err := models.AddDevice(models.GetFakeDevice())
+				if err != nil {
+					panic(err)
+				}
 			}
 		case "room":
 			for i := 0; i < entries; i++ {
-				models.AddRoom(models.GetFakeRoom())
+				err := models.AddRoom(models.GetFakeRoom())
+				if err != nil {
+					panic(err)
+				}
 			}
 		case "roomstat":
 			for i := 0; i < entries; i++ {
-				models.AddRoomStat(models.GetFakeRoomStat())
+				err := models.AddRoomStat(models.GetFakeRoomStat())
+				if err != nil {
+					panic(err)
+				}
 			}
 		case "statistic":
 			for i := 0; i < entries; i++ {
-				models.AddStat(models.GetFakeStat())
+				err := models.AddStat(models.GetFakeStat())
+				if err != nil {
+					panic(err)
+				}
 			}
 		case "user":
 			for i := 0; i < entries; i++ {
-				models.AddUser(models.GetFakeUser())
+				err := models.AddUser(models.GetFakeUser())
+				if err != nil {
+					panic(err)
+				}
 			}
 		default:
 			fmt.Println("Invalid table name!")

@@ -14,7 +14,10 @@ import (
 
 // LogoutHandler handles logging out.
 func LogoutHandler(ctx *macaron.Context, sess session.Store) {
-	sess.Set("auth", Unauthenticated)
+	err := sess.Set("auth", Unauthenticated)
+	if err != nil {
+		panic(err)
+	}
 	ctx.Redirect("/")
 }
 
@@ -98,6 +101,9 @@ func AddUserHandler(ctx *macaron.Context, form forms.RegisterForm, f *session.Fl
 		FirstName: form.FirstName,
 		LastName:  form.LastName,
 	}
-	models.AddUser(user)
+	err = models.AddUser(user)
+	if err != nil {
+		panic(err)
+	}
 	ctx.Redirect("/dashboard")
 }

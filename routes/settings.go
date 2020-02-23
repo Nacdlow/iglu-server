@@ -26,7 +26,6 @@ func PostAccountSettingsHandler(ctx *macaron.Context, f *session.Flash) {
 	case "get_invite":
 		code := tokens.GenerateInviteKey()
 		f.Info(fmt.Sprintf("Your new invitation code is: %s", code))
-		break
 	default:
 		f.Error("Unknown action")
 	}
@@ -103,8 +102,12 @@ func PostEditAccountHandler(ctx *macaron.Context, f *session.Flash,
 				user.LastName = form.LastName
 			}
 
-			models.UpdateUserCols(&user, updateCols...)
-			f.Success("User updated!")
+			err := models.UpdateUserCols(&user, updateCols...)
+			if err != nil {
+				f.Error("Failed to update user!")
+			} else {
+				f.Success("User updated!")
+			}
 		}
 	}
 	ctx.Redirect("/settings/accounts")

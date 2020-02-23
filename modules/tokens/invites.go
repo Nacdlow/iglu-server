@@ -21,7 +21,7 @@ func init() {
 
 // randIntRange generate a random number within a given range.
 func randIntRange(min, max int) int {
-	return rand.Intn(max-min) + min
+	return rnd.Intn(max-min) + min
 }
 
 // GenerateInviteKey generates a new invite key.

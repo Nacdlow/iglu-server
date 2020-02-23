@@ -112,7 +112,10 @@ func AddDeviceRoomPostHandler(ctx *macaron.Context, form forms.AddDeviceForm, f 
 	case models.Speaker:
 		device.Volume = 8
 	}
-	models.AddDevice(device)
+	err := models.AddDevice(device)
+	if err != nil {
+		panic(err)
+	}
 	ctx.Redirect(fmt.Sprintf("/room/%d", form.RoomID))
 }
 
@@ -121,7 +124,7 @@ func RoomsHandler(ctx *macaron.Context) {
 	ctx.Data["NavTitle"] = "Rooms"
 	ctx.Data["IsRooms"] = 1
 	rooms := models.GetRooms()
-	for i, _ := range rooms {
+	for i := range rooms {
 		rooms[i].LoadMainDevices()
 	}
 	ctx.Data["Rooms"] = rooms
@@ -140,7 +143,10 @@ func PostRoomHandler(ctx *macaron.Context, form forms.AddRoomForm) {
 		room.IsSubRoom = true
 		room.PartOfRoom = form.PartOfRoom
 	}
-	models.AddRoom(room)
+	err := models.AddRoom(room)
+	if err != nil {
+		panic(err)
+	}
 	ctx.Redirect("/rooms")
 }
 

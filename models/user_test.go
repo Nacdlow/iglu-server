@@ -10,29 +10,29 @@ func TestUserFavRooms(t *testing.T) {
 	engine := SetupTestEngine()
 	defer engine.Close()
 	// Add rooms
-	AddRoom(&Room{
+	assert.Nil(AddRoom(&Room{
 		RoomName:    "Main living",
 		Description: "Our family living room",
 		RoomType:    LoungeRoom,
-	})
-	AddRoom(&Room{
+	}))
+	assert.Nil(AddRoom(&Room{
 		RoomName:    "Main kitchen",
 		Description: "Our family kitchen",
 		RoomType:    KitchenRoom,
-	})
-	AddRoom(&Room{
+	}))
+	assert.Nil(AddRoom(&Room{
 		RoomName:    "Outdoor garage",
 		Description: "The outdoor garage",
 		RoomType:    GarageRoom,
-	})
+	}))
 	// Add user
-	AddUser(&User{
+	assert.Nil(AddUser(&User{
 		Username:     "az40",
 		FirstName:    "Alakbar",
 		LastName:     "Zeynalzade",
 		Role:         AdminRole,
 		FavRoomsList: []int64{1, 2},
-	})
+	}))
 	// Getting the user
 	user, err := GetUser("az40")
 	assert.Nil(err)

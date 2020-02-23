@@ -190,8 +190,11 @@ func Tick() {
 			runningTempCont++
 			Env.Home.Rooms[i].ActualRoomTemp = getChange(room.ActualRoomTemp, tempCont.Temp, 240, 0.75)
 		}
-		models.UpdateRoomCols(&models.Room{RoomID: room.DBRoomID,
+		err = models.UpdateRoomCols(&models.Room{RoomID: room.DBRoomID,
 			CurrentTemp: int64(Env.Home.Rooms[i].ActualRoomTemp)}, "current_temp")
+		if err != nil {
+			panic(err)
+		}
 	}
 	now := time.Unix(Env.CurrentTime, 0)
 
@@ -248,7 +251,10 @@ func Tick() {
 			PowerGenAvg: float64(PowerGenSum) / float64(SinceLog),
 			PowerConAvg: float64(PowerConSum) / float64(SinceLog),
 		}
-		models.AddStat(&stat)
+		err := models.AddStat(&stat)
+		if err != nil {
+			panic(err)
+		}
 		SinceLog, PowerConSum, PowerGenSum = 0, 0, 0
 	}
 }

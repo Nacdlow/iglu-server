@@ -62,9 +62,12 @@ func ToggleHandler(ctx *macaron.Context) {
 		if room.MainLightDeviceID == ctx.ParamsInt64("id") {
 			dev, err := models.GetDevice(room.MainLightDeviceID)
 			if err == nil && dev.Type == models.Light {
-				models.UpdateDeviceCols(&models.Device{
+				err := models.UpdateDeviceCols(&models.Device{
 					DeviceID: dev.DeviceID,
 					Status:   !dev.Status}, "status")
+				if err != nil {
+					panic(err)
+				}
 			}
 			break
 		}
