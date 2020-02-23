@@ -52,14 +52,6 @@ func AlertsHandler(ctx *macaron.Context) {
 	ctx.HTML(http.StatusOK, "alerts")
 }
 
-// SearchDeviceHandler handles the search for device
-func SearchDeviceHandler(ctx *macaron.Context) {
-	ctx.Data["BackLink"] = "/add"
-	ctx.Data["CrossBack"] = 1
-	ctx.Data["IsSearchDevice"] = 1
-	ctx.HTML(http.StatusOK, "search_device")
-}
-
 // SpecificRoomsHandler handles the specific rooms
 func SpecificRoomsHandler(ctx *macaron.Context) {
 	ctx.Data["NavTitle"] = ctx.Params("roomType")

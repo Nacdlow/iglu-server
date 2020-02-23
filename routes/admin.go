@@ -29,6 +29,14 @@ func AddHandler(ctx *macaron.Context) {
 	ctx.HTML(http.StatusOK, "add")
 }
 
+// SearchDeviceHandler handles the search for device
+func SearchDeviceHandler(ctx *macaron.Context) {
+	ctx.Data["BackLink"] = "/add"
+	ctx.Data["CrossBack"] = 1
+	ctx.Data["IsSearchDevice"] = 1
+	ctx.HTML(http.StatusOK, "search_device")
+}
+
 // AddRoomHandler handles the add room page
 func AddRoomHandler(ctx *macaron.Context) {
 	ctx.Data["BackLink"] = "/add"
