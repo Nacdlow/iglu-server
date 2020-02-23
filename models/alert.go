@@ -10,7 +10,7 @@ const (
 	High          // 2
 )
 
-//Alert struct represents the Alert title, AlertCategory (severity), Alert Message,
+// Alert struct represents the Alert title, AlertCategory (severity), Alert Message,
 // and also the time the Alert was sent to the user
 type Alert struct {
 	AlertID         int64 `xorm:"pk autoincr"`

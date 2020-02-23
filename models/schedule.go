@@ -4,16 +4,16 @@ import (
 	"errors"
 )
 
-// ScheduleType some text
+// ScheduleType is used to store the different types of schedules that the user can set
 type ScheduleType int64
 
-// Some text
+// The enumerations for the types of schedules that the user may set
 const (
-	Duration  = iota // 0
+	Cron      = iota // 0
 	TurnOnOff        // 1
 )
 
-// Schedule some text
+// Schedule represents the parameters that a schedule may hold, such as the time that a device may turn on and off
 type Schedule struct {
 	ScheduleID  int64 `xorm:"pk autoincr"`
 	DeviceID    string
@@ -26,14 +26,14 @@ type Schedule struct {
 	Description string
 }
 
-// GetFakeSchedule some text
+// GetFakeSchedule creates a fake schedule
 func GetFakeSchedule() (sch *Schedule) {
 	sch = new(Schedule)
 	// Some fake data generation here
 	return
 }
 
-// GetSchedule some text
+// GetSchedule gets the schedule
 func GetSchedule(id int64) (*Schedule, error) {
 	sch := new(Schedule)
 	has, err := engine.ID(id).Get(sch)
@@ -45,19 +45,19 @@ func GetSchedule(id int64) (*Schedule, error) {
 	return sch, nil
 }
 
-// AddSchedule some text
+// AddSchedule makes a new schedule
 func AddSchedule(sch *Schedule) (err error) {
 	_, err = engine.Insert(sch)
 	return
 }
 
-// UpdateSchedule updates an Schedule in the database
+// UpdateSchedule updates the values of the schedule
 func UpdateSchedule(d *Schedule) (err error) {
 	_, err = engine.Id(d.ScheduleID).Update(d)
 	return
 }
 
-// DeleteSchedule deletes a Schedule from the database.
+// DeleteSchedule deletes the Schedule from the database
 func DeleteSchedule(id int64) (err error) {
 	_, err = engine.ID(id).Delete(&Schedule{})
 	return
