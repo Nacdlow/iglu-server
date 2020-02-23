@@ -38,9 +38,13 @@ func dumpfakes(c *cli.Context) (err error) {
 		return nil
 	}
 
-	fmt.Println()
-	fmt.Println("Type \"quit\" to exit")
-	fmt.Println()
+	fmt.Printf("\n\nType \"quit\" to exit\n\n\n")
+
+	dumpLoop()
+	return nil
+}
+
+func dumpLoop() {
 	for {
 		var table, entriesStr string
 
@@ -59,46 +63,43 @@ func dumpfakes(c *cli.Context) (err error) {
 		}
 
 		table = strings.ToLower(table)
-		switch table {
-		case "device":
-			for i := 0; i < entries; i++ {
-				err := models.AddDevice(models.GetFakeDevice())
-				if err != nil {
-					panic(err)
-				}
-			}
-		case "room":
-			for i := 0; i < entries; i++ {
-				err := models.AddRoom(models.GetFakeRoom())
-				if err != nil {
-					panic(err)
-				}
-			}
-		case "roomstat":
-			for i := 0; i < entries; i++ {
-				err := models.AddRoomStat(models.GetFakeRoomStat())
-				if err != nil {
-					panic(err)
-				}
-			}
-		case "statistic":
-			for i := 0; i < entries; i++ {
-				err := models.AddStat(models.GetFakeStat())
-				if err != nil {
-					panic(err)
-				}
-			}
-		case "user":
-			for i := 0; i < entries; i++ {
-				err := models.AddUser(models.GetFakeUser())
-				if err != nil {
-					panic(err)
-				}
-			}
-		default:
-			fmt.Println("Invalid table name!")
-		}
-		fmt.Println("Added!")
+		dump(table, entries)
+
 		fmt.Println()
 	}
+}
+
+func assertNil(err error) {
+	if err != nil {
+		panic(err)
+	}
+}
+
+func dump(table string, entries int) {
+	switch table {
+	case "device":
+		for i := 0; i < entries; i++ {
+			assertNil(models.AddDevice(models.GetFakeDevice()))
+		}
+	case "room":
+		for i := 0; i < entries; i++ {
+			assertNil(models.AddRoom(models.GetFakeRoom()))
+		}
+	case "roomstat":
+		for i := 0; i < entries; i++ {
+			assertNil(models.AddRoomStat(models.GetFakeRoomStat()))
+		}
+	case "statistic":
+		for i := 0; i < entries; i++ {
+			assertNil(models.AddStat(models.GetFakeStat()))
+		}
+	case "user":
+		for i := 0; i < entries; i++ {
+			assertNil(models.AddUser(models.GetFakeUser()))
+		}
+	default:
+		fmt.Println("Invalid table name!")
+		return
+	}
+	fmt.Println("Added!")
 }

@@ -71,9 +71,9 @@ func GetUser(user string) (*User, error) {
 }
 
 // GetUsers returns an array of all Users from the database.
-func GetUsers() (users []User) {
-	engine.Find(&users)
-	return users
+func GetUsers() (users []User, err error) {
+	err = engine.Find(&users)
+	return
 }
 
 // AddUser adds a User in the database.

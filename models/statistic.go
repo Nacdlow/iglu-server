@@ -30,9 +30,14 @@ func GetFakeStat() (s *Statistic) {
 }
 
 // GetLatestStats returns the latest stats (from the past 24 hours).
-func GetLatestStats() (s []Statistic) {
+func GetLatestStats() (s []Statistic, err error) {
 	minTime := time.Now().Add(-(24 * time.Hour))
-	for _, stat := range GetStats() {
+	var stats []Statistic
+	stats, err = GetStats()
+	if err != nil {
+		return
+	}
+	for _, stat := range stats {
 		if stat.StatTime > minTime.Unix() {
 			s = append(s, stat)
 		}
@@ -59,8 +64,8 @@ func GetStat(id int64) (*Statistic, error) {
 }
 
 // GetStats returns an array of all Statistics from the database.
-func GetStats() (stat []Statistic) {
-	engine.Find(&stat)
+func GetStats() (stat []Statistic, err error) {
+	err = engine.Find(&stat)
 	return
 }
 

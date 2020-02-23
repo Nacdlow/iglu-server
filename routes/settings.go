@@ -17,7 +17,11 @@ import (
 // AccountSettingsHandler handles the settings
 func AccountSettingsHandler(ctx *macaron.Context) {
 	ctx.Data["NavTitle"] = "Account Settings"
-	ctx.Data["Accounts"] = models.GetUsers()
+	var err error
+	ctx.Data["Accounts"], err = models.GetUsers()
+	if err != nil {
+		panic(err)
+	}
 	ctx.HTML(http.StatusOK, "settings/accounts")
 }
 
@@ -35,7 +39,11 @@ func PostAccountSettingsHandler(ctx *macaron.Context, f *session.Flash) {
 
 // DeleteAccountHandler handles deleting accounts.
 func DeleteAccountHandler(ctx *macaron.Context) {
-	for _, u := range models.GetUsers() {
+	users, err := models.GetUsers()
+	if err != nil {
+		panic(err)
+	}
+	for _, u := range users {
 		if u.Username == ctx.Params("username") {
 			ctx.Data["DelUser"] = u
 			ctx.HTML(http.StatusOK, "settings/del_account")
@@ -47,7 +55,11 @@ func DeleteAccountHandler(ctx *macaron.Context) {
 
 // PostDeleteAccountHandler handles post for deleting accounts.
 func PostDeleteAccountHandler(ctx *macaron.Context, f *session.Flash) {
-	for _, u := range models.GetUsers() {
+	users, err := models.GetUsers()
+	if err != nil {
+		panic(err)
+	}
+	for _, u := range users {
 		if u.Username == ctx.Query("username") {
 			err := models.DeleteUser(ctx.Query("username"))
 			if err != nil {
@@ -62,7 +74,11 @@ func PostDeleteAccountHandler(ctx *macaron.Context, f *session.Flash) {
 
 // EditAccountHandler handles editing accounts.
 func EditAccountHandler(ctx *macaron.Context) {
-	for _, u := range models.GetUsers() {
+	users, err := models.GetUsers()
+	if err != nil {
+		panic(err)
+	}
+	for _, u := range users {
 		if u.Username == ctx.Params("username") {
 			ctx.Data["EditUser"] = u
 			ctx.HTML(http.StatusOK, "settings/edit_account")
@@ -75,7 +91,11 @@ func EditAccountHandler(ctx *macaron.Context) {
 // PostEditAccountHandler handles post for editing accounts.
 func PostEditAccountHandler(ctx *macaron.Context, f *session.Flash,
 	form forms.EditAccountForm) {
-	for _, u := range models.GetUsers() {
+	users, err := models.GetUsers()
+	if err != nil {
+		panic(err)
+	}
+	for _, u := range users {
 		if u.Username == form.Email {
 			var updateCols []string
 			user := models.User{Username: form.Email}

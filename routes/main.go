@@ -38,7 +38,10 @@ func DashboardHandler(ctx *macaron.Context, f *session.Flash) {
 	if err != nil {
 		panic(err)
 	}
-	ctx.Data["Stats"] = models.GetLatestStats()
+	ctx.Data["Stats"], err = models.GetLatestStats()
+	if err != nil {
+		panic(err)
+	}
 	ctx.HTML(http.StatusOK, "dashboard")
 }
 

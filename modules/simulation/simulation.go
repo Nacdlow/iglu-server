@@ -43,7 +43,6 @@ func UpdateFromDB() {
 
 // LoadFromDB loads the rooms from the database into
 func LoadFromDB() {
-	lacking := false
 	rooms, err := models.GetRooms()
 	if err != nil {
 		panic(err)
@@ -64,7 +63,7 @@ func LoadFromDB() {
 		}
 
 		// Get room temp and light status from the devices of that room
-		tempSet, lightSet := false, false
+		tempSet := false
 		for _, device := range devices {
 			if device.RoomID == room.RoomID {
 				switch device.Type {
@@ -75,7 +74,6 @@ func LoadFromDB() {
 				case models.Light:
 					if device.IsMainLight {
 						r.MainLightDeviceID = device.DeviceID
-						lightSet = true
 						// brightness threshold (minecraft has no brightness for lights
 						if device.Status && device.Brightness < 3 {
 							r.LightStatus = false
@@ -103,21 +101,7 @@ func LoadFromDB() {
 			}
 		}
 
-		// No room light source? Be angry!
-		if !lightSet {
-			log.Printf("Room %d (%s) does not have a main light source (device)!\n",
-				room.RoomID, room.RoomName)
-		}
-
-		if !lightSet || !tempSet {
-			lacking = true
-		}
-
 		Env.Rooms = append(Env.Rooms, r)
-	}
-	if lacking {
-		log.Println("Some rooms may be lacking important devices which is required for the simulator to work properly!" +
-			" Please fix before continuing.")
 	}
 }
 
@@ -208,8 +192,21 @@ func Tick() {
 			panic(err)
 		}
 	}
-	now := time.Unix(Env.CurrentTime, 0)
 
+	now := time.Unix(Env.CurrentTime, 0)
+	calculatePower(now, runningLights, runningTempCont)
+	Env.MinecraftTime = ((now.Hour() * 1000) - 6000 + (now.Minute() * 16))
+
+	// Update data for next statistic
+	SinceLog++
+	PowerConSum += int64(Env.PowerConRate)
+	PowerGenSum += int64(Env.PowerGenRate)
+
+	logStat(now)
+}
+
+// calculatePower updates the power consumption and generation.
+func calculatePower(now time.Time, runningLights int, runningTempCont int) {
 	// Calculate power consumption
 	powerPerTempCont := (float64(15) / float64(len(Env.Home.Rooms))) // 15kW per entire house
 	Env.PowerConRate = 11                                            // Baseline kW consumption
@@ -246,15 +243,10 @@ func Tick() {
 	} else if now.Hour() < 9 || now.Hour() > 17 { // Early morning/late afternoon
 		Env.PowerGenRate /= 4
 	}
+}
 
-	Env.MinecraftTime = ((now.Hour() * 1000) - 6000 + (now.Minute() * 16))
-
-	// Update data for next statistic
-	SinceLog++
-	PowerConSum += int64(Env.PowerConRate)
-	PowerGenSum += int64(Env.PowerGenRate)
-
-	// Log a statistic
+// logStat will attempt to log a statistic.
+func logStat(now time.Time) {
 	rounded := roundStatTime(now)
 	exists := models.StatExists(rounded.Unix())
 	if !exists && SinceLog >= 3600 {
