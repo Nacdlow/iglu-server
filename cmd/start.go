@@ -117,7 +117,7 @@ func getMacaron() *macaron.Macaron {
 			m.Group("/add", func() {
 				m.Get("", routes.AddHandler)
 				m.Get("/room", routes.AddRoomHandler)
-				m.Get("/search_devices", routes.SearchDeviceHandler)
+				m.Get("/search_device", routes.SearchDeviceHandler)
 				m.Post("/room", binding.Bind(forms.AddRoomForm{}),
 					routes.PostRoomHandler)
 				m.Get("/device", routes.AddDeviceHandler)
