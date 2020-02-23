@@ -1,13 +1,14 @@
 package simulation
 
 import (
+	"log"
+	"math"
+	"time"
+
 	"github.com/adlio/darksky"
 	"gitlab.com/group-nacdlow/nacdlow-server/models"
 	"gitlab.com/group-nacdlow/nacdlow-server/modules/settings"
 	"gitlab.com/group-nacdlow/nacdlow-server/modules/weather"
-	"log"
-	"math"
-	"time"
 )
 
 var (
@@ -90,11 +91,13 @@ func LoadFromDB() {
 		// to something else.
 		if !tempSet {
 			if Env.ForecastData != nil {
-				log.Printf("Room %d (%s) does not have a temperature control device! Using outside temp...\n",
+				log.Printf("Room %d (%s) does not have a temperature control device! "+
+					"Using outside temp...\n",
 					room.RoomID, room.RoomName)
 				r.ActualRoomTemp = Env.ForecastData.Currently.Temperature
 			} else {
-				log.Printf("Room %d (%s) does not have a temperature control device! Cannot use outside temp either! Setting to 20C.\n",
+				log.Printf("Room %d (%s) does not have a temperature control device! "+
+					"Cannot use outside temp either! Setting to 20C.\n",
 					room.RoomID, room.RoomName)
 				r.ActualRoomTemp = 20
 			}
@@ -241,7 +244,7 @@ func Tick() {
 	if now.Hour() < 6 || now.Hour() > 18 { // Night
 		Env.PowerGenRate = 0
 	} else if now.Hour() < 9 || now.Hour() > 17 { // Early morning/late afternoon
-		Env.PowerGenRate = Env.PowerGenRate / 4
+		Env.PowerGenRate /= 4
 	}
 
 	Env.MinecraftTime = ((now.Hour() * 1000) - 6000 + (now.Minute() * 16))
@@ -298,7 +301,7 @@ type Environment struct {
 // environment.
 type WeatherStatus struct {
 	Type        WeatherType `json:"type"`
-	OutdoorTemp float64     `json:"outdoor_temp"` // In Celcius.
+	OutdoorTemp float64     `json:"outdoor_temp"` // In Celsius.
 	Humidity    float64     `json:"humidity"`     // In decimal, 0.5 = 50%.
 	CloudCover  float64     `json:"cloud_cover"`
 }

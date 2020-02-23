@@ -2,8 +2,9 @@ package models
 
 import (
 	"errors"
-	"github.com/brianvoe/gofakeit/v4"
 	"time"
+
+	"github.com/brianvoe/gofakeit/v4"
 )
 
 // Statistic represents a statistic log at a period of time, which spans an

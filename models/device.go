@@ -2,6 +2,7 @@ package models
 
 import (
 	"errors"
+
 	"github.com/brianvoe/gofakeit/v4"
 )
 
@@ -24,7 +25,7 @@ type Device struct {
 	Type        DeviceType `fake:"skip"`
 	Description string     `fake:"{lorem.word} {lorem.word} {lorem.word}"`
 	Status      bool       `fake:"skip"`
-	Temp        float64    `xorm:"null" fake:"skip"` // In Celcius
+	Temp        float64    `xorm:"null" fake:"skip"` // In Celsius
 	Volume      int64      `xorm:"null" fake:"skip"`
 	Brightness  int64      `xorm:"null" fake:"skip"`
 	IsMainLight bool       `fake:"skip"` // Whether the light device is the room's main light source

@@ -2,10 +2,11 @@ package cmd
 
 import (
 	"fmt"
-	"github.com/urfave/cli/v2"
 	"os"
 	"strconv"
 	"strings"
+
+	"github.com/urfave/cli/v2"
 
 	"gitlab.com/group-nacdlow/nacdlow-server/models"
 	"gitlab.com/group-nacdlow/nacdlow-server/modules/settings"

@@ -3,10 +3,11 @@ package models
 import (
 	_ "github.com/mattn/go-sqlite3" // SQLite driver support
 
-	"github.com/brianvoe/gofakeit/v4"
-	"gitlab.com/group-nacdlow/nacdlow-server/modules/settings"
 	"log"
 	"time"
+
+	"github.com/brianvoe/gofakeit/v4"
+	"gitlab.com/group-nacdlow/nacdlow-server/modules/settings"
 	"xorm.io/core"
 	"xorm.io/xorm"
 )

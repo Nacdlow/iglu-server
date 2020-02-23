@@ -8,9 +8,10 @@ import (
 	"gitlab.com/group-nacdlow/nacdlow-server/modules/settings"
 	"gitlab.com/group-nacdlow/nacdlow-server/modules/tokens"
 
+	"net/http"
+
 	"golang.org/x/crypto/bcrypt"
 	macaron "gopkg.in/macaron.v1"
-	"net/http"
 )
 
 // LogoutHandler handles logging out.

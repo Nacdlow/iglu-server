@@ -64,15 +64,16 @@ func SliderHandler(ctx *macaron.Context) {
 	for _, device := range devices {
 		if device.DeviceID == ctx.ParamsInt64("id") {
 			var err error
-			if device.Type == models.Speaker {
+			switch device.Type {
+			case models.Speaker:
 				err = models.UpdateDeviceCols(&models.Device{
 					DeviceID: device.DeviceID,
 					Volume:   ctx.ParamsInt64("value")}, "volume")
-			} else if device.Type == models.TempControl {
+			case models.TempControl:
 				err = models.UpdateDeviceCols(&models.Device{
 					DeviceID: device.DeviceID,
 					Temp:     ctx.ParamsFloat64("value")}, "temp")
-			} else if device.Type == models.Light {
+			case models.Light:
 				err = models.UpdateDeviceCols(&models.Device{
 					DeviceID:   device.DeviceID,
 					Brightness: ctx.ParamsInt64("value")}, "brightness")

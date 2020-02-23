@@ -2,9 +2,10 @@ package models
 
 import (
 	"errors"
+	"log"
+
 	"github.com/brianvoe/gofakeit/v4"
 	"golang.org/x/crypto/bcrypt"
-	"log"
 )
 
 // UserRole is the role of a user.

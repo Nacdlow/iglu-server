@@ -18,7 +18,7 @@ import (
 
 // NotFoundHandler handles 404 errors
 func NotFoundHandler(ctx *macaron.Context) {
-	ctx.HTML(404, "notfound")
+	ctx.HTML(http.StatusNotFound, "notfound")
 }
 
 // DashboardHandler handles rendering the dashboard.

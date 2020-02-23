@@ -2,6 +2,7 @@ package models
 
 import (
 	"errors"
+
 	"github.com/brianvoe/gofakeit/v4"
 )
 

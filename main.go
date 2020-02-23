@@ -1,9 +1,10 @@
 package main
 
 import (
-	"gitlab.com/group-nacdlow/nacdlow-server/cmd"
 	"log"
 	"os"
+
+	"gitlab.com/group-nacdlow/nacdlow-server/cmd"
 
 	"github.com/urfave/cli/v2"
 )

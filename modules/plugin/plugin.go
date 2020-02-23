@@ -2,11 +2,12 @@ package plugin
 
 import (
 	"fmt"
-	macaron "gopkg.in/macaron.v1"
 	"io/ioutil"
 	"log"
 	"plugin"
 	"runtime"
+
+	macaron "gopkg.in/macaron.v1"
 )
 
 // IgluPlugin represents a loaded Iglu plugin.

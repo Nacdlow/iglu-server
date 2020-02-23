@@ -1,9 +1,10 @@
 package routes
 
 import (
+	"net/http"
+
 	"gitlab.com/group-nacdlow/nacdlow-server/models"
 	macaron "gopkg.in/macaron.v1"
-	"net/http"
 )
 
 // AddDeviceHandler handles the add device page
