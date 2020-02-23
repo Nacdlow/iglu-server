@@ -77,7 +77,10 @@
     </div>
     {{end}}
   </div>
-  <!-- Remove room -->
+</div>
+
+{{range .Rooms}}
+<!-- Remove room -->
 <div class="modal fade" id="removeRoom-{{.RoomID}}" tabindex="-1" role="dialog"
 aria-labelledby="removeRoom-{{.RoomID}}" aria-hidden="true">
 
@@ -86,7 +89,7 @@ aria-labelledby="removeRoom-{{.RoomID}}" aria-hidden="true">
 
   <div class="modal-content">
     <div class="modal-header">
-      <h4 class="modal-title w-100 black-text" id="removeDevice">Are you sure you want to remove this device?
+      <h4 class="modal-title w-100 black-text" id="removeDevice">Are you sure you want to remove this Room?
       </h4>
       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true">&times;</span>
@@ -95,14 +98,13 @@ aria-labelledby="removeRoom-{{.RoomID}}" aria-hidden="true">
     <div class="modal-footer">
       <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Cancel</button>
       <button type="submit" data-dismiss="modal" class="btn btn-primary btn-sm" id="remove-{{.RoomID}}"
-        onclick="$.get('/remove_room/{{.RoomID}}');reload();">Remove Device</button>
+        onclick="$.get('/remove_room/{{.RoomID}}');reload();">Remove Room</button>
     </div>
   </div>
 </div>
 </div>
+{{end}}
 <!-- /Remove room -->
-</div>
-
 
 {{template "base/scripts" .}}
 <script>
