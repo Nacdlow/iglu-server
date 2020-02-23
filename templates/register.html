@@ -1,64 +1,73 @@
 {{template "base/head" .}}
 
 <div class="container">
-<div class="row d-flex justify-content-center">
-<div class="col- pt-5">
-<form class="text-center pt-5" method="POST">
-
-    <h2>Create Account</h2>
-    <hr>
-
-    <div class="form-row">
-        <div class="col">       
-            <!-- First name -->
-            <div class="md-form">
-                <input type="text" id="fn" class="form-control white-text"
-				placeholder="First name" name="fname" autofocus="1">
-            </div>
+    <div class="d-flex justify-content-center pt-5">
+    <div class="col-lg-6 col-md-10 col-sm-12 pt-3">
+    <div class="card mr-lg-0 mb-4">
+      <div class="card-body">
+        <div class="d-flex justify-content-center">
+            <h2>Register</h2>
         </div>
-        <div class="col">
-            <!-- Last name -->
-            <div class="md-form">
-                <input type="text" id="ln" class="form-control white-text" placeholder="Last name" name="lname">
+        <hr>
+        <form class="text-center" method="POST">   
+        
+            <div class="form-row">
+                <div class="col">       
+                    <!-- First name -->
+                    <div class="md-form">
+                        <input type="text" id="fn" class="form-control white-text"
+                        placeholder="First name" name="fname" autofocus="1">
+                    </div>
+                </div>
+                <div class="col">
+                    <!-- Last name -->
+                    <div class="md-form">
+                        <input type="text" id="ln" class="form-control white-text" placeholder="Last name" name="lname">
+                    </div>
+                </div>
             </div>
-        </div>
+        
+            <!-- E-mail -->
+            <div class="md-form mt-0">
+                <input type="email" id="em" class="form-control white-text mb-4" placeholder="E-mail" name="email">
+            </div>
+            <!-- Password -->
+            <div class="md-form">
+                <input type="password" id="pw1" class="form-control white-text" placeholder="Password" aria-describedby="defaultRegisterFormPasswordHelpBlock" name="password">
+            </div>
+        
+             <!-- ReEnterPassword -->
+             <div class="md-form">
+                <input type="password" id="pw2" class="form-control white-text"
+                placeholder="Confirm Password" aria-describedby="defaultRegisterFormPasswordHelpBlock" name="repassword">
+            </div>
+        
+            <small id="defaultRegisterFormPasswordHelpBlock" class="form-text text-muted mb-4">
+                Passwords must be at least 8 characters
+            </small>
+             
+            <!-- InviteCode -->
+             <div class="md-form">
+                <input type="text" id="invite" class="form-control white-text"
+                placeholder="Invite Code" name="invite">
+            </div>
+        
+            <!-- Sign up button -->
+            <div class="d-flex justify-content-center">
+                <div class="col-lg-8 col-12 p-0 pb-3">
+                     <button class="btn btn-new-1 btn-block" id="registeruser" type="submit">Sign up</button>
+                </div>
+            </div>
+           
+        
+            <!-- Terms of service -->
+            <p>By clicking
+                <em>Sign up</em> you agree to our
+                <a href="" target="_blank">terms of service</a>
+        </form>
+      </div>
     </div>
-
-    <!-- E-mail -->
-    <div class="md-form">
-        <input type="email" id="em" class="form-control white-text mb-4" placeholder="E-mail" name="email">
     </div>
-    <!-- Password -->
-    <div class="md-form">
-        <input type="password" id="pw1" class="form-control white-text" placeholder="Password" aria-describedby="defaultRegisterFormPasswordHelpBlock" name="password">
     </div>
-
-     <!-- ReEnterPassword -->
-     <div class="md-form">
-        <input type="password" id="pw2" class="form-control white-text"
-		placeholder="Confirm Password" aria-describedby="defaultRegisterFormPasswordHelpBlock" name="repassword">
-    </div>
-
-    <small id="defaultRegisterFormPasswordHelpBlock" class="form-text text-muted mb-4">
-        Passwords must be at least 8 characters
-    </small>
-     
-	<!-- InviteCode -->
-     <div class="md-form">
-        <input type="text" id="invite" class="form-control white-text"
-		placeholder="Invite Code" name="invite">
-    </div>
-
-    <!-- Sign up button -->
-    <button class="btn btn-default my-4 btn-block" id="registeruser" type="submit">Sign up</button>
-
-    <!-- Terms of service -->
-    <p>By clicking
-        <em>Sign up</em> you agree to our
-        <a href="" target="_blank">terms of service</a>
-<hr>
-</form>
-</div>
-</div>
-</div>
+  </div>
 {{template "base/footer" .}}
