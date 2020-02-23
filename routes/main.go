@@ -72,7 +72,10 @@ func SpecificRoomsHandler(ctx *macaron.Context) {
 			return
 		}
 		ctx.Data["Room"] = room
-		ctx.Data["Devices"] = rooms
+		ctx.Data["Devices"], err = models.GetDevices()
+		if err != nil {
+			panic(err)
+		}
 	}
 
 	ctx.Data["ArrowBack"] = 1
