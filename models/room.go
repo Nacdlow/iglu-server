@@ -119,8 +119,19 @@ func UpdateRoomCols(r *Room, cols ...string) (err error) {
 	return
 }
 
-// DeleteRoom deletes a Room from the database.
+// DeleteRoom deletes a Room from the database. Also cascades delete all rooms.
 func DeleteRoom(id int64) (err error) {
-	_, err = engine.ID(id).Delete(&Room{})
-	return
+	sess := engine.NewSession() // transaction
+	if err = sess.Begin(); err != nil {
+		return err
+	}
+
+	if _, err = sess.Where("room_id = ?", id).Delete(new(Device)); err != nil {
+		return err
+	}
+
+	if _, err = sess.ID(id).Delete(new(Room)); err != nil {
+		return err
+	}
+	return sess.Commit()
 }
