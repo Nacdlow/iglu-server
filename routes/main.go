@@ -71,7 +71,7 @@ func SpecificRoomsHandler(ctx *macaron.Context) {
 			ctx.Redirect("/rooms")
 			return
 		}
-		ctx.Data["NavTitle"] = room.Description
+		ctx.Data["NavTitle"] = room.RoomName
 		ctx.Data["Room"] = room
 		ctx.Data["Devices"], err = models.GetDevices()
 		if err != nil {
