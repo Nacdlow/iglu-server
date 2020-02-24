@@ -149,7 +149,7 @@ func AppearanceSettingsHandler(ctx *macaron.Context) {
 
 // PluginsSettingsHandler handles the settings
 func PluginsSettingsHandler(ctx *macaron.Context) {
-	ctx.Data["NavTitle"] = "Intalled Plugins"
+	ctx.Data["NavTitle"] = "Installed Plugins"
 	ctx.Data["Plugins"] = plugin.LoadedPlugins
 	ctx.Data["ArrowBack"] = 1
 	ctx.HTML(http.StatusOK, "settings/plugins")
