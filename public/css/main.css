@@ -39,23 +39,25 @@ html {
 
 /* width */
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 12px;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
-  display: none;
+  background: var(--top-bar);
 }
  
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: var(--top-bar); 
+  background: var(--back); 
+  border: solid 2px;
+  border-color: var(--top-bar);
   border-radius: 10px;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #555; 
+  background: var(--light); 
 }
 /*---Scrollbar Settings---*/
 
