@@ -13,9 +13,8 @@
 	<link rel="manifest" href="/manifest.json">
 	{{if .HeadExtra}}{{.HeadExtra}}{{end}}
 	<style>
-		p, h1, h2, h3, h4, a {
-			/* transform: scale(1)!important; */
-			font-size: {{.User.FontSize}}!important;
+		.bottom-nav {
+			font-size: var(--{{.User.FontSize}})!important;
 		}
 
 	</style>
