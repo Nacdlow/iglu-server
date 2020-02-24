@@ -7,6 +7,8 @@
   --iglu-colour: #3766ff;
   --light: #454452;
   --cool-button: #26272c;
+  --nav-radius: 50px;
+  --btn-radius: 500px;
 }
 
 html {
@@ -20,7 +22,7 @@ html {
 .btn {
   background-color: var(--top-bar);
   text-transform: none !important;
-  border-radius: 10px !important;
+  border-radius: var(--btn-radius);
 }
 
 .btn:hover {
@@ -29,7 +31,7 @@ html {
 
 .btn-new {
   background-color: var(--top-bar);
-  border-radius: 30px !important;
+  border-radius: 500px !important;
   text-align: left;
   font-weight: bold;
   font-size: 20px;
@@ -38,7 +40,7 @@ html {
 
 .btn-new-1 {
   background-color: var(--back);
-  border-radius: 30px !important;
+  border-radius: var(--btn-radius)!important;
   width: 100%; 
   font-size: 16px;
   /*border:solid; 
@@ -402,7 +404,7 @@ a {
 }
 
 .nav-rounded {
-  border-radius: 7px !important;
+  border-radius: var(--nav-radius)!important;
 }
 
 .activetab {
