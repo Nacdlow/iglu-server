@@ -32,9 +32,32 @@
   --cool-button: #26272c; /* Some text */
 }
 
+/*Scrollbar Settings*/
 html {
   overflow-y: scroll;
 }
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  display: none;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: var(--top-bar); 
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
+/*---Scrollbar Settings---*/
 
 .bottom-nav {
   font-size: var(--font-small);
