@@ -146,6 +146,7 @@ func getMacaron() *macaron.Macaron {
 				})
 
 				m.Get("/appearance", routes.AppearanceSettingsHandler)
+				m.Get("/appearance/font/:size", routes.FontSliderHandler)
 				m.Get("/about", routes.AboutSettingsHandler)
 			})
 		}, routes.RequireAdmin)

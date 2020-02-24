@@ -186,10 +186,12 @@ func Tick() {
 			runningTempCont++
 			Env.Home.Rooms[i].ActualRoomTemp = getChange(room.ActualRoomTemp, tempCont.Temp, 240, 0.75)
 		}
-		err = models.UpdateRoomCols(&models.Room{RoomID: room.DBRoomID,
-			CurrentTemp: int64(Env.Home.Rooms[i].ActualRoomTemp)}, "current_temp")
-		if err != nil {
-			panic(err)
+		if Env.CurrentTime%10 == 0 {
+			err = models.UpdateRoomCols(&models.Room{RoomID: room.DBRoomID,
+				CurrentTemp: int64(Env.Home.Rooms[i].ActualRoomTemp)}, "current_temp")
+			if err != nil {
+				panic(err)
+			}
 		}
 	}
 

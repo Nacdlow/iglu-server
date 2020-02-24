@@ -1,14 +1,35 @@
-/* The global CSS file */
+/* The Global CSS File */
+/*! Copyright Nacdlow 2019-present. All rights reserved. */
 
 :root {
+
+  /* Main Background Colour */
   --back: #121116;
-  --top-bar: #1c1b20;
-  --bottom-bar: #1c1b20;
-  --iglu-colour: #3766ff;
-  --light: #454452;
-  --cool-button: #26272c;
+  
+  /* Border Radius On Elements */
   --nav-radius: 50px;
-  --btn-radius: 500px;
+  --btn-radius: 500px;  
+
+
+  /* F O N T   S I Z E S */
+  /* =================== */
+  --font-xsmall: 8px;
+  --font-small: 12px;
+  --font-medium: 16px;
+  --font-large: 20px;
+  --font-xlarge: 24px;
+  --font-xxlarge: 28px;
+  --font-xxxlarge: 32px;
+
+
+  /* T H E M E   C O L O U R S */
+  /* ========================= */
+  --top-bar: #1c1b20;     /* Navbar Background Colours */
+  --bottom-bar: #1c1b20;  /* Navbar Background Colours */
+
+  --iglu-colour: #3766ff; /* Iglu Accent Colour */
+  --light: #454452;       /* Some Text */
+  --cool-button: #26272c; /* Some text */
 }
 
 html {
@@ -16,8 +37,13 @@ html {
 }
 
 .bottom-nav {
-  font-size: small;
+  font-size: var(--font-small);
+  /* font-size: small; */
 }
+
+ #lblGreetings {
+   font-size: var(--font-large);
+ }
 
 .btn {
   background-color: var(--top-bar);
@@ -34,14 +60,14 @@ html {
   border-radius: 500px !important;
   text-align: left;
   font-weight: bold;
-  font-size: 20px;
+  /* font-size: 20px!important; */
   margin-bottom: 20px !important;
 }
 
 .btn-new-1 {
   background-color: var(--back);
   border-radius: var(--btn-radius)!important;
-  width: 100%; 
+  width: 100%;
   font-size: 16px;
   /*border:solid; 
   border-color:#3677ff; 
@@ -63,7 +89,7 @@ html {
   background-color: var(--top-bar);
   font-size: large;
   font-weight: 300;
-  color:white!important;
+  color: white!important;
   border-radius: 30px !important;
   border: solid;
   border-color: rgb(255, 28, 28);
@@ -210,7 +236,6 @@ a {
   color: red;
 }
 
-
 /* Switch success */
 
 .switch {
@@ -245,8 +270,7 @@ a {
   padding: .5rem 1rem;
 }
 
-.btn-default,
-.default-color {
+.btn-default, .default-color {
   background-color: var(--top-bar)!important;
 }
 
@@ -396,8 +420,7 @@ a {
   max-width: 25%;
 }
 
-.nav-tabs,
-.nav-link {
+.nav-tabs, .nav-link {
   width: 100%!important;
   border: 0 !important;
   border-radius: 0 !important;
@@ -471,13 +494,11 @@ div.scrollmenu a:hover {
   margin-right: 3px;
 }
 
-.scrolling-wrapper::-webkit-scrollbar,
-.scrolling-wrapper-flexbox::-webkit-scrollbar {
+.scrolling-wrapper::-webkit-scrollbar, .scrolling-wrapper-flexbox::-webkit-scrollbar {
   display: none;
 }
 
-.scrolling-wrapper,
-.scrolling-wrapper-flexbox {
+.scrolling-wrapper, .scrolling-wrapper-flexbox {
   width: 100%;
   -webkit-overflow-scrolling: touch;
 }
@@ -500,9 +521,7 @@ div.scrollmenu a:hover {
   border-color: var(--iglu-colour)!important;
 }
 
-.nav-tabs .nav-item.show .nav-link,
-.nav-tabs .nav-link.active,
-.nav-tabs .nav-link {
+.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active, .nav-tabs .nav-link {
   background-color: var(--light)!important;
   color: #fff !important;
 }

@@ -12,6 +12,12 @@
 	<link rel="icon" href="/img/favicon.png" />
 	<link rel="manifest" href="/manifest.json">
 	{{if .HeadExtra}}{{.HeadExtra}}{{end}}
+	<style>
+		.bottom-nav {
+			font-size: var(--{{.User.FontSize}})!important;
+		}
+
+	</style>
 </head>
 
 <body class="bg">

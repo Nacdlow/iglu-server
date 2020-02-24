@@ -30,6 +30,7 @@ type User struct {
 	FavRooms     []*Room  `xorm:"-" fake:"skip"` // This means do not store this in the DB.
 	CreatedUnix  int64    `xorm:"created"`
 	UpdatedUnix  int64    `xorm:"updated"`
+	FontSize     string
 }
 
 // GetFakeUser returns a new randomly generated User. This is used for testing

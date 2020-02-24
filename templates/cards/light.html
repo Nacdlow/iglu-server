@@ -5,7 +5,7 @@
 			<div class="col-4">
 				<div class="custom-control custom-switch float-left" id="div">
 					<input type="checkbox" class="custom-control-input" id="customSwitches-{{.DeviceID}}" {{if .Status}}
-					  checked {{end}} onclick="$.get('/toggle_device/{{.DeviceID}}');" />
+					  checked {{end}} onclick="$.get('/toggle_device/{{.DeviceID}}');update();" />
   
 					<label class="custom-control-label" for="customSwitches-{{.DeviceID}}"></label>
 				  </div>
@@ -28,7 +28,7 @@
 				<div class="dropdown-menu dropdown-menu-right dropdown-default text-center"
 					aria-labelledby="navbarDropdownMenuLink-333">
 						<a class="dropdown-item {{if .IsFave}}red-text{{else}}black-text{{end}}" href="#"
-							id="fave-{{.DeviceID}}" onclick="$.get('/toggle_fave/{{.DeviceID}}');">
+							id="fave-{{.DeviceID}}" onclick="$.get('/toggle_fave/{{.DeviceID}}');update();">
 						<div class="favediv-{{.DeviceID}}" id="favediv-{{.DeviceID}}">
 							{{if .IsFave}}Un-favourite{{else}}Favourite{{end}} <i class="fas fa-heart red-text"></i></a>
 						</div>

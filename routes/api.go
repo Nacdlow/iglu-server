@@ -4,6 +4,7 @@ import (
 	"net/http"
 	"time"
 
+	"github.com/go-macaron/session"
 	"gitlab.com/group-nacdlow/nacdlow-server/models"
 	"gitlab.com/group-nacdlow/nacdlow-server/modules/settings"
 	"gitlab.com/group-nacdlow/nacdlow-server/modules/simulation"
@@ -83,6 +84,28 @@ func SliderHandler(ctx *macaron.Context) {
 			}
 			break
 		}
+	}
+}
+
+// FontSliderHandler handles modifying font size values based on sliders.
+func FontSliderHandler(ctx *macaron.Context, sess session.Store) {
+	if user, err := models.GetUser(sess.Get("username").(string)); err == nil {
+		var fontSize string
+
+		switch ctx.ParamsInt("size") {
+		case 0:
+			fontSize = "font-xsmall"
+		case 1:
+			fontSize = "font-small"
+		case 2:
+			fontSize = "font-medium"
+		case 3:
+			fontSize = "font-large"
+		case 4:
+			fontSize = "font-xlarge"
+		}
+
+		models.UpdateUserCols(&models.User{Username: user.Username, FontSize: fontSize}, "font_size")
 	}
 }
 
