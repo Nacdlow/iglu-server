@@ -22,6 +22,7 @@ func AccountSettingsHandler(ctx *macaron.Context) {
 	if err != nil {
 		panic(err)
 	}
+	ctx.Data["ArrowBack"] = 1
 	ctx.HTML(http.StatusOK, "settings/accounts")
 }
 
@@ -142,13 +143,15 @@ func PostEditAccountHandler(ctx *macaron.Context, f *session.Flash,
 // AppearanceSettingsHandler handles the settings
 func AppearanceSettingsHandler(ctx *macaron.Context) {
 	ctx.Data["NavTitle"] = "Appearance Settings"
+	ctx.Data["ArrowBack"] = 1
 	ctx.HTML(http.StatusOK, "settings/appearance")
 }
 
 // PluginsSettingsHandler handles the settings
 func PluginsSettingsHandler(ctx *macaron.Context) {
-	ctx.Data["NavTitle"] = "Plugins"
+	ctx.Data["NavTitle"] = "Intalled Plugins"
 	ctx.Data["Plugins"] = plugin.LoadedPlugins
+	ctx.Data["ArrowBack"] = 1
 	ctx.HTML(http.StatusOK, "settings/plugins")
 }
 
@@ -184,5 +187,6 @@ var Libraries = map[string]LibraryDesc{
 func AboutSettingsHandler(ctx *macaron.Context) {
 	ctx.Data["NavTitle"] = "About"
 	ctx.Data["Libraries"] = Libraries
+	ctx.Data["ArrowBack"] = 1
 	ctx.HTML(http.StatusOK, "settings/about")
 }
