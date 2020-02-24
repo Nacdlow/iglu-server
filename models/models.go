@@ -15,7 +15,7 @@ import (
 var (
 	engine     *xorm.Engine
 	tables     []interface{}
-	sqlitePath = "data.db"
+	sqlitePath = "data.db?cache=shared&mode=ro&_busy_timeout=9999999"
 )
 
 func init() {
