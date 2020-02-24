@@ -6,7 +6,7 @@
 			<div class="custom-control custom-switch float-left">
 				<input type="checkbox" class="custom-control-input" id="customSwitches-{{.DeviceID}}" 
 				{{if eq .Status true}}checked{{else}}unchecked{{end}}
-				onclick="$.get('/toggle_device/{{.DeviceID}}');">
+				onclick="$.get('/toggle_device/{{.DeviceID}}');update();">
 				
 				<label class="custom-control-label" for="customSwitches-{{.DeviceID}}"></label>
 			</div>
@@ -28,7 +28,7 @@
 				<div class="dropdown-menu dropdown-menu-right dropdown-default text-center"
 				  aria-labelledby="navbarDropdownMenuLink-333">
 				  <a class="dropdown-item {{if .IsFave}}red-text{{else}}black-text{{end}}" href="#" id="fave-{{.DeviceID}}"
-				  onclick="$.get('/toggle_fave/{{.DeviceID}}');">
+				  onclick="$.get('/toggle_fave/{{.DeviceID}}');update();">
 				  <div class="favediv-{{.DeviceID}}" id="favediv-{{.DeviceID}}">
 				  {{if .IsFave}}Un-favourite{{else}}Favourite{{end}} <i class="fas fa-heart red-text"></i></a>
 				</div>
@@ -41,11 +41,11 @@
 		<div class="d-flex justify-content-center">
 			<span class="font-weight-bold blue-text mr-2 ">0<small>&deg;C</small></span>
 			<form class="range-field text-center" 
-			oninput="$.get('/toggle_slider/{{.DeviceID}}/'+ $('#slider-{{.DeviceID}}').val());">
+			oninput="$.get('/toggle_slider/{{.DeviceID}}/'+ $('#slider-{{.DeviceID}}').val());update();">
 				<input class="custom-range" type="range" min="0" max="28" value="{{.Temp}}" id="slider-{{.DeviceID}}"/>
 			<div class="sliderdiv-{{.DeviceID}}" id="sliderdiv-{{.DeviceID}}">
 				<output for="slider-{{.DeviceID}}">{{.Temp}}<small>&deg;C</small></output>
-				</div>
+			</div>
 			</form>
 			<span class="font-weight-bold red-text ml-2">28<small>&deg;C</small></span>
 		</div>
