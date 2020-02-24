@@ -20,7 +20,7 @@
         <div class="card-body">
           <div class="row">
             <div class="col-6">
-              <h4>{{.RoomName}}</h4>
+              <h4 id="name-{{.RoomID}}">{{.RoomName}}</h4>
             </div>
             <div class="col-6 d-flex align-items-center justify-content-end">
               <i class="{{if eq .RoomType 0}}fas fa-couch{{else if eq .RoomType 1}}fas fa-bed{{else if eq .RoomType 2}}
@@ -32,7 +32,7 @@
               <i class="fas fa-ellipsis-v fa-lg"></i></a>
               <div class="dropdown-menu dropdown-menu-right dropdown-default text-center"
               aria-labelledby="navbarDropdownMenuLink-333">
-              <a class="dropdown-item black-text" href="#">Edit</a>
+              <a class="dropdown-item black-text" href="#" onclick="edit();">Edit</a>
               <a class="dropdown-item black-text" href="#" id="remove-{{.RoomID}}" data-toggle="modal"
                 data-target="#removeRoom-{{.RoomID}}">Remove</a>
             </div>
@@ -60,7 +60,7 @@
             </div>
             </div>
                 <div class="col-12 d-flex justify-content-center pt-3">
-                  <a class="btn-new-1 text-center p-3 " href="/room/{{.RoomID}}">
+                  <a class="btn-new-1 text-center p-3" id="button-{{.RoomID}}" href="/room/{{.RoomID}}">
                     View Room</a>
                 </div>
               </div>
@@ -130,6 +130,25 @@ aria-labelledby="removeRoom-{{.RoomID}}" aria-hidden="true">
   setInterval(function () {
     updateRoom() // this will run after every 1 seconds
   }, 1000);
+
+  function edit() {
+    {{range .Rooms}}
+    var name = document.getElementById("name-{{.RoomID}}").value;
+    var roomH4 = document.getElementById("name-{{.RoomID}}");
+    var inputField = document.createElement("input");
+    inputField.setAttribute('id','new-{{.RoomID}}');
+    inputField.setAttribute('class','black-text');
+    roomH4.parentNode.replaceChild(inputField, roomH4);
+    
+    var viewButton = document.getElementById("button-{{.RoomID}}");
+    var saveButton = document.createElement("a");
+    saveButton.setAttribute('id','saveButton-{{.RoomID}}');
+    saveButton.setAttribute('class','btn-new-1 text-center p-3 white-text');
+    saveButton.innerHTML = "Save Changes";
+    viewButton.parentNode.replaceChild(saveButton, viewButton);
+    {{end}}
+
+  }
 </script>
 {{template "base/footer" .}}
 {{template "base/tabnav" .}}
