@@ -1,5 +1,6 @@
-<div class="container pt-2 pb-0">
+
     {{if .Flash.ErrorMsg}}
+    <div class="container pt-2 pb-0">
     <div class="alert alert-danger alert-dismissible fade show" role="alert">
         <h1>Holy guacamole!</h1>
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -7,9 +8,11 @@
         </button>
         <strong>{{.Flash.ErrorMsg}}</strong>
     </div>
+    </div>
     {{end}}
 
     {{if .Flash.WarningMsg}}
+    <div class="container pt-2 pb-0">
     <div class="alert alert-warning alert-dismissible fade show" role="alert">
         <h1>Wait a Sec!</h1>
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -17,9 +20,11 @@
         </button>
         <strong>{{.Flash.WarningMsg}}</strong>
     </div>
+    </div>
     {{end}}
 
     {{if .Flash.InfoMsg}}
+    <div class="container pt-2 pb-0">
     <div class="alert alert-primary alert-dismissible fade show" role="alert">
         <h1>Information</h1>
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -27,10 +32,12 @@
         </button>
         <strong>{{.Flash.InfoMsg}}</strong>
     </div>
+    </div>
     {{end}}
 
 
     {{if .Flash.SuccessMsg}}
+    <div class="container pt-2 pb-0">
     <div class="alert alert-success alert-dismissible fade show" role="alert">
         <h1>Success!</h1>
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -38,5 +45,5 @@
         </button>
         <strong>{{.Flash.SuccessMsg}}</strong>
     </div>
+    </div>
     {{end}}
-</div>
