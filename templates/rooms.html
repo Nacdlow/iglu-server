@@ -141,7 +141,7 @@ aria-labelledby="removeRoom-{{.RoomID}}" aria-hidden="true">
     var roomH4 = document.getElementById("name-"+id);
     var inputField = document.createElement("input");
     inputField.setAttribute('id','new-'+id);
-    inputField.setAttribute('class','black-text navcolor white-text');
+    inputField.setAttribute('class','navcolor white-text');
     inputField.setAttribute('style','border: 0.5px solid white; opacity: 80%; border-radius: 3px; height: 55px; width: 230px; color: white;');
     inputField.setAttribute('placeholder', 'Enter a new room name');
     roomH4.parentNode.replaceChild(inputField, roomH4);
@@ -149,8 +149,8 @@ aria-labelledby="removeRoom-{{.RoomID}}" aria-hidden="true">
     var viewButton = document.getElementById("button-"+id);
     var saveButton = document.createElement("a");
     saveButton.setAttribute('id','saveButton-'+id);
-    saveButton.setAttribute('class','btn-new-1 text-center p-3 white-text');
-    saveButton.setAttribute('style', 'background-color: #3ddb75;');
+    saveButton.setAttribute('class','btn-new-1 bodycolor text-center p-3 white-text');
+    saveButton.setAttribute('style', 'border: 2px solid #00e900;');
     saveButton.setAttribute('onClick', 'reload();');
     saveButton.innerHTML = "Save Changes";
     viewButton.parentNode.replaceChild(saveButton, viewButton);

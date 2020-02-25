@@ -1,62 +1,62 @@
-<div class="card mr-3 mr-lg-0 mb-4">
-	<div class="card-body w300">
+<div class="card w-100">
+	<div class="card-body">
 		<div class="row">
 			<!-- switch -->
-			<div class="col-4">
+			<div class="col">
 				<div class="custom-control custom-switch float-left" id="div">
 					<input type="checkbox" class="custom-control-input" id="customSwitches-{{.DeviceID}}" {{if .Status}}
-					  checked {{end}} onclick="$.get('/toggle_device/{{.DeviceID}}');update();" />
-  
+						checked {{end}} onclick="$.get('/toggle_device/{{.DeviceID}}');update();" />
+
 					<label class="custom-control-label" for="customSwitches-{{.DeviceID}}"></label>
-				  </div>
-					<div class="labeldiv-{{.DeviceID}}" id="labeldiv-{{.DeviceID}}">
-						<label class="" id="label-{{.DeviceID}}">{{if .Status}}On{{else}}Off{{end}}</label>
-					</div>
+				</div>
+				<div class="labeldiv-{{.DeviceID}}" id="labeldiv-{{.DeviceID}}">
+					<label class="" id="label-{{.DeviceID}}">{{if .Status}}On{{else}}Off{{end}}</label>
+				</div>
 			</div>
 			<!--/switch -->
 
 
-			<div class="col-4">
+			<div class="col-5">
 				<h5 class="card-title text-center">{{.Description}}</h5>
 			</div>
 
-			<div class="col-4 text-right">
+			<div class="col text-right">
 				<a class="p-0" id="navbarDropdownMenuLink-333" data-toggle="dropdown" aria-haspopup="true"
 					aria-expanded="false">
 					<i class="fas fa-ellipsis-h"></i>
 				</a>
 				<div class="dropdown-menu dropdown-menu-right dropdown-default text-center"
 					aria-labelledby="navbarDropdownMenuLink-333">
-						<a class="dropdown-item {{if .IsFave}}red-text{{else}}black-text{{end}}" href="#"
-							id="fave-{{.DeviceID}}" onclick="$.get('/toggle_fave/{{.DeviceID}}');update();">
+					<a class="dropdown-item {{if .IsFave}}red-text{{else}}black-text{{end}}" href="#"
+						id="fave-{{.DeviceID}}" onclick="$.get('/toggle_fave/{{.DeviceID}}');update();">
 						<div class="favediv-{{.DeviceID}}" id="favediv-{{.DeviceID}}">
-							{{if .IsFave}}Un-favourite{{else}}Favourite{{end}} <i class="fas fa-heart red-text"></i></a>
-						</div>
-					<a class="dropdown-item black-text" href="#">Edit</a>
-					<a class="dropdown-item black-text" href="#" id="remove-{{.DeviceID}}" data-toggle="modal"
-						data-target="#removeDevice-{{.DeviceID}}">Remove</a>
+							{{if .IsFave}}Un-favourite{{else}}Favourite{{end}} <i class="fas fa-heart red-text"></i>
+					</a>
 				</div>
+				<a class="dropdown-item black-text" href="#">Edit</a>
+				<a class="dropdown-item black-text" href="#" id="remove-{{.DeviceID}}" data-toggle="modal"
+					data-target="#removeDevice-{{.DeviceID}}">Remove</a>
 			</div>
 		</div>
+	</div>
 
-		<p class="text-center pt-4">Brightness</p>
-		<div class="d-flex justify-content-center">
-			<span class="blue-text mr-2"><i class="fas fa-moon fa-lg" aria-hidden="true"></i></span>
-				<form class="range-field">
-					<input class="custom-range" type="range" min="0" max="10" value="{{.Brightness}}"
-						id="slider-{{.DeviceID}}"
-						onclick="$.get('/toggle_slider/{{.DeviceID}}/'+ $('#slider-{{.DeviceID}}').val());" />
-				</form>
-			<span class="blue-text ml-2 "><i class="fas fa-sun fa-lg" aria-hidden="true"></i></span>
-		</div>
+	<p class="text-center pt-4">Brightness</p>
+	<div class="d-flex justify-content-center">
+		<span class="blue-text mr-2"><i class="fas fa-moon fa-lg" aria-hidden="true"></i></span>
+		<form class="range-field">
+			<input class="custom-range" type="range" min="0" max="10" value="{{.Brightness}}" id="slider-{{.DeviceID}}"
+				onclick="$.get('/toggle_slider/{{.DeviceID}}/'+ $('#slider-{{.DeviceID}}').val());" />
+		</form>
+		<span class="blue-text ml-2 "><i class="fas fa-sun fa-lg" aria-hidden="true"></i></span>
 	</div>
-	<div class="footerdiv-{{.DeviceID}}" id="footerdiv-{{.DeviceID}}">
-		<div class="card-footer" {{if .Status}}style="background-color: #FEFF9E;"
-			{{else}}style="background-color: #FF6666;" {{end}}>
-			<small class="text-muted black-text">{{if .Status}}Time on: {{CalcSince .ToggledUnix}}{{else}}Last on:
-					{{CalcSince .ToggledUnix}}{{end}}</small>
-		</div>
+</div>
+<div class="footerdiv-{{.DeviceID}}" id="footerdiv-{{.DeviceID}}">
+	<div class="card-footer" {{if .Status}}style="background-color: #FEFF9E;" {{else}}style="background-color: #FF6666;"
+		{{end}}>
+		<small class="text-muted black-text">{{if .Status}}Time on: {{CalcSince .ToggledUnix}}{{else}}Last on:
+			{{CalcSince .ToggledUnix}}{{end}}</small>
 	</div>
+</div>
 </div>
 
 <!-- Remove Device -->
@@ -83,4 +83,3 @@
 	</div>
 </div>
 <!-- /Remove Device -->
-
