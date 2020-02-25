@@ -1,15 +1,22 @@
 {{template "base/head" .}}
 {{template "base/nav" .}}
-<div class="container animated fadeIn">
-  <row class="col-12">
-    <a class="fas fa-arrow-circle-left d-flex text-left fa-2x w-10" href="/settings"></a>
-    <h2 class="text-center">Appearance</h2>
-    </row>
-  <div class="pt-3 pb-3">
-    <hr>
+<div class="container">
+  <div class="mobhide">
+    <div class="row align-items-center justify-content-center pt-4 pb-1">
+      <div class="col-4">
+        <a class="fas fa-arrow-circle-left fa-2x text-left" href="/settings"></a>
+      </div>
+      <div class="col-4">
+        <h2 class="text-center mb-0">Appearence Settings</h2>
+      </div>
+    <div class="col-4"></div>
+    </div>
+    <div class="pt-3">
+      <hr>
+    </div>
   </div>
 
-  <div class="list-group">
+  <div class="list-group pt-3">
     <a type="button" href="#" class="list-group-item list-group-item-action">
       <!-- Default checked -->
       <div class="custom-control custom-switch">

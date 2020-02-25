@@ -2,8 +2,24 @@
 {{template "base/nav" .}}
 <div class="container">
 	<div class="mobhide">
-		<h2 class="pt-4 text-center">Account Settings</h2>
-		<div class="pt-3">
+		<div class="row justify-content-center align-items-center pt-3">
+			<div class="col">
+				<a class="fas fa-arrow-circle-left fa-2x text-left" href="/settings"></a>
+			</div>
+			<div class="col">
+				<h2 class=" text-center">Account Settings</h2>
+			</div>
+
+			<div class="col d-flex justify-content-end">
+				<form method="POST" id="getcode">
+					<input type="hidden" name="action" value="get_invite" />
+					<button type="submit" class="mobhide btn btn-success-new p-3 m-0 btn-lg">
+						Generate Invite Code</button>
+				</form>
+			</div>
+
+		</div>
+		<div class="pt-2">
 			<hr>
 		</div>
 	</div>
@@ -31,14 +47,15 @@
 		</div>
 		{{end}}
 	</div>
-	<div class="d-flex justify-content-center pt-3">
-		<form method="POST">
-			<input type="hidden" name="action" value="get_invite"/>
-			<button type="submit" class="deskhide circle-small btn-group-position">
-				<i class="fas fa-user-plus fa-lg"></i></button>
-			<button type="submit" class="mobhide btn btn-success-new">
-					Generate an invite code</button>
 
+
+
+	<div class="deskhide">
+		<form method="POST" id="getcode">
+			<input type="hidden" name="action" value="get_invite" />
+			<a class="btn btn-success-new navcolor btn-fix-bottom-middle"
+				onclick="document.getElementById('getcode').submit()">
+				Generate Invite Code</a>
 		</form>
 	</div>
 </div>

@@ -311,7 +311,7 @@ a {
     display: none;
   }
   .deskhide {
-    display: none;
+    display: none!important;
   }
   .back-button {
     display: none;
@@ -320,7 +320,7 @@ a {
 
 @media (max-width: 992px) {
   .mobhide {
-    display: none;
+    display: none!important;
   }
   .navbar-toggler {
     display: none;
@@ -555,6 +555,20 @@ div.scrollmenu a:hover {
   position: fixed;
   right: 15px;
   bottom: 77px;
+}
+
+.btn-fix-bottom-middle {
+    position: fixed!important;
+    left: 0!important;
+    right: 0!important;
+    margin-left: auto!important;
+    margin-right: auto!important;
+    min-width: 185px!important;
+    max-width: 250px!important;
+    max-height: 53px!important;
+    bottom: 100px!important;
+    align-items: unset!important;
+    line-height: normal!important;
 }
 
 .tab-content {
