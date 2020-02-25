@@ -94,15 +94,15 @@ func FontSliderHandler(ctx *macaron.Context, sess session.Store) {
 
 		switch ctx.ParamsInt("size") {
 		case 0:
-			fontSize = "font-xsmall"
+			fontSize = "xsmall"
 		case 1:
-			fontSize = "font-small"
+			fontSize = "small"
 		case 2:
-			fontSize = "font-medium"
+			fontSize = "medium"
 		case 3:
-			fontSize = "font-large"
+			fontSize = "large"
 		case 4:
-			fontSize = "font-xlarge"
+			fontSize = "xlarge"
 		}
 
 		models.UpdateUserCols(&models.User{Username: user.Username, FontSize: fontSize}, "font_size")
@@ -141,5 +141,24 @@ func RemoveRoomHandler(ctx *macaron.Context) {
 	err := models.DeleteRoom(ctx.ParamsInt64("id"))
 	if err != nil {
 		panic(err)
+	}
+}
+
+func ChangeNameHandler(ctx *macaron.Context) {
+	rooms, err := models.GetRooms()
+	if err != nil {
+		panic(err)
+	}
+	for _, room := range rooms {
+		if room.RoomID == ctx.ParamsInt64("id") {
+			err := models.UpdateRoomCols(&models.Room{
+				RoomID:   room.RoomID,
+				RoomName: ctx.Params("newName"),
+			})
+			if err != nil {
+				panic(err)
+			}
+			break
+		}
 	}
 }

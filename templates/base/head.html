@@ -13,10 +13,14 @@
 	<link rel="manifest" href="/manifest.json">
 	{{if .HeadExtra}}{{.HeadExtra}}{{end}}
 	<style>
-		.bottom-nav {
-			font-size: var(--{{.User.FontSize}})!important;
+			
+		#lblGreetings {
+			font-size: var(--{{.User.FontSize}}-heading)!important;
 		}
 
+		.text-center {
+			font-size: var(--{{.User.FontSize}}-bottom-nav)!important;
+		}
 	</style>
 </head>
 
