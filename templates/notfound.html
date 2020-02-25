@@ -1,5 +1,5 @@
 {{template "base/head" .}}
-
+{{if .LoggedIn}}{{template "base/nav" .}}{{end}}
 <br>
 <br>
 <h1 class="text-center pb-5">HTTP 404 ERR</h1>
@@ -8,4 +8,5 @@
 </div>
 
 {{template "base/scripts" .}}
+{{if .LoggedIn}}{{template "base/tabnav" .}}{{end}}
 {{template "base/footer" .}}
