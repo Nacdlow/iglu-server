@@ -24,7 +24,7 @@ func AddDeviceHandler(ctx *macaron.Context) {
 
 // AddHandler handles the add page
 func AddHandler(ctx *macaron.Context) {
-	ctx.Data["CrossBack"] = 1
+	ctx.Data["NavTitle"] = "Add..."
 	ctx.Data["IsAdd"] = 1
 	ctx.HTML(http.StatusOK, "add")
 }
