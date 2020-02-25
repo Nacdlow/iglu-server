@@ -57,11 +57,6 @@ func LoadFromDB() {
 			LightStatus: false, // Assume lights are off
 		}
 
-		// Add Windows
-		for i := int64(0); i < room.WindowCount; i++ {
-			r.Windows = append(r.Windows, Window{false}) // Assume all windows are closed
-		}
-
 		// Get room temp and light status from the devices of that room
 		tempSet := false
 		for _, device := range devices {
@@ -167,10 +162,8 @@ func Tick() {
 	outTemp := Env.Weather.OutdoorTemp
 	for i, room := range Env.Home.Rooms {
 		// Simulate cold/hot air from outside coming in room through windows
-		for _, window := range room.Windows {
-			if window.IsOpen {
-				Env.Home.Rooms[i].ActualRoomTemp = getChange(room.ActualRoomTemp, outTemp, 270, 0.75)
-			}
+		for i := 0; i < room.OpenedWindows; i++ {
+			Env.Home.Rooms[i].ActualRoomTemp = getChange(room.ActualRoomTemp, outTemp, 270, 0.75)
 		}
 
 		if room.LightStatus {
@@ -313,15 +306,10 @@ type Home struct {
 
 // Room represents a simulated room state.
 type Room struct {
-	DBRoomID            int64    `json:"db_room_id"` // The database room ID.
-	Windows             []Window `json:"windows"`
-	ActualRoomTemp      float64  `json:"actual_room_temp"`
-	TempControlDeviceID int64    `json:"temp_control_device_id"`
-	LightStatus         bool     `json:"light_status"`
-	MainLightDeviceID   int64    `json:"main_light_device_id"`
-}
-
-// Window represents a simulated window state.
-type Window struct {
-	IsOpen bool `json:"is_open"`
+	DBRoomID            int64   `json:"db_room_id"` // The database room ID.
+	OpenedWindows       int     `json:"opened_windows"`
+	ActualRoomTemp      float64 `json:"actual_room_temp"`
+	TempControlDeviceID int64   `json:"temp_control_device_id"`
+	LightStatus         bool    `json:"light_status"`
+	MainLightDeviceID   int64   `json:"main_light_device_id"`
 }

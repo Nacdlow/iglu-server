@@ -62,8 +62,8 @@ func PostChangeTimeSleepHandler(ctx *macaron.Context, form forms.ChangeTimeSleep
 	ctx.Redirect("/sim")
 }
 
-// ToggleHandler handles toggling a device in the simulation. This is mostly
-// used by the Minecraft simulation plugin.
+// ToggleHandler handles toggling a device in the simulation. This is made for
+// the Minecraft simulation plugin.
 func ToggleHandler(ctx *macaron.Context) {
 	for _, room := range simulation.Env.Rooms {
 		if room.MainLightDeviceID == ctx.ParamsInt64("id") {
@@ -77,6 +77,21 @@ func ToggleHandler(ctx *macaron.Context) {
 				}
 			}
 			break
+		}
+	}
+}
+
+// SetMainDoorHandler sets the main door status.
+func SetMainDoorHandler(ctx *macaron.Context) {
+	simulation.Env.MainDoorOpened = (ctx.Params("status") == "opened")
+}
+
+// SetWindowStatusHandler sets the number of opened windows in a room.
+func SetWindowStatusHandler(ctx *macaron.Context) {
+	for _, room := range simulation.Env.Rooms {
+		if room.DBRoomID == ctx.ParamsInt64("room") {
+			room.OpenedWindows = ctx.ParamsInt("open_count")
+			return
 		}
 	}
 }
