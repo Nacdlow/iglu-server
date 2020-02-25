@@ -36,7 +36,7 @@
               <i class="fas fa-ellipsis-v fa-lg"></i></a>
               <div class="dropdown-menu dropdown-menu-right dropdown-default text-center"
               aria-labelledby="navbarDropdownMenuLink-333">
-              <a class="dropdown-item black-text" href="#" onclick="edit();">Edit</a>
+              <a class="dropdown-item black-text" href="#" onclick="edit({{.RoomID}});">Edit</a>
               <a class="dropdown-item black-text" href="#" id="remove-{{.RoomID}}" data-toggle="modal"
                 data-target="#removeRoom-{{.RoomID}}">Remove</a>
             </div>
@@ -135,23 +135,32 @@ aria-labelledby="removeRoom-{{.RoomID}}" aria-hidden="true">
     updateRoom() // this will run after every 1 seconds
   }, 1000);
 
-  function edit() {
+  function edit(id) {//swaps room title with an input field and changes the button to a save button.
     {{range .Rooms}}
-    var name = document.getElementById("name-{{.RoomID}}").value;
-    var roomH4 = document.getElementById("name-{{.RoomID}}");
+    var roomH4 = document.getElementById("name-"+id);
     var inputField = document.createElement("input");
-    inputField.setAttribute('id','new-{{.RoomID}}');
-    inputField.setAttribute('class','black-text');
+    inputField.setAttribute('id','new-'+id);
+    inputField.setAttribute('class','black-text navcolor white-text');
+    inputField.setAttribute('style','border: 1px solid white; opacity: 80%; border-radius: 15px; height: 55px; width: 230px; color: white;');
+    inputField.setAttribute('placeholder', '  Enter a new room name');
     roomH4.parentNode.replaceChild(inputField, roomH4);
     
-    var viewButton = document.getElementById("button-{{.RoomID}}");
+    var viewButton = document.getElementById("button-"+id);
     var saveButton = document.createElement("a");
-    saveButton.setAttribute('id','saveButton-{{.RoomID}}');
+    saveButton.setAttribute('id','saveButton-'+id);
     saveButton.setAttribute('class','btn-new-1 text-center p-3 white-text');
+    saveButton.setAttribute('style', 'background-color: #3ddb75;');
+    saveButton.setAttribute('onClick', 'postChanges('+id+');');
     saveButton.innerHTML = "Save Changes";
     viewButton.parentNode.replaceChild(saveButton, viewButton);
     {{end}}
 
+  }
+
+  function postChanges(id){
+    var newName = document.getElementById("new-"+id).value;
+    $.get('/change_name/'+id+'/'+newName);
+    reload();
   }
 </script>
 {{template "base/tabnav" .}}
