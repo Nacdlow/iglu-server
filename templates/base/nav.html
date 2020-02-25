@@ -1,19 +1,19 @@
-<dheader>
+<header>
   <nav class="navbar navbar-expand-lg navbar-dark default-color">
     <!-- Additional container -->
     <div class="container">
       <!-- Collapse button -->
 
-      
-    {{if .ArrowBack}}
-    <a {{if .BackLink}}href="{{.BackLink}}"{{else}}onclick="history.back()"{{end}} class="back-button">
-      <i class="fas fa-angle-left"></i></a>
-    {{end}}
 
-    {{if .CrossBack}}
-    <a {{if .BackLink}}href="{{.BackLink}}"{{else}}onclick="history.back()"{{end}} class="back-button">
-      <i class="fas fa-times"></i></a>
-    {{end}}
+      {{if .ArrowBack}}
+      <a {{if .BackLink}}href="{{.BackLink}}" {{else}}onclick="history.back()" {{end}} class="back-button">
+        <i class="fas fa-angle-left"></i></a>
+      {{end}}
+
+      {{if .CrossBack}}
+      <a {{if .BackLink}}href="{{.BackLink}}" {{else}}onclick="history.back()" {{end}} class="back-button">
+        <i class="fas fa-times"></i></a>
+      {{end}}
 
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent41"
         aria-controls="navbarSupportedContent41" aria-expanded="false" aria-label="Toggle navigation">
@@ -21,22 +21,22 @@
       </button>
       <!-- Navbar brand and Login Button -->
       <div class="deskhide">
-      {{if not .IsDashboard}}
-      <a class="navbar-brand pt-2" href="#"><strong>{{.NavTitle}}</strong></a>
-      {{else}}
-      <a class="navbar-brand pl-2" href="/dashboard"><img src="/img/iglu-light.svg" class="svghover"
-          alt="iglü" width="50"></a>
-      {{end}}
-    </div>
-    <a class="navbar-brand mobhide pl-lg-4" id="brand" href="/dashboard"><img src="/img/iglu-light.svg" class="svghover"
-      alt="iglü" width="50"></a>
+        {{if not .IsDashboard}}
+        <a class="navbar-brand pt-2" href="#"><strong>{{.NavTitle}}</strong></a>
+        {{else}}
+        <a class="navbar-brand pl-2" href="/dashboard"><img src="/img/iglu-light.svg" class="svghover" alt="iglü"
+            width="50"></a>
+        {{end}}
+      </div>
+      <a class="navbar-brand mobhide pl-lg-4" id="brand" href="/dashboard"><img src="/img/iglu-light.svg"
+          class="svghover" alt="iglü" width="50"></a>
 
 
 
       <div class="nav deskhide">
         <div class="nav-item dropdown avatar">
-          <a class="nav-link p-0 {{if not .IsDashboard}} pt-1 {{end}}" id="navbarDropdownMenuLink-333" data-toggle="dropdown" aria-haspopup="true"
-            aria-expanded="false">
+          <a class="nav-link p-0 {{if not .IsDashboard}} pt-1 {{end}}" id="navbarDropdownMenuLink-333"
+            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-5.jpg" class="mb-0 rounded-circle z-depth-0"
               alt="avatar image" height="45" width="45">
           </a>
@@ -73,28 +73,31 @@
 
         <ul class="navbar-nav mobhide">
           <li class="nav-item">
-            <a class="nav-link waves-effect waves-light" href="{{if .IsSpecificRoom}}/add/device/{{.Room.RoomID}}{{else}}/add{{end}}">
-				<i class="fa fa-plus"></i></a>
+            <a class="nav-link waves-effect waves-light"
+              href="{{if .IsSpecificRoom}}/add/device/{{.Room.RoomID}}{{else}}/add{{end}}">
+              <i class="fa fa-plus"></i></a>
           </li>
-        <ul class="navbar-nav mobhide">
-          <li class="nav-item">
-            <a class="nav-link waves-effect waves-light" href="/alerts"> <i class="far fa-bell"></i></a>
-          </li>
-          <li class="nav-item dropdown avatar">
-            <a class="nav-link p-0" id="navbarDropdownMenuLink-333" data-toggle="dropdown" aria-haspopup="true"
-              aria-expanded="false">
-              <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-5.jpg" class="mb-0 rounded-circle z-depth-0"
-                alt="avatar image" height="45" width="45">
-            </a>
-            <div class="dropdown-menu dropdown-menu-right dropdown-default text-center"
-              aria-labelledby="navbarDropdownMenuLink-333">
-              <a class="dropdown-item black-text" href="/settings/accounts">Accounts</a>
-              <a class="dropdown-item black-text" href="/logout"><i class="fas fa-sign-out-alt fa-rotate-180"></i> Log Out</a>
-            </div>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/settings"><i class="fas fa-cog"></i></a>
-          </li>
+          <ul class="navbar-nav mobhide">
+            <li class="nav-item">
+              <a class="nav-link waves-effect waves-light" href="/alerts"> <i class="far fa-bell"></i></a>
+            </li>
+            <li class="nav-item dropdown avatar">
+              <a class="nav-link p-0" id="navbarDropdownMenuLink-444" data-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="false">
+                <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-5.jpg" class="mb-0 rounded-circle z-depth-0"
+                  alt="avatar image" height="45" width="45">
+              </a>
+              <div class="dropdown-menu dropdown-menu-right dropdown-default text-center"
+                aria-labelledby="navbarDropdownMenuLink-444">
+                <a class="dropdown-item black-text" href="/settings/accounts">Accounts</a>
+                <a class="dropdown-item black-text" href="/logout"><i class="fas fa-sign-out-alt fa-rotate-180"></i> Log
+                  Out</a>
+              </div>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/settings"><i class="fas fa-cog"></i></a>
+            </li>
+          </ul>
         </ul>
       </div>
     </div>

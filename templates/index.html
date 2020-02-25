@@ -1,4 +1,5 @@
 {{template "base/head" .}}
+
 <script>
     if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
@@ -13,6 +14,7 @@
 <div class="mobhide">
     <div class="split split-right">
         <div class="centered">
+            {{template "base/flash" .}}
             <form class="text-center" method="POST">
                 <h2>Login</h2>
 
@@ -74,6 +76,7 @@
 <div class="deskhide">
     <div class="split-vert split-bottom mt-2">
         <div class="centered centered-bottom">
+            {{template "base/flash" .}}
             <form class="text-center" method="POST">
                 <h3>Login</h3>
 
