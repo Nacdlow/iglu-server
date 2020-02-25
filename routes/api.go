@@ -94,15 +94,15 @@ func FontSliderHandler(ctx *macaron.Context, sess session.Store) {
 
 		switch ctx.ParamsInt("size") {
 		case 0:
-			fontSize = "font-xsmall"
+			fontSize = "xsmall"
 		case 1:
-			fontSize = "font-small"
+			fontSize = "small"
 		case 2:
-			fontSize = "font-medium"
+			fontSize = "medium"
 		case 3:
-			fontSize = "font-large"
+			fontSize = "large"
 		case 4:
-			fontSize = "font-xlarge"
+			fontSize = "xlarge"
 		}
 
 		models.UpdateUserCols(&models.User{Username: user.Username, FontSize: fontSize}, "font_size")

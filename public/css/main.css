@@ -8,18 +8,36 @@
   
   /* Border Radius On Elements */
   --nav-radius: 50px;
-  --btn-radius: 500px;  
+  --btn-radius: 500px;
 
 
   /* F O N T   S I Z E S */
   /* =================== */
-  --font-xsmall: 8px;
-  --font-small: 12px;
-  --font-medium: 16px;
-  --font-large: 20px;
-  --font-xlarge: 24px;
-  --font-xxlarge: 28px;
-  --font-xxxlarge: 32px;
+  --xsmall: 8px;
+  --small: 12px;
+  --medium: 16px;
+  --large: 20px;
+  --xlarge: 24px;
+  --xxlarge: 28px;
+  --xxxlarge: 32px;
+
+
+  --xsmall-heading: 12px;
+  --small-heading: 16px;
+  --medium-heading: 20px;
+  --large-heading: 24px;
+  --xlarge-heading: 28px;
+  --xxlarge-heading: 32px;
+  --xxxlarge-heading: 36px;
+
+
+  --xsmall-bottom-nav: 4px;
+  --small-bottom-nav: 8px;
+  --medium-bottom-nav: 12px;
+  --large-bottom-nav: 16px;
+  --xlarge-bottom-nav: 20px;
+  --xxlarge-bottom-nav: 24px;
+  --xxxlarge-bottom-nav: 28px;
 
 
   /* T H E M E   C O L O U R S */
@@ -61,14 +79,14 @@ html {
 }
 /*---Scrollbar Settings---*/
 
-.bottom-nav {
+/* .bottom-nav {
   font-size: var(--font-small);
   /* font-size: small; */
 }
-
+/* 
  #lblGreetings {
    font-size: var(--font-large);
- }
+ } */
 
 .btn {
   background-color: var(--top-bar);
