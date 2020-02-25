@@ -1,5 +1,6 @@
-{{template "base/head" .}} {{template "base/nav" .}}
-
+{{template "base/head" .}}
+{{template "base/nav" .}}
+{{template "base/flash" .}}
 
 <div class="container">
 
@@ -211,5 +212,5 @@
 		update() // this will run after every 1 seconds
 	}, 1000);
 </script>
-{{template "base/footer" .}}
 {{template "base/tabnav" .}}
+{{template "base/footer" .}}
