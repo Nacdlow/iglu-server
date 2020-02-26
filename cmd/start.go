@@ -224,17 +224,19 @@ func start(clx *cli.Context) (err error) {
 		log.Fatal(server.ListenAndServeTLS("fullchain.pem", "privkey.pem"))
 	}()
 
+	defer func() {
+		ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+		defer cancel()
+		if err := server.Shutdown(ctx); err != nil {
+			panic(err)
+		}
+	}()
+	defer plugin.UnloadPlugins()
+
 	// Capture system interrupt
 	stop := make(chan os.Signal, 1)
 	signal.Notify(stop, os.Interrupt)
 	<-stop
-	plugin.UnloadPlugins()
-
-	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
-	defer cancel()
-	if err := server.Shutdown(ctx); err != nil {
-		panic(err)
-	}
 
 	return nil
 }
