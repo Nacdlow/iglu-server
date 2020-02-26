@@ -166,6 +166,8 @@ func getMacaron() *macaron.Macaron {
 			routes_sim.PostChangeTimeSleepHandler)
 		m.Get("/env_status", routes_sim.EnvStatusHandler)
 		m.Get("/toggle/:id", routes_sim.ToggleHandler)
+		m.Get("/reload_db", routes_sim.ReloadDBHandler)
+		m.Get("/purge_stats", routes_sim.PurgeStatsHandler)
 		m.Get("/set_main_door/:status", routes_sim.SetMainDoorHandler)
 		m.Get("/set_window_status/:room/:open_count", routes_sim.SetWindowStatusHandler)
 	})

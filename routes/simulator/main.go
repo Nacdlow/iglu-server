@@ -95,3 +95,22 @@ func SetWindowStatusHandler(ctx *macaron.Context) {
 		}
 	}
 }
+
+// ReloadDBHandler handles request for reloading the simulation's model from the
+// database.
+func ReloadDBHandler(ctx *macaron.Context) {
+	simulation.LoadFromDB()
+	ctx.Redirect("/sim")
+}
+
+// PurgeStatsHandler handles request for purging all stats from the database.
+func PurgeStatsHandler(ctx *macaron.Context) {
+	stats, err := models.GetStats()
+	if err != nil {
+		panic(err)
+	}
+	for _, stat := range stats {
+		models.DeleteStat(stat.StatID)
+	}
+	ctx.Redirect("/sim")
+}
