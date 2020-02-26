@@ -230,6 +230,7 @@ func start(clx *cli.Context) (err error) {
 		if err := server.Shutdown(ctx); err != nil {
 			panic(err)
 		}
+		time.Sleep(500 * time.Millisecond)
 	}()
 	defer plugin.UnloadPlugins()
 
