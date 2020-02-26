@@ -131,8 +131,9 @@
     $("#labeldiv-{{.DeviceID}}").load(location.href + " #labeldiv-{{.DeviceID}}>*", "");
     $("#footerdiv-{{.DeviceID}}").load(location.href + " #footerdiv-{{.DeviceID}}>*", "");
     {{end}}
+    $("#battery").load("/battery_stat #battery-div>*", "");
   }
-  
+
   update(); // This will run on page load
   setInterval(function () {
     update() // this will run after every 1 seconds
@@ -283,11 +284,6 @@
   });
 </script>
 <script>
-
-  (function () {
-    $("#battery").load("/battery_stat");
-    setTimeout(arguments.callee, 1000);
-  })();
 </script>
 {{template "base/tabnav" .}}
 {{template "base/footer" .}}
