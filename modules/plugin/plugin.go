@@ -7,9 +7,9 @@ import (
 	"os"
 	"os/exec"
 
+	"github.com/Nacdlow/plugin-sdk"
 	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/go-plugin"
-	api "gitlab.com/group-nacdlow/nacdlow-server/modules/plugin/commons"
 	macaron "gopkg.in/macaron.v1"
 )
 
@@ -31,11 +31,11 @@ var handshakeConfig = plugin.HandshakeConfig{
 }
 
 var pluginMap = map[string]plugin.Plugin{
-	"iglu_plugin": &api.IgluPlugin{},
+	"iglu_plugin": &sdk.IgluPlugin{},
 }
 
 // LoadedPlugins is an array of all loaded plugins.
-var LoadedPlugins []api.Iglu
+var LoadedPlugins []sdk.Iglu
 
 // LoadPlugins will load all plugins in the `./plugins` folder.
 func LoadPlugins() {
@@ -71,7 +71,7 @@ func LoadPlugins() {
 				log.Fatal(err)
 			}
 
-			plugin := raw.(api.Iglu)
+			plugin := raw.(sdk.Iglu)
 			plugin.OnLoad()
 
 			LoadedPlugins = append(LoadedPlugins, plugin)
