@@ -228,6 +228,7 @@ func start(clx *cli.Context) (err error) {
 	stop := make(chan os.Signal, 1)
 	signal.Notify(stop, os.Interrupt)
 	<-stop
+	plugin.UnloadPlugins()
 
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()

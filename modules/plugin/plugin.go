@@ -31,6 +31,16 @@ var pluginMap = map[string]plugin.Plugin{
 // LoadedPlugins is an array of all loaded plugins.
 var LoadedPlugins []IgluPlugin
 
+func UnloadPlugins() {
+	log.Println("Unloading plugins...")
+	for _, plugin := range LoadedPlugins {
+		if plugin.client != nil {
+			plugin.client.Kill()
+		}
+	}
+	log.Println("Plugins unloaded")
+}
+
 // LoadPlugins will load all plugins in the `./plugins` folder.
 func LoadPlugins() {
 	log.Println("Loading plugins...")
