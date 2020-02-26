@@ -79,11 +79,12 @@ func getMacaron() *macaron.Macaron {
 	m.Use(routes.ContextInit())
 
 	// Load plugin middlewares
-	for _, pl := range plugin.LoadedPlugins {
-		if pl.Middleware != nil {
-			m.Use(pl.Middleware())
-		}
-	}
+	/*
+		for _, pl := range plugin.LoadedPlugins {
+			if pl.Middleware != nil {
+				m.Use(pl.Middleware())
+			}
+		}*/
 
 	m.NotFound(routes.NotFoundHandler)
 
@@ -211,6 +212,7 @@ func start(clx *cli.Context) (err error) {
 	engine := models.SetupEngine()
 	defer engine.Close()
 	go simulation.Start()
+
 	plugin.LoadPlugins()
 
 	// Start the web server

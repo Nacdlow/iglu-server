@@ -10,18 +10,12 @@ import (
 	"github.com/Nacdlow/plugin-sdk"
 	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/go-plugin"
-	macaron "gopkg.in/macaron.v1"
 )
 
 // IgluPlugin represents a loaded Iglu plugin.
 type IgluPlugin struct {
-	ID            string // Unique ID, for updates, etc
-	Name          string
-	Author        string
-	Version       string
-	SettingsRoute string
-	Plugin        *plugin.Plugin
-	Middleware    (func() macaron.Handler)
+	Plugin *sdk.Iglu
+	client *plugin.Client
 }
 
 var handshakeConfig = plugin.HandshakeConfig{
@@ -35,11 +29,10 @@ var pluginMap = map[string]plugin.Plugin{
 }
 
 // LoadedPlugins is an array of all loaded plugins.
-var LoadedPlugins []sdk.Iglu
+var LoadedPlugins []IgluPlugin
 
 // LoadPlugins will load all plugins in the `./plugins` folder.
 func LoadPlugins() {
-
 	log.Println("Loading plugins...")
 	files, err := ioutil.ReadDir("./plugins")
 	if err == nil {
@@ -57,7 +50,7 @@ func LoadPlugins() {
 				Cmd:             exec.Command(fmt.Sprintf("./plugins/%s", f.Name())),
 				Logger:          logger,
 			})
-			defer client.Kill()
+			//defer client.Kill()
 
 			// Connect via RPC
 			rpcClient, err := client.Client()
@@ -72,9 +65,12 @@ func LoadPlugins() {
 			}
 
 			plugin := raw.(sdk.Iglu)
-			plugin.OnLoad()
+			err = plugin.OnLoad()
+			if err != nil {
+				log.Printf("Failed to load plugin %s (onLoad): %s\n", f.Name(), err)
+			}
 
-			LoadedPlugins = append(LoadedPlugins, plugin)
+			LoadedPlugins = append(LoadedPlugins, IgluPlugin{&plugin, client})
 		}
 	}
 	log.Printf("%d plugins loaded!\n", len(LoadedPlugins))
