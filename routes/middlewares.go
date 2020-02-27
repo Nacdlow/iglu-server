@@ -1,7 +1,10 @@
 package routes
 
 import (
+	"fmt"
+	"html/template"
 	"regexp"
+	"strings"
 
 	"github.com/Nacdlow/plugin-sdk"
 	"github.com/go-macaron/session"
@@ -54,17 +57,17 @@ func ContextInit() macaron.Handler {
 							extraCSS.WriteString(ext.Source)
 							extraCSS.WriteString("\n\n")
 						case sdk.JavaScript:
-							extraJavaScript.WriteString(fmt.Sprintf("/* Injected by %s */\n", pl.Plugin.GetManifest().Name))
-							extraJavaScript.WriteString(ext.Source)
-							extraJavaScript.WriteString("\n\n")
+							extraJS.WriteString(fmt.Sprintf("/* Injected by %s */\n", pl.Plugin.GetManifest().Name))
+							extraJS.WriteString(ext.Source)
+							extraJS.WriteString("\n\n")
 						}
 					}
 				}
 			}
 		}
 
-		ctx.Data["ExtraCSS"] = extraCSS.String()
-		ctx.Data["ExtraJS"] = extraJS.String()
+		ctx.Data["ExtraCSS"] = template.CSS(extraCSS.String())
+		ctx.Data["ExtraJS"] = template.JS(extraJS.String())
 	}
 }
 
@@ -72,8 +75,8 @@ func matchPathRegex(regex, path string) bool {
 	if regex == "*" || regex == "" {
 		return true
 	}
-	regex := regexp.MustCompile(ext.PathMatchRegex)
-	return regex.Match(path)
+	r := regexp.MustCompile(regex)
+	return r.Match([]byte(path))
 
 }
 
