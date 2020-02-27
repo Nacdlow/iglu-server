@@ -3,7 +3,7 @@ package routes
 import (
 	"regexp"
 
-	"github.com/Nacdlow/iglu-sdk"
+	"github.com/Nacdlow/plugin-sdk"
 	"github.com/go-macaron/session"
 	macaron "gopkg.in/macaron.v1"
 
