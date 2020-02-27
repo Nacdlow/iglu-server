@@ -11,6 +11,8 @@ import (
 	"github.com/BurntSushi/toml"
 	"github.com/go-macaron/session"
 	macaron "gopkg.in/macaron.v1"
+
+	"gitlab.com/group-nacdlow/nacdlow-server/modules/plugin"
 )
 
 type pluginDescription struct {
@@ -82,4 +84,22 @@ func InstallPluginSettingsHandler(ctx *macaron.Context) {
 	ctx.Data["Plugin"] = desc
 
 	ctx.HTML(http.StatusOK, "settings/plugin_install_confirm")
+}
+
+//func PluginSettingPage(ctx *macaron.Context, f *session.Flash) {
+
+func PluginSettingPage(w http.ResponseWriter, r *http.Request) {
+	/*	if !plugin.IsPluginLoaded(ctx.Params("id")) {
+		f.Error("Plugin not loaded!")
+		ctx.Redirect("/settings/plugins")
+		return
+	}*/
+
+	//pl, err := plugin.GetPlugin(ctx.Params("id"))
+	pl, err := plugin.GetPlugin("test")
+	if err != nil {
+		panic(err)
+	}
+	pl.Plugin.PluginHTTP(w, r)
+	return
 }

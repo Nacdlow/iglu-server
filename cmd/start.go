@@ -78,14 +78,6 @@ func getMacaron() *macaron.Macaron {
 
 	m.Use(routes.ContextInit())
 
-	// Load plugin middlewares
-	/*
-		for _, pl := range plugin.LoadedPlugins {
-			if pl.Middleware != nil {
-				m.Use(pl.Middleware())
-			}
-		}*/
-
 	m.NotFound(routes.NotFoundHandler)
 
 	m.Get("/", routes.LoginHandler)
@@ -137,6 +129,9 @@ func getMacaron() *macaron.Macaron {
 					m.Get("/:id", routes.InstallPluginSettingsHandler)
 					m.Get("/confirm/:id", routes.InstallPluginConfirmSettingsHandler) // TODO use POST so it is secure
 				})
+
+				m.Get("/plugin/:id", routes.PluginSettingPage)
+				m.Post("/plugin/:id", routes.PluginSettingPage)
 
 				m.Group("/accounts", func() {
 					m.Get("", routes.AccountSettingsHandler)
@@ -232,7 +227,7 @@ func start(clx *cli.Context) (err error) {
 		}
 		time.Sleep(500 * time.Millisecond)
 	}()
-	defer plugin.UnloadPlugins()
+	defer plugin.UnloadAllPlugins()
 
 	// Capture system interrupt
 	stop := make(chan os.Signal, 1)

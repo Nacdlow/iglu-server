@@ -11,7 +11,6 @@
 	<title>{{if .Title}}{{ .Title }} - {{end}}{{.AppName}}</title>
 	<link rel="icon" href="/img/favicon.png" />
 	<link rel="manifest" href="/manifest.json">
-	{{if .HeadExtra}}{{.HeadExtra}}{{end}}
 	<style>
 			
 		#lblGreetings {
@@ -21,6 +20,9 @@
 		.text-center {
 			font-size: var(--{{.User.FontSize}}-bottom-nav)!important;
 		}
+	</style>
+	<style>
+	{{.ExtraCSS}}
 	</style>
 </head>
 

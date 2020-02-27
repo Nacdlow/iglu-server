@@ -6,6 +6,10 @@ github.com/BurntSushi/toml v0.3.1 h1:WXkYYl6Yr3qBf1K79EBnL4mak0OimBfB0XUf9Vl28OQ
 github.com/BurntSushi/toml v0.3.1/go.mod h1:xHWCNGjB5oqiDr8zfno3MHue2Ht5sIBksp03qcyfWMU=
 github.com/Nacdlow/plugin-sdk v0.0.0-20200226231030-db4f0f3eb380 h1:uh8VjOO5K3Eig/9t2e34LehTWKnlYa7rYkUS6E7Jq5M=
 github.com/Nacdlow/plugin-sdk v0.0.0-20200226231030-db4f0f3eb380/go.mod h1:vhwYeT4KtEe02iYcaa3zviNRYpR4KTb6lxKYRBb+MD8=
+github.com/Nacdlow/plugin-sdk v0.0.0-20200227022127-cc80779d8975 h1:nd+RnowQPzT/3BYcs3OyR+T6gkpS/BdW1cqy8UDPskg=
+github.com/Nacdlow/plugin-sdk v0.0.0-20200227022127-cc80779d8975/go.mod h1:vhwYeT4KtEe02iYcaa3zviNRYpR4KTb6lxKYRBb+MD8=
+github.com/Nacdlow/plugin-sdk v0.0.0-20200227023359-486f4a7c7d11 h1:1B8xGMCxr3dZOEwF5LceeMQLFNKjJQH+5UTj6tuFzNQ=
+github.com/Nacdlow/plugin-sdk v0.0.0-20200227023359-486f4a7c7d11/go.mod h1:vhwYeT4KtEe02iYcaa3zviNRYpR4KTb6lxKYRBb+MD8=
 github.com/OneOfOne/xxhash v1.2.2/go.mod h1:HSdplMjZKSmBqAxg5vPj2TmRDmfkzw+cTzAElWljhcU=
 github.com/Shopify/sarama v1.19.0/go.mod h1:FVkBWblsNy7DGZRfXLU0O9RCGt5g3g3yEuWXgklEdEo=
 github.com/Shopify/toxiproxy v2.1.4+incompatible/go.mod h1:OXgGpZ6Cli1/URJOF1DMxUHB2q5Ap20/P/eIdh4G0pI=
