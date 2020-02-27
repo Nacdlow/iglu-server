@@ -22,13 +22,13 @@
 
 	<div class="list-group">
 		{{range .Plugins}}
-		<a type="button" {{if .SettingsRoute}}href="{{.SettingsRoute}}"
-			{{end}}class="list-group-item list-group-item-action">
+		<div class="list-group-item list-group-item-action">
 			<i class="fas fa-cube" style="font-size: 15px;"></i>&nbsp;
-			&nbsp; {{.Name}} ({{.Version}}) by {{.Author}} <span href="https://market.nacdlow.com/{{.ID}}"
-				class="btn btn-info btn-sm">View on Market</span>
-			{{if .SettingsRoute}}<span href="{{.SettingsRoute}}" class="btn btn-warning btn-sm">Settings</span>{{end}}
-		</a>
+			&nbsp; {{.Name}} ({{.Version}}) by {{.Author}} <a href="https://market.nacdlow.com/{{.Id}}"
+				class="btn btn-info btn-sm">View on Market</a>
+			<a href="/settings/plugin/{{.Id}}" class="btn btn-warning
+				btn-sm">Settings</a>
+		</div>
 		{{end}}
 	</div>
 

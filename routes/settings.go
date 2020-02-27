@@ -9,6 +9,7 @@ import (
 	"gitlab.com/group-nacdlow/nacdlow-server/modules/plugin"
 	"gitlab.com/group-nacdlow/nacdlow-server/modules/tokens"
 
+	"github.com/Nacdlow/plugin-sdk"
 	"github.com/go-macaron/session"
 	"golang.org/x/crypto/bcrypt"
 	macaron "gopkg.in/macaron.v1"
@@ -150,7 +151,11 @@ func AppearanceSettingsHandler(ctx *macaron.Context) {
 // PluginsSettingsHandler handles the settings
 func PluginsSettingsHandler(ctx *macaron.Context) {
 	ctx.Data["NavTitle"] = "Installed Plugins"
-	ctx.Data["Plugins"] = plugin.LoadedPlugins
+	var plugins []sdk.PluginManifest
+	for _, pl := range plugin.LoadedPlugins {
+		plugins = append(plugins, pl.Plugin.GetManifest())
+	}
+	ctx.Data["Plugins"] = plugins
 	ctx.Data["ArrowBack"] = 1
 	ctx.HTML(http.StatusOK, "settings/plugins")
 }

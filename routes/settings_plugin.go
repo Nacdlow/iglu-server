@@ -86,20 +86,18 @@ func InstallPluginSettingsHandler(ctx *macaron.Context) {
 	ctx.HTML(http.StatusOK, "settings/plugin_install_confirm")
 }
 
-//func PluginSettingPage(ctx *macaron.Context, f *session.Flash) {
-
-func PluginSettingPage(w http.ResponseWriter, r *http.Request) {
-	/*	if !plugin.IsPluginLoaded(ctx.Params("id")) {
+// PluginSettingPage handles rendering the plugin pages.
+func PluginSettingPage(ctx *macaron.Context, f *session.Flash) {
+	if !plugin.IsPluginLoaded(ctx.Params("id")) {
 		f.Error("Plugin not loaded!")
 		ctx.Redirect("/settings/plugins")
 		return
-	}*/
+	}
 
-	//pl, err := plugin.GetPlugin(ctx.Params("id"))
 	pl, err := plugin.GetPlugin("test")
 	if err != nil {
 		panic(err)
 	}
-	pl.Plugin.PluginHTTP(w, r)
+	pl.Plugin.PluginHTTP(ctx.Resp, ctx.Req.Request)
 	return
 }
