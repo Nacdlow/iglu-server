@@ -17,7 +17,8 @@
 		<div class="col-3">
 			<li class="nav-item p-0">
 				<div class="plus-button">
-					<a class="nav-link bottom-nav p-0 pt-2 pb-1 text-center {{if .IsAdd}} activetab{{end}}"
+					<a class="nav-link bottom-nav p-2 d-flex align-items-center justify-content-center
+					 {{if .IsAdd}} activetab{{end}}"
 						href="{{if .IsSpecificRoom}}/add/device/{{.Room.RoomID}}{{else}}/add{{end}}">
 						<i class="fa fa-plus" style="font-size: 15px;"></i></a>
 				</div>
