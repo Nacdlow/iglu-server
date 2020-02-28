@@ -26,18 +26,14 @@
     </div>
     <div class="list-group-item list-group-item-action">
       <label for="customRange2">Font Size</label>
-      <input type="range" class="custom-range" min="1" max="5" value="3" id="customRange">
+      <input type="range" class="custom-range" min="1" max="5" value="{{.SliderNumber}}" id="customRange">
       <div class="text-center" id="fontsize">
-        Normal
+        {{.SliderText}}
       </div>
       <br>
       <div class="row">
-        <div class="col">
-          <p class="text-muted">Refresh to enable changes</p>
-        </div>
         <div class="col text-right">
-          <!-- DOESNT REALLY WORK CUS IT DOESNT SAVE :( -->
-          <button class="btn btn-new-1 w-50" onclick="disablesize()">Restore Defaults</button>
+          <button class="btn btn-new-1 w-50" onclick="reload();">Apply</button>
         </div>
       </div>
     </div>
@@ -65,40 +61,27 @@
     switch (this.value) {
       case "1":
         output.innerHTML = "Tiny"
-        output.style.fontSize = "x-small"
         $.get('appearance/font/0');
-        // reload();
         break;
 
       case "2":
         output.innerHTML = "Small"
-        output.style.fontSize = "small"
         $.get('appearance/font/1');
-        // reload();
         break;
 
       case "3":
         output.innerHTML = "Normal"
-        output.style.fontSize = "medium"
         $.get('appearance/font/2');
-        // reload();
         break;
 
       case "4":
         output.innerHTML = "Large"
-        output.style.fontSize = "x-large"
         $.get('appearance/font/3');
-        // reload();
         break;
 
       case "5":
         output.innerHTML = "Huge"
-        output.style.fontSize = "xxx-large"
         $.get('appearance/font/4');
-        // reload();
-        break;
-
-      default:
         break;
     }
   }
