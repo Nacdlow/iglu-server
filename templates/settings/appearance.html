@@ -9,7 +9,7 @@
       <div class="col-4">
         <h2 class="text-center mb-0">Appearance Settings</h2>
       </div>
-    <div class="col-4"></div>
+      <div class="col-4"></div>
     </div>
     <div class="pt-3">
       <hr>
@@ -31,10 +31,28 @@
         Normal
       </div>
       <br>
-      <p class="text-muted">Refresh to enable changes</p>
+      <div class="row">
+        <div class="col">
+          <p class="text-muted">Refresh to enable changes</p>
+        </div>
+        <div class="col text-right">
+          <!-- DOESNT REALLY WORK CUS IT DOESNT SAVE :( -->
+          <button class="btn btn-new-1 w-50" onclick="disablesize()">Restore Defaults</button>
+        </div>
+      </div>
     </a>
   </div>
+
+
 </div>
+
+<!--SCRIPT FOR BUTTON-->
+<script>
+  function disablesize() {
+    var styles = document.getElementById('access');
+    styles.parentNode.removeChild(styles); // removes the styles in the header
+  }
+</script>
 
 <script>
   var slider = document.getElementById("customRange");
