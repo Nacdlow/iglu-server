@@ -71,11 +71,11 @@
               <!--/switch -->
             </div>
             <div class="footerdiv-{{.DeviceID}}" id="footerdiv-{{.DeviceID}}">
-              <div class="card-footer pb-2 pr-2 pl-2 pt-1" {{if .Status}}style="background-color: #A8FFA8;"
-                {{else}}style="background-color: #FF6666;" {{end}} id="footer">
-                <small class="text-muted black-text" style="font-size: 0.7rem;">
+              <div class="card-footer pb-1 pr-2 pl-2 pt-1" {{if .Status}}style="background-color: #A8FFA8;"
+                {{else}}style="background-color: #CDCDCD;" {{end}} id="footer">
+                <p class="card-footer-text" style="transform: translate(0%, 25%)">
 					{{if .Status}}Time on: {{CalcSince .ToggledUnix}}{{else}}Last on:
-					{{CalcSince .ToggledUnix}} ago{{end}}</small>
+					{{CalcSince .ToggledUnix}} ago{{end}}</p>
               </div>
             </div>
           </div>

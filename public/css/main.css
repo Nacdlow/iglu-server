@@ -18,26 +18,24 @@
   --medium: 16px;
   --large: 20px;
   --xlarge: 24px;
-  --xxlarge: 28px;
-  --xxxlarge: 32px;
 
+  --xsmall-title: 16px;
+  --small-title: 20px;
+  --medium-title: 24px;
+  --large-title: 28px;
+  --xlarge-title: 32px;
 
   --xsmall-heading: 12px;
   --small-heading: 16px;
   --medium-heading: 20px;
   --large-heading: 24px;
   --xlarge-heading: 28px;
-  --xxlarge-heading: 32px;
-  --xxxlarge-heading: 36px;
-
 
   --xsmall-bottom-nav: 4px;
   --small-bottom-nav: 8px;
   --medium-bottom-nav: 12px;
   --large-bottom-nav: 16px;
   --xlarge-bottom-nav: 20px;
-  --xxlarge-bottom-nav: 24px;
-  --xxxlarge-bottom-nav: 28px;
 
 
   /* T H E M E   C O L O U R S */
@@ -81,11 +79,15 @@ html {
 
 /* .bottom-nav {
   font-size: var(--font-small);
-  /* font-size: small; 
+  font-size: small;
 }
-/* 
+ 
  #lblGreetings {
    font-size: var(--font-large);
+ }
+
+ h4.text-center.pb-3 {
+   font-size: var(--font-);
  } */
 
 .btn {
@@ -211,9 +213,15 @@ a {
   background-color: var(--top-bar);
 }
 
-.card-footer .text-muted {
-  color: #000!important;
+.card-footer {
+  color: #000;
 }
+
+.text-muted {
+  color: #bbb!important;
+  font-style: italic;
+}
+
 
 .btn {
   border-radius: 100vw;

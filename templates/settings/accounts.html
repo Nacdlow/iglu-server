@@ -27,7 +27,7 @@
 		{{range .Accounts}}
 		<div class="list-group-item list-group-item-action">
 			<div class="row align-items-center">
-				<div class="col-lg-9 col-8">
+				<div class="col-lg-9 col-8" id="text">
 					<i class="fas fa-user fa-lg pr-2"></i>
 					{{.FirstName}}{{if .LastName}} {{.LastName}}{{end}} ({{.Username}})
 					{{if eq .Role 1}}<span class="badge badge-danger">Admin</span>
