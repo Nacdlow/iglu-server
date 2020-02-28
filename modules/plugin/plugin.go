@@ -73,6 +73,7 @@ func GetPlugin(id string) (*IgluPlugin, error) {
 	return nil, errors.New("Plugin is not loaded")
 }
 
+// LoadPlugin loads a plugin from a file path.
 func LoadPlugin(f string) {
 	mutex.Lock()
 	defer mutex.Unlock()
