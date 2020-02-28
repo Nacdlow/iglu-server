@@ -7,7 +7,7 @@
         <a class="fas fa-arrow-circle-left fa-2x text-left" href="/settings"></a>
       </div>
       <div class="col-4">
-        <h2 class="text-center mb-0">Appearence Settings</h2>
+        <h2 class="text-center mb-0">Appearance Settings</h2>
       </div>
     <div class="col-4"></div>
     </div>
@@ -30,6 +30,8 @@
       <div class="text-center" id="fontsize">
         Normal
       </div>
+      <br>
+      <p class="text-muted">Refresh to enable changes</p>
     </a>
   </div>
 </div>
@@ -46,26 +48,36 @@
       case "1":
         output.innerHTML = "Tiny"
         output.style.fontSize = "x-small"
+        $.get('appearance/font/0');
+        // reload();
         break;
 
       case "2":
         output.innerHTML = "Small"
         output.style.fontSize = "small"
+        $.get('appearance/font/1');
+        // reload();
         break;
 
       case "3":
         output.innerHTML = "Normal"
         output.style.fontSize = "medium"
+        $.get('appearance/font/2');
+        // reload();
         break;
 
       case "4":
         output.innerHTML = "Large"
         output.style.fontSize = "x-large"
+        $.get('appearance/font/3');
+        // reload();
         break;
 
       case "5":
         output.innerHTML = "Huge"
         output.style.fontSize = "xxx-large"
+        $.get('appearance/font/4');
+        // reload();
         break;
 
       default:
