@@ -13,8 +13,8 @@
 
   /* F O N T   S I Z E S */
   /* =================== */
-  --xsmall: 8px;
-  --small: 12px;
+  --xsmall: 12px;
+  --small: 14px;
   --medium: 16px;
   --large: 20px;
   --xlarge: 24px;
@@ -31,8 +31,8 @@
   --large-heading: 24px;
   --xlarge-heading: 28px;
 
-  --xsmall-bottom-nav: 4px;
-  --small-bottom-nav: 8px;
+  --xsmall-bottom-nav: 10px;
+  --small-bottom-nav: 10px;
   --medium-bottom-nav: 12px;
   --large-bottom-nav: 16px;
   --xlarge-bottom-nav: 20px;
