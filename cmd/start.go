@@ -106,7 +106,8 @@ func getMacaron() *macaron.Macaron {
 		m.Get("/remove_device/:id", routes.RemoveHandler)   //remove a device
 		m.Get("/remove_room/:id", routes.RemoveRoomHandler) //removes a room
 
-		m.Get("/change_name/:id/:newName", routes.ChangeNameHandler) //changes the name of a device
+		m.Get("/change_name/:id/:newName", routes.ChangeNameHandler)         //changes the name of a device
+		m.Get("/change_device/:id/:newName", routes.ChangeDeviceNameHandler) //changes the name of a device
 
 		m.Group("", func() {
 			m.Group("/add", func() {

@@ -141,8 +141,8 @@ aria-labelledby="removeRoom-{{.RoomID}}" aria-hidden="true">
     var inputField = document.createElement("input");
     inputField.setAttribute('id','new-'+id);
     inputField.setAttribute('class','black-text navcolor white-text');
-    inputField.setAttribute('style','border: 1px solid white; opacity: 80%; border-radius: 15px; height: 55px; width: 230px; color: white;');
-    inputField.setAttribute('placeholder', '  Enter a new room name');
+    inputField.setAttribute('style','border: 2px solid white; opacity: 80%; border-radius: 50px; height: 35px; width: 230px; color: white;');
+    inputField.setAttribute('placeholder', '   Enter a new room name');
     roomH4.parentNode.replaceChild(inputField, roomH4);
     
     var viewButton = document.getElementById("button-"+id);

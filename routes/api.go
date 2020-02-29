@@ -144,6 +144,7 @@ func RemoveRoomHandler(ctx *macaron.Context) {
 	}
 }
 
+// ChangeNameHandler add comments @Ruaridh!
 func ChangeNameHandler(ctx *macaron.Context) {
 	rooms, err := models.GetRooms()
 	if err != nil {
@@ -154,6 +155,26 @@ func ChangeNameHandler(ctx *macaron.Context) {
 			err := models.UpdateRoomCols(&models.Room{
 				RoomID:   room.RoomID,
 				RoomName: ctx.Params("newName"),
+			})
+			if err != nil {
+				panic(err)
+			}
+			break
+		}
+	}
+}
+
+//ChangeDeviceNameHandler handles changing of the device name, crazy huh?
+func ChangeDeviceNameHandler(ctx *macaron.Context) {
+	devices, err := models.GetDevices()
+	if err != nil {
+		panic(err)
+	}
+	for _, device := range devices {
+		if device.DeviceID == ctx.ParamsInt64("id") {
+			err := models.UpdateDeviceCols(&models.Device{
+				DeviceID:    device.DeviceID,
+				Description: ctx.Params("newName"),
 			})
 			if err != nil {
 				panic(err)

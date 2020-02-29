@@ -17,7 +17,7 @@
 			</div>
 
 			<div class="col-5">
-				<h5 class="card-title text-center">{{.Description}}</h5>
+				<h5 class="card-title text-center" id="name-{{.DeviceID}}">{{.Description}}</h5>
 			</div>
 
 			<div class="col text-right">
@@ -33,7 +33,37 @@
 							{{if .IsFave}}Un-favourite{{else}}Favourite{{end}} <i class="fas fa-heart red-text"></i>
 					</a>
 				</div>
-				<a class="dropdown-item black-text" href="#">Edit</a>
+				<!-- <a class="dropdown-item black-text" href="#">Edit</a> -->
+				<a class="dropdown-item black-text" href="#" onclick="edit({{.DeviceID}});">Edit</a>
+
+				<script>
+					function edit(id) {//swaps room title with an input field and changes the button to a save button.
+						var deviceName = document.getElementById("name-"+id);
+						var inputField = document.createElement("input");
+						inputField.setAttribute('id','new-'+id);
+						inputField.setAttribute('class','black-text navcolor white-text');
+						inputField.setAttribute('style','border: 2px solid white; opacity: 80%; border-radius: 50px; height: 35px; width: 150%; color: white;');
+						inputField.setAttribute('placeholder', '   Device name');
+						deviceName.parentNode.replaceChild(inputField, deviceName);
+						
+						var viewButton = document.getElementById("button-"+id);
+						var saveButton = document.createElement("a");
+						saveButton.setAttribute('id','saveButton-'+id);
+						saveButton.setAttribute('class','btn-new-1 text-center p-3 white-text');
+						saveButton.setAttribute('style', 'background-color: #3ddb75;');
+						saveButton.setAttribute('onClick', 'postChanges('+id+');');
+						saveButton.innerHTML = "Save Changes";
+						viewButton.parentNode.replaceChild(saveButton, viewButton);
+					}
+
+					function postChanges(id){
+						var newName = document.getElementById("new-"+id).value;
+						console.log(newName)
+						$.get('/change_device/'+id+'/'+newName);
+						reload();
+					}
+				</script>
+
 				<a class="dropdown-item black-text" href="#" id="remove-{{.DeviceID}}" data-toggle="modal"
 					data-target="#removeDevice-{{.DeviceID}}">Remove</a>
 			</div>
@@ -52,7 +82,10 @@
 			</form>
 			<span class="font-weight-bold red-text ml-2">28<small>&deg;C</small></span>
 		</div>
-	
+		<div class="col-12 d-flex justify-content-center pt-3">
+			<a class="btn btn-new-1 text-center p-3 m-0" id="button-{{.RoomID}}" style="display: none;" href="/room/{{.RoomID}}">
+				View Room</a>
+		</div>
 </div>
 
 <div class="footerdiv-{{.DeviceID}}" id="footerdiv-{{.DeviceID}}">
