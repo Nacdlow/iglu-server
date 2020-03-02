@@ -2,7 +2,7 @@
 	<div class="card-body">
 		<div class="row">
 			<!-- switch -->
-			<div class="col">
+			<div class="col" id="toggleHide-{{.DeviceID}}">
 				<div class="custom-control custom-switch float-left" id="div">
 					<input type="checkbox" class="custom-control-input" id="customSwitches-{{.DeviceID}}" {{if .Status}}
 						checked {{end}} onclick="$.get('/toggle_device/{{.DeviceID}}');update();" />
@@ -17,7 +17,7 @@
 
 
 			<div class="col-5">
-				<h5 class="card-title text-center">{{.Description}}</h5>
+				<h5 class="card-title text-center" id="name-{{.DeviceID}}">{{.Description}}</h5>
 			</div>
 
 			<div class="col text-right">
@@ -33,14 +33,17 @@
 							{{if .IsFave}}Un-favourite{{else}}Favourite{{end}} <i class="fas fa-heart red-text"></i>
 					</a>
 				</div>
-				<a class="dropdown-item black-text" href="#">Edit</a>
+				<a class="dropdown-item black-text" href="#" onclick="edit({{.DeviceID}});">Edit</a>
+				<a class="dropdown-item black-text" href="#" id="move-{{.DeviceID}}" data-toggle="modal"
+				data-target="#moveDevice-{{.DeviceID}}">Move</a>
 				<a class="dropdown-item black-text" href="#" id="remove-{{.DeviceID}}" data-toggle="modal"
-					data-target="#removeDevice-{{.DeviceID}}">Remove</a>
+					data-target="#removeDevice-{{.DeviceID}}">Delete</a>
 			</div>
 		</div>
 	</div>
 
 	<p class="text-center pt-4">Brightness</p>
+	<div id="sliderHide-{{.DeviceID}}">
 	<div class="d-flex justify-content-center">
 		<span class="blue-text mr-2"><i class="fas fa-moon fa-lg" aria-hidden="true"></i></span>
 		<form class="range-field">
@@ -49,6 +52,8 @@
 		</form>
 		<span class="blue-text ml-2 "><i class="fas fa-sun fa-lg" aria-hidden="true"></i></span>
 	</div>
+	</div>
+	<div id="button-{{.DeviceID}}" class="button-{{.DeviceID}} text-center justify-content-center d-flex"></div>
 </div>
 <div class="footerdiv-{{.DeviceID}}" id="footerdiv-{{.DeviceID}}">
 	<div class="card-footer" {{if .Status}}style="background-color: #FEFF9E;" {{else}}style="background-color: #FF6666;"
@@ -83,3 +88,34 @@
 	</div>
 </div>
 <!-- /Remove Device -->
+<script>
+	function edit(id) {//swaps room title with an input field and changes the button to a save button.
+		var toggleDiv = document.getElementById("toggleHide-"+id);
+		var sliderDiv = document.getElementById("sliderHide-"+id);
+		sliderDiv.style.display = "none";
+		toggleDiv.style.display = "none";
+		var deviceName = document.getElementById("name-"+id);
+		var inputField = document.createElement("input");
+		inputField.setAttribute('id','new-'+id);
+		inputField.setAttribute('class','black-text navcolor white-text');
+		inputField.setAttribute('style','border: 2px solid white; opacity: 80%; border-radius: 50px; height: 35px; width: 200%; color: white;');
+		inputField.setAttribute('placeholder', '   Device name');
+		deviceName.parentNode.replaceChild(inputField, deviceName);
+		
+		var viewButton = document.getElementById("button-"+id);
+		var saveButton = document.createElement("a");
+		saveButton.setAttribute('id','saveButton-'+id);
+		saveButton.setAttribute('class','btn-new-1 text-center p-3 white-text justify-content-center pt-2 d-flex');
+		saveButton.setAttribute('style', 'background-color: #3ddb75;');
+		saveButton.setAttribute('onClick', 'postChanges('+id+');');
+		saveButton.innerHTML = "Save Changes";
+		viewButton.parentNode.replaceChild(saveButton, viewButton);
+	}
+
+	function postChanges(id){
+		var newName = document.getElementById("new-"+id).value;
+		console.log(newName)
+		$.get('/change_device/'+id+'/'+newName);
+		reload();
+	}
+</script>
