@@ -52,6 +52,11 @@ func AlertsHandler(ctx *macaron.Context) {
 	ctx.HTML(http.StatusOK, "alerts")
 }
 
+// InternalAccounts handels the internal accounts page
+func InternalAccountsHandler(ctx *macaron.Context) {
+	ctx.HTML(http.StatusNotFound, "internal_accounts")
+}
+
 // SpecificRoomsHandler handles the specific rooms
 func SpecificRoomsHandler(ctx *macaron.Context) {
 	ctx.Data["NavTitle"] = ctx.Params("roomType")

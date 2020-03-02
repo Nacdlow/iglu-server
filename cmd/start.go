@@ -79,7 +79,6 @@ func getMacaron() *macaron.Macaron {
 	m.Use(routes.ContextInit())
 
 	m.NotFound(routes.NotFoundHandler)
-
 	m.Get("/", routes.LoginHandler)
 	m.Get("/login", routes.LoginHandler)
 	m.Post("/", binding.Bind(forms.SignInForm{}), routes.PostLoginHandler)
@@ -101,7 +100,7 @@ func getMacaron() *macaron.Macaron {
 		m.Get("/toggle_device/:id", routes.ToggleHandler)
 		m.Get("/toggle_slider/:id/:value", routes.SliderHandler)
 		m.Get("/alerts", routes.AlertsHandler)
-
+		m.Get("/internal_accounts", routes.InternalAccountsHandler)
 		m.Get("/toggle_fave/:id", routes.FaveHandler)       //set device as fave
 		m.Get("/remove_device/:id", routes.RemoveHandler)   //remove a device
 		m.Get("/remove_room/:id", routes.RemoveRoomHandler) //removes a room
