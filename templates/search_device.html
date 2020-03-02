@@ -2,27 +2,86 @@
 {{template "base/nav" .}}
 <div class="container">
 
-    <h1 class="display-1 text-center pt-5 pb-5">
-        <i class="fas fa-search fa-lg animated flip infinite slow"></i>
-    </h1>
-    <h1 class="text-center pb-3">
-        Seaching for Devices<br>
-        <div class="spinner-grow" style="width: 3rem; height: 3rem;" role="status">
-            <span class="sr-only">Loading...</span>
+    <div class="deskhide">
+        <h1 class="text-center pt-4 pb-3" id="h1">
+            <i class="fas fa-search fa-lg animated flip infinite slow"></i>
+        </h1>
+
+        <div class="d-flex align-items-center justify-content-center pb-4">
+            <h1 class="pr-2 mb-0" id="h1">
+                Searching for Devices
+
+            </h1>
+            <div class="spinner-border" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
         </div>
-        <div class="spinner-grow" style="width: 3rem; height: 3rem;" role="status">
-            <span class="sr-only">Loading...</span>
-        </div>
-        <div class="spinner-grow" style="width: 3rem; height: 3rem;" role="status">
-            <span class="sr-only">Loading...</span>
-        </div>
-    </h1>
-    <br>
-    <div class="text-center">
-        <a class="btn btn-new-1 navcolor w-50" href="/add">
-            Cancel</a>
     </div>
-</div>
+
+    <div class="mobhide">
+        <div class="row align-items-center justify-content-center pt-4 pb-4">
+            <div class="col-lg-4">
+                <a class="fas fa-arrow-circle-left fa-2x text-left" href="/add"></a>
+            </div>
+            <div class="col-lg-4">
+                <!--<h1 class="text-center pb-3" id="h1">
+                <i class="fas fa-search fa-lg animated flip infinite slow"></i>
+            </h1>-->
+                <div class="d-flex justify-content-center">
+                    <h1 class="text-center pr-2 mb-0" id="h1">Searching for Devices</h1>
+                    <div class="spinner-border" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 d-flex justify-content-end align-items-center">
+                <a class="btn btn-new-1 navcolor w-50 text-center p-3 m-0 btn-lg" href="#">
+                    Scan</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="hr-text">
+        <h3 class="pr-2 mb-0">Available Devices</h3>
+    </div>
+
+    <div class="d-flex justify-content-center pt-3">
+        <div class="col-lg-8 col-12 p-0 ">
+            <div class="list-group pt-3">
+                <div class="list-group-item list-group-item-action">
+                    <div class="row align-items-center">
+                        <div class="col-lg-1 col-2 pr-0" id="text">
+                            <i class="fas fa-plug fa-3x"></i>
+                        </div>
+                        <div class="col-lg-6 col-5 pl-2 pr-0" id="text">
+                            Device Name
+                            <br>
+                            <span style="font-size: small;">Plugin Name</span>
+                            <br>
+                            <span style="font-size: x-small;">ID/Address</span>
+                        </div>
+                        <div class="col-5 text-right pl-0">
+                            <a href="#">
+                                <span class="mobhide pr-1">Identify</span>
+                                <i class="fas fa-fingerprint fa-lg mr-lg-0 pr-3"></i>
+
+                            </a>
+                            <a href="#">
+                                <span class="mobhide pr-1">Connect </span>
+                                <i class="fas fa-check fa-lg"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="deskhide">
+        <a class="btn btn-new-1 navcolor btn-fix-bottom-middle" href="#">
+            Scan</a>
+    </div>
 </div>
 
 

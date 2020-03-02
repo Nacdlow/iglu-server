@@ -605,3 +605,26 @@ div.scrollmenu a:hover {
 input {
   color: white!important;
 }
+
+.hr-text {
+  display: flex;
+  align-items: center;
+  text-align: center;
+}
+.hr-text::before {
+  margin-right: 1em;
+}
+
+.hr-text::after {
+  margin-left: 1em;
+}
+
+.hr-text::before,
+.hr-text::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1.5px solid white!important;
+}
+
+
+
