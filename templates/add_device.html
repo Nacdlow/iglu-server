@@ -5,21 +5,26 @@
     <div class="col-lg-6 col-md-8 col-sm-12">
       <div class="card mr-lg-0 mb-4">
         <div class="card-body">
-          <div class="d-flex justify-content-center">
-            <row class="col-12">
-            <a class="fas fa-times-circle d-flex text-left" onclick="history.back();"></a>
-            <h2 class="text-center">Add Device</h2>
-            </row>
+          <div class="d-flex justify-content-center pt-2">
+            <div class="col-1 d-flex justify-content-start p-0">
+              <a class="fas fa-times-circle fa-lg" onclick="history.back();"></a>
+            </div>
+            <div class="col-10">
+              <h2 class="text-center">Add Device</h2>
+            </div>
+            <div class="col-1 p-0">
+
+            </div>
           </div>
           <hr>
           <form method="POST">
             <h6 class="text-center pt-4">Enter Device Name:</h6>
             <div class="md-form justify-content-center d-flex mr-lg-5 ml-lg-5 mr-sm-0 ml-sm-0">
-              <input type="text" class="form-control white-text mb-3 text-center" placeholder="e.g. Smart Light"
-                name="description">
+              <input type="text" class="form-control white-text mb-3 text-center" maxlength="11"
+                placeholder="e.g. Smart Light" name="description">
             </div>
             <h6 class="text-center">Select Device Type:</h6>
-            <div class="md-form pb-3 pr-5 pl-5">
+            <div class="md-form pb-3  mr-lg-5 ml-lg-5 mr-sm-0 ml-sm-0">
               <select class="browser-default custom-select" id="select" name="device_type">
                 <option value="" disabled selected>Choose Type</option>
                 <option value="0">Lights</option>
@@ -29,13 +34,13 @@
               </select>
             </div>
             {{if not .RoomSelected}}
-              <h6 class="text-center ">Belongs to room</h6>
-              <div class="md-form pr-5 pl-5">
-                <select class="browser-default custom-select" id="select" name="room_id">
-                  <option value="-1" selected>Please select a room</option>
-                  {{range .Rooms}}<option value="{{.RoomID}}">{{.RoomName}}</option>{{end}}
-                </select>
-              </div>
+            <h6 class="text-center ">Belongs to room:</h6>
+            <div class="md-form mr-lg-5 ml-lg-5 mr-sm-0 ml-sm-0">
+              <select class="browser-default custom-select" id="select" name="room_id">
+                <option value="-1" selected>Please select a room</option>
+                {{range .Rooms}}<option value="{{.RoomID}}">{{.RoomName}}</option>{{end}}
+              </select>
+            </div>
             {{else}}
             <input name="room_id" value="{{.RoomID}}" type="hidden" />
             {{end}}
@@ -44,9 +49,11 @@
               <label class="custom-control-label" for="defaultUnchecked">Main Light</label>
             </div>
             <div class="d-flex justify-content-center pt-4">
-              <button type="submit" class="btn btn-new-1 btn-block bodycolor w-50">
-                Add Device
-              </button>
+              <div class="col-8">
+                <button type="submit" class="btn btn-success-new btn-block bodycolor">
+                  Save Device
+                </button>
+              </div>
             </div>
           </form>
         </div>

@@ -170,7 +170,6 @@ func PostRoomHandler(ctx *macaron.Context, form forms.AddRoomForm) {
 		RoomName:    form.RoomName,
 		Description: form.Description,
 		RoomType:    models.RType(form.RoomType),
-		WindowCount: form.WindowsCount,
 	}
 	if form.PartOfRoom >= 0 {
 		room.IsSubRoom = true

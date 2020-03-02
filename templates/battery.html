@@ -1,9 +1,10 @@
+<div id="battery-div">
 <div class="row justify-content-center">
     <div class="col-12 justify-content-center d-flex">
-        <p>Current battery status:</p>
+        <p class="mb-0 text-center">Current Battery Status</p>
     </div>
     <div class="col-12 justify-content-center d-flex">
-        <h1 style="font-size: 6em;"> {{.BatteryPerc}}% </h1>
+        <div style="font-size: 6em;"> {{.BatteryPerc}}% </div>
     </div>
 </div>
 <div class="fas fa-rotate-270 {{if eq .BatState 0}}fa-battery-empty
@@ -12,3 +13,5 @@
 					fa-battery-half{{else if eq .BatState 3}}green-text
 					fa-battery-three-quarters{{else}}fa-battery-full
 					green-text{{end}}" style="font-size: 7em;"></div>
+</div>
+</div>

@@ -1,87 +1,128 @@
-<div class="card mr-3 mr-lg-0 mb-4">
-	<div class="card-body w300">
+<div class="card w-100">
+	<div class="card-body">
 		<div class="row">
 			<!-- switch -->
-			<div class="col-4">
-			<div class="custom-control custom-switch float-left">
-				<input type="checkbox" class="custom-control-input" id="customSwitches-{{.DeviceID}}" 
-				{{if eq .Status true}}checked{{else}}unchecked{{end}}
-				onclick="$.get('/toggle_device/{{.DeviceID}}');update();">
-				
-				<label class="custom-control-label" for="customSwitches-{{.DeviceID}}"></label>
+			<div class="col" id="toggleHide-{{.DeviceID}}">
+				<div class="custom-control custom-switch float-left">
+					<input type="checkbox" class="custom-control-input" id="customSwitches-{{.DeviceID}}"
+						{{if eq .Status true}}checked{{else}}unchecked{{end}}
+						onclick="$.get('/toggle_device/{{.DeviceID}}');update();">
+
+					<label class="custom-control-label" for="customSwitches-{{.DeviceID}}"></label>
+				</div>
+				<div class="labeldiv-{{.DeviceID}}" id="labeldiv-{{.DeviceID}}">
+					<label class="">{{if .Status}}On{{else}}Off{{end}}</label>
+				</div>
+				<!--/switch -->
 			</div>
-			<div class="labeldiv-{{.DeviceID}}" id="labeldiv-{{.DeviceID}}">
-				<label class="">{{if .Status}}On{{else}}Off{{end}}</label>
+
+			<div class="col-5">
+				<h5 class="card-title text-center" id="name-{{.DeviceID}}">{{.Description}}</h5>
 			</div>
-			<!--/switch -->
-		</div>
-	
-			<div class="col-4">
-			<h5 class="card-title text-center">{{.Description}}</h5>
-		</div>
-	
-			<div class="col-4 text-right">
-			<a class="p-0" id="navbarDropdownMenuLink-333" data-toggle="dropdown" aria-haspopup="true"
-				  aria-expanded="false">
-				  <i class="fas fa-ellipsis-h"></i>
+
+			<div class="col text-right">
+				<a class="p-0" id="navbarDropdownMenuLink-333" data-toggle="dropdown" aria-haspopup="true"
+					aria-expanded="false">
+					<i class="fas fa-ellipsis-h"></i>
 				</a>
 				<div class="dropdown-menu dropdown-menu-right dropdown-default text-center"
-				  aria-labelledby="navbarDropdownMenuLink-333">
-				  <a class="dropdown-item {{if .IsFave}}red-text{{else}}black-text{{end}}" href="#" id="fave-{{.DeviceID}}"
-				  onclick="$.get('/toggle_fave/{{.DeviceID}}');update();">
-				  <div class="favediv-{{.DeviceID}}" id="favediv-{{.DeviceID}}">
-				  {{if .IsFave}}Un-favourite{{else}}Favourite{{end}} <i class="fas fa-heart red-text"></i></a>
+					aria-labelledby="navbarDropdownMenuLink-333">
+					<a class="dropdown-item {{if .IsFave}}red-text{{else}}black-text{{end}}" href="#"
+						id="fave-{{.DeviceID}}" onclick="$.get('/toggle_fave/{{.DeviceID}}');update();">
+						<div class="favediv-{{.DeviceID}}" id="favediv-{{.DeviceID}}">
+							{{if .IsFave}}Un-favourite{{else}}Favourite{{end}} <i class="fas fa-heart red-text"></i>
+					</a>
 				</div>
-				  <a class="dropdown-item black-text" href="#">Edit</a>
-				  <a class="dropdown-item black-text" href="#" id="remove-{{.DeviceID}}" data-toggle="modal" data-target="#removeDevice-{{.DeviceID}}">Remove</a>
+				<!-- <a class="dropdown-item black-text" href="#">Edit</a> -->
+				<a class="dropdown-item black-text" href="#" onclick="edit({{.DeviceID}});">Edit</a>
+				<a class="dropdown-item black-text" href="#" id="move-{{.DeviceID}}" data-toggle="modal"
+				data-target="#moveDevice-{{.DeviceID}}">Move</a>
+				<a class="dropdown-item black-text" href="#" id="remove-{{.DeviceID}}" data-toggle="modal"
+					data-target="#removeDevice-{{.DeviceID}}">Delete</a>
 			</div>
 		</div>
-
+	</div>
+	
 		<p class="text-center pt-4">Temperature</p>
+		<div id="sliderHide-{{.DeviceID}}">
 		<div class="d-flex justify-content-center">
 			<span class="font-weight-bold blue-text mr-2 ">0<small>&deg;C</small></span>
-			<form class="range-field text-center" 
-			oninput="$.get('/toggle_slider/{{.DeviceID}}/'+ $('#slider-{{.DeviceID}}').val());update();">
-				<input class="custom-range" type="range" min="0" max="28" value="{{.Temp}}" id="slider-{{.DeviceID}}"/>
-			<div class="sliderdiv-{{.DeviceID}}" id="sliderdiv-{{.DeviceID}}">
-				<output for="slider-{{.DeviceID}}">{{.Temp}}<small>&deg;C</small></output>
-			</div>
+			<form class="range-field text-center"
+				oninput="$.get('/toggle_slider/{{.DeviceID}}/'+ $('#slider-{{.DeviceID}}').val());update();">
+				<input class="custom-range" type="range" min="0" max="28" value="{{.Temp}}" id="slider-{{.DeviceID}}" />
+				<div class="sliderdiv-{{.DeviceID}}" id="sliderdiv-{{.DeviceID}}">
+					<output for="slider-{{.DeviceID}}">{{.Temp}}<small>&deg;C</small></output>
+				</div>
 			</form>
 			<span class="font-weight-bold red-text ml-2">28<small>&deg;C</small></span>
 		</div>
 		</div>
+		<div id="button-{{.DeviceID}}" class="button-{{.DeviceID}} text-center justify-content-center d-flex"></div>
 </div>
 
-	<div class="footerdiv-{{.DeviceID}}" id="footerdiv-{{.DeviceID}}">
-	<div class="card-footer" {{if .Status}}style="background-color: #A8FFA8;"
-		 {{else}}style="background-color: #FF6666" ;{{end}}>
-		<small class="text-muted">{{if .Status}}Running Since: {{CalcSince .ToggledUnix}}{{else}}Last on:
-					{{CalcSince .ToggledUnix}}{{end}}</small>
+<div class="footerdiv-{{.DeviceID}}" id="footerdiv-{{.DeviceID}}">
+	<div class="card-footer" {{if .Status}}style="background-color: #A8FFA8;" {{else}}style="background-color: #FF6666"
+		;{{end}}>
+		<small class="text-muted">{{if .Status}}Running Time: {{CalcSince .ToggledUnix}}{{else}}Last on:
+			{{CalcSince .ToggledUnix}}{{end}}</small>
 	</div>
-	</div>
+</div>
 </div>
 
 <!-- Remove Device -->
-<div class="modal fade" id="removeDevice-{{.DeviceID}}" tabindex="-1" role="dialog" aria-labelledby="removeDevice-{{.DeviceID}}"
-  aria-hidden="true">
+<div class="modal fade" id="removeDevice-{{.DeviceID}}" tabindex="-1" role="dialog"
+	aria-labelledby="removeDevice-{{.DeviceID}}" aria-hidden="true">
 
-  <!-- Change class .modal-sm to change the size of the modal -->
-  <div class="modal-dialog modal-sm" role="document">
+	<!-- Change class .modal-sm to change the size of the modal -->
+	<div class="modal-dialog modal-sm" role="document">
 
 
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title w-100 black-text" id="removeDevice">Are you sure you want to remove this device?</h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-	  </div>
-      <div class="modal-footer justify-content-center">
-        <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Cancel</button>
-		<button type="submit" data-dismiss="modal" class="btn btn-primary btn-sm" id="remove-{{.DeviceID}}"
-		onclick="$.get('/remove_device/{{.DeviceID}}');reload();">Remove Device</button>
-      </div>
-    </div>
-  </div>
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title w-100 black-text" id="removeDevice">Are you sure you want to remove this device?
+				</h4>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-footer justify-content-center">
+				<button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Cancel</button>
+				<button type="submit" data-dismiss="modal" class="btn btn-primary btn-sm" id="remove-{{.DeviceID}}"
+					onclick="$.get('/remove_device/{{.DeviceID}}');reload();">Remove Device</button>
+			</div>
+		</div>
+	</div>
 </div>
 <!-- /Remove Device -->
+
+<script>
+	function edit(id) {//swaps room title with an input field and changes the button to a save button.
+		var toggleDiv = document.getElementById("toggleHide-"+id);
+		var sliderDiv = document.getElementById("sliderHide-"+id);
+		sliderDiv.style.display = "none";
+		toggleDiv.style.display = "none";
+		var deviceName = document.getElementById("name-"+id);
+		var inputField = document.createElement("input");
+		inputField.setAttribute('id','new-'+id);
+		inputField.setAttribute('class','black-text navcolor white-text');
+		inputField.setAttribute('style','border: 2px solid white; opacity: 80%; border-radius: 50px; height: 35px; width: 200%; color: white;');
+		inputField.setAttribute('placeholder', '   Device name');
+		deviceName.parentNode.replaceChild(inputField, deviceName);
+		
+		var viewButton = document.getElementById("button-"+id);
+		var saveButton = document.createElement("a");
+		saveButton.setAttribute('id','saveButton-'+id);
+		saveButton.setAttribute('class','btn-new-1 text-center p-3 white-text justify-content-center pt-3 d-flex');
+		saveButton.setAttribute('style', 'background-color: #3ddb75;');
+		saveButton.setAttribute('onClick', 'postChanges('+id+');');
+		saveButton.innerHTML = "Save Changes";
+		viewButton.parentNode.replaceChild(saveButton, viewButton);
+	}
+
+	function postChanges(id){
+		var newName = document.getElementById("new-"+id).value;
+		console.log(newName)
+		$.get('/change_device/'+id+'/'+newName);
+		reload();
+	}
+</script>

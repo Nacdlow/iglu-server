@@ -78,13 +78,6 @@ func getMacaron() *macaron.Macaron {
 
 	m.Use(routes.ContextInit())
 
-	// Load plugin middlewares
-	for _, pl := range plugin.LoadedPlugins {
-		if pl.Middleware != nil {
-			m.Use(pl.Middleware())
-		}
-	}
-
 	m.NotFound(routes.NotFoundHandler)
 	m.Get("/", routes.LoginHandler)
 	m.Get("/login", routes.LoginHandler)
@@ -112,6 +105,9 @@ func getMacaron() *macaron.Macaron {
 		m.Get("/remove_device/:id", routes.RemoveHandler)   //remove a device
 		m.Get("/remove_room/:id", routes.RemoveRoomHandler) //removes a room
 
+		m.Get("/change_name/:id/:newName", routes.ChangeNameHandler)         //changes the name of a device
+		m.Get("/change_device/:id/:newName", routes.ChangeDeviceNameHandler) //changes the name of a device
+
 		m.Group("", func() {
 			m.Group("/add", func() {
 				m.Get("", routes.AddHandler)
@@ -133,6 +129,9 @@ func getMacaron() *macaron.Macaron {
 					m.Get("/:id", routes.InstallPluginSettingsHandler)
 					m.Get("/confirm/:id", routes.InstallPluginConfirmSettingsHandler) // TODO use POST so it is secure
 				})
+
+				m.Get("/plugin/:id", routes.PluginSettingPage)
+				m.Post("/plugin/:id", routes.PluginSettingPage)
 
 				m.Group("/accounts", func() {
 					m.Get("", routes.AccountSettingsHandler)
@@ -163,6 +162,10 @@ func getMacaron() *macaron.Macaron {
 			routes_sim.PostChangeTimeSleepHandler)
 		m.Get("/env_status", routes_sim.EnvStatusHandler)
 		m.Get("/toggle/:id", routes_sim.ToggleHandler)
+		m.Get("/reload_db", routes_sim.ReloadDBHandler)
+		m.Get("/purge_stats", routes_sim.PurgeStatsHandler)
+		m.Get("/set_main_door/:status", routes_sim.SetMainDoorHandler)
+		m.Get("/set_window_status/:room/:open_count", routes_sim.SetWindowStatusHandler)
 	})
 
 	// For debugging purposes.
@@ -204,6 +207,7 @@ func start(clx *cli.Context) (err error) {
 	engine := models.SetupEngine()
 	defer engine.Close()
 	go simulation.Start()
+
 	plugin.LoadPlugins()
 
 	// Start the web server
@@ -215,16 +219,20 @@ func start(clx *cli.Context) (err error) {
 		log.Fatal(server.ListenAndServeTLS("fullchain.pem", "privkey.pem"))
 	}()
 
+	defer func() {
+		ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+		defer cancel()
+		if err := server.Shutdown(ctx); err != nil {
+			panic(err)
+		}
+		time.Sleep(500 * time.Millisecond)
+	}()
+	defer plugin.UnloadAllPlugins()
+
 	// Capture system interrupt
 	stop := make(chan os.Signal, 1)
 	signal.Notify(stop, os.Interrupt)
 	<-stop
-
-	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
-	defer cancel()
-	if err := server.Shutdown(ctx); err != nil {
-		panic(err)
-	}
 
 	return nil
 }

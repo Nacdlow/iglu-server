@@ -9,6 +9,7 @@ import (
 	"gitlab.com/group-nacdlow/nacdlow-server/modules/plugin"
 	"gitlab.com/group-nacdlow/nacdlow-server/modules/tokens"
 
+	"github.com/Nacdlow/plugin-sdk"
 	"github.com/go-macaron/session"
 	"golang.org/x/crypto/bcrypt"
 	macaron "gopkg.in/macaron.v1"
@@ -16,7 +17,7 @@ import (
 
 // AccountSettingsHandler handles the settings
 func AccountSettingsHandler(ctx *macaron.Context) {
-	ctx.Data["NavTitle"] = "Account Settings"
+	ctx.Data["NavTitle"] = "Accounts"
 	var err error
 	ctx.Data["Accounts"], err = models.GetUsers()
 	if err != nil {
@@ -141,16 +142,44 @@ func PostEditAccountHandler(ctx *macaron.Context, f *session.Flash,
 }
 
 // AppearanceSettingsHandler handles the settings
-func AppearanceSettingsHandler(ctx *macaron.Context) {
-	ctx.Data["NavTitle"] = "Appearance Settings"
+func AppearanceSettingsHandler(ctx *macaron.Context, sess session.Store) {
+	ctx.Data["NavTitle"] = "Appearance"
 	ctx.Data["ArrowBack"] = 1
-	ctx.HTML(http.StatusOK, "settings/appearance")
+
+	if user, err := models.GetUser(sess.Get("username").(string)); err == nil {
+		switch user.FontSize {
+		case "xsmall":
+			ctx.Data["SliderNumber"] = 1
+			ctx.Data["SliderText"] = "Tiny"
+		case "small":
+			ctx.Data["SliderNumber"] = 2
+			ctx.Data["SliderText"] = "Small"
+		case "medium":
+			ctx.Data["SliderNumber"] = 3
+			ctx.Data["SliderText"] = "Normal"
+		case "large":
+			ctx.Data["SliderNumber"] = 4
+			ctx.Data["SliderText"] = "Large"
+		case "xlarge":
+			ctx.Data["SliderNumber"] = 5
+			ctx.Data["SliderText"] = "Huge"
+		default:
+			ctx.Data["SliderNumber"] = 3
+			ctx.Data["SliderText"] = "Normal"
+		}
+
+		ctx.HTML(http.StatusOK, "settings/appearance")
+	}
 }
 
 // PluginsSettingsHandler handles the settings
 func PluginsSettingsHandler(ctx *macaron.Context) {
 	ctx.Data["NavTitle"] = "Installed Plugins"
-	ctx.Data["Plugins"] = plugin.LoadedPlugins
+	var plugins []sdk.PluginManifest
+	for _, pl := range plugin.LoadedPlugins {
+		plugins = append(plugins, pl.Plugin.GetManifest())
+	}
+	ctx.Data["Plugins"] = plugins
 	ctx.Data["ArrowBack"] = 1
 	ctx.HTML(http.StatusOK, "settings/plugins")
 }

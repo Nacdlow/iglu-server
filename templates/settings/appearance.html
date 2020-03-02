@@ -7,9 +7,9 @@
         <a class="fas fa-arrow-circle-left fa-2x text-left" href="/settings"></a>
       </div>
       <div class="col-4">
-        <h2 class="text-center mb-0">Appearence Settings</h2>
+        <h2 class="text-center mb-0">Appearance Settings</h2>
       </div>
-    <div class="col-4"></div>
+      <div class="col-4"></div>
     </div>
     <div class="pt-3">
       <hr>
@@ -17,22 +17,36 @@
   </div>
 
   <div class="list-group pt-3">
-    <a type="button" href="#" class="list-group-item list-group-item-action">
+    <div class="list-group-item list-group-item-action">
       <!-- Default checked -->
       <div class="custom-control custom-switch">
         <input type="checkbox" class="custom-control-input" id="customSwitch1" checked>
         <label class="custom-control-label" for="customSwitch1">Enable Dark Theme</label>
       </div>
-    </a>
-    <a type="button" href="#" class="list-group-item list-group-item-action">
+    </div>
+    <div class="list-group-item list-group-item-action">
       <label for="customRange2">Font Size</label>
-      <input type="range" class="custom-range" min="1" max="5" value="3" id="customRange">
+      <input type="range" class="custom-range" min="1" max="5" value="{{.SliderNumber}}" id="customRange">
       <div class="text-center" id="fontsize">
-        Normal
+        {{.SliderText}}
       </div>
-    </a>
+      <br>
+      <div class="row">
+        <div class="col text-right">
+          <button class="btn btn-new-1 w-50" onclick="reload();">Apply</button>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
+
+<!--SCRIPT FOR BUTTON-->
+<script>
+  function disablesize() {
+    var styles = document.getElementById('access');
+    styles.parentNode.removeChild(styles); // removes the styles in the header
+  }
+</script>
 
 <script>
   var slider = document.getElementById("customRange");
@@ -45,30 +59,27 @@
     switch (this.value) {
       case "1":
         output.innerHTML = "Tiny"
-        output.style.fontSize = "x-small"
+        $.get('appearance/font/0');
         break;
 
       case "2":
         output.innerHTML = "Small"
-        output.style.fontSize = "small"
+        $.get('appearance/font/1');
         break;
 
       case "3":
         output.innerHTML = "Normal"
-        output.style.fontSize = "medium"
+        $.get('appearance/font/2');
         break;
 
       case "4":
         output.innerHTML = "Large"
-        output.style.fontSize = "x-large"
+        $.get('appearance/font/3');
         break;
 
       case "5":
         output.innerHTML = "Huge"
-        output.style.fontSize = "xxx-large"
-        break;
-
-      default:
+        $.get('appearance/font/4');
         break;
     }
   }

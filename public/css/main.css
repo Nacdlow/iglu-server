@@ -8,18 +8,34 @@
   
   /* Border Radius On Elements */
   --nav-radius: 50px;
-  --btn-radius: 500px;  
+  --btn-radius: 500px;
 
 
   /* F O N T   S I Z E S */
   /* =================== */
-  --font-xsmall: 8px;
-  --font-small: 12px;
-  --font-medium: 16px;
-  --font-large: 20px;
-  --font-xlarge: 24px;
-  --font-xxlarge: 28px;
-  --font-xxxlarge: 32px;
+  --xsmall: 12px;
+  --small: 14px;
+  --medium: 16px;
+  --large: 20px;
+  --xlarge: 24px;
+
+  --xsmall-title: 16px;
+  --small-title: 20px;
+  --medium-title: 24px;
+  --large-title: 28px;
+  --xlarge-title: 32px;
+
+  --xsmall-heading: 12px;
+  --small-heading: 16px;
+  --medium-heading: 20px;
+  --large-heading: 24px;
+  --xlarge-heading: 28px;
+
+  --xsmall-bottom-nav: 10px;
+  --small-bottom-nav: 10px;
+  --medium-bottom-nav: 12px;
+  --large-bottom-nav: 16px;
+  --xlarge-bottom-nav: 20px;
 
 
   /* T H E M E   C O L O U R S */
@@ -61,14 +77,18 @@ html {
 }
 /*---Scrollbar Settings---*/
 
-.bottom-nav {
+/* .bottom-nav {
   font-size: var(--font-small);
-  /* font-size: small; */
+  font-size: small;
 }
-
+ 
  #lblGreetings {
    font-size: var(--font-large);
  }
+
+ h4.text-center.pb-3 {
+   font-size: var(--font-);
+ } */
 
 .btn {
   background-color: var(--top-bar);
@@ -193,9 +213,15 @@ a {
   background-color: var(--top-bar);
 }
 
-.card-footer .text-muted {
-  color: #000!important;
+.card-footer {
+  color: #000;
 }
+
+.text-muted {
+  color: #bbb!important;
+  font-style: italic;
+}
+
 
 .btn {
   border-radius: 100vw;
@@ -485,6 +511,7 @@ div.scrollmenu {
   display: block;
   overflow: auto;
   white-space: nowrap;
+  flex-wrap: nowrap!important;
 }
 
 div.scrollmenu a {
@@ -547,7 +574,7 @@ div.scrollmenu a:hover {
 }
 
 .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active, .nav-tabs .nav-link {
-  background-color: var(--light)!important;
+  background-color: var(--top-bar)!important;
   color: #fff !important;
 }
 

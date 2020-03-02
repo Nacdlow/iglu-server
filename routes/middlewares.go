@@ -1,9 +1,17 @@
 package routes
 
 import (
+	"fmt"
+	"html/template"
+	"regexp"
+	"strings"
+
+	"github.com/Nacdlow/plugin-sdk"
 	"github.com/go-macaron/session"
-	"gitlab.com/group-nacdlow/nacdlow-server/models"
 	macaron "gopkg.in/macaron.v1"
+
+	"gitlab.com/group-nacdlow/nacdlow-server/models"
+	"gitlab.com/group-nacdlow/nacdlow-server/modules/plugin"
 )
 
 // LoginStatus represents the status of a user's session.
@@ -35,7 +43,41 @@ func ContextInit() macaron.Handler {
 				return
 			}
 		}
+		var extraCSS, extraJS strings.Builder
+
+		// Load WebExtensions from plugins
+		for _, pl := range plugin.LoadedPlugins {
+			exts := pl.Plugin.GetWebExtensions()
+			if exts != nil {
+				for _, ext := range exts {
+					if matchPathRegex(ext.PathMatchRegex, ctx.Req.URL.Path) {
+						switch ext.Type {
+						case sdk.CSS:
+							extraCSS.WriteString(fmt.Sprintf("/* Injected by %s */\n", pl.Plugin.GetManifest().Name))
+							extraCSS.WriteString(ext.Source)
+							extraCSS.WriteString("\n\n")
+						case sdk.JavaScript:
+							extraJS.WriteString(fmt.Sprintf("/* Injected by %s */\n", pl.Plugin.GetManifest().Name))
+							extraJS.WriteString(ext.Source)
+							extraJS.WriteString("\n\n")
+						}
+					}
+				}
+			}
+		}
+
+		ctx.Data["ExtraCSS"] = template.CSS(extraCSS.String())
+		ctx.Data["ExtraJS"] = template.JS(extraJS.String())
 	}
+}
+
+func matchPathRegex(regex, path string) bool {
+	if regex == "*" || regex == "" {
+		return true
+	}
+	r := regexp.MustCompile(regex)
+	return r.Match([]byte(path))
+
 }
 
 // RequireAdmin is a per-route middleware which requires the user to be an

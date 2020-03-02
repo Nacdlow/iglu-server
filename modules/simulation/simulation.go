@@ -1,6 +1,7 @@
 package simulation
 
 import (
+	"fmt"
 	"log"
 	"math"
 	"time"
@@ -25,6 +26,24 @@ var (
 	// PowerConSum is the sum of Power Consumption. We divide this by SinceLog
 	// to get an average.
 	PowerConSum int64 = 0
+	// PowerConGraph is used to make the power consumption graph more
+	// realistic.
+	PowerConGraph = map[string]float64{
+		"00:00": 0.3, "01:00": 0.3, "02:00": 0.3, "03:00": 0.3, "04:00": 0.3,
+		"05:00": 0.3, "06:00": 0.3, "07:00": 0.3, "08:00": 0.8, "09:00": 0.6,
+		"10:00": 0.5, "11:00": 0.4, "12:00": 0.2, "13:00": 0.1, "14:00": 0.2,
+		"15:00": 0.1, "16:00": 0.2, "17:00": 0.4, "18:00": 0.7, "19:00": 0.8,
+		"20:00": 0.7, "21:00": 0.65, "22:00": 0.4, "23:00": 0.3,
+	}
+	// PowerGenGraph is used to make the solar power generation graph more
+	// realistic.
+	PowerGenGraph = map[string]float64{
+		"00:00": 0, "01:00": 0, "02:00": 0, "03:00": 0, "04:00": 0, "05:00": 0,
+		"06:00": 0, "07:00": 0, "08:00": 0.1, "09:00": 0.1, "10:00": 0.45,
+		"11:00": 1, "12:00": 1, "13:00": 1, "14:00": 1, "15:00": 1, "16:00": 1,
+		"17:00": 0.9, "18:00": 0.45, "19:00": 0.1, "20:00": 0, "21:00": 0,
+		"22:00": 0, "23:00": 0,
+	}
 )
 
 // UpdateFromDB updates the simulation model based on database.
@@ -55,11 +74,6 @@ func LoadFromDB() {
 		r := Room{
 			DBRoomID:    room.RoomID,
 			LightStatus: false, // Assume lights are off
-		}
-
-		// Add Windows
-		for i := int64(0); i < room.WindowCount; i++ {
-			r.Windows = append(r.Windows, Window{false}) // Assume all windows are closed
 		}
 
 		// Get room temp and light status from the devices of that room
@@ -167,10 +181,8 @@ func Tick() {
 	outTemp := Env.Weather.OutdoorTemp
 	for i, room := range Env.Home.Rooms {
 		// Simulate cold/hot air from outside coming in room through windows
-		for _, window := range room.Windows {
-			if window.IsOpen {
-				Env.Home.Rooms[i].ActualRoomTemp = getChange(room.ActualRoomTemp, outTemp, 270, 0.75)
-			}
+		for i := 0; i < room.OpenedWindows; i++ {
+			Env.Home.Rooms[i].ActualRoomTemp = getChange(room.ActualRoomTemp, outTemp, 270, 0.75)
 		}
 
 		if room.LightStatus {
@@ -186,7 +198,7 @@ func Tick() {
 			runningTempCont++
 			Env.Home.Rooms[i].ActualRoomTemp = getChange(room.ActualRoomTemp, tempCont.Temp, 240, 0.75)
 		}
-		if Env.CurrentTime%10 == 0 {
+		if Env.CurrentTime%30 == 0 {
 			err = models.UpdateRoomCols(&models.Room{RoomID: room.DBRoomID,
 				CurrentTemp: int64(Env.Home.Rooms[i].ActualRoomTemp)}, "current_temp")
 			if err != nil {
@@ -212,8 +224,7 @@ func calculatePower(now time.Time, runningLights int, runningTempCont int) {
 	// Calculate power consumption
 	powerPerTempCont := (float64(15) / float64(len(Env.Home.Rooms))) // 15kW per entire house
 	Env.PowerConRate = 11                                            // Baseline kW consumption
-	conVary := math.Sin(float64(now.Second())/10) / 6
-	Env.PowerConRate += conVary
+	Env.PowerConRate += math.Sin(float64(now.Hour()))
 	Env.PowerConRate += (float64(runningLights) * 0.20) // Light power consumption
 	Env.PowerConRate += (powerPerTempCont * float64(runningTempCont))
 
@@ -232,7 +243,7 @@ func calculatePower(now time.Time, runningLights int, runningTempCont int) {
 		change = float64(Env.SolarMaxPower)
 	}
 
-	change += math.Sin(float64(now.Second())/10) * 5
+	change += math.Sin(float64(now.Hour()))
 	if change < 0 {
 		Env.PowerGenRate = 0
 	} else if change > float64(Env.SolarMaxPower) {
@@ -240,11 +251,21 @@ func calculatePower(now time.Time, runningLights int, runningTempCont int) {
 	} else {
 		Env.PowerGenRate = change
 	}
-	if now.Hour() < 6 || now.Hour() > 18 { // Night
-		Env.PowerGenRate = 0
-	} else if now.Hour() < 9 || now.Hour() > 17 { // Early morning/late afternoon
-		Env.PowerGenRate /= 4
+
+	currStamp := now.Format("15:00")
+	var genNum, conNum float64
+	var ok bool
+	genNum, ok = PowerGenGraph[currStamp]
+	if !ok {
+		panic(fmt.Errorf("PowerGenGraph is not complete for stamp \"%s\"", currStamp))
 	}
+	conNum, ok = PowerConGraph[currStamp]
+	if !ok {
+		panic(fmt.Errorf("PowerConGraph is not complete for stamp \"%s\"", currStamp))
+	}
+
+	Env.PowerGenRate *= genNum
+	Env.PowerConRate *= conNum
 }
 
 // logStat will attempt to log a statistic.
@@ -313,15 +334,10 @@ type Home struct {
 
 // Room represents a simulated room state.
 type Room struct {
-	DBRoomID            int64    `json:"db_room_id"` // The database room ID.
-	Windows             []Window `json:"windows"`
-	ActualRoomTemp      float64  `json:"actual_room_temp"`
-	TempControlDeviceID int64    `json:"temp_control_device_id"`
-	LightStatus         bool     `json:"light_status"`
-	MainLightDeviceID   int64    `json:"main_light_device_id"`
-}
-
-// Window represents a simulated window state.
-type Window struct {
-	IsOpen bool `json:"is_open"`
+	DBRoomID            int64   `json:"db_room_id"` // The database room ID.
+	OpenedWindows       int     `json:"opened_windows"`
+	ActualRoomTemp      float64 `json:"actual_room_temp"`
+	TempControlDeviceID int64   `json:"temp_control_device_id"`
+	LightStatus         bool    `json:"light_status"`
+	MainLightDeviceID   int64   `json:"main_light_device_id"`
 }

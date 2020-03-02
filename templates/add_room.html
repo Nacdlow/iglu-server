@@ -2,73 +2,73 @@
 {{template "base/nav" .}}
 <div class="container">
   <div class="d-flex d-flex justify-content-center pt-4">
-  <div class="col-lg-6 col-md-8 col-sm-12">
-  <div class="card mr-lg-0 mb-4">
-    <div class="card-body">
-      <div class="d-flex justify-content-center">
-        <row class="col-12">
-          <a class="fas fa-times-circle d-flex text-left" onclick="history.back();"></a>
-          <h2 class="text-center">Add Your Room</h2>
-          </row>
-      </div>
-      <hr>
-        <form method="POST">
-          <h6 class="text-center pt-4">Enter Room Name:</h6>
-          <div class="md-form justify-content-center d-flex mr-lg-5 ml-lg-5 mr-sm-0 ml-sm-0">
-            <input type="text" class="form-control white-text text-center"
-							   placeholder="e.g. John's Room"
-              name="room_name" required>
-          </div>
-          <h6 class="text-center">Enter Room Description:</h6>
-          <div class="md-form justify-content-center d-flex mr-lg-5 ml-lg-5 mr-sm-0 ml-sm-0">
-            <input type="text" class="form-control white-text text-center" placeholder="Description"
-              name="description">
-          </div>
-          <div class="form-row">
-            <div class="col">
-              <h6 class="text-center ">Select Room Type:</h6>
-              <div>
-                <select class="browser-default custom-select" id="select" name="room_type">
-                  <option value="" disabled selected>Choose Type</option>
-                  <option value="0">Lounge</option>
-                  <option value="1">Bedroom</option>
-                  <option value="2">Dining Room</option>
-                  <option value="3">Kitchen</option>
-                  <option value="4">Bathroom</option>
-                  <option value="5">Hallway</option>
-                  <option value="6">Storage</option>
-                  <option value="7">Utility Room</option>
-                  <option value="8">Garage</option>
-                  <option value="9">Guest</option>
-                </select>
-              </div>
+    <div class="col-lg-6 col-md-8 col-sm-12">
+      <div class="card mr-lg-0 mb-4">
+        <div class="card-body">
+          <div class="d-flex justify-content-center pt-2">
+            <div class="col-1 d-flex justify-content-start p-0">
+              <a class="fas fa-times-circle fa-lg" onclick="history.back();"></a>
             </div>
-            <div class="col">
-              <h6 class="text-center ">Part of a room?</h6>
-              <div>
-                <select class="browser-default custom-select" id="select" name="part_of_room">
-                  <option value="-1" selected>Not part of any room</option>
-                  {{range .Rooms}}<option value="{{.RoomID}}">{{.RoomName}}</option>
-                  {{end}}
-                </select>
-              </div>
+            <div class="col-10">
+              <h2 class="text-center">Add Room</h2>
+            </div>
+            <div class="col-1 p-0">
+
             </div>
           </div>
-          <h6 class="text-center pt-4">Enter Number of Windows:</h6>
-          <div class="md-form text-center justify-content-center d-flex mr-lg-5 ml-lg-5 mr-sm-0 ml-sm-0">
-            <input type="number" class="form-control white-text text-center " placeholder="e.g. 2"
-              name="windows_count">
-          </div>
-          <div class="d-flex justify-content-center">
-        <button type="submit" class="btn btn-new-1 btn-block bodycolor w-50">Save changes</button>
+          <hr>
+          <form method="POST">
+            <h6 class="text-center pt-4">Enter Room Name:</h6>
+            <div class="md-form justify-content-center d-flex mr-lg-5 ml-lg-5 mr-sm-0 ml-sm-0">
+              <input type="text" class="form-control white-text text-center" placeholder="e.g. John's Room"
+                name="room_name" required>
+            </div>
+            <h6 class="text-center">Enter Room Description:</h6>
+            <div class="md-form justify-content-center d-flex mr-lg-5 ml-lg-5 mr-sm-0 ml-sm-0">
+              <input type="text" class="form-control white-text text-center" placeholder="Description"
+                name="description">
+            </div>
+            <div class="form-row">
+              <div class="col">
+                <h6 class="text-center ">Select Room Type:</h6>
+                <div>
+                  <select class="browser-default custom-select" id="select" name="room_type">
+                    <option value="" disabled selected>Choose Type</option>
+                    <option value="0">Lounge</option>
+                    <option value="1">Bedroom</option>
+                    <option value="2">Dining Room</option>
+                    <option value="3">Kitchen</option>
+                    <option value="4">Bathroom</option>
+                    <option value="5">Hallway</option>
+                    <option value="6">Storage</option>
+                    <option value="7">Utility Room</option>
+                    <option value="8">Garage</option>
+                    <option value="9">Guest</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col">
+                <h6 class="text-center ">Part of a room?</h6>
+                <div>
+                  <select class="browser-default custom-select" id="select" name="part_of_room">
+                    <option value="-1" selected>Not part of any room</option>
+                    {{range .Rooms}}<option value="{{.RoomID}}">{{.RoomName}}</option>
+                    {{end}}
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="d-flex justify-content-center pt-4">
+              <div class="col-8">
+                <button type="submit" class="btn btn-success-new btn-block bodycolor">Save Room</button>
+              </div>
+            </div>
+          </form>
+        </div>
       </div>
-      </form>
     </div>
-  </div>
-  </div>
   </div>
 </div>
 {{template "base/scripts" .}}
 {{template "base/tabnav" .}}
 {{template "base/footer" .}}
-

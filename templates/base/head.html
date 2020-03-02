@@ -11,12 +11,32 @@
 	<title>{{if .Title}}{{ .Title }} - {{end}}{{.AppName}}</title>
 	<link rel="icon" href="/img/favicon.png" />
 	<link rel="manifest" href="/manifest.json">
-	{{if .HeadExtra}}{{.HeadExtra}}{{end}}
-	<style>
-		.bottom-nav {
+	<style id="access">
+			
+		#lblGreetings {
+			font-size: var(--{{.User.FontSize}}-heading)!important;
+		}
+
+		.bottom-nav, .small-text, h5.text-center.pb-2, .card-footer-text {
+			font-size: var(--{{.User.FontSize}}-bottom-nav)!important;
+		}
+
+		h3, strong, h1 {
+			font-size: var(--{{.User.FontSize}}-title)!important;
+		}
+
+		h2, h4, h4.text-center.pb-3, h2.text-center.p-2, h1.text-center {
+			font-size: var(--{{.User.FontSize}}-heading)!important;
+		}
+		
+		h5, p, #fontsize, label, select, input, div#text, .btn, h6, a.list-group-item, .text-muted, #content-1, #content-2, #content-3, #content-4, #content-5 {
 			font-size: var(--{{.User.FontSize}})!important;
 		}
 
+
+	</style>
+	<style>
+	{{.ExtraCSS}}
 	</style>
 </head>
 <body class="bg">
