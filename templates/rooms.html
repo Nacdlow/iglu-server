@@ -46,11 +46,12 @@
           <hr>
           <div class="row">
             <div class="col-6">
-              <div class="row pt-3">
+              <div class="row">
                 <div class="col-6 text-center p-0">
          <div id="labeldiv-{{.MainLight.DeviceID}}" class="labeldiv-{{.MainLight.DeviceID}}">
+          <div class="text-center pb-3" style="font-size: x-small;">Main Light</div>
 				  <a class="far fa-lightbulb {{if.MainLight.Status}}yellow-text fa-2x{{else}}grey-text fa-2x{{end}}"
-					 onclick="{{if .HasLight}}$.get('/toggle_device/{{.MainLight.DeviceID}}');updateRoom();{{end}}"></a>
+           onclick="{{if .HasLight}}$.get('/toggle_device/{{.MainLight.DeviceID}}');updateRoom();{{end}}"></a>
            <h6>{{if .HasLight}}{{if.MainLight.Status}}On{{else}}Off{{end}}{{else}}None{{end}}</h6>
           </div>
           </div>
@@ -58,8 +59,9 @@
           <div class="col-6 text-center p-0">
             
             <div id="labeldiv2-{{.MainTemp.DeviceID}}" class="labeldiv2-{{.MainTemp.DeviceID}}">
+              <div class="text-center pb-3" style="font-size: x-small;">Temp Control</div>
 					<a class="fas fa-power-off {{if not .HasTemp}}grey-text {{else}}{{if .MainTemp.Status}}green-text{{else}}red-text{{end}}{{end}} fa-2x"
-					 onclick="{{if .HasTemp}}$.get('/toggle_device/{{.MainTemp.DeviceID}}');updateRoom();{{end}}"></a>
+           onclick="{{if .HasTemp}}$.get('/toggle_device/{{.MainTemp.DeviceID}}');updateRoom();{{end}}"></a>
            <h6>{{if .HasTemp}}{{if.MainTemp.Status}}On{{else}}Off{{end}}{{else}}None{{end}}</h6>
             </div>
             </div>
