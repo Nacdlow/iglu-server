@@ -176,7 +176,7 @@ func AppearanceSettingsHandler(ctx *macaron.Context, sess session.Store) {
 func PluginsSettingsHandler(ctx *macaron.Context) {
 	ctx.Data["NavTitle"] = "Installed Plugins"
 	var plugins []sdk.PluginManifest
-	for _, pl := range plugin.LoadedPlugins {
+	for _, pl := range plugin.GetLoadedPlugins() {
 		plugins = append(plugins, pl.Plugin.GetManifest())
 	}
 	ctx.Data["Plugins"] = plugins

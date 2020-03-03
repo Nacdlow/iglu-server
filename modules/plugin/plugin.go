@@ -30,21 +30,30 @@ var pluginMap = map[string]plugin.Plugin{
 	"iglu_plugin": &sdk.IgluPlugin{},
 }
 
-// LoadedPlugins is an array of all loaded plugins.
-var LoadedPlugins []IgluPlugin
+var loadedPlugins []IgluPlugin
 var mutex sync.Mutex
+
+// GetLoadedPlugins returns a list of loaded and running plugins.
+func GetLoadedPlugins() []IgluPlugin {
+	for i, plugin := range loadedPlugins {
+		if plugin.client.Exited() {
+			loadedPlugins = append(loadedPlugins[:i], loadedPlugins[i+1:]...)
+		}
+	}
+	return loadedPlugins
+}
 
 // UnloadAllPlugins unloads all loaded plugins.
 func UnloadAllPlugins() {
 	mutex.Lock()
 	defer mutex.Unlock()
 	log.Println("Unloading plugins...")
-	for _, plugin := range LoadedPlugins {
+	for _, plugin := range loadedPlugins {
 		if plugin.client != nil {
 			plugin.client.Kill()
 		}
 	}
-	LoadedPlugins = []IgluPlugin{}
+	loadedPlugins = []IgluPlugin{}
 	log.Println("Plugins unloaded")
 }
 
@@ -52,11 +61,11 @@ func UnloadAllPlugins() {
 func UnloadPlugin(id string) {
 	mutex.Lock()
 	defer mutex.Unlock()
-	for i, plugin := range LoadedPlugins {
+	for i, plugin := range loadedPlugins {
 		if plugin.client != nil {
 			plugin.client.Kill()
 		}
-		LoadedPlugins = append(LoadedPlugins[:i], LoadedPlugins[i+1:]...)
+		loadedPlugins = append(loadedPlugins[:i], loadedPlugins[i+1:]...)
 		return
 	}
 }
@@ -65,9 +74,9 @@ func UnloadPlugin(id string) {
 func GetPlugin(id string) (*IgluPlugin, error) {
 	mutex.Lock()
 	defer mutex.Unlock()
-	for i, plugin := range LoadedPlugins {
+	for i, plugin := range loadedPlugins {
 		if plugin.client != nil {
-			return &LoadedPlugins[i], nil
+			return &loadedPlugins[i], nil
 		}
 	}
 	return nil, errors.New("Plugin is not loaded")
@@ -87,6 +96,7 @@ func LoadPlugin(f string) {
 	client := plugin.NewClient(&plugin.ClientConfig{
 		HandshakeConfig: handshakeConfig,
 		Plugins:         pluginMap,
+		Managed:         true,
 		Cmd:             exec.Command(fmt.Sprintf("./plugins/%s", f)),
 		Logger:          logger,
 	})
@@ -116,7 +126,7 @@ func LoadPlugin(f string) {
 		return
 	}
 
-	LoadedPlugins = append(LoadedPlugins, IgluPlugin{
+	loadedPlugins = append(loadedPlugins, IgluPlugin{
 		Plugin: plugin,
 		client: client,
 	})
@@ -124,7 +134,7 @@ func LoadPlugin(f string) {
 
 // IsPluginLoaded returns whether a plugin is loaded based on the plugin ID.
 func IsPluginLoaded(id string) bool {
-	for _, pl := range LoadedPlugins {
+	for _, pl := range loadedPlugins {
 		if pl.Plugin != nil && pl.Plugin.GetManifest().Id == id {
 			return true
 		}
@@ -141,5 +151,5 @@ func LoadPlugins() {
 			LoadPlugin(f.Name())
 		}
 	}
-	log.Printf("%d plugins loaded!\n", len(LoadedPlugins))
+	log.Printf("%d plugins loaded!\n", len(loadedPlugins))
 }

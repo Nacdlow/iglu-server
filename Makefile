@@ -2,7 +2,7 @@ GC = go
 
 TARGET = nacdlow-server
 
-all: clean format test $(TARGET)
+all: clean bindata format test $(TARGET)
 
 $(TARGET): main.go
 	$(GC) build
@@ -22,3 +22,10 @@ sat:
 	golint ./...
 	ineffassign .
 
+bindata:
+	go-bindata -pkg templates -prefix "templates/" -o templates/bindata.go templates/...
+	go-bindata -pkg public -prefix "public/" -o public/bindata.go public/...
+
+bindata-dev:
+	go-bindata -debug -pkg templates -prefix "templates/" -o templates/bindata.go templates/...
+	go-bindata -debug -pkg public -prefix "public/" -o public/bindata.go public/...

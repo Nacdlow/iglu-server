@@ -7,24 +7,17 @@ variables:
 
 before_script:
   - cd $CI_PROJECT_DIR
-  - go get ./...
+  - go get -u github.com/go-bindata/go-bindata/...
+  - go install github.com/go-bindata/go-bindata/...
 
 stages:
     - get
-    - test
     - build
-
-format:
-    stage: test
-    script:
-      - go fmt $(go list ./... | grep -v /vendor/)
-      - go vet $(go list ./... | grep -v /vendor/)
-      - go test -cover -race $(go list ./... | grep -v /vendor/)
 
 compile:
     stage: build
     script:
-      - go build -race -ldflags "-extldflags '-static'" -o $CI_PROJECT_DIR/$BINARY
+      - make
     artifacts:
       paths:
         - $BINARY

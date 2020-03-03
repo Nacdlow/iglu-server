@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"github.com/go-macaron/bindata"
 	"github.com/go-macaron/binding"
 	"github.com/go-macaron/csrf"
 	"github.com/go-macaron/session"
@@ -24,8 +25,10 @@ import (
 	"gitlab.com/group-nacdlow/nacdlow-server/modules/plugin"
 	"gitlab.com/group-nacdlow/nacdlow-server/modules/settings"
 	"gitlab.com/group-nacdlow/nacdlow-server/modules/simulation"
+	"gitlab.com/group-nacdlow/nacdlow-server/public"
 	"gitlab.com/group-nacdlow/nacdlow-server/routes"
 	routes_sim "gitlab.com/group-nacdlow/nacdlow-server/routes/simulator"
+	"gitlab.com/group-nacdlow/nacdlow-server/templates"
 )
 
 // CmdStart represents a command-line command
@@ -40,13 +43,18 @@ var CmdStart = &cli.Command{
 			Value: "8080",
 			Usage: "the web server port",
 		},
+		&cli.BoolFlag{
+			Name:  "dev",
+			Value: false,
+			Usage: "enables development mode (for templates)",
+		},
 	},
 	Action: start,
 }
 
-func getMacaron() *macaron.Macaron {
+func getMacaron(dev bool) *macaron.Macaron {
 	m := macaron.Classic()
-	m.Use(macaron.Renderer(macaron.RenderOptions{
+	renderOpts := macaron.RenderOptions{
 		Funcs: []template.FuncMap{map[string]interface{}{
 			"CalcSince": func(unix int64) string {
 				dur := time.Since(time.Unix(unix, 0)).Round(time.Minute)
@@ -66,15 +74,32 @@ func getMacaron() *macaron.Macaron {
 				return time.Format("3:04pm")
 			},
 		}},
-	}))
+	}
+	staticOpts := macaron.StaticOptions{
+		Expires: func() string {
+			return time.Now().Add(24 * 60 * time.Minute).UTC().Format("Mon, 02 Jan 2006 15:04:05 GMT")
+		},
+	}
+
+	if !dev {
+		renderOpts.TemplateFileSystem = bindata.Templates(bindata.Options{
+			Asset:      templates.Asset,
+			AssetDir:   templates.AssetDir,
+			AssetNames: templates.AssetNames,
+			Prefix:     "",
+		})
+		staticOpts.FileSystem = bindata.Static(bindata.Options{
+			Asset:      public.Asset,
+			AssetDir:   public.AssetDir,
+			AssetNames: public.AssetNames,
+			Prefix:     "",
+		})
+	}
+
+	m.Use(macaron.Renderer(renderOpts))
 	m.Use(session.Sessioner())
 	m.Use(csrf.Csrfer())
-	m.Use(macaron.Static("public",
-		macaron.StaticOptions{
-			Expires: func() string {
-				return time.Now().Add(24 * 60 * time.Minute).UTC().Format("Mon, 02 Jan 2006 15:04:05 GMT")
-			},
-		}))
+	m.Use(macaron.Static("public", staticOpts))
 
 	m.Use(routes.ContextInit())
 
@@ -83,7 +108,6 @@ func getMacaron() *macaron.Macaron {
 	m.Get("/login", routes.LoginHandler)
 	m.Post("/", binding.Bind(forms.SignInForm{}), routes.PostLoginHandler)
 	m.Get("/register", routes.RegisterHandler)
-	//m.Post("/register", routes.PostRegisterHandler)
 	m.Post("/register", binding.Bind(forms.RegisterForm{}), routes.AddUserHandler) //registers a user
 	m.Get("/forgot", routes.ForgotHandler)
 
@@ -113,6 +137,7 @@ func getMacaron() *macaron.Macaron {
 				m.Get("", routes.AddHandler)
 				m.Get("/room", routes.AddRoomHandler)
 				m.Get("/search_device", routes.SearchDeviceHandler)
+				m.Get("/search_device/list", routes.SearchDeviceListHandler)
 				m.Post("/room", binding.Bind(forms.AddRoomForm{}),
 					routes.PostRoomHandler)
 				m.Get("/device", routes.AddDeviceHandler)
@@ -129,9 +154,6 @@ func getMacaron() *macaron.Macaron {
 					m.Get("/:id", routes.InstallPluginSettingsHandler)
 					m.Get("/confirm/:id", routes.InstallPluginConfirmSettingsHandler) // TODO use POST so it is secure
 				})
-
-				m.Get("/plugin/:id", routes.PluginSettingPage)
-				m.Post("/plugin/:id", routes.PluginSettingPage)
 
 				m.Group("/accounts", func() {
 					m.Get("", routes.AccountSettingsHandler)
@@ -211,7 +233,7 @@ func start(clx *cli.Context) (err error) {
 	plugin.LoadPlugins()
 
 	// Start the web server
-	m := getMacaron()
+	m := getMacaron(clx.Bool("dev"))
 
 	log.Printf("Starting TLS web server on :%s\n", clx.String("port"))
 	server := &http.Server{Addr: fmt.Sprintf(":%s", clx.String("port")), Handler: m}
