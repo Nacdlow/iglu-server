@@ -46,7 +46,7 @@ func ContextInit() macaron.Handler {
 		var extraCSS, extraJS strings.Builder
 
 		// Load WebExtensions from plugins
-		for _, pl := range plugin.LoadedPlugins {
+		for _, pl := range plugin.GetLoadedPlugins() {
 			exts := pl.Plugin.GetWebExtensions()
 			if exts != nil {
 				for _, ext := range exts {

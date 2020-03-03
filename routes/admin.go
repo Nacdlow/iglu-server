@@ -43,7 +43,7 @@ func SearchDeviceHandler(ctx *macaron.Context) {
 	ctx.Data["CrossBack"] = 1
 	ctx.Data["IsSearchDevice"] = 1
 	var listings []PluginDeviceListing
-	for _, plugin := range plugin.LoadedPlugins {
+	for _, plugin := range plugin.GetLoadedPlugins() {
 		listings = append(listings, PluginDeviceListing{
 			PluginName: plugin.Plugin.GetManifest().Name,
 			Devices:    plugin.Plugin.GetAvailableDevices(),
