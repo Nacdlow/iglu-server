@@ -108,7 +108,6 @@ func getMacaron(dev bool) *macaron.Macaron {
 	m.Get("/login", routes.LoginHandler)
 	m.Post("/", binding.Bind(forms.SignInForm{}), routes.PostLoginHandler)
 	m.Get("/register", routes.RegisterHandler)
-	//m.Post("/register", routes.PostRegisterHandler)
 	m.Post("/register", binding.Bind(forms.RegisterForm{}), routes.AddUserHandler) //registers a user
 	m.Get("/forgot", routes.ForgotHandler)
 

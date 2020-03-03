@@ -33,6 +33,7 @@ func LoadConfig() {
 	Config.SetDefault("Location.Lon", "55.511716")
 	Config.SetDefault("Simulation.SolarCapacityKW", 45)
 	Config.SetDefault("Simulation.BatteryCapacityKWH", 135)
+	Config.SetDefault("Marketplace.RepositoryURL", "https://market.nacdlow.com/repo")
 
 	// Read configuration
 	if err := Config.ReadInConfig(); err != nil {

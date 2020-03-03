@@ -16,6 +16,7 @@ require (
 	github.com/go-macaron/session v0.0.0-20200228145033-57c61d8a8be7
 	github.com/go-sql-driver/mysql v1.5.0 // indirect
 	github.com/gopherjs/gopherjs v0.0.0-20191106031601-ce3c9ade29de // indirect
+	github.com/hashicorp/go-getter v1.4.1
 	github.com/hashicorp/go-hclog v0.12.1
 	github.com/hashicorp/go-plugin v1.1.0
 	github.com/kr/pretty v0.2.0 // indirect
