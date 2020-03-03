@@ -12,6 +12,7 @@ plugins/
 # Do not include binary
 nacdlow-server
 source
+main
 
 # Using Go gitignore template from: 
 # https://github.com/github/gitignore/blob/master/Go.gitignore 
