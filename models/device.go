@@ -20,19 +20,19 @@ const (
 // Device represents a smart home (Internet of Things) device, such as a light
 // bulb, TV, temperature control (thermometer), etc.
 type Device struct {
-	DeviceID    int64      `xorm:"pk autoincr" fake:"skip"`
-	RoomID      int64      `fake:"skip"`
-	Type        DeviceType `fake:"skip"`
-	Description string     `fake:"{lorem.word} {lorem.word} {lorem.word}"`
-	Status      bool       `fake:"skip"`
-	Temp        float64    `xorm:"null" fake:"skip"` // In Celsius
-	Volume      int64      `xorm:"null" fake:"skip"`
-	Brightness  int64      `xorm:"null" fake:"skip"`
-	IsMainLight bool       `fake:"skip"` // Whether the light device is the room's main light source
-	CreatedUnix int64      `xorm:"created"`
-	UpdatedUnix int64      `xorm:"updated"`
+	DeviceID    int64      `xorm:"pk autoincr" fake:"skip" json:"id" xml:"id,attr"`
+	RoomID      int64      `fake:"skip" json:"roomID" xml:"ofRoom,attr"`
+	Type        DeviceType `fake:"skip" json:"type" xml:"type,attr"`
+	Description string     `fake:"{lorem.word} {lorem.word} {lorem.word}" json:"description" xml:"description"`
+	Status      bool       `fake:"skip" json:"status" xml:"status"`
+	Temp        float64    `xorm:"null" fake:"skip" json:"temp,omitempty" xml:"temp,omitempty"` // In Celsius
+	Volume      int64      `xorm:"null" fake:"skip" json:"volume,omitempty" xml:"volume,omitempty"`
+	Brightness  int64      `xorm:"null" fake:"skip" json:"brightness,omitempty" xml:"brightness,omitempty"`
+	IsMainLight bool       `fake:"skip" json:"isMainLight" xml:"is_main_light"` // Whether the light device is the room's main light source
+	CreatedUnix int64      `xorm:"created" json:"createdUnix" xml:"timestamps>created_unix"`
+	UpdatedUnix int64      `xorm:"updated" json:"updatedUnix" xml:"timestamps>updated_unix"`
 	IsFave      bool       `fake:"skip"` //whether the device has been favourited or not
-	ToggledUnix int64
+	ToggledUnix int64      `json:"toggledUnix,omitempty" xml:"timestamps>toggled_unix,omitempty"`
 }
 
 // GetFakeDevice returns a new randomly created Device. This is used for

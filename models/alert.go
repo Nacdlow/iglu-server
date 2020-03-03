@@ -13,10 +13,10 @@ const (
 // Alert struct represents the Alert title, AlertCategory (severity), Alert Message,
 // and also the time the Alert was sent to the user
 type Alert struct {
-	AlertID         int64 `xorm:"pk autoincr"`
-	Time            int64 `xorm:"index"`
-	Username        string
-	AlertTitle      string
-	AlertMessage    string
-	AlertImportance Category
+	AlertID    int64    `xorm:"pk autoincr" json:"id" xml:"id,attr"`
+	Time       int64    `json:"time" xml:"time"`
+	Username   string   `xorm:"index" json:"username" xml:"username,attr"`
+	Title      string   `json:"title" xml:"title"`
+	Message    string   `json:"message" xml:"message"`
+	Importance Category `json:"importance" xml:"importance"`
 }

@@ -15,15 +15,15 @@ const (
 
 // Schedule represents the parameters that a schedule may hold, such as the time that a device may turn on and off
 type Schedule struct {
-	ScheduleID  int64 `xorm:"pk autoincr"`
-	DeviceID    string
-	Cron        string `xorm:"null"`
-	Start       int64  // Start time for task
-	End         int64  // End time for task
-	Username    string // Username of
-	Type        ScheduleType
-	Title       string
-	Description string
+	ScheduleID  int64        `xorm:"pk autoincr" json:"id" xml:"id,attr"`
+	DeviceID    string       `json:"deviceID" xml:"device_id,attr"`
+	Cron        string       `xorm:"null" json:"cron,omitempty" xml:"schedule>cron,omitempty"`
+	Start       int64        `json:"start" xml:"schedule>start"` // Start time for task
+	End         int64        `json:"end" xml:"schedule>end"`     // End time for task
+	Username    string       `json:"username" xml:"username"`    // Username of
+	Type        ScheduleType `json:"type" xml:"type,attr"`
+	Title       string       `json:"title" xml:"title"`
+	Description string       `json:"description" xml:"description"`
 }
 
 // GetFakeSchedule creates a fake schedule

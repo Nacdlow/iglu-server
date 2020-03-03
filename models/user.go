@@ -21,16 +21,16 @@ const (
 
 // User is a smart home system user whom may interact with the system.
 type User struct {
-	Username     string   `xorm:"pk" fake:"{animal.petname}###"`
-	Password     string   `fake:"skip"`
-	FirstName    string   `fake:"{person.first}"`
-	LastName     string   `fake:"{person.last}"`
-	Role         UserRole `fake:"skip"`
-	FavRoomsList []int64  `fake:"skip"`
-	FavRooms     []*Room  `xorm:"-" fake:"skip"` // This means do not store this in the DB.
-	CreatedUnix  int64    `xorm:"created"`
-	UpdatedUnix  int64    `xorm:"updated"`
-	FontSize     string
+	Username     string   `xorm:"pk" fake:"{animal.petname}###" json:"username" xml:"username,attr"`
+	Password     string   `fake:"skip" json:"password" xml:"password"`
+	FirstName    string   `fake:"{person.first}" json:"firstName" xml:"name>first"`
+	LastName     string   `fake:"{person.last}" json:"lastName" xml:"name>last"`
+	Role         UserRole `fake:"skip" json:"role" xml:"role"`
+	FavRoomsList []int64  `fake:"skip" json:"favRoomsList" xml:"fav_rooms_list"`
+	FavRooms     []*Room  `xorm:"-" fake:"skip" json:"-" xml:"-"` // This means do not store this in the DB.
+	CreatedUnix  int64    `xorm:"created" json:"createdUnix" xml:"timestamps>created_unix"`
+	UpdatedUnix  int64    `xorm:"updated" json:"updatedUnix" xml:"timestamps>updated_unix"`
+	FontSize     string   `json:"fontSize" xml:"font_size"`
 }
 
 // GetFakeUser returns a new randomly generated User. This is used for testing

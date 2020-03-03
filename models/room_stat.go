@@ -8,15 +8,15 @@ import (
 
 // RoomStat represents a room statistic, which is a part of a larger Statistic.
 type RoomStat struct {
-	RStatID     int64 `xorm:"pk autoincr"`
-	StatID      int64 // the larger Statistic ID
-	RoomID      int64
-	Room        Room `xorm:"-"`
-	Temperature float64
-	Humidity    float64
-	OpenWindows int64
-	CreatedUnix int64 `xorm:"created"`
-	UpdatedUnix int64 `xorm:"updated"`
+	RStatID     int64   `xorm:"pk autoincr" json:"id" xml:"id,attr"`
+	StatID      int64   `json:"statID" xml:"stat_id,attr"` // the larger Statistic ID
+	RoomID      int64   `json:"roomID" xml:"room_id,attr"`
+	Room        Room    `xorm:"-" json:"-" xml:"-"`
+	Temperature float64 `json:"temperature" xml:"measurements>temperature"`
+	Humidity    float64 `json:"humidity" xml:"measurements>humidity"`
+	OpenWindows int64   `json:"openWindows" xml:"open_windows"`
+	CreatedUnix int64   `xorm:"created" json:"createdUnix" xml:"timestamps>created_unix"`
+	UpdatedUnix int64   `xorm:"updated" json:"updatedUnix" xml:"timestamps>updated_unix"`
 }
 
 // GetFakeRoomStat returns a randomly generated room statistic. This is used

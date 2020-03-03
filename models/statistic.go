@@ -10,13 +10,13 @@ import (
 // Statistic represents a statistic log at a period of time, which spans an
 // hour.
 type Statistic struct {
-	StatID               int64   `xorm:"pk autoincr"`
-	StatTime             int64   `xorm:"unique index"`
-	PowerGenAvg          float64 // Power generated, kWh
-	PowerConAvg          float64 // Power conserved, kWh
-	MainDoorsOpenedCount int64   // How many times the doors opened
-	CreatedUnix          int64   `xorm:"created"`
-	UpdatedUnix          int64   `xorm:"updated"`
+	StatID               int64   `xorm:"pk autoincr" json:"id" xml:"id,attr"`
+	StatTime             int64   `xorm:"unique index" json:"statTime" xml:"timestamps>stat_time"`
+	PowerGenAvg          float64 `json:"powerGenAvg" xml:"avg>power_gen,attr"`               // Power generated, kWh
+	PowerConAvg          float64 `json:"powerConAvg" xml:"avg>power_con,attr"`               // Power conserved, kWh
+	MainDoorsOpenedCount int64   `json:"mainDoorsOpenedCount" xml:"main_doors_opened_count"` // How many times the doors opened
+	CreatedUnix          int64   `xorm:"created" json:"createdUnix" xml:"timestamps>created_unix"`
+	UpdatedUnix          int64   `xorm:"updated" json:"updatedUnix" xml:"timestamps>updated_unix"`
 }
 
 // GetFakeStat returns a new randomly generated statistic. This is used for
