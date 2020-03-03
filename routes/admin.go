@@ -4,6 +4,9 @@ import (
 	"net/http"
 
 	"gitlab.com/group-nacdlow/nacdlow-server/models"
+	"gitlab.com/group-nacdlow/nacdlow-server/modules/plugin"
+
+	"github.com/Nacdlow/plugin-sdk"
 	macaron "gopkg.in/macaron.v1"
 )
 
@@ -34,6 +37,11 @@ func SearchDeviceHandler(ctx *macaron.Context) {
 	ctx.Data["BackLink"] = "/add"
 	ctx.Data["CrossBack"] = 1
 	ctx.Data["IsSearchDevice"] = 1
+	var available []sdk.AvailableDevice
+	for _, plugin := range plugin.LoadedPlugins {
+		available = append(available, plugin.Plugin.GetAvailableDevices()...)
+	}
+	ctx.Data["AvailableDevices"] = available
 	ctx.HTML(http.StatusOK, "search_device")
 }
 
