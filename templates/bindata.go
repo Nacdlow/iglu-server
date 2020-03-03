@@ -29,6 +29,7 @@
 // templates/register.html
 // templates/rooms.html
 // templates/search_device.html
+// templates/search_device_list.html
 // templates/settings/about.html
 // templates/settings/accounts.html
 // templates/settings/appearance.html
@@ -608,6 +609,24 @@ func search_deviceHtml() (*asset, error) {
 	return a, err
 }
 
+// search_device_listHtml reads file data from disk. It returns an error on failure.
+func search_device_listHtml() (*asset, error) {
+	path := "/home/humaid/uni/y3b/profdev/group-project/nacdlow-server/templates/search_device_list.html"
+	name := "search_device_list.html"
+	bytes, err := bindataRead(path, name)
+	if err != nil {
+		return nil, err
+	}
+
+	fi, err := os.Stat(path)
+	if err != nil {
+		err = fmt.Errorf("Error reading asset info %s at %s: %v", name, path, err)
+	}
+
+	a := &asset{bytes: bytes, info: fi}
+	return a, err
+}
+
 // settingsAboutHtml reads file data from disk. It returns an error on failure.
 func settingsAboutHtml() (*asset, error) {
 	path := "/home/humaid/uni/y3b/profdev/group-project/nacdlow-server/templates/settings/about.html"
@@ -922,6 +941,7 @@ var _bindata = map[string]func() (*asset, error){
 	"register.html":                        registerHtml,
 	"rooms.html":                           roomsHtml,
 	"search_device.html":                   search_deviceHtml,
+	"search_device_list.html":              search_device_listHtml,
 	"settings/about.html":                  settingsAboutHtml,
 	"settings/accounts.html":               settingsAccountsHtml,
 	"settings/appearance.html":             settingsAppearanceHtml,
@@ -1000,16 +1020,17 @@ var _bintree = &bintree{nil, map[string]*bintree{
 		"temp.html":    &bintree{cardsTempHtml, map[string]*bintree{}},
 		"tv.html":      &bintree{cardsTvHtml, map[string]*bintree{}},
 	}},
-	"dashboard.html":         &bintree{dashboardHtml, map[string]*bintree{}},
-	"devices.html":           &bintree{devicesHtml, map[string]*bintree{}},
-	"forgot.html":            &bintree{forgotHtml, map[string]*bintree{}},
-	"index.html":             &bintree{indexHtml, map[string]*bintree{}},
-	"internal_accounts.html": &bintree{internal_accountsHtml, map[string]*bintree{}},
-	"notfound.html":          &bintree{notfoundHtml, map[string]*bintree{}},
-	"overview.html":          &bintree{overviewHtml, map[string]*bintree{}},
-	"register.html":          &bintree{registerHtml, map[string]*bintree{}},
-	"rooms.html":             &bintree{roomsHtml, map[string]*bintree{}},
-	"search_device.html":     &bintree{search_deviceHtml, map[string]*bintree{}},
+	"dashboard.html":          &bintree{dashboardHtml, map[string]*bintree{}},
+	"devices.html":            &bintree{devicesHtml, map[string]*bintree{}},
+	"forgot.html":             &bintree{forgotHtml, map[string]*bintree{}},
+	"index.html":              &bintree{indexHtml, map[string]*bintree{}},
+	"internal_accounts.html":  &bintree{internal_accountsHtml, map[string]*bintree{}},
+	"notfound.html":           &bintree{notfoundHtml, map[string]*bintree{}},
+	"overview.html":           &bintree{overviewHtml, map[string]*bintree{}},
+	"register.html":           &bintree{registerHtml, map[string]*bintree{}},
+	"rooms.html":              &bintree{roomsHtml, map[string]*bintree{}},
+	"search_device.html":      &bintree{search_deviceHtml, map[string]*bintree{}},
+	"search_device_list.html": &bintree{search_device_listHtml, map[string]*bintree{}},
 	"settings": &bintree{nil, map[string]*bintree{
 		"about.html":                  &bintree{settingsAboutHtml, map[string]*bintree{}},
 		"accounts.html":               &bintree{settingsAccountsHtml, map[string]*bintree{}},
