@@ -49,17 +49,21 @@
     <div class="d-flex justify-content-center pt-3">
         <div class="col-lg-8 col-12 p-0 ">
             <div class="list-group pt-3">
+				{{range .Listings}}
+                <div class="list-group-item list-group-item-action">
+						<span style="font-size: small;">{{.PluginName}}</span>
+				</div>
+				{{range .Devices}}
                 <div class="list-group-item list-group-item-action">
                     <div class="row align-items-center">
                         <div class="col-lg-1 col-2 pr-0" id="text">
                             <i class="fas fa-plug fa-3x"></i>
                         </div>
                         <div class="col-lg-6 col-5 pl-2 pr-0" id="text">
-                            Device Name
+							{{.UniqueID}}
                             <br>
-                            <span style="font-size: small;">Plugin Name</span>
-                            <br>
-                            <span style="font-size: x-small;">ID/Address</span>
+							<span style="font-size: small;">{{.ManufacturerName}}
+										 {{.ModelName}}</span>
                         </div>
                         <div class="col-5 text-right pl-0">
                             <a href="#">
@@ -74,6 +78,8 @@
                         </div>
                     </div>
                 </div>
+				{{end}}
+				{{end}}
             </div>
         </div>
     </div>

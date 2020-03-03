@@ -32,16 +32,24 @@ func AddHandler(ctx *macaron.Context) {
 	ctx.HTML(http.StatusOK, "add")
 }
 
+type PluginDeviceListing struct {
+	PluginName string
+	Devices    []sdk.AvailableDevice
+}
+
 // SearchDeviceHandler handles the search for device
 func SearchDeviceHandler(ctx *macaron.Context) {
 	ctx.Data["BackLink"] = "/add"
 	ctx.Data["CrossBack"] = 1
 	ctx.Data["IsSearchDevice"] = 1
-	var available []sdk.AvailableDevice
+	var listings []PluginDeviceListing
 	for _, plugin := range plugin.LoadedPlugins {
-		available = append(available, plugin.Plugin.GetAvailableDevices()...)
+		listings = append(listings, PluginDeviceListing{
+			PluginName: plugin.Plugin.GetManifest().Name,
+			Devices:    plugin.Plugin.GetAvailableDevices(),
+		})
 	}
-	ctx.Data["AvailableDevices"] = available
+	ctx.Data["Listings"] = listings
 	ctx.HTML(http.StatusOK, "search_device")
 }
 
