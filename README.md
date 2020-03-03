@@ -16,6 +16,13 @@ The following packages are required.
 - GNU Make
 - go-bindata
 
+### Installing go-bindata
+
+```sh
+$ go get -u github.com/go-bindata/go-bindata/...
+$ go install github.com/go-bindata/go-bindata/...
+```
+
 ## Building
 
 You can build by running:
