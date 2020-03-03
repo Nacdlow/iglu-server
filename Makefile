@@ -3,6 +3,7 @@ GC = go
 TARGET = nacdlow-server
 
 all: clean format test $(TARGET)
+full: clean bindata format test $(TARGET)
 
 $(TARGET): main.go
 	$(GC) build
