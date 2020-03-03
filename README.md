@@ -1,23 +1,32 @@
-# Nacdlow Server
+# iglü Server
 
 ## Description
 
-Nacdlow server is the web server and control system for the smart home. Its
+iglü server is the web server and control system for the smart home. Its
 purpose is to control home appliances and Internet-connected devices. It 
 is self-contained, handling access-control among other things, and should work
 without Internet connection.
 
-## Cloning and running
+## Requirements
 
+The following packages are required.
+
+- git
+- Go (1.12+)
+- GNU Make
+- go-bindata
+
+## Building
+
+You can build by running:
 ```sh
-$ git clone git@gitlab.com:group-nacdlow/nacdlow-server.git
-$ cd nacdlow-server
+$ make
 ```
 
-And to run the web server
+And to run the web server:
 ```
 $ make
-$ ./nacdlow-server run [--port 443]
+$ ./nacdlow-server run [--port 443] [--dev]
 ```
 
 ## Configuration
@@ -25,3 +34,8 @@ $ ./nacdlow-server run [--port 443]
 A configuration file is created `./config.toml`. New fields will be
 automatically added. You might need to set the Dark Sky API key, which you can
 find on our Internal Wiki.
+
+## Plugins
+
+Plugins are added in the `plugins/` folder. Plugins may also be downloaded
+directly from the marketplace.
