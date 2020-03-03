@@ -42,15 +42,23 @@ func SearchDeviceHandler(ctx *macaron.Context) {
 	ctx.Data["BackLink"] = "/add"
 	ctx.Data["CrossBack"] = 1
 	ctx.Data["IsSearchDevice"] = 1
+	ctx.HTML(http.StatusOK, "search_device")
+}
+
+// SearchDeviceListHandler handles the search for device
+func SearchDeviceListHandler(ctx *macaron.Context) {
 	var listings []PluginDeviceListing
 	for _, plugin := range plugin.GetLoadedPlugins() {
-		listings = append(listings, PluginDeviceListing{
-			PluginName: plugin.Plugin.GetManifest().Name,
-			Devices:    plugin.Plugin.GetAvailableDevices(),
-		})
+		devices := plugin.Plugin.GetAvailableDevices()
+		if len(devices) > 0 {
+			listings = append(listings, PluginDeviceListing{
+				PluginName: plugin.Plugin.GetManifest().Name,
+				Devices:    devices,
+			})
+		}
 	}
 	ctx.Data["Listings"] = listings
-	ctx.HTML(http.StatusOK, "search_device")
+	ctx.HTML(http.StatusOK, "search_device_list")
 }
 
 // AddRoomHandler handles the add room page

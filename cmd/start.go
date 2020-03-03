@@ -137,6 +137,7 @@ func getMacaron(dev bool) *macaron.Macaron {
 				m.Get("", routes.AddHandler)
 				m.Get("/room", routes.AddRoomHandler)
 				m.Get("/search_device", routes.SearchDeviceHandler)
+				m.Get("/search_device/list", routes.SearchDeviceListHandler)
 				m.Post("/room", binding.Bind(forms.AddRoomForm{}),
 					routes.PostRoomHandler)
 				m.Get("/device", routes.AddDeviceHandler)
