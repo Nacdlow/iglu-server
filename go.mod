@@ -10,6 +10,7 @@ require (
 	github.com/cpuguy83/go-md2man/v2 v2.0.0 // indirect
 	github.com/denisenkom/go-mssqldb v0.0.0-20191128021309-1d7a30a10f73 // indirect
 	github.com/elazarl/go-bindata-assetfs v1.0.0 // indirect
+	github.com/go-bindata/go-bindata v3.1.2+incompatible // indirect
 	github.com/go-macaron/bindata v0.0.0-20191101042848-1f434a96f7aa
 	github.com/go-macaron/binding v1.1.0
 	github.com/go-macaron/csrf v0.0.0-20191101041016-98718788f460
