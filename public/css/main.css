@@ -8,7 +8,20 @@
   
   /* Border Radius On Elements */
   --nav-radius: 50px;
-  --btn-radius: 500px;
+  --btn-radius: 50px;
+
+
+    /* T H E M E   C O L O U R S */
+  /* ========================= */
+  --top-bar: #1c1b20;     /* Navbar Background Colours */
+  --bottom-bar: #1c1b20;  /* Navbar Background Colours */
+
+  --iglu-colour: #3766ff; /* Iglu Accent Colour */
+  --green-colour: #00E900;
+  --red-colour: #E90000;
+  --hover: #eeeeee; /* Hover colour on bottons */
+  --light: #454452;       /* Some Text */
+  --cool-button: #26272c; /* Some text */
 
 
   /* F O N T   S I Z E S */
@@ -19,11 +32,23 @@
   --large: 20px;
   --xlarge: 24px;
 
+  --xsmall-desktop: 12px;
+  --small-desktop: 14px;
+  --medium-desktop: 16px;
+  --large-desktop: 20px;
+  --xlarge-desktop: 24px;
+
   --xsmall-title: 16px;
   --small-title: 20px;
   --medium-title: 24px;
   --large-title: 28px;
   --xlarge-title: 32px;
+
+  --xsmall-title-desktop: 24px;
+  --small-title-desktop: 28px;
+  --medium-title-desktop: 32px;
+  --large-title-desktop: 36px;
+  --xlarge-title-desktop: 40px;
 
   --xsmall-heading: 12px;
   --small-heading: 16px;
@@ -31,21 +56,17 @@
   --large-heading: 24px;
   --xlarge-heading: 28px;
 
+  --xsmall-heading-desktop: 18px;
+  --small-heading-desktop: 20px;
+  --medium-heading-desktop: 24px;
+  --large-heading-desktop: 28px;
+  --xlarge-heading-desktop: 32px;
+
   --xsmall-bottom-nav: 10px;
   --small-bottom-nav: 10px;
   --medium-bottom-nav: 12px;
   --large-bottom-nav: 16px;
   --xlarge-bottom-nav: 20px;
-
-
-  /* T H E M E   C O L O U R S */
-  /* ========================= */
-  --top-bar: #1c1b20;     /* Navbar Background Colours */
-  --bottom-bar: #1c1b20;  /* Navbar Background Colours */
-
-  --iglu-colour: #3766ff; /* Iglu Accent Colour */
-  --light: #454452;       /* Some Text */
-  --cool-button: #26272c; /* Some text */
 }
 
 /*Scrollbar Settings*/
@@ -94,15 +115,41 @@ html {
   background-color: var(--top-bar);
   text-transform: none !important;
   border-radius: var(--btn-radius);
+  padding: 10px !important;
+  transition: all 0.25s ease-out;
+}
+
+.btn-phat {
+  padding: 15px !important;
+}
+
+.btn-large {
+  padding: 40px !important;
 }
 
 .btn:hover {
+  border-color: #eee;
+}
+
+/* .btn:hover {
   color: #fff;
+} */
+
+.btn-border-iglu {
+  border: solid var(--iglu-colour) 2px!important;
+}
+
+.btn-border-green {
+  border: solid var(--green-colour) 2px!important;
+}
+
+.btn-border-red {
+  border: solid var(--red-colour) 2px!important;
 }
 
 .btn-new {
   background-color: var(--top-bar);
-  border-radius: 500px !important;
+  border-radius: var(--btn-radius)!important;
   text-align: left;
   font-weight: bold;
   /* font-size: 20px!important; */
@@ -113,10 +160,6 @@ html {
   background-color: var(--back);
   border-radius: var(--btn-radius)!important;
   width: 100%;
-  font-size: 16px;
-  /*border:solid; 
-  border-color:#3677ff; 
-  border-width: 1.5px;*/
 }
 
 .btn-success-new {
@@ -148,6 +191,11 @@ html {
   border: solid;
   border-color: #3677ff;
   border-width: 2px;
+  transition: all 0.25s ease-out;
+}
+
+.plus-button:hover {
+  border-color: var(--hover);
 }
 
 .bottom-colour {
@@ -159,7 +207,7 @@ small {
 }
 
 .list-group-item {
-  background-color: var(--light);
+  background-color: var(--cool-button);
   color: #fff!important;
 }
 
@@ -177,13 +225,11 @@ small {
 }
 
 .svghover {
-  transition: 0.5s ease;
+  transition: all 0.5s ease-out;
 }
 
 .svghover:hover {
-  transition: 0.5s ease;
   filter: brightness(50%);
-  ;
 }
 
 .navcolor {
@@ -220,11 +266,6 @@ a {
 .text-muted {
   color: #bbb!important;
   font-style: italic;
-}
-
-
-.btn {
-  border-radius: 100vw;
 }
 
 .circle {

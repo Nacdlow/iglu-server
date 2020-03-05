@@ -13,24 +13,42 @@
 	<link rel="manifest" href="/manifest.json">
 	<style id="access">
 			
-		#lblGreetings {
-			font-size: var(--{{.User.FontSize}}-heading)!important;
-		}
-
-		.bottom-nav, .small-text, h5.text-center.pb-2, .card-footer-text {
-			font-size: var(--{{.User.FontSize}}-bottom-nav)!important;
-		}
-
-		strong, h1, #h1 {
-			font-size: var(--{{.User.FontSize}}-title)!important;
+		strong, h1, h1.font-weight-bolder, #h1, #lblGreetings {
+			font-size: var(--{{.User.FontSize}}-title-desktop)!important;
 		}
 
 		h3, h2, h4, h4.text-center.pb-3, h2.text-center.p-2, h1.text-center {
+			font-size: var(--{{.User.FontSize}}-heading-desktop)!important;
+		}
+
+		h5 {
 			font-size: var(--{{.User.FontSize}}-heading)!important;
 		}
 		
-		h5, p, #fontsize, label, select, input, div#text, .btn, h6, a.list-group-item, .text-muted, #content-1, #content-2, #content-3, #content-4, #content-5 {
+		p, #fontsize, label, select, input, div#text, .btn, h6, a.list-group-item, .text-muted, #content-1, #content-2, #content-3, #content-4, #content-5 {
+			font-size: var(--{{.User.FontSize}}-desktop)!important;
+		}
+
+		.small-text, h5.text-center.pb-2, .card-footer-text {
 			font-size: var(--{{.User.FontSize}})!important;
+		}
+	
+		@media only screen and (max-width: 992px) {
+			.bottom-nav, .small-text, h5.text-center.pb-2, .card-footer-text {
+			font-size: var(--{{.User.FontSize}}-bottom-nav)!important;
+			}
+
+			strong, h1, #h1 {
+				font-size: var(--{{.User.FontSize}}-title)!important;
+			}
+
+			h3, h2, h4, h4.text-center.pb-3, h2.text-center.p-2, h1.text-center, #lblGreetings {
+				font-size: var(--{{.User.FontSize}}-heading)!important;
+			}
+			
+			h5, p, #fontsize, label, select, input, div#text, .btn, h6, a.list-group-item, .text-muted, #content-1, #content-2, #content-3, #content-4, #content-5 {
+				font-size: var(--{{.User.FontSize}})!important;
+			}
 		}
 
 
