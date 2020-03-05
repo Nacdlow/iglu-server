@@ -2,27 +2,25 @@
 /*! Copyright Nacdlow 2019-present. All rights reserved. */
 
 :root {
-
   /* Main Background Colour */
   --back: #121116;
-  
+
   /* Border Radius On Elements */
   --nav-radius: 50px;
   --btn-radius: 50px;
 
-
-    /* T H E M E   C O L O U R S */
+  /* T H E M E   C O L O U R S */
   /* ========================= */
-  --top-bar: #1c1b20;     /* Navbar Background Colours */
-  --bottom-bar: #1c1b20;  /* Navbar Background Colours */
+  --top-bar: #1c1b20; /* Navbar Background Colours */
+  --bottom-bar: #1c1b20; /* Navbar Background Colours */
 
   --iglu-colour: #3766ff; /* Iglu Accent Colour */
-  --green-colour: #00E900;
-  --red-colour: #E90000;
+  --button-border: #888;
+  --green-colour: #00e900;
+  --red-colour: #e90000;
   --hover: #eeeeee; /* Hover colour on bottons */
-  --light: #454452;       /* Some Text */
+  --light: #454452; /* Some Text */
   --cool-button: #26272c; /* Some text */
-
 
   /* F O N T   S I Z E S */
   /* =================== */
@@ -83,10 +81,10 @@ html {
 ::-webkit-scrollbar-track {
   background: var(--top-bar);
 }
- 
+
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: var(--back); 
+  background: var(--back);
   border: solid 2px;
   border-color: var(--top-bar);
   border-radius: 10px;
@@ -94,7 +92,7 @@ html {
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--light); 
+  background: var(--light);
 }
 /*---Scrollbar Settings---*/
 
@@ -110,6 +108,22 @@ html {
  h4.text-center.pb-3 {
    font-size: var(--font-);
  } */
+
+ .split-left {
+   border-right: solid 2px var(--iglu-colour);
+ }
+
+ .navbar, .split-top {
+   border-bottom: solid 2px var(--iglu-colour);
+ }
+
+ #mobilenav {
+   border-top: solid 2px var(--iglu-colour);
+ }
+
+.horizontal {
+  border-color: #888 !important;
+}
 
 .btn {
   background-color: var(--top-bar);
@@ -128,7 +142,7 @@ html {
 }
 
 .btn:hover {
-  border-color: #eee;
+  border-color: var(--hover) !important;
 }
 
 /* .btn:hover {
@@ -136,20 +150,24 @@ html {
 } */
 
 .btn-border-iglu {
-  border: solid var(--iglu-colour) 2px!important;
+  border: solid var(--iglu-colour) 2px !important;
+}
+
+.btn-border-grey {
+  border: solid var(--button-border) 2px !important;
 }
 
 .btn-border-green {
-  border: solid var(--green-colour) 2px!important;
+  border: solid var(--green-colour) 2px !important;
 }
 
 .btn-border-red {
-  border: solid var(--red-colour) 2px!important;
+  border: solid var(--red-colour) 2px !important;
 }
 
 .btn-new {
   background-color: var(--top-bar);
-  border-radius: var(--btn-radius)!important;
+  border-radius: var(--btn-radius) !important;
   text-align: left;
   font-weight: bold;
   /* font-size: 20px!important; */
@@ -158,7 +176,7 @@ html {
 
 .btn-new-1 {
   background-color: var(--back);
-  border-radius: var(--btn-radius)!important;
+  border-radius: var(--btn-radius) !important;
   width: 100%;
 }
 
@@ -166,7 +184,7 @@ html {
   background-color: var(--top-bar);
   font-size: large;
   font-weight: 300;
-  color: white!important;
+  color: white !important;
   border-radius: 30px !important;
   border: solid;
   border-color: rgb(0, 233, 0);
@@ -177,7 +195,7 @@ html {
   background-color: var(--top-bar);
   font-size: large;
   font-weight: 300;
-  color: white!important;
+  color: white !important;
   border-radius: 30px !important;
   border: solid;
   border-color: rgb(255, 28, 28);
@@ -208,7 +226,7 @@ small {
 
 .list-group-item {
   background-color: var(--cool-button);
-  color: #fff!important;
+  color: #fff !important;
 }
 
 .list-group-item:hover {
@@ -221,7 +239,7 @@ small {
 }
 
 .room-icon a:hover {
-  color: var(--iglu-colour)!important;
+  color: var(--iglu-colour) !important;
 }
 
 .svghover {
@@ -241,21 +259,21 @@ small {
 }
 
 body {
-  background-color: var(--back)!important;
-  color: white!important;
+  background-color: var(--back) !important;
+  color: white !important;
   margin-bottom: 100px;
 }
 
 hr {
-  border-top: 1.5px solid white!important;
+  border-top: 1.5px solid white !important;
 }
 
 a {
-  color: white!important;
+  color: white !important;
 }
 
 .card {
-  color: #fff!important;
+  color: #fff !important;
   background-color: var(--top-bar);
 }
 
@@ -264,7 +282,7 @@ a {
 }
 
 .text-muted {
-  color: #bbb!important;
+  color: #bbb !important;
   font-style: italic;
 }
 
@@ -298,7 +316,7 @@ a {
 }
 
 .circle-small {
-  background-color: var(--top-bar)!important;
+  background-color: var(--top-bar) !important;
   color: rgb(0, 255, 0);
   border: solid;
   border-color: rgb(0, 233, 0);
@@ -331,13 +349,13 @@ a {
 /* Switch success */
 
 .switch {
-  background-color: #00C851;
+  background-color: #00c851;
 }
 
 .elipsesNav {
-  box-shadow: none!important;
-  text-shadow: none!important;
-  max-width: 35%!important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  max-width: 35% !important;
   float: right;
   padding-right: 0%;
   padding-top: 0%;
@@ -359,11 +377,12 @@ a {
   align-items: center;
   -ms-flex-pack: justify;
   justify-content: space-between;
-  padding: .5rem 1rem;
+  padding: 0.5rem 1rem;
 }
 
-.btn-default, .default-color {
-  background-color: var(--top-bar)!important;
+.btn-default,
+.default-color {
+  background-color: var(--top-bar) !important;
 }
 
 @media (min-width: 992px) {
@@ -378,7 +397,7 @@ a {
     display: none;
   }
   .deskhide {
-    display: none!important;
+    display: none !important;
   }
   .back-button {
     display: none;
@@ -387,14 +406,14 @@ a {
 
 @media (max-width: 992px) {
   .mobhide {
-    display: none!important;
+    display: none !important;
   }
   .navbar-toggler {
     display: none;
   }
   .navbar {
     height: 65px !important;
-    padding-top: 2px!important;
+    padding-top: 2px !important;
   }
   .w300 {
     width: 300px;
@@ -413,7 +432,7 @@ a {
 }
 
 .nav-item {
-  font-size: 18px!important;
+  font-size: 18px !important;
 }
 
 .split {
@@ -464,7 +483,7 @@ a {
 }
 
 .centered-bottom {
-  top: 40%!important;
+  top: 40% !important;
 }
 
 .lilnav {
@@ -512,27 +531,28 @@ a {
   max-width: 25%;
 }
 
-.nav-tabs, .nav-link {
-  width: 100%!important;
+.nav-tabs,
+.nav-link {
+  width: 100% !important;
   border: 0 !important;
   border-radius: 0 !important;
 }
 
 .nav-rounded {
-  border-radius: var(--nav-radius)!important;
+  border-radius: var(--nav-radius) !important;
 }
 
 .activetab {
-  color: var(--iglu-colour)!important;
+  color: var(--iglu-colour) !important;
 }
 
 .nav-link.active {
-  border: 1px solid white!important;
-  border-bottom-color: transparent!important;
+  border: 1px solid white !important;
+  border-bottom-color: transparent !important;
 }
 
 .nav-link {
-  border-bottom-color: white!important;
+  border-bottom-color: white !important;
 }
 
 .nav-link:hover {
@@ -552,7 +572,7 @@ div.scrollmenu {
   display: block;
   overflow: auto;
   white-space: nowrap;
-  flex-wrap: nowrap!important;
+  flex-wrap: nowrap !important;
 }
 
 div.scrollmenu a {
@@ -587,11 +607,13 @@ div.scrollmenu a:hover {
   margin-right: 3px;
 }
 
-.scrolling-wrapper::-webkit-scrollbar, .scrolling-wrapper-flexbox::-webkit-scrollbar {
+.scrolling-wrapper::-webkit-scrollbar,
+.scrolling-wrapper-flexbox::-webkit-scrollbar {
   display: none;
 }
 
-.scrolling-wrapper, .scrolling-wrapper-flexbox {
+.scrolling-wrapper,
+.scrolling-wrapper-flexbox {
   width: 100%;
   -webkit-overflow-scrolling: touch;
 }
@@ -609,13 +631,15 @@ div.scrollmenu a:hover {
   color: var(--iglu-colour) !important;
 }
 
-.custom-control-input:checked~.custom-control-label::before {
-  background-color: var(--iglu-colour)!important;
-  border-color: var(--iglu-colour)!important;
+.custom-control-input:checked ~ .custom-control-label::before {
+  background-color: var(--iglu-colour) !important;
+  border-color: var(--iglu-colour) !important;
 }
 
-.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active, .nav-tabs .nav-link {
-  background-color: var(--top-bar)!important;
+.nav-tabs .nav-item.show .nav-link,
+.nav-tabs .nav-link.active,
+.nav-tabs .nav-link {
+  background-color: var(--top-bar) !important;
   color: #fff !important;
 }
 
@@ -626,17 +650,17 @@ div.scrollmenu a:hover {
 }
 
 .btn-fix-bottom-middle {
-    position: fixed!important;
-    left: 0!important;
-    right: 0!important;
-    margin-left: auto!important;
-    margin-right: auto!important;
-    min-width: 185px!important;
-    max-width: 250px!important;
-    max-height: 53px!important;
-    bottom: 100px!important;
-    align-items: unset!important;
-    line-height: normal!important;
+  position: fixed !important;
+  left: 0 !important;
+  right: 0 !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  min-width: 185px !important;
+  max-width: 250px !important;
+  max-height: 53px !important;
+  bottom: 100px !important;
+  align-items: unset !important;
+  line-height: normal !important;
 }
 
 .tab-content {
@@ -644,7 +668,7 @@ div.scrollmenu a:hover {
 }
 
 input {
-  color: white!important;
+  color: white !important;
 }
 
 .hr-text {
@@ -662,10 +686,7 @@ input {
 
 .hr-text::before,
 .hr-text::after {
-  content: '';
+  content: "";
   flex: 1;
-  border-bottom: 1.5px solid white!important;
+  border-bottom: 1.5px solid white !important;
 }
-
-
-
