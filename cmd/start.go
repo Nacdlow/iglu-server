@@ -155,6 +155,9 @@ func getMacaron(dev bool) *macaron.Macaron {
 					m.Get("/confirm/:id", routes.InstallPluginConfirmSettingsHandler) // TODO use POST so it is secure
 				})
 
+				m.Get("/plugin/:id", routes.SpecificPluginSettingsHandler)
+				m.Post("/plugin/:id", routes.SpecificPluginSettingsPostHandler)
+
 				m.Group("/accounts", func() {
 					m.Get("", routes.AccountSettingsHandler)
 					m.Post("", routes.PostAccountSettingsHandler)
