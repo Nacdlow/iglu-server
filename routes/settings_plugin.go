@@ -67,13 +67,19 @@ func InstallPluginConfirmSettingsHandler(ctx *macaron.Context, f *session.Flash)
 	id := ctx.Params("id")
 	repoURL := settings.Config.Get("Marketplace.RepositoryURL")
 	platform := fmt.Sprintf("%s-%s", runtime.GOOS, runtime.GOARCH)
-	repo := fmt.Sprintf("%s/%s/%s.xz?checksum=file:%s/%s/%s.sha256sum&archive=xz",
+	appendExe := ""
+	if runtime.GOOS == "windows" {
+		appendExe = ".exe"
+	}
+	repo := fmt.Sprintf("%s/%s/%s%s.xz?checksum=file:%s/%s/%s%s.xz.sha256sum&archive=xz",
 		repoURL,
 		platform,
 		id,
+		appendExe,
 		repoURL,
 		platform,
-		id)
+		id,
+		appendExe)
 	pwd, err := os.Getwd()
 	if err != nil {
 		panic(fmt.Errorf("Failed to get wd: %s", err))
@@ -96,7 +102,11 @@ func InstallPluginConfirmSettingsHandler(ctx *macaron.Context, f *session.Flash)
 	}
 	os.Chmod(pluginFile, 0700)
 
-	plugin.LoadPlugin(id)
+	if runtime.GOOS == "windows" {
+		plugin.LoadPlugin(id + ".exe")
+	} else {
+		plugin.LoadPlugin(id)
+	}
 
 	f.Success("Plugin installed and loaded!")
 	ctx.Redirect("/settings/plugins")
