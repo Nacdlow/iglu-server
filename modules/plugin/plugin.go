@@ -14,10 +14,21 @@ import (
 	"github.com/hashicorp/go-plugin"
 )
 
+type PluginState int64
+
+const (
+	Stopped = iota
+	Running
+	Crashed
+)
+
 // IgluPlugin represents a loaded Iglu plugin.
 type IgluPlugin struct {
-	Plugin sdk.Iglu
-	client *plugin.Client
+	Plugin   sdk.Iglu
+	client   *plugin.Client
+	State    PluginState
+	Config   []sdk.PluginConfig
+	Manifest sdk.PluginManifest
 }
 
 var handshakeConfig = plugin.HandshakeConfig{
@@ -33,13 +44,20 @@ var pluginMap = map[string]plugin.Plugin{
 var loadedPlugins []IgluPlugin
 var mutex sync.Mutex
 
-// GetLoadedPlugins returns a list of loaded and running plugins.
-func GetLoadedPlugins() []IgluPlugin {
+func markCrashedPlugins() {
+	mutex.Lock()
+	defer mutex.Unlock()
 	for i, plugin := range loadedPlugins {
-		if plugin.client.Exited() {
-			loadedPlugins = append(loadedPlugins[:i], loadedPlugins[i+1:]...)
+		if plugin.client.Exited() && plugin.State == Running {
+			log.Printf("Plugin '%s' crashed\n", plugin.Manifest.Id)
+			loadedPlugins[i].State = Crashed
 		}
 	}
+}
+
+// GetLoadedPlugins returns a list of loaded and running plugins.
+func GetLoadedPlugins() []IgluPlugin {
+	markCrashedPlugins()
 	return loadedPlugins
 }
 
@@ -48,12 +66,12 @@ func UnloadAllPlugins() {
 	mutex.Lock()
 	defer mutex.Unlock()
 	log.Println("Unloading plugins...")
-	for _, plugin := range loadedPlugins {
-		if plugin.client != nil {
+	for i, plugin := range loadedPlugins {
+		if plugin.client != nil && plugin.client.Exited() {
 			plugin.client.Kill()
 		}
+		loadedPlugins[i].State = Stopped
 	}
-	loadedPlugins = []IgluPlugin{}
 	log.Println("Plugins unloaded")
 }
 
@@ -65,7 +83,7 @@ func UnloadPlugin(id string) {
 		if plugin.client != nil {
 			plugin.client.Kill()
 		}
-		loadedPlugins = append(loadedPlugins[:i], loadedPlugins[i+1:]...)
+		loadedPlugins[i].State = Stopped
 		return
 	}
 }
@@ -127,15 +145,19 @@ func LoadPlugin(f string) {
 	}
 
 	loadedPlugins = append(loadedPlugins, IgluPlugin{
-		Plugin: plugin,
-		client: client,
+		Plugin:   plugin,
+		client:   client,
+		State:    Running,
+		Manifest: plugin.GetManifest(),
+		Config:   plugin.GetPluginConfiguration(),
 	})
 }
 
 // IsPluginLoaded returns whether a plugin is loaded based on the plugin ID.
+// A positive doesn't mean the plugin is running.
 func IsPluginLoaded(id string) bool {
 	for _, pl := range loadedPlugins {
-		if pl.Plugin != nil && pl.Plugin.GetManifest().Id == id {
+		if pl.Plugin != nil && pl.Manifest.Id == id {
 			return true
 		}
 	}

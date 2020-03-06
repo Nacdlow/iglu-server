@@ -23,10 +23,20 @@
 		{{range .Plugins}}
 		<div class="list-group-item list-group-item-action">
 			<i class="fas fa-cube" style="font-size: 15px;"></i>&nbsp;
-			&nbsp; {{.Name}} ({{.Version}}) by {{.Author}} <a href="https://market.nacdlow.com/{{.Id}}"
+			&nbsp; {{.Manifest.Name}} ({{.Manifest.Version}}) by
+		   {{.Manifest.Author}} <a href="https://market.nacdlow.com/{{.Manifest.Id}}"
 				class="btn btn-info btn-sm">View on Market</a>
-			<a href="/settings/plugin/{{.Id}}" class="btn btn-warning
+			<a href="/settings/plugin/{{.Manifest.Id}}" class="btn btn-warning
 				btn-sm">Settings</a>
+			{{if eq .State 0}}
+			<span class="badge badge-warning">Stopped</span>
+			{{else if eq .State 1}}
+			<span class="badge badge-success">Running</span>
+			{{else if eq .State 2}}
+			<span class="badge badge-danger">Crashed</span>
+			{{else}}
+			<span class="badge badge-primary">Unknown</span>
+			{{end}}
 		</div>
 		{{end}}
 	</div>

@@ -47,17 +47,20 @@ func ContextInit() macaron.Handler {
 
 		// Load WebExtensions from plugins
 		for _, pl := range plugin.GetLoadedPlugins() {
+			if pl.State != plugin.Running {
+				continue
+			}
 			exts := pl.Plugin.GetWebExtensions()
 			if exts != nil {
 				for _, ext := range exts {
 					if matchPathRegex(ext.PathMatchRegex, ctx.Req.URL.Path) {
 						switch ext.Type {
 						case sdk.CSS:
-							extraCSS.WriteString(fmt.Sprintf("/* Injected by %s */\n", pl.Plugin.GetManifest().Name))
+							extraCSS.WriteString(fmt.Sprintf("/* Injected by %s */\n", pl.Manifest.Name))
 							extraCSS.WriteString(ext.Source)
 							extraCSS.WriteString("\n\n")
 						case sdk.JavaScript:
-							extraJS.WriteString(fmt.Sprintf("/* Injected by %s */\n", pl.Plugin.GetManifest().Name))
+							extraJS.WriteString(fmt.Sprintf("/* Injected by %s */\n", pl.Manifest.Name))
 							extraJS.WriteString(ext.Source)
 							extraJS.WriteString("\n\n")
 						}

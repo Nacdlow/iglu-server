@@ -52,7 +52,7 @@ func SearchDeviceListHandler(ctx *macaron.Context) {
 		devices := plugin.Plugin.GetAvailableDevices()
 		if len(devices) > 0 {
 			listings = append(listings, PluginDeviceListing{
-				PluginName: plugin.Plugin.GetManifest().Name,
+				PluginName: plugin.Manifest.Name,
 				Devices:    devices,
 			})
 		}

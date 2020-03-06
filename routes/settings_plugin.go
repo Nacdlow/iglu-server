@@ -135,7 +135,7 @@ func SpecificPluginSettingsHandler(ctx *macaron.Context, f *session.Flash) {
 	var pl *plugin.IgluPlugin
 	plugins := plugin.GetLoadedPlugins()
 	for i := range plugins {
-		if plugins[i].Plugin.GetManifest().Id == ctx.Params("id") {
+		if plugins[i].Manifest.Id == ctx.Params("id") {
 			pl = &plugins[i]
 			break
 		}
@@ -147,10 +147,28 @@ func SpecificPluginSettingsHandler(ctx *macaron.Context, f *session.Flash) {
 		return
 	}
 
-	ctx.Data["PluginSettings"] = pl.Plugin.GetPluginConfiguration()
+	ctx.Data["PluginSettings"] = pl.Config
 	ctx.HTML(http.StatusOK, "settings/plugin_setting")
 }
 
 func SpecificPluginSettingsPostHandler(ctx *macaron.Context) {
+
+}
+
+func DeletePluginHandler(ctx *macaron.Context, f *session.Flash) {
+	var pl *plugin.IgluPlugin
+	plugins := plugin.GetLoadedPlugins()
+	for i := range plugins {
+		if plugins[i].Manifest.Id == ctx.Params("id") {
+			pl = &plugins[i]
+			break
+		}
+	}
+
+	if pl == nil {
+		f.Error("Cannot find plugin.")
+		ctx.Redirect("/settings/plugins")
+		return
+	}
 
 }
