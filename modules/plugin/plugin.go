@@ -82,7 +82,7 @@ func UnloadAllPlugins() {
 	defer mutex.Unlock()
 	log.Println("Unloading plugins...")
 	for i, plugin := range loadedPlugins {
-		if plugin.client != nil && plugin.client.Exited() {
+		if plugin.client != nil && !plugin.client.Exited() {
 			plugin.client.Kill()
 		}
 		loadedPlugins[i].State = Stopped
