@@ -53,10 +53,10 @@
 	<div id="button-{{.DeviceID}}" class="button-{{.DeviceID}} text-center justify-content-center d-flex"></div>
 </div>
 <div class="footerdiv-{{.DeviceID}}" id="footerdiv-{{.DeviceID}}">
-	<div class="card-footer" {{if .Status}}style="background-color: #A8FFA8;" {{else}}style="background-color: #FF6666;"
-		{{end}}>
-		<small class="text-muted black-text">{{if .Status}}Connected to David's
-			Iphone{{else}}Disconnected{{end}}</small>
+	<div class="card-footer" {{if .Status}}style="background-color: #A8FFA8;"
+	{{else}}style="background-color: #CDCDCD;" {{end}}>
+		<p class="mb-0">{{if .Status}}Connected to David's
+			Iphone{{else}}Disconnected{{end}}</p>
 	</div>
 </div>
 </div>

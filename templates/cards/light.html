@@ -56,10 +56,11 @@
 	<div id="button-{{.DeviceID}}" class="button-{{.DeviceID}} text-center justify-content-center d-flex"></div>
 </div>
 <div class="footerdiv-{{.DeviceID}}" id="footerdiv-{{.DeviceID}}">
-	<div class="card-footer" {{if .Status}}style="background-color: #FEFF9E;" {{else}}style="background-color: #FF6666;"
-		{{end}}>
-		<small class="text-muted black-text">{{if .Status}}Time on: {{CalcSince .ToggledUnix}}{{else}}Last on:
-			{{CalcSince .ToggledUnix}}{{end}}</small>
+	<div class="card-footer" {{if .Status}}style="background-color: #A8FFA8;"
+	{{else}}style="background-color: #CDCDCD;" {{end}} id="footer">
+		<p class="mb-0">
+			{{if .Status}}Time on: {{CalcSince .ToggledUnix}}{{else}}Last on:
+			{{CalcSince .ToggledUnix}}{{end}}</p>
 	</div>
 </div>
 </div>

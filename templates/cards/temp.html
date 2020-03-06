@@ -61,10 +61,11 @@
 </div>
 
 <div class="footerdiv-{{.DeviceID}}" id="footerdiv-{{.DeviceID}}">
-	<div class="card-footer" {{if .Status}}style="background-color: #A8FFA8;" {{else}}style="background-color: #FF6666"
+	<div class="card-footer" {{if .Status}}style="background-color: #A8FFA8;" {{else}}style="background-color: #CDCDCD"
 		;{{end}}>
-		<small class="text-muted">{{if .Status}}Running Time: {{CalcSince .ToggledUnix}}{{else}}Last on:
-			{{CalcSince .ToggledUnix}}{{end}}</small>
+		<p class="mb-0">{{if .Status}}Running Time: {{CalcSince .ToggledUnix}}{{else}}Last on:
+			{{CalcSince .ToggledUnix}}{{end}}</p>
+			
 	</div>
 </div>
 </div>
