@@ -27,6 +27,7 @@ type IgluPlugin struct {
 	Plugin   sdk.Iglu
 	client   *plugin.Client
 	State    PluginState
+	Filename string
 	Config   []sdk.PluginConfig
 	Manifest sdk.PluginManifest
 }
@@ -59,6 +60,20 @@ func markCrashedPlugins() {
 func GetLoadedPlugins() []IgluPlugin {
 	markCrashedPlugins()
 	return loadedPlugins
+}
+
+// DeletePlugin will unload and delete plugin from disk.
+func DeletePlugin(id string) {
+	mutex.Lock()
+	defer mutex.Unlock()
+	for i, plugin := range loadedPlugins {
+		if plugin.client != nil && plugin.client.Exited() {
+			plugin.client.Kill()
+		}
+		os.Remove("./plugins/" + plugin.Filename)
+		loadedPlugins = append(loadedPlugins[:i], loadedPlugins[i+1:]...)
+		return
+	}
 }
 
 // UnloadAllPlugins unloads all loaded plugins.
@@ -148,6 +163,7 @@ func LoadPlugin(f string) {
 		Plugin:   plugin,
 		client:   client,
 		State:    Running,
+		Filename: f,
 		Manifest: plugin.GetManifest(),
 		Config:   plugin.GetPluginConfiguration(),
 	})
