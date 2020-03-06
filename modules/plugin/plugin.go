@@ -62,16 +62,49 @@ func GetLoadedPlugins() []IgluPlugin {
 	return loadedPlugins
 }
 
+// StopPlugin stops a running plugin.
+func StopPlugin(id string) {
+	mutex.Lock()
+	defer mutex.Unlock()
+	for i, plugin := range loadedPlugins {
+		if plugin.Manifest.Id == id {
+			if !plugin.client.Exited() && plugin.State == Running {
+				plugin.client.Kill()
+				loadedPlugins[i].State = Stopped
+			}
+		}
+	}
+}
+
+// StartPlugin starts a stopped or crashed plugin.
+func StartPlugin(id string) {
+	mutex.Lock()
+	for i, plugin := range loadedPlugins {
+		if plugin.Manifest.Id == id {
+			file := plugin.Filename
+			if plugin.client.Exited() && plugin.State != Running {
+				loadedPlugins = append(loadedPlugins[:i], loadedPlugins[i+1:]...)
+			}
+			mutex.Unlock()
+			LoadPlugin(file)
+			return
+		}
+	}
+
+}
+
 // DeletePlugin will unload and delete plugin from disk.
 func DeletePlugin(id string) {
 	mutex.Lock()
 	defer mutex.Unlock()
 	for i, plugin := range loadedPlugins {
-		if plugin.client != nil && plugin.client.Exited() {
-			plugin.client.Kill()
+		if plugin.Manifest.Id == id {
+			if plugin.client != nil && plugin.client.Exited() {
+				plugin.client.Kill()
+			}
+			os.Remove("./plugins/" + plugin.Filename)
+			loadedPlugins = append(loadedPlugins[:i], loadedPlugins[i+1:]...)
 		}
-		os.Remove("./plugins/" + plugin.Filename)
-		loadedPlugins = append(loadedPlugins[:i], loadedPlugins[i+1:]...)
 		return
 	}
 }
@@ -115,10 +148,17 @@ func GetPlugin(id string) (*IgluPlugin, error) {
 	return nil, errors.New("Plugin is not loaded")
 }
 
-// LoadPlugin loads a plugin from a file path.
-func LoadPlugin(f string) {
-	mutex.Lock()
-	defer mutex.Unlock()
+func newClient(file string, logger hclog.Logger) *plugin.Client {
+	return plugin.NewClient(&plugin.ClientConfig{
+		HandshakeConfig: handshakeConfig,
+		Plugins:         pluginMap,
+		Managed:         true,
+		Cmd:             exec.Command(file),
+		Logger:          logger,
+	})
+}
+
+func hostPlugin(f string) IgluPlugin {
 	// Create an hclog.Logger
 	logger := hclog.New(&hclog.LoggerOptions{
 		Name:   "plugin",
@@ -126,13 +166,7 @@ func LoadPlugin(f string) {
 		Level:  hclog.Debug,
 	})
 	// We're a host! Start by launching the plugin process.
-	client := plugin.NewClient(&plugin.ClientConfig{
-		HandshakeConfig: handshakeConfig,
-		Plugins:         pluginMap,
-		Managed:         true,
-		Cmd:             exec.Command(fmt.Sprintf("./plugins/%s", f)),
-		Logger:          logger,
-	})
+	client := newClient(fmt.Sprintf("./plugins/%s", f), logger)
 
 	// Connect via RPC
 	rpcClient, err := client.Client()
@@ -151,22 +185,30 @@ func LoadPlugin(f string) {
 	if err != nil {
 		log.Printf("Failed to load plugin %s (onLoad): %s\n", f, err)
 	}
-
-	// We cannot load the same plugin twice!
-	if IsPluginLoaded(plugin.GetManifest().Id) {
-		log.Printf("Cannot load plugin '%s' as it is already loaded!\n", plugin.GetManifest().Id)
-		client.Kill()
-		return
-	}
-
-	loadedPlugins = append(loadedPlugins, IgluPlugin{
+	return IgluPlugin{
 		Plugin:   plugin,
 		client:   client,
 		State:    Running,
 		Filename: f,
 		Manifest: plugin.GetManifest(),
 		Config:   plugin.GetPluginConfiguration(),
-	})
+	}
+}
+
+// LoadPlugin loads a plugin from a file path.
+func LoadPlugin(f string) {
+	mutex.Lock()
+	defer mutex.Unlock()
+	plugin := hostPlugin(f)
+
+	// We cannot load the same plugin twice!
+	if IsPluginLoaded(plugin.Manifest.Id) {
+		log.Printf("Cannot load plugin '%s' as it is already loaded!\n", plugin.Manifest.Id)
+		plugin.client.Kill()
+		return
+	}
+
+	loadedPlugins = append(loadedPlugins, plugin)
 }
 
 // IsPluginLoaded returns whether a plugin is loaded based on the plugin ID.

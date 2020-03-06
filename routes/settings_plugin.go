@@ -165,3 +165,18 @@ func DeletePluginHandler(ctx *macaron.Context, f *session.Flash) {
 	plugin.DeletePlugin(ctx.Params("id"))
 	ctx.Redirect("settings/plugins")
 }
+
+func PluginStateHandler(ctx *macaron.Context) {
+	id := ctx.Params("id")
+	_, err := plugin.GetPlugin(id)
+	if err != nil {
+		return
+	}
+
+	switch ctx.ParamsInt("state") {
+	case 0:
+		plugin.StopPlugin(id)
+	case 1:
+		plugin.StartPlugin(id)
+	}
+}
