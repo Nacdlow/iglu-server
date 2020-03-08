@@ -261,7 +261,7 @@
       labels: [{{range .Stats}}"{{HourStamp .StatTime}}", {{end}}],
       datasets: [{
         label: "Power Usage (kW)",
-		  data: [{{range .Stats}}{{.PowerConAvg}}, {{end}}],
+		  data: [{{range .Stats}}{{RoundPower .PowerConAvg}}, {{end}}],
         backgroundColor: [
           // 'rgba(55, 102, 255, .5)',
           'rgba(127,157,255,0.5)'
@@ -276,7 +276,7 @@
       },
       {
         label: "Power Generation (kW)",
-        data: [{{range .Stats}}{{.PowerGenAvg}}, {{end}}],
+        data: [{{range .Stats}}{{RoundPower .PowerGenAvg}}, {{end}}],
         backgroundColor: [
           'rgba(255,165,0, .5)',
         ],

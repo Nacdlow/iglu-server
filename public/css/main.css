@@ -698,6 +698,7 @@ input {
   
 }
 
+<<<<<<< HEAD
 #moveRoomLink{
   opacity: 1.0;
   filter: alpha(opacity=100);
@@ -708,3 +709,14 @@ input {
     filter: alpha(opacity=40);
     background-color: var(--iglu-colour);
 }
+=======
+.toast-header {
+  background-color: var(--light);
+  color: white;
+}
+
+
+.card-header {
+  background-color: var(--light);
+}
+>>>>>>> d0a6fb672c41d277e35a9088d457c3c5205b243f
