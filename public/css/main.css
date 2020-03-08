@@ -406,6 +406,14 @@ a {
   .back-button {
     display: none;
   }
+
+  .text-center-lg{
+    text-align: center;
+  }
+
+  .fa-2x-lg {
+    font-size: 2em;
+  }
 }
 
 @media (max-width: 992px) {
