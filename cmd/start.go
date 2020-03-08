@@ -13,6 +13,7 @@ import (
 	"html/template"
 	"io"
 	"log"
+	"math"
 	"net/http"
 	"net/http/pprof"
 	"os"
@@ -75,6 +76,9 @@ func getMacaron(dev bool) *macaron.Macaron {
 			"HourStamp": func(unix int64) string {
 				time := time.Unix(unix, 0)
 				return time.Format("3:04pm")
+			},
+			"RoundPower": func(power float64) float64 {
+				return math.Round(power*100) / 100
 			},
 		}},
 	}
