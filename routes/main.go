@@ -46,9 +46,15 @@ func DashboardHandler(ctx *macaron.Context, f *session.Flash) {
 }
 
 // AlertsHandler handles the alerts page
-func AlertsHandler(ctx *macaron.Context) {
+func AlertsHandler(ctx *macaron.Context, sess session.Store) {
 	ctx.Data["CrossBack"] = 1
 	ctx.Data["IsAlerts"] = 1
+	alerts, err := models.GetUserAlerts(sess.Get("username").(string))
+	if err != nil {
+		panic(err)
+	}
+	ctx.Data["None"] = (len(alerts) == 0)
+	ctx.Data["Alerts"] = alerts
 	ctx.HTML(http.StatusOK, "alerts")
 }
 

@@ -4,25 +4,15 @@ import (
 	"errors"
 )
 
-// AlertCategory is a ranking of how severe the aleart is.
-type AlertCategory int64
-
-// AlertCategory enums from lowest to highest.
-const (
-	Low    = iota // 0
-	Medium        // 1
-	High          // 2
-)
-
 // Alert struct represents the Alert title, AlertCategory (severity), Alert Message,
 // and also the time the Alert was sent to the user
 type Alert struct {
-	AlertID    int64         `xorm:"pk autoincr" json:"id" xml:"id,attr"`
-	Time       int64         `json:"time" xml:"time"`
-	Username   string        `xorm:"index" json:"username" xml:"username,attr"`
-	Title      string        `json:"title" xml:"title"`
-	Message    string        `json:"message" xml:"message"`
-	Importance AlertCategory `json:"importance" xml:"importance"`
+	AlertID     int64  `xorm:"pk autoincr" json:"id" xml:"id,attr"`
+	Time        int64  `json:"time" xml:"time"`
+	Username    string `xorm:"index" json:"username" xml:"username,attr"`
+	Title       string `json:"title" xml:"title"`
+	Message     string `json:"message" xml:"message"`
+	IsImportant bool   `json:"isImportant" xml:"is_important"`
 }
 
 // GetAlert gets a alert based on its ID from the database.
@@ -40,6 +30,12 @@ func GetAlert(id int64) (*Alert, error) {
 // GetAlerts returns an array of all alerts from the database.
 func GetAlerts() (alerts []Alert, err error) {
 	err = engine.Find(&alerts)
+	return
+}
+
+// GetUserAlerts returns an array of all alerts of a corresponding user.
+func GetUserAlerts(user string) (alerts []Alert, err error) {
+	err = engine.Where("username = ?", user).Find(&alerts)
 	return
 }
 
