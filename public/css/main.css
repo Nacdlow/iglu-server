@@ -702,3 +702,8 @@ input {
   background-color: var(--light);
   color: white;
 }
+
+
+.card-header {
+  background-color: var(--light);
+}
