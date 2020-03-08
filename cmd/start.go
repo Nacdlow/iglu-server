@@ -55,6 +55,9 @@ var CmdStart = &cli.Command{
 func getMacaron(dev bool) *macaron.Macaron {
 	m := macaron.Classic()
 	renderOpts := macaron.RenderOptions{
+		PrefixXML:  []byte(`<?xml version="1.0" encoding="utf-8" ?>`),
+		IndentJSON: true,
+		IndentXML:  true,
 		Funcs: []template.FuncMap{map[string]interface{}{
 			"CalcSince": func(unix int64) string {
 				dur := time.Since(time.Unix(unix, 0)).Round(time.Minute)
@@ -173,6 +176,11 @@ func getMacaron(dev bool) *macaron.Macaron {
 				})
 
 				m.Get("/appearance", routes.AppearanceSettingsHandler)
+				m.Group("/data", func() {
+					m.Get("", routes.DataSettingsHandler)
+					m.Get("/json", routes.JSONDataSettingsHandler)
+					m.Get("/xml", routes.XMLDataSettingsHandler)
+				})
 				m.Get("/appearance/font/:size", routes.FontSliderHandler)
 				m.Get("/about", routes.AboutSettingsHandler)
 			})

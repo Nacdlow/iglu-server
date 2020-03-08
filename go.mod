@@ -4,7 +4,7 @@ go 1.13
 
 require (
 	github.com/BurntSushi/toml v0.3.1
-	github.com/Nacdlow/plugin-sdk v0.0.0-20200308001459-a2a4455e4624
+	github.com/Nacdlow/plugin-sdk v0.0.0-20200308015102-f9f169a26fdc
 	github.com/adlio/darksky v0.0.0-20190219023837-63c8e8a7fabe
 	github.com/brianvoe/gofakeit/v4 v4.2.3
 	github.com/cpuguy83/go-md2man/v2 v2.0.0 // indirect
