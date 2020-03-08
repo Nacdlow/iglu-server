@@ -78,6 +78,7 @@ func SpecificRoomsHandler(ctx *macaron.Context) {
 		}
 		ctx.Data["NavTitle"] = room.RoomName
 		ctx.Data["Room"] = room
+		ctx.Data["Rooms"], err = models.GetRooms()
 		ctx.Data["Devices"], err = models.GetDevices()
 		if err != nil {
 			panic(err)

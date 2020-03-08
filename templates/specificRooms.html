@@ -113,54 +113,54 @@
     </div>
 </div>
 
-<!--<div class="modal bottom fade" id="options" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-  aria-hidden="true" data-backdrop="false">
-  <div class="modal-dialog modal-dialog-centered" role="document" data-backdrop="false">
-    <div class="modal-content" data-backdrop="false" method="POST">
-      <div class="modal-header navcolor">
-        <h5 class="modal-title">Options</h5>
+<!-- move Device -->
+<div class="modal fade" id="moveDevice" tabindex="-1" role="dialog"
+	aria-labelledby="moveDevice" aria-hidden="true">
+
+	<!-- Change class .modal-sm to change the size of the modal -->
+	<div class="modal-dialog modal-lg" role="document">
+		
+		<div class="modal-content" style="background-color:   #121212;">
+			<div class="modal-header">
+				<h4 class="modal-title w-100 white-text" id="moveDevice">Move Device to:
+        </h4>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true"><i class="fas fa-times white-text"></i></span>
-        </button>
+					<span aria-hidden="true">&times;</span>
+				</button>
       </div>
-      <div class="modal-body">
-        <p class="text-center black-text">Bass</p>
-        <div class="d-flex justify-content-center">
-          <span class="font-weight-bold red-text mr-2"><i class="fas fa-minus fa-lg" aria-hidden="true"></i></span>
-          <form class="range-field">
-            <input class="custom-range" type="range" min="0" max="10" />
-          </form>
-          <span class="font-weight-bold green-text ml-2"><i class="fas fa-plus fa-lg" aria-hidden="true"></i></span>
-        </div>
-        <p class="text-center pt-3 black-text">Midrange</p>
-        <div class="d-flex justify-content-center">
-          <span class="font-weight-bold red-text mr-2"><i class="fas fa-minus fa-lg" aria-hidden="true"></i></span>
-          <form class="range-field">
-            <input class="custom-range" type="range" min="0" max="10" />
-          </form>
-          <span class="font-weight-bold green-text ml-2"><i class="fas fa-plus fa-lg" aria-hidden="true"></i></span>
-        </div>
-        <p class="text-center pt-3 black-text">Treble</p>
-        <div class="d-flex justify-content-center pb-3">
-          <span class="font-weight-bold red-text mr-2"><i class="fas fa-minus fa-lg" aria-hidden="true"></i></span>
-          <form class="range-field">
-            <input class="custom-range" type="range" min="0" max="10" />
-          </form>
-          <span class="font-weight-bold green-text ml-2"><i class="fas fa-plus fa-lg" aria-hidden="true"></i></span>
-        </div>
-        <div class="text-center">
-          <button class="btn red">Disconnect</button>
-          <button class="btn green">Connect</button>
+      <div class="row justify-content-center pt-3 pb-3 p-3">
+        {{range .Rooms}}{{if not (eq .RoomID $.Room.RoomID)}}
+    <div class="col-lg-4">
+      <a class="room-{{.RoomID}}" onclick="move({{.RoomID}})">
+      <div class="card mr-lg-0 mb-4" id="moveRoomLink">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-8">
+              <h2 id="name-{{.RoomID}}">{{.RoomName}}</h2>
+            </div>
+            <div class="col-4 d-flex align-items-center justify-content-end">
+              <i class="{{if eq .RoomType 0}}fas fa-couch{{else if eq .RoomType 1}}fas fa-bed{{else if eq .RoomType 2}}
+          fas fa-coffee{{else if eq .RoomType 3}}fas fa-utensils{{else if eq .RoomType 4}}fas fa-bath{{else if eq .RoomType 5}}
+          fas fa-door-open{{else if eq .RoomType 6}}fas fa-toolbox{{else if eq .RoomType 7}}fas fa-socks{{else if eq .RoomType 8}}
+          fas fa-warehouse{{else if eq .RoomType 9}}fas fa-user{{end}} fa-2x"></i>
+          </div>
         </div>
       </div>
-      <div class="modal-footer justify-content-center d-flex navcolor">
-        <button type="button" class="btn bodycolor" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn white black-text">Save changes</button>
-      </div>
-      </form>
     </div>
+  </a>
   </div>
-</div> -->
+  {{end}}{{end}}
+</div>
+			<div class="text-center"> 
+				<button type="button" class="btn btn btn-danger-new bodycolor btn-phat" data-dismiss="modal">Cancel</button>
+				<button type="submit" data-dismiss="modal" class="btn btn-success-new bodycolor btn-phat" id="move-{{.DeviceID}}"
+          onclick="$.get('/move_device/{{.DeviceID}}');reload();">Move Device</button>
+          
+			</div>
+	</div>
+</div>
+</div>
+<!-- /move Device -->
 
 {{template "base/scripts" .}}
 <script>
@@ -177,6 +177,10 @@
 	setInterval(function () {
 		update() // this will run after every 1 seconds
 	}, 1000);
+
+  function move(id){
+
+  }
 </script>
 {{template "base/tabnav" .}}
 {{template "base/footer" .}}

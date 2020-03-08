@@ -697,3 +697,14 @@ input {
   border-bottom: 1.5px solid #888 !important;
   
 }
+
+#moveRoomLink{
+  opacity: 1.0;
+  filter: alpha(opacity=100);
+}
+
+#moveRoomLink:hover {
+  opacity: 0.5;
+    filter: alpha(opacity=40);
+    background-color: var(--iglu-colour);
+}
