@@ -32,6 +32,7 @@ func TestUserFavRooms(t *testing.T) {
 		FirstName:    "Alakbar",
 		LastName:     "Zeynalzade",
 		Role:         AdminRole,
+		FontSize:     "medium",
 		FavRoomsList: []int64{1, 2},
 	}))
 	// Getting the user

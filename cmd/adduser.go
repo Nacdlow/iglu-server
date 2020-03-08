@@ -39,6 +39,7 @@ func adduser(c *cli.Context) (err error) {
 		fmt.Println("Creating a regular (normal) user")
 		u.Role = models.NormalRole
 	}
+	u.FontSize = "medium"
 	fmt.Printf("Username (email): ")
 	fmt.Scanln(&u.Username)
 	fmt.Printf("First name: ")

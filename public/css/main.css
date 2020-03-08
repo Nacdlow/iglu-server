@@ -3,7 +3,8 @@
 
 :root {
   /* Main Background Colour */
-  --back: #121116;
+  /* --back: #121116; */
+  --back: #121212;
 
   /* Border Radius On Elements */
   --nav-radius: 50px;
@@ -11,15 +12,18 @@
 
   /* T H E M E   C O L O U R S */
   /* ========================= */
-  --top-bar: #1c1b20; /* Navbar Background Colours */
-  --bottom-bar: #1c1b20; /* Navbar Background Colours */
+  /* --top-bar: #1c1b20; Navbar Background Colours
+  --bottom-bar: #1c1b20; Navbar Background Colours */
+
+  --top-bar: #202020; /* Navbar Background Colours */
+  --bottom-bar: #202020; /* Navbar Background Colours */
 
   --iglu-colour: #3766ff; /* Iglu Accent Colour */
   --button-border: #888;
   --green-colour: #00e900;
   --red-colour: #e90000;
   --hover: #eeeeee; /* Hover colour on bottons */
-  --light: #454452; /* Some Text */
+  --light: #323232; /* Some Text */
   --cool-button: #26272c; /* Some text */
 
   /* F O N T   S I Z E S */
@@ -113,7 +117,7 @@ html {
    border-right: solid 2px var(--iglu-colour);
  }
 
- .navbar, .split-top {
+ .split-top {
    border-bottom: solid 2px var(--iglu-colour);
  }
 

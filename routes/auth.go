@@ -103,6 +103,7 @@ func AddUserHandler(ctx *macaron.Context, form forms.RegisterForm, f *session.Fl
 		Password:  string(pass),
 		FirstName: form.FirstName,
 		LastName:  form.LastName,
+		FontSize:  "medium",
 	}
 	err = models.AddUser(user)
 	if err != nil {

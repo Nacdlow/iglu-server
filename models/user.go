@@ -79,6 +79,7 @@ func GetUsers() (users []User, err error) {
 
 // AddUser adds a User in the database.
 func AddUser(u *User) (err error) {
+
 	_, err = engine.Insert(u)
 	return err
 }
