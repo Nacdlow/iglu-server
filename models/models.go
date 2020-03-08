@@ -20,9 +20,11 @@ var (
 
 func init() {
 	tables = append(tables,
+		new(Alert),
 		new(Device),
 		new(Room),
 		new(RoomStat),
+		new(Schedule),
 		new(Statistic),
 		new(User),
 	)

@@ -45,15 +45,33 @@ func GetSchedule(id int64) (*Schedule, error) {
 	return sch, nil
 }
 
+// GetSchedules returns an array of all schedules from the database.
+func GetSchedules() (schedules []Schedule, err error) {
+	err = engine.Find(&schedules)
+	return
+}
+
 // AddSchedule makes a new schedule
 func AddSchedule(sch *Schedule) (err error) {
 	_, err = engine.Insert(sch)
 	return
 }
 
+// HasSchedule returns whether a schedule is in the database or not.
+func HasSchedule(id int64) (has bool) {
+	has, _ = engine.Get(&Schedule{ScheduleID: id})
+	return
+}
+
 // UpdateSchedule updates the values of the schedule
 func UpdateSchedule(d *Schedule) (err error) {
 	_, err = engine.Id(d.ScheduleID).Update(d)
+	return
+}
+
+// UpdateScheduleCols will update the columns of an item even if they are empty.
+func UpdateScheduleCols(d *Schedule, cols ...string) (err error) {
+	_, err = engine.ID(d.ScheduleID).Cols(cols...).Update(d)
 	return
 }
 
