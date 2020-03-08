@@ -694,5 +694,6 @@ input {
 .hr-text::after {
   content: "";
   flex: 1;
-  border-bottom: 1.5px solid white !important;
+  border-bottom: 1.5px solid #888 !important;
+  
 }
