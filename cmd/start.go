@@ -159,6 +159,7 @@ func getMacaron(dev bool) *macaron.Macaron {
 				m.Post("/plugin/:id", routes.SpecificPluginSettingsPostHandler)
 
 				m.Get("/plugin/:id/delete", routes.DeletePluginHandler)
+				m.Get("/plugin/:id/reload", routes.ReloadPluginHandler)
 				m.Get("/plugin/:id/:state([0-1])", routes.PluginStateHandler)
 
 				m.Group("/accounts", func() {

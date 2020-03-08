@@ -166,6 +166,18 @@ func DeletePluginHandler(ctx *macaron.Context, f *session.Flash) {
 	ctx.Redirect("/settings/plugins")
 }
 
+func ReloadPluginHandler(ctx *macaron.Context, f *session.Flash) {
+	if !plugin.IsPluginLoaded(ctx.Params("id")) {
+		f.Error("Cannot find plugin.")
+		ctx.Redirect("/settings/plugins")
+		return
+	}
+
+	plugin.ReloadPlugin(ctx.Params("id"))
+	f.Success("Plugin reloaded!")
+	ctx.Redirect("/settings/plugin/" + ctx.Params("id"))
+}
+
 func PluginStateHandler(ctx *macaron.Context) {
 	id := ctx.Params("id")
 	_, err := plugin.GetPlugin(id)

@@ -90,7 +90,12 @@ func StartPlugin(id string) {
 			return
 		}
 	}
+}
 
+// ReloadPlugin stops and starts a plugin.
+func ReloadPlugin(id string) {
+	StopPlugin(id)
+	StartPlugin(id)
 }
 
 // DeletePlugin will unload and delete plugin from disk.
