@@ -35,7 +35,7 @@
 				</div>
 				<a class="dropdown-item black-text" href="#" onclick="edit({{.DeviceID}});">Edit</a>
 				<a class="dropdown-item black-text" href="#" id="move-{{.DeviceID}}" data-toggle="modal"
-				data-target="#moveDevice-{{.DeviceID}}">Move</a>
+				data-target="#moveDevice">Move</a>
 				<a class="dropdown-item black-text" href="#" id="remove-{{.DeviceID}}" data-toggle="modal"
 					data-target="#removeDevice-{{.DeviceID}}">Delete</a>
 			</div>
@@ -89,6 +89,9 @@
 	</div>
 </div>
 <!-- /Remove Device -->
+
+
+
 <script>
 	function edit(id) {//swaps room title with an input field and changes the button to a save button.
 		var toggleDiv = document.getElementById("toggleHide-"+id);

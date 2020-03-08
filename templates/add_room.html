@@ -4,27 +4,28 @@
   <div class="d-flex d-flex justify-content-center pt-4">
     <div class="col-lg-6 col-md-8 col-sm-12">
       <div class="card mr-lg-0 mb-4">
-        <div class="card-body">
-          <div class="d-flex justify-content-center pt-2">
+        <div class="card-header pt-4 pb-4">
+          <div class="d-flex justify-content-center align-items-center">
             <div class="col-1 d-flex justify-content-start p-0">
               <a class="fas fa-times-circle fa-lg" onclick="history.back();"></a>
             </div>
             <div class="col-10">
-              <h2 class="text-center">Add Room</h2>
+              <h2 class="text-center mb-0">Add Room</h2>
             </div>
             <div class="col-1 p-0">
 
             </div>
           </div>
-          <hr>
+        </div>
+        <div class="card-body">
           <form method="POST">
-            <h6 class="text-center pt-4">Enter Room Name:</h6>
-            <div class="md-form justify-content-center d-flex mr-lg-5 ml-lg-5 mr-sm-0 ml-sm-0">
+            <h6 class="text-center">Enter Room Name:</h6>
+            <div class="md-form justify-content-center d-flex mt-3 mr-lg-5 ml-lg-5 mr-sm-0 ml-sm-0">
               <input type="text" class="form-control white-text text-center" placeholder="e.g. John's Room"
                 name="room_name" required>
             </div>
             <h6 class="text-center">Enter Room Description:</h6>
-            <div class="md-form justify-content-center d-flex mr-lg-5 ml-lg-5 mr-sm-0 ml-sm-0">
+            <div class="md-form justify-content-center d-flex mt-3 mr-lg-5 ml-lg-5 mr-sm-0 ml-sm-0">
               <input type="text" class="form-control white-text text-center" placeholder="Description"
                 name="description">
             </div>
