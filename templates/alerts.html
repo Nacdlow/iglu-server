@@ -6,36 +6,25 @@
 		<hr class="">
 	</div>
 
+
 	<div class="pt-3 animated fadeInUp faster">
+	{{if .None}}
+		<p class="text-center text-muted">You have no notifications</p>
+	{{end}}
 
-		<!-- <p class="text-center text-muted">You have no notifications</p>-->
-
+	{{range .Alerts}}
 		<div class="pb-3">
 			<div class="toast-header p-3">
 				<i class="fas fa-bell fa-lg pr-2 animated swing infinite faster"></i>
-				<h3 class="mr-auto mb-0">Notification Title</h3>
-				<small>11 mins ago</small>
+				<h3 class="mr-auto mb-0">{{.Title}} {{if.IsImportant}}<i class="fas
+						   fa-exclamation-circle"></i>{{end}}</h3>
+				<small>{{CalcSince .Time}}</small>
 			</div>
 			<div class="toast-body navcolor">
-				Notification Message...
-				Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cupiditate eligendi error esse distinctio
-				dolor dolorum.
+				<p>{{.Message}}</p>
 			</div>
 		</div>
-
-		<div class="toast-header p-3">
-			<i class="fas fa-bell fa-lg pr-2 animated swing infinite faster"></i>
-			<h3 class="mr-auto mb-0">Notification Title <i class="fas fa-exclamation-circle"></i>
-			</h3>
-
-
-			<small>11 mins ago</small>
-		</div>
-		<div class="toast-body navcolor">
-			Notification Message...
-			Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cupiditate eligendi error esse distinctio dolor
-			dolorum.
-		</div>
+		{{end}}
 	</div>
 
 </div>

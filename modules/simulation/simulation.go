@@ -12,6 +12,10 @@ import (
 	"gitlab.com/group-nacdlow/nacdlow-server/modules/weather"
 )
 
+const (
+	BatteryLowerLimit = -100
+)
+
 var (
 	// Env is the current simulation Environment
 	Env Environment
@@ -233,6 +237,9 @@ func calculatePower(now time.Time, runningLights int, runningTempCont int) {
 	Env.BatteryStore += Env.NetPower / 60 / 60
 	if Env.BatteryStore > settings.Config.GetFloat64("Simulation.BatteryCapacityKWH") {
 		Env.BatteryStore = settings.Config.GetFloat64("Simulation.BatteryCapacityKWH")
+	}
+	if Env.BatteryStore < BatteryLowerLimit {
+		Env.BatteryStore = BatteryLowerLimit
 	}
 
 	// Update kWh solar generation value
