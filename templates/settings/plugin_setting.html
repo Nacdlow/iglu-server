@@ -1,18 +1,19 @@
 {{template "base/head" .}}
 {{template "base/nav" .}}
 {{template "base/flash" .}}
-
 <div class="container">
   <div class="row align-items-center justify-content-center pt-3">
     <div class="col-3">
       <a class="fas fa-arrow-circle-left fa-2x text-left" href="/settings/plugins"></a>
     </div>
     <div class="col-6">
-      <h2 class="text-center mb-0">[Title for Plugin]</h2>
+		<h2 class="text-center mb-0">{{.Plugin.Manifest.Name}} <span
+			class="text-muted">({{.Plugin.Manifest.Version}}) by
+			{{.Plugin.Manifest.Author}}</span></h2>
     </div>
     <div class="col-3 d-flex justify-content-end align-items-center">
       <a class="btn btn-border-iglu btn-phat navcolor text-center p-3 m-0"
-        href="https://market.nacdlow.com/{{.ID}}">View in Marketplace</a>
+        href="https://market.nacdlow.com/{{.Plugin.Manifest.Id}}">View in Marketplace</a>
     </div>
   </div>
   <div class="pt-2">
@@ -23,102 +24,43 @@
 
     <div class="col-12">
       <div class="list-group">
-        <div class="list-group-item list-group-item-action">
-
+		  {{range .Plugin.Config}}
+		  <div class="list-group-item list-group-item-action"> <!-- option -->
           <div class="row align-items-center">
-
             <div class="d-flex align-items-center">
-              <i class="fas fa-user pl-3"></i>
+				{{if .IsUserSpecific}}<i class="fas fa-user pl-3" data-toggle="tooltip" data-placement="top" title="This setting is user-specific"></i>{{else}}
+				<i class="fas fa-globe-europe pl-3" data-toggle="tooltip" data-placement="top" title="This setting applies to all users"></i>{{end}}
             </div>
-
             <div class="col-6">
-              <h6>
-                Option Title
-              </h6>
-              <p class="mb-0"><i>Description for Option</i></p>
+				<h6> {{.Title}}</h6>
+				<p class="mb-0"><i>{{.Description}}</i></p>
             </div>
-
             <div class="col">
-
-              <form method="POST">
-                <select class="browser-default custom-select" id="select" name="#">
-                  <option value="" disabled selected>Option Input Type</option>
-                  <option value="0">#</option>
-                  <option value="1">#</option>
-                  <option value="2">#</option>
-                  <option value="3">#</option>
+				{{if eq .Type 0}}
+                <input type="text" class="form-control black-text" placeholder="Another Option Type"
+				  name="field-{{.Key}}">
+				{{else if eq .Type 1}}
+                <input type="number" class="form-control black-text" placeholder="Another Option Type"
+				 name="field-{{.Key}}">
+				{{else if eq .Type 2}}
+				<select class="browser-default custom-select" id="select" name="field-{{.Key}}">
+					{{range $k, $v := .Values}}
+					<option value="{{$v}}">{{$v}}</option>
+				  {{end}}
                 </select>
-
-              </form>
-            </div>
-          </div>
-
-        </div>
-
-        <div class="list-group-item list-group-item-action">
-
-          <div class="row align-items-center">
-
-            <div class="d-flex align-items-center">
-              <i class="pl-3 fas fa-globe-americas"></i>
-            </div>
-
-            <div class="col-6">
-              <h6>
-                Another Option Title
-              </h6>
-              <p class="mb-0"><i>Another Description for Option</i></p>
-            </div>
-
-            <div class="col">
-
-              <form method="POST">
-
-                <input type="text" class="form-control white-text disabled" placeholder="Another Option Type"
-                  name="description">
-
-
-              </form>
-            </div>
-          </div>
-        </div>
-
-
-        <div class="list-group-item list-group-item-action">
-
-          <div class="row align-items-center">
-
-            <div class="d-flex align-items-center">
-              <i class="pl-3 fas fa-globe-americas"></i>
-            </div>
-
-            <div class="col-6">
-              <h6>
-                Yet Another Option Title
-              </h6>
-              <p class="mb-0"><i>Yet Another Description for Option</i></p>
-            </div>
-
-            <div class="col-lg col-3">
-
-              <form method="POST">
-
+				{{else if eq .Type 3}}
                 <div class="text-right custom-control custom-switch" id="div">
-                  <input type="checkbox" class="custom-control-input" id="customSwitches" />
+					<input type="checkbox" class="custom-control-input" id="customSwitches" name="field-{{.Key}}" />
 
                   <label class="custom-control-label" for="customSwitches">
                     Enable/Disable
                   </label>
                 </div>
+				{{end}}
 
-
-              </form>
             </div>
           </div>
-
-        </div>
-
-
+        </div>{{end}}
       </div>
     </div>
   </div>
@@ -147,5 +89,10 @@
 
 
 {{template "base/scripts" .}}
+	<script>
+$(function () {
+$('[data-toggle="tooltip"]').tooltip()
+})
+	</script>
 {{template "base/tabnav" .}}
 {{template "base/footer" .}}

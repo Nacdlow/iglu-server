@@ -14,6 +14,8 @@ github.com/BurntSushi/toml v0.3.1/go.mod h1:xHWCNGjB5oqiDr8zfno3MHue2Ht5sIBksp03
 github.com/BurntSushi/xgb v0.0.0-20160522181843-27f122750802/go.mod h1:IVnqGOEym/WlBOVXweHU+Q+/VP0lqqI8lqeDx9IjBqo=
 github.com/Nacdlow/plugin-sdk v0.0.0-20200303150351-00f9ee518bf0 h1:0kUpQS5ETDuwSopOwc10wzXRAG8OOFVlYl+HqRE4ZWo=
 github.com/Nacdlow/plugin-sdk v0.0.0-20200303150351-00f9ee518bf0/go.mod h1:2pcgvmwTD3bH8+uA0k/Rww0tJUbGvA6GQl8DDuRYles=
+github.com/Nacdlow/plugin-sdk v0.0.0-20200308001459-a2a4455e4624 h1:7WCyVkyxQvqsSKLK9A3CWjM190bdqwoBuvSnYWM2Bt4=
+github.com/Nacdlow/plugin-sdk v0.0.0-20200308001459-a2a4455e4624/go.mod h1:2pcgvmwTD3bH8+uA0k/Rww0tJUbGvA6GQl8DDuRYles=
 github.com/OneOfOne/xxhash v1.2.2/go.mod h1:HSdplMjZKSmBqAxg5vPj2TmRDmfkzw+cTzAElWljhcU=
 github.com/Shopify/sarama v1.19.0/go.mod h1:FVkBWblsNy7DGZRfXLU0O9RCGt5g3g3yEuWXgklEdEo=
 github.com/Shopify/toxiproxy v2.1.4+incompatible/go.mod h1:OXgGpZ6Cli1/URJOF1DMxUHB2q5Ap20/P/eIdh4G0pI=

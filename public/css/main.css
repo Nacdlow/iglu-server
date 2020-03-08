@@ -7,7 +7,7 @@
 
   /* Border Radius On Elements */
   --nav-radius: 50px;
-  --btn-radius: 50px;
+  --btn-radius: 25px;
 
   /* T H E M E   C O L O U R S */
   /* ========================= */
@@ -185,7 +185,7 @@ html {
   font-size: large;
   font-weight: 300;
   color: white !important;
-  border-radius: 30px !important;
+  border-radius: var(--btn-radius) !important;
   border: solid;
   border-color: rgb(0, 233, 0);
   border-width: 2px;
@@ -196,7 +196,7 @@ html {
   font-size: large;
   font-weight: 300;
   color: white !important;
-  border-radius: 30px !important;
+  border-radius: var(--btn-radius) !important;
   border: solid;
   border-color: rgb(255, 28, 28);
   border-width: 2px;

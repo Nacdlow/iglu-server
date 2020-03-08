@@ -147,7 +147,7 @@ func SpecificPluginSettingsHandler(ctx *macaron.Context, f *session.Flash) {
 		return
 	}
 
-	ctx.Data["PluginSettings"] = pl.Config
+	ctx.Data["Plugin"] = pl
 	ctx.HTML(http.StatusOK, "settings/plugin_setting")
 }
 
@@ -163,7 +163,7 @@ func DeletePluginHandler(ctx *macaron.Context, f *session.Flash) {
 	}
 
 	plugin.DeletePlugin(ctx.Params("id"))
-	ctx.Redirect("settings/plugins")
+	ctx.Redirect("/settings/plugins")
 }
 
 func PluginStateHandler(ctx *macaron.Context) {
@@ -179,4 +179,5 @@ func PluginStateHandler(ctx *macaron.Context) {
 	case 1:
 		plugin.StartPlugin(id)
 	}
+	ctx.Redirect("/settings/plugins")
 }
