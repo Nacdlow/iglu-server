@@ -257,12 +257,16 @@
         label: "Power Usage (kW)",
 		  data: [{{range .Stats}}{{.PowerConAvg}}, {{end}}],
         backgroundColor: [
-          'rgba(	55, 102, 255, .5)',
+          // 'rgba(55, 102, 255, .5)',
+          'rgba(127,157,255,0.5)'
         ],
-        borderColor: [
-          '#fff',
-        ],
+        borderColor: 'rgba(127,157,255,1)',
         borderWidth: 2,
+        pointBorderColor: '#fff',
+        pointRadius: 0,
+        pointHoverRadius: 5,
+        pointHitRadius: 15,
+        pointBackgroundColor: 'rgba(127,157,255,1)',
       },
       {
         label: "Power Generation (kW)",
@@ -270,10 +274,13 @@
         backgroundColor: [
           'rgba(255,165,0, .5)',
         ],
-        borderColor: [
-          'rgba(255,255,0, .7)',
-        ],
-        borderWidth: 2
+        borderColor: 'rgba(255,165,0, 1)',
+        borderWidth: 2,
+        pointBorderColor: '#fff',
+        pointRadius: 0,
+        pointHoverRadius: 5,
+        pointHitRadius: 15,
+        pointBackgroundColor: 'rgba(255,165,0, 1)',
       }
       ]
     },
