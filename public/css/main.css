@@ -697,3 +697,8 @@ input {
   border-bottom: 1.5px solid #888 !important;
   
 }
+
+.toast-header {
+  background-color: var(--light);
+  color: white;
+}
