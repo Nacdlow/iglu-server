@@ -164,6 +164,12 @@ func newClient(file string, logger hclog.Logger) *plugin.Client {
 }
 
 func hostPlugin(f string) IgluPlugin {
+	defer func() {
+		if r := recover(); r != nil {
+			fmt.Println("Recovered in f", r)
+		}
+	}()
+
 	// Create an hclog.Logger
 	logger := hclog.New(&hclog.LoggerOptions{
 		Name:   "plugin",

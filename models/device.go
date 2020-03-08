@@ -33,7 +33,7 @@ type Device struct {
 	UpdatedUnix    int64      `xorm:"updated" json:"updatedUnix" xml:"timestamps>updated_unix"`
 	IsFave         bool       `fake:"skip"` //whether the device has been favourited or not
 	ToggledUnix    int64      `json:"toggledUnix,omitempty" xml:"timestamps>toggled_unix,omitempty"`
-	IsRegistered   bool       `json:"isRegistered" xml:"plugin>registered,attr"`
+	IsRegistered   bool       `json:"isRegistered" xml:"plugin>registered"`
 	PluginUniqueID string     `json:"pluginUniqueID" xml:"plugin>unique_id,omitempty"`
 }
 

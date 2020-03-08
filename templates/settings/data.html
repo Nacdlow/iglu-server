@@ -1,0 +1,25 @@
+{{template "base/head" .}}
+{{template "base/nav" .}}
+<div class="container">
+  <div class="mobhide">
+    <div class="row align-items-center justify-content-center pt-4 pb-1">
+      <div class="col-4">
+        <a class="fas fa-arrow-circle-left fa-2x text-left" href="/settings"></a>
+      </div>
+      <div class="col-4">
+        <h2 class="text-center mb-0">Import/Export</h2>
+      </div>
+    <div class="col-4"></div>
+    </div>
+    <div class="pt-3">
+      <hr>
+    </div>
+  </div>
+
+  <p>You may import and export data in the following formats: </p>
+  <p><a href="/settings/data/json" class="btn btn-primary">JSON</a> <a
+	 href="/settings/data/xml" class="btn btn-warning">XML</a></p>
+</div>
+{{template "base/scripts" .}}
+{{template "base/tabnav" .}}
+{{template "base/footer" .}}

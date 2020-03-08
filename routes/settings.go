@@ -214,3 +214,44 @@ func AboutSettingsHandler(ctx *macaron.Context) {
 	ctx.Data["ArrowBack"] = 1
 	ctx.HTML(http.StatusOK, "settings/about")
 }
+
+func DataSettingsHandler(ctx *macaron.Context) {
+	ctx.Data["NavTitle"] = "Import/Export"
+	ctx.Data["ArrowBack"] = 1
+	ctx.HTML(http.StatusOK, "settings/data")
+}
+
+func JSONDataSettingsHandler(ctx *macaron.Context) {
+	alerts, _ := models.GetAlerts()
+	devices, _ := models.GetDevices()
+	rooms, _ := models.GetRooms()
+	room_stats, _ := models.GetRoomStats()
+	schedules, _ := models.GetSchedules()
+	statistics, _ := models.GetStats()
+	ctx.JSON(200, map[string]interface{}{
+		"alerts":     alerts,
+		"device":     devices,
+		"rooms":      rooms,
+		"roomStats":  room_stats,
+		"schedules":  schedules,
+		"statistics": statistics,
+	})
+}
+func XMLDataSettingsHandler(ctx *macaron.Context) {
+	alerts, _ := models.GetAlerts()
+	devices, _ := models.GetDevices()
+	rooms, _ := models.GetRooms()
+	room_stats, _ := models.GetRoomStats()
+	schedules, _ := models.GetSchedules()
+	statistics, _ := models.GetStats()
+	type Export struct {
+		Alerts     []models.Alert  `xml:"alerts"`
+		Devices    []models.Device `xml:"devices"`
+		Rooms      []models.Room
+		Room_stats []models.RoomStat
+		Schedules  []models.Schedule
+		Statistics []models.Statistic
+	}
+	export := Export{alerts, devices, rooms, room_stats, schedules, statistics}
+	ctx.XML(200, export)
+}
