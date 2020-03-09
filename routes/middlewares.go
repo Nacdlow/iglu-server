@@ -33,6 +33,9 @@ func ContextInit() macaron.Handler {
 			if user, err := models.GetUser(sess.Get("username").(string)); err == nil {
 				ctx.Data["User"] = user
 				ctx.Data["LoggedIn"] = 1
+				if user.Role == models.AdminRole {
+					ctx.Data["IsAdmin"] = 1
+				}
 			} else {
 				// Logged in user does not exist
 				err := sess.Set("auth", Unauthenticated)
