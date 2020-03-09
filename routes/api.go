@@ -183,3 +183,22 @@ func ChangeDeviceNameHandler(ctx *macaron.Context) {
 		}
 	}
 }
+
+func MoveDeviceHandler(ctx *macaron.Context) {
+	devices, err := models.GetDevices()
+	if err != nil {
+		panic(err)
+	}
+	for _, device := range devices {
+		if device.DeviceID == ctx.ParamsInt64("did") {
+			err := models.UpdateDeviceCols(&models.Device{
+				DeviceID: device.DeviceID,
+				RoomID:   ctx.ParamsInt64("rid"),
+			})
+			if err != nil {
+				panic(err)
+			}
+			break
+		}
+	}
+}

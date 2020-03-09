@@ -138,6 +138,7 @@ func getMacaron(dev bool) *macaron.Macaron {
 
 		m.Get("/change_name/:id/:newName", routes.ChangeNameHandler)         //changes the name of a device
 		m.Get("/change_device/:id/:newName", routes.ChangeDeviceNameHandler) //changes the name of a device
+		m.Get("/move_device/:did/:rid", routes.MoveDeviceHandler)            //moves device between rooms
 
 		m.Group("", func() {
 			m.Group("/add", func() {
