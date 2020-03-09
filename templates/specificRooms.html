@@ -45,8 +45,8 @@
         <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact"
           aria-selected="false"><i
             class="far fa-snowflake fa-2x"></i><br>Temperature</a>
-        <a class="nav-link" id="tv-tab" data-toggle="tab" href="#tv" role="tab" aria-controls="tv" aria-selected="false">
-      <i class="fas fa-tv fa-2x"></i><br>TV</a> 
+        <a class="nav-link" id="tv-tab" data-toggle="tab" href="#other" role="tab" aria-controls="tv" aria-selected="false">
+      <i class="fas fa-plug fa-2x"></i><br>Other</a> 
     </div>
 
     <!-- /devices tabs-->
@@ -97,7 +97,7 @@
       </div>
 
       <!--tv device tab cards-->
-      <div class="tab-pane" id="tv" role="tabpanel" aria-labelledby="contact-tab">
+      <div class="tab-pane" id="other" role="tabpanel" aria-labelledby="contact-tab">
 
         <div class="row justify-content-center p-3">
           {{range .Devices}}{{if and (eq .Type 2) (eq .RoomID $.Room.RoomID)}}

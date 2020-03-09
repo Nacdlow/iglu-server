@@ -42,7 +42,7 @@ func ToggleHandler(ctx *macaron.Context) {
 	for _, device := range devices {
 		if device.DeviceID == ctx.ParamsInt64("id") {
 			if device.Type == models.Light || device.Type == models.Speaker ||
-				device.Type == models.TempControl || device.Type == models.TV {
+				device.Type == models.TempControl || device.Type == models.Other {
 				err := models.UpdateDeviceCols(&models.Device{
 					DeviceID:    device.DeviceID,
 					Status:      !device.Status,

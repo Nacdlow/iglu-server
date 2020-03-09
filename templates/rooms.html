@@ -37,8 +37,10 @@
             <div class="dropdown-menu dropdown-menu-right dropdown-default text-center"
             aria-labelledby="navbarDropdownMenuLink-333">
             <a class="dropdown-item black-text" href="#" onclick="edit({{.RoomID}});">Edit</a>
+            {{if .IsAdmin}}
             <a class="dropdown-item black-text" href="#" id="restrict-{{.RoomID}}" data-toggle="modal"
               data-target="#restrictRoom-{{.RoomID}}">Restrict</a>
+            {{end}}
             <a class="dropdown-item black-text" href="#" id="remove-{{.RoomID}}" data-toggle="modal"
               data-target="#removeRoom-{{.RoomID}}">Remove</a>
           </div>
