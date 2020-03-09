@@ -26,19 +26,20 @@ const (
 // Room represents a room in a house, it includes a description and type of the
 // room.
 type Room struct {
-	RoomID      int64  `xorm:"pk autoincr" fake:"skip" json:"id" xml:"id,attr"`
-	RoomName    string `fake:"{hipster.word}{address.street_suffix}" json:"roomName" xml:"room_name"`
-	Description string `fake:"{hacker.ingverb} {hacker.noun} {hacker.adjective}" json:"description" xml:"description"`
-	RoomType    RType  `fake:"skip" json:"roomType" xml:"type,attr"`
-	IsSubRoom   bool   `json:"isSubRoom" xml:"sub_room>is_sub_room"`
-	PartOfRoom  int64  `xorm:"null" fake:"skip" json:"partOfRoom" xml:"sub_room>part_of_room,omitempty"`
-	CreatedUnix int64  `xorm:"created" json:"createdUnix" xml:"timestamps>created_unix"`
-	UpdatedUnix int64  `xorm:"updated" json:"updatedUnix" xml:"timestamps>updated_unix"`
-	CurrentTemp int64  `xorm:"null" json:"currentTemp" xml:"currentTemp"`
-	HasLight    bool   `xorm:"-" json:"-" xml:"-"`
-	MainLight   Device `xorm:"-" json:"-" xml:"-"`
-	HasTemp     bool   `xorm:"-" json:"-" xml:"-"`
-	MainTemp    Device `xorm:"-" json:"-" xml:"-"`
+	RoomID       int64  `xorm:"pk autoincr" fake:"skip" json:"id" xml:"id,attr"`
+	RoomName     string `fake:"{hipster.word}{address.street_suffix}" json:"roomName" xml:"room_name"`
+	Description  string `fake:"{hacker.ingverb} {hacker.noun} {hacker.adjective}" json:"description" xml:"description"`
+	RoomType     RType  `fake:"skip" json:"roomType" xml:"type,attr"`
+	IsSubRoom    bool   `json:"isSubRoom" xml:"sub_room>is_sub_room"`
+	PartOfRoom   int64  `xorm:"null" fake:"skip" json:"partOfRoom" xml:"sub_room>part_of_room,omitempty"`
+	CreatedUnix  int64  `xorm:"created" json:"createdUnix" xml:"timestamps>created_unix"`
+	UpdatedUnix  int64  `xorm:"updated" json:"updatedUnix" xml:"timestamps>updated_unix"`
+	CurrentTemp  int64  `xorm:"null" json:"currentTemp" xml:"currentTemp"`
+	HasLight     bool   `xorm:"-" json:"-" xml:"-"`
+	MainLight    Device `xorm:"-" json:"-" xml:"-"`
+	HasTemp      bool   `xorm:"-" json:"-" xml:"-"`
+	MainTemp     Device `xorm:"-" json:"-" xml:"-"`
+	IsRestricted bool   `xorm:"-" json:"-" xml:"-"`
 }
 
 // LoadMainDevices loads the main light and temperature control variables of

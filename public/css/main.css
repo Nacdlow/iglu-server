@@ -406,6 +406,14 @@ a {
   .back-button {
     display: none;
   }
+
+  .text-center-lg{
+    text-align: center;
+  }
+
+  .fa-2x-lg {
+    font-size: 2em;
+  }
 }
 
 @media (max-width: 992px) {
@@ -698,7 +706,6 @@ input {
   
 }
 
-<<<<<<< HEAD
 #moveRoomLink{
   opacity: 1.0;
   filter: alpha(opacity=100);
@@ -709,7 +716,6 @@ input {
     filter: alpha(opacity=40);
     background-color: var(--iglu-colour);
 }
-=======
 .toast-header {
   background-color: var(--light);
   color: white;
@@ -719,4 +725,3 @@ input {
 .card-header {
   background-color: var(--light);
 }
->>>>>>> d0a6fb672c41d277e35a9088d457c3c5205b243f
