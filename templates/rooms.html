@@ -37,6 +37,8 @@
             <div class="dropdown-menu dropdown-menu-right dropdown-default text-center"
             aria-labelledby="navbarDropdownMenuLink-333">
             <a class="dropdown-item black-text" href="#" onclick="edit({{.RoomID}});">Edit</a>
+            <a class="dropdown-item black-text" href="#" id="restrict-{{.RoomID}}" data-toggle="modal"
+              data-target="#restrictRoom-{{.RoomID}}">Restrict</a>
             <a class="dropdown-item black-text" href="#" id="remove-{{.RoomID}}" data-toggle="modal"
               data-target="#removeRoom-{{.RoomID}}">Remove</a>
           </div>
@@ -107,8 +109,8 @@ aria-labelledby="removeRoom-{{.RoomID}}" aria-hidden="true">
         <hr>
         <h4 class="text-center pb-1">Are You Sure?</h4>
         <div class="text-center">
-        <button type="button" class="btn btn-success-new bodycolor btn-phat" data-dismiss="modal">Cancel</button>
-        <button type="submit" class="btn btn-danger-new bodycolor btn-phat" id="remove-{{.RoomID}}"
+        <button type="button" class="btn btn-danger-new bodycolor btn-phat" data-dismiss="modal">Cancel</button>
+        <button type="submit" class="btn btn-success-new bodycolor btn-phat" id="remove-{{.RoomID}}"
           onclick="$.get('/remove_room/{{.RoomID}}');reload();">Remove Room</button>
         </div>
       </div>
@@ -118,6 +120,32 @@ aria-labelledby="removeRoom-{{.RoomID}}" aria-hidden="true">
 </div>
 {{end}}
 <!-- /Remove room -->
+{{range .Rooms}}
+<!-- Restrict room -->
+<div class="modal fade" id="restrictRoom-{{.RoomID}}" tabindex="-1" role="dialog"
+aria-labelledby="restrictRoom-{{.RoomID}}" aria-hidden="true">
+
+<!-- Change class .modal-sm to change the size of the modal -->
+<div class="modal-dialog  modal-dialog-centered" role="document">
+
+  <div class="modal-content" style="background-color: transparent!important;">
+    <div class="card w-100">
+      <div class="card-body">
+            <h3 class="text-center" id="restrictDevice">Restrict {{.RoomName}}</h3>
+        <hr>
+        <h4 class="text-center pb-1">Are You Sure? Only admins will be able to access this room.</h4>
+        <div class="text-center">
+        <button type="button" class="btn btn-danger-new bodycolor btn-phat" data-dismiss="modal">Cancel</button>
+        <button type="submit" class="btn btn-success-new bodycolor btn-phat" id="restrict-{{.RoomID}}"
+          onclick="$.get('/restrict_room/{{.RoomID}}');reload();">Restrict Room</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+{{end}}
+<!-- /Restrict room -->
 
 {{template "base/scripts" .}}
 <script>
