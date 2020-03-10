@@ -24,11 +24,6 @@
               <input type="text" class="form-control white-text text-center" placeholder="e.g. John's Room"
                 name="room_name" required>
             </div>
-            <h6 class="text-center">Enter Room Description:</h6>
-            <div class="md-form justify-content-center d-flex mt-3 mr-lg-5 ml-lg-5 mr-sm-0 ml-sm-0">
-              <input type="text" class="form-control white-text text-center" placeholder="Description"
-                name="description">
-            </div>
             <div class="form-row">
               <div class="col">
                 <h6 class="text-center ">Select Room Type:</h6>
@@ -44,7 +39,8 @@
                     <option value="6">Storage</option>
                     <option value="7">Utility Room</option>
                     <option value="8">Garage</option>
-                    <option value="9">Guest</option>
+                    <option value="9">Other</option>
+                    <option value="10">Guest</option>
                   </select>
                 </div>
               </div>
@@ -59,6 +55,12 @@
                 </div>
               </div>
             </div>
+            {{if .IsAdmin}}
+            <div class="custom-control custom-checkbox text-center pt-2">
+              <input type="checkbox" class="custom-control-input" id="defaultUnchecked" name="is_restricted">
+              <label class="custom-control-label" for="defaultUnchecked">Restricted</label>
+            </div>
+            {{end}}
             <div class="d-flex justify-content-center pt-4">
               <div class="col-8">
                 <button type="submit" class="btn btn-success-new btn-block bodycolor">Save Room</button>

@@ -12,19 +12,16 @@ func TestUserFavRooms(t *testing.T) {
 	defer engine.Close()
 	// Add rooms
 	assert.Nil(AddRoom(&Room{
-		RoomName:    "Main living",
-		Description: "Our family living room",
-		RoomType:    LoungeRoom,
+		RoomName: "Main living",
+		RoomType: LoungeRoom,
 	}))
 	assert.Nil(AddRoom(&Room{
-		RoomName:    "Main kitchen",
-		Description: "Our family kitchen",
-		RoomType:    KitchenRoom,
+		RoomName: "Main kitchen",
+		RoomType: KitchenRoom,
 	}))
 	assert.Nil(AddRoom(&Room{
-		RoomName:    "Outdoor garage",
-		Description: "The outdoor garage",
-		RoomType:    GarageRoom,
+		RoomName: "Outdoor garage",
+		RoomType: GarageRoom,
 	}))
 	// Add user
 	assert.Nil(AddUser(&User{
