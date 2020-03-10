@@ -137,8 +137,7 @@ func RestrictHandler(ctx *macaron.Context) {
 		if room.RoomID == ctx.ParamsInt64("id") {
 			err := models.UpdateRoomCols(&models.Room{
 				RoomID:       room.RoomID,
-				IsRestricted: !room.IsRestricted,
-			})
+				IsRestricted: !room.IsRestricted}, "is_restricted")
 			if err != nil {
 				panic(err)
 			}

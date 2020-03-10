@@ -38,7 +38,7 @@ type Room struct {
 	MainLight    Device `xorm:"-" json:"-" xml:"-"`
 	HasTemp      bool   `xorm:"-" json:"-" xml:"-"`
 	MainTemp     Device `xorm:"-" json:"-" xml:"-"`
-	IsRestricted bool   `xorm:"-" json:"-" xml:"-"`
+	IsRestricted bool   `xorm:"null" json:"-" xml:"-"`
 }
 
 // LoadMainDevices loads the main light and temperature control variables of
