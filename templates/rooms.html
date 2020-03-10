@@ -106,9 +106,10 @@ aria-labelledby="removeRoom-{{.RoomID}}" aria-hidden="true">
 
   <div class="modal-content" style="background-color: transparent!important;">
     <div class="card w-100">
+      <div class="card-header">
+      <h3 class="text-center mb-0" id="removeDevice">Remove {{.RoomName}}</h3>
+    </div>
       <div class="card-body">
-            <h3 class="text-center" id="removeDevice">Remove {{.RoomName}}</h3>
-        <hr>
         <h4 class="text-center pb-1">Are You Sure?</h4>
         <div class="text-center">
         <button type="button" class="btn btn-danger-new bodycolor btn-phat" data-dismiss="modal">Cancel</button>
@@ -132,9 +133,10 @@ aria-labelledby="restrictRoom-{{.RoomID}}" aria-hidden="true">
 
   <div class="modal-content" style="background-color: transparent!important;">
     <div class="card w-100">
+      <div class="card-header">
+      <h3 class="text-center mb-0" id="restrictDevice">Restrict {{.RoomName}}</h3>
+    </div>
       <div class="card-body">
-            <h3 class="text-center" id="restrictDevice">Restrict {{.RoomName}}</h3>
-        <hr>
         <h4 class="text-center pb-1">Are You Sure? Only admins will be able to access this room.</h4>
         <div class="text-center">
         <button type="button" class="btn btn-danger-new bodycolor btn-phat" data-dismiss="modal">Cancel</button>
