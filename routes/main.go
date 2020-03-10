@@ -10,6 +10,7 @@ import (
 
 	"gitlab.com/group-nacdlow/nacdlow-server/models"
 	"gitlab.com/group-nacdlow/nacdlow-server/models/forms"
+	"gitlab.com/group-nacdlow/nacdlow-server/modules/plugin"
 	"gitlab.com/group-nacdlow/nacdlow-server/modules/simulation"
 
 	"github.com/go-macaron/session"
@@ -154,6 +155,28 @@ func AddDeviceRoomPostHandler(ctx *macaron.Context, form forms.AddDeviceForm, f 
 		panic(err)
 	}
 	ctx.Redirect(fmt.Sprintf("/room/%d", form.RoomID))
+}
+
+func ConnectDeviceHandler(ctx *macaron.Context, f *session.Flash) {
+	pl, err := plugin.GetPlugin(ctx.Params("plugin"))
+	if err != nil {
+		f.Error("Cannot connect to plugin")
+		ctx.Redirect("/rooms")
+		return
+	}
+	devices := pl.Plugin.GetAvailableDevices()
+	for _, dev := range devices {
+		if dev.UniqueID == ctx.Params("id") {
+
+			return
+		}
+	}
+	f.Error("Cannot find device (doesn't exist anymore?)")
+	ctx.Redirect("/rooms")
+}
+
+func ConnectDevicePostHandler(ctx *macaron.Context) {
+
 }
 
 // RoomsHandler handles rendering the rooms page

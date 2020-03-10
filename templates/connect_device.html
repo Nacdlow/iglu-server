@@ -1,0 +1,62 @@
+{{template "base/head" .}}
+{{template "base/nav" .}}
+<div class="container">
+  <div class="d-flex d-flex justify-content-center pt-4">
+    <div class="col-lg-6 col-md-8 col-sm-12">
+      <div class="card mr-lg-0 mb-4">
+        <div class="card-header pt-4 pb-4">
+          <div class="d-flex justify-content-center align-items-center">
+            <div class="col-1 d-flex justify-content-start p-0">
+              <a class="fas fa-times-circle fa-lg" onclick="history.back();"></a>
+            </div>
+            <div class="col-10">
+              <h2 class="text-center mb-0">Connect Device</h2>
+            </div>
+            <div class="col-1 p-0">
+sdf
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <form method="POST">
+            <h6 class="text-center">Enter Device Name:</h6>
+            <div class="md-form justify-content-center d-flex mt-3 mr-lg-5 ml-lg-5 mr-sm-0 ml-sm-0">
+              <input type="text" class="form-control white-text mb-3 text-center" maxlength="11"
+                placeholder="e.g. Smart Light" name="description">
+            </div>
+            <h6 class="text-center">Select Device Type:</h6>
+            <div class="md-form pb-3  mr-lg-5 ml-lg-5 mr-sm-0 ml-sm-0">
+              <select class="browser-default custom-select" id="select"
+				  name="device_type" readonly>
+				  <option value="" selected>{{.Type}}</option>
+              </select>
+            </div>
+            <h6 class="text-center ">Belongs to room:</h6>
+            <div class="md-form mr-lg-5 ml-lg-5 mr-sm-0 ml-sm-0">
+              <select class="browser-default custom-select" id="select" name="room_id">
+                <option value="-1" selected>Please select a room</option>
+                {{range .Rooms}}<option value="{{.RoomID}}">{{.RoomName}}</option>{{end}}
+              </select>
+            </div>
+			{{if eq .Type 0}}
+            <div class="custom-control custom-checkbox text-center pt-2">
+              <input type="checkbox" class="custom-control-input" id="defaultUnchecked" name="is_main_light_source">
+              <label class="custom-control-label" for="defaultUnchecked">Main Light</label>
+			</div>{{end}}
+            <div class="d-flex justify-content-center pt-4">
+              <div class="col-8">
+                <button type="submit" class="btn btn-success-new btn-block bodycolor">
+                  Connect Device
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{{template "base/scripts" .}}
+{{template "base/tabnav" .}}
+{{template "base/footer" .}}
+

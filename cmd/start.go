@@ -154,6 +154,9 @@ func getMacaron(dev bool) *macaron.Macaron {
 					routes.AddDeviceRoomPostHandler)
 				m.Post("/device/:id", binding.Bind(forms.AddDeviceForm{}),
 					routes.AddDeviceRoomPostHandler)
+				m.Get("/device/connect/:plugin/:id", routes.ConnectDeviceHandler)
+				m.Post("/device/connect/:plugin/:id", binding.Bind(forms.AddDeviceForm{}),
+					routes.ConnectDevicePostHandler)
 			})
 			m.Group("/settings", func() {
 				m.Get("", routes.SettingsHandler)
