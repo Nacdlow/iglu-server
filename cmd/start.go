@@ -181,6 +181,10 @@ func getMacaron(dev bool) *macaron.Macaron {
 						routes.PostEditAccountHandler)
 				})
 
+				m.Get("/devices", routes.DeviceSettingsHandler)
+				m.Get("/notifications", routes.NotifictionsSettingsHandler)
+				m.Get("/privacy", routes.PrivacySettingsHandler)
+
 				m.Get("/appearance", routes.AppearanceSettingsHandler)
 				m.Group("/data", func() {
 					m.Get("", routes.DataSettingsHandler)

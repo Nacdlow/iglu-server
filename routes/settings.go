@@ -185,6 +185,24 @@ func SettingsHandler(ctx *macaron.Context) {
 	ctx.HTML(http.StatusOK, "settings")
 }
 
+// DeviceSettingsHandler handles the device settings
+func DeviceSettingsHandler(ctx *macaron.Context) {
+	ctx.Data["NavTitle"] = "Device Settings"
+	ctx.HTML(http.StatusOK, "settings/devices")
+}
+
+// NotificationsSettingsHandler handles the device settings
+func NotifictionsSettingsHandler(ctx *macaron.Context) {
+	ctx.Data["NavTitle"] = "Device Settings"
+	ctx.HTML(http.StatusOK, "settings/notifications")
+}
+
+// PrivacySettingsHandler handles the device settings
+func PrivacySettingsHandler(ctx *macaron.Context) {
+	ctx.Data["NavTitle"] = "Device Settings"
+	ctx.HTML(http.StatusOK, "settings/privacy")
+}
+
 // LibraryDesc represents the description of an open-source library.
 type LibraryDesc struct {
 	Author     string
