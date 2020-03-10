@@ -26,24 +26,11 @@
 						{{if .IsFave}}Un-favourite{{else}}Favourite{{end}} <i class="fas fa-heart red-text"></i></a>
 						<a class="dropdown-item black-text" href="#" onclick="edit({{.DeviceID}});">Edit</a>
 						<a class="dropdown-item black-text" href="#" id="move-{{.DeviceID}}" data-toggle="modal"
-							data-target="#moveDevice">Move</a>
+							data-target="#moveDevice" onclick="passDevID({{.DeviceID}})">Move</a>
 					<a class="dropdown-item black-text" href="#" id="remove-{{.DeviceID}}" data-toggle="modal"
 						data-target="#removeDevice-{{.DeviceID}}">Delete</a>
 				</div>
 			</div>
-		</div>
-
-		<p class="text-center pt-4">Volume</p>
-		<div id="sliderHide-{{.DeviceID}}">
-		<div class="d-flex justify-content-center">
-			<span class="font-weight-bold green-text mr-2"><i class="fas fa-volume-mute" aria-hidden="true"></i></span>
-			<form class="range-field">
-				<input class="custom-range" type="range" min="0" max="10" value="{{.Volume}}" id="slider-{{.DeviceID}}"
-					onclick="$.get('/toggle_slider/{{.DeviceID}}/'+ $('#slider-{{.DeviceID}}').val());reload();" />
-			</form>
-			<span class="font-weight-bold green-text ml-2"><i class="fas fa-volume-up fa-lg"
-					aria-hidden="true"></i></span>
-		</div>
 		</div>
 		<div id="button-{{.DeviceID}}" class="button-{{.DeviceID}} text-center justify-content-center d-flex"></div>
 	</div>
@@ -81,8 +68,6 @@
 <script>
 	function edit(id) {//swaps room title with an input field and changes the button to a save button.
 		var toggleDiv = document.getElementById("toggleHide-"+id);
-		var sliderDiv = document.getElementById("sliderHide-"+id);
-		sliderDiv.style.display = "none";
 		toggleDiv.style.display = "none";
 		var deviceName = document.getElementById("name-"+id);
 		var inputField = document.createElement("input");

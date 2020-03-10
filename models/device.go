@@ -13,7 +13,7 @@ type DeviceType int64
 const (
 	Light       = iota //0
 	TempControl        //1
-	TV                 //2
+	Other              //2
 	Speaker            //3
 )
 

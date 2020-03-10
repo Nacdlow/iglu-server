@@ -42,7 +42,7 @@ func ToggleHandler(ctx *macaron.Context) {
 	for _, device := range devices {
 		if device.DeviceID == ctx.ParamsInt64("id") {
 			if device.Type == models.Light || device.Type == models.Speaker ||
-				device.Type == models.TempControl || device.Type == models.TV {
+				device.Type == models.TempControl || device.Type == models.Other {
 				err := models.UpdateDeviceCols(&models.Device{
 					DeviceID:    device.DeviceID,
 					Status:      !device.Status,
@@ -175,6 +175,25 @@ func ChangeDeviceNameHandler(ctx *macaron.Context) {
 			err := models.UpdateDeviceCols(&models.Device{
 				DeviceID:    device.DeviceID,
 				Description: ctx.Params("newName"),
+			})
+			if err != nil {
+				panic(err)
+			}
+			break
+		}
+	}
+}
+
+func MoveDeviceHandler(ctx *macaron.Context) {
+	devices, err := models.GetDevices()
+	if err != nil {
+		panic(err)
+	}
+	for _, device := range devices {
+		if device.DeviceID == ctx.ParamsInt64("did") {
+			err := models.UpdateDeviceCols(&models.Device{
+				DeviceID: device.DeviceID,
+				RoomID:   ctx.ParamsInt64("rid"),
 			})
 			if err != nil {
 				panic(err)

@@ -262,6 +262,10 @@ small {
   background-color: var(--back) !important;
 }
 
+.lightcolor {
+  background-color: var(--light)!important;
+}
+
 body {
   background-color: var(--back) !important;
   color: white !important;
