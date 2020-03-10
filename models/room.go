@@ -28,7 +28,6 @@ const (
 type Room struct {
 	RoomID       int64  `xorm:"pk autoincr" fake:"skip" json:"id" xml:"id,attr"`
 	RoomName     string `fake:"{hipster.word}{address.street_suffix}" json:"roomName" xml:"room_name"`
-	Description  string `fake:"{hacker.ingverb} {hacker.noun} {hacker.adjective}" json:"description" xml:"description"`
 	RoomType     RType  `fake:"skip" json:"roomType" xml:"type,attr"`
 	IsSubRoom    bool   `json:"isSubRoom" xml:"sub_room>is_sub_room"`
 	PartOfRoom   int64  `xorm:"null" fake:"skip" json:"partOfRoom" xml:"sub_room>part_of_room,omitempty"`

@@ -128,6 +128,25 @@ func FaveHandler(ctx *macaron.Context) {
 	}
 }
 
+func RestrictHandler(ctx *macaron.Context) {
+	rooms, err := models.GetRooms()
+	if err != nil {
+		panic(err)
+	}
+	for _, room := range rooms {
+		if room.RoomID == ctx.ParamsInt64("id") {
+			err := models.UpdateRoomCols(&models.Room{
+				RoomID:       room.RoomID,
+				IsRestricted: !room.IsRestricted,
+			})
+			if err != nil {
+				panic(err)
+			}
+			break
+		}
+	}
+}
+
 // RemoveHandler handles removing devices.
 func RemoveHandler(ctx *macaron.Context) {
 	err := models.DeleteDevice(ctx.ParamsInt64("id"))

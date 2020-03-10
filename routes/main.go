@@ -197,9 +197,9 @@ func RoomsHandler(ctx *macaron.Context) {
 // PostRoomHandler handles post request for room page, to add a room.
 func PostRoomHandler(ctx *macaron.Context, form forms.AddRoomForm) {
 	room := &models.Room{
-		RoomName:    form.RoomName,
-		Description: form.Description,
-		RoomType:    models.RType(form.RoomType),
+		RoomName:     form.RoomName,
+		RoomType:     models.RType(form.RoomType),
+		IsRestricted: form.IsRestricted,
 	}
 	if form.PartOfRoom >= 0 {
 		room.IsSubRoom = true
