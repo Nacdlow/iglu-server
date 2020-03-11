@@ -6,7 +6,7 @@ import (
 	"gitlab.com/group-nacdlow/nacdlow-server/models"
 	"gitlab.com/group-nacdlow/nacdlow-server/modules/plugin"
 
-	"github.com/Nacdlow/plugin-sdk"
+	sdk "github.com/Nacdlow/plugin-sdk"
 	macaron "gopkg.in/macaron.v1"
 )
 
@@ -82,4 +82,11 @@ func AddRoomHandler(ctx *macaron.Context) {
 		panic(err)
 	}
 	ctx.HTML(http.StatusOK, "add_room")
+}
+
+// AddScheduleHandler handles the adding schedule page
+func AddScheduleHandler(ctx *macaron.Context) {
+	ctx.Data["BackLink"] = "/add"
+
+	ctx.HTML(http.StatusOK, "add_schedule")
 }
