@@ -4,6 +4,8 @@ import (
 	"errors"
 
 	"github.com/brianvoe/gofakeit/v4"
+
+	"gitlab.com/group-nacdlow/nacdlow-server/modules/plugin"
 )
 
 // DeviceType is the type of smart device.
@@ -70,12 +72,27 @@ func GetDevice(id int64) (*Device, error) {
 	} else if !has {
 		return d, errors.New("Device does not exist")
 	}
+	d.UpdateFromPlugin()
 	return d, nil
+}
+
+// UpdateFromPlugin updates a device's status from the plugin.
+func (d *Device) UpdateFromPlugin() {
+	if d.IsRegistered {
+		pl, err := plugin.GetPlugin(d.PluginID)
+		if err != nil {
+			return
+		}
+		d.Status = pl.Plugin.GetDeviceStatus(d.PluginUniqueID)
+	}
 }
 
 // GetDevices returns an array of all devices from the database.
 func GetDevices() (devices []Device, err error) {
 	err = engine.Find(&devices)
+	for i := range devices {
+		devices[i].UpdateFromPlugin()
+	}
 	return
 }
 

@@ -5,13 +5,14 @@ go 1.13
 require (
 	cloud.google.com/go v0.54.0 // indirect
 	github.com/BurntSushi/toml v0.3.1
-	github.com/Nacdlow/plugin-sdk v0.0.0-20200311032553-61c7c62ed730
+	github.com/Nacdlow/plugin-sdk v0.0.0-20200311042405-5b018faa56b3
 	github.com/adlio/darksky v0.0.0-20190219023837-63c8e8a7fabe
-	github.com/aws/aws-sdk-go v1.29.19 // indirect
+	github.com/aws/aws-sdk-go v1.29.21 // indirect
 	github.com/brianvoe/gofakeit/v4 v4.2.3
 	github.com/cpuguy83/go-md2man/v2 v2.0.0 // indirect
 	github.com/denisenkom/go-mssqldb v0.0.0-20191128021309-1d7a30a10f73 // indirect
 	github.com/elazarl/go-bindata-assetfs v1.0.0 // indirect
+	github.com/fsnotify/fsnotify v1.4.8 // indirect
 	github.com/go-macaron/bindata v0.0.0-20200308113348-9fced76aaa6e
 	github.com/go-macaron/binding v1.1.0
 	github.com/go-macaron/csrf v0.0.0-20200308113458-6ceba14208b2
@@ -23,6 +24,7 @@ require (
 	github.com/hashicorp/go-hclog v0.12.1
 	github.com/hashicorp/go-plugin v1.1.0
 	github.com/hashicorp/go-version v1.2.0 // indirect
+	github.com/jmespath/go-jmespath v0.0.0-20200310193758-2437e8417af5 // indirect
 	github.com/kr/pretty v0.2.0 // indirect
 	github.com/lib/pq v1.3.0 // indirect
 	github.com/mattn/go-sqlite3 v2.0.3+incompatible
@@ -33,14 +35,15 @@ require (
 	github.com/spf13/jwalterweatherman v1.1.0 // indirect
 	github.com/spf13/pflag v1.0.5 // indirect
 	github.com/spf13/viper v1.6.2
-	github.com/stretchr/testify v1.4.0
+	github.com/stretchr/testify v1.5.1
 	github.com/ulikunitz/xz v0.5.7 // indirect
 	github.com/unknwon/com v1.0.1 // indirect
-	github.com/urfave/cli/v2 v2.1.1
+	github.com/urfave/cli/v2 v2.2.0
 	gitlab.com/skilstak/code/go/uniq v0.0.0-20190715184642-a9672d63d2d8
 	golang.org/x/crypto v0.0.0-20200302210943-78000ba7a073
-	golang.org/x/tools v0.0.0-20200308013534-11ec41452d41 // indirect
-	google.golang.org/genproto v0.0.0-20200306153348-d950eab6f860 // indirect
+	golang.org/x/tools v0.0.0-20200311035431-43e3193a9bc5 // indirect
+	google.golang.org/genproto v0.0.0-20200310143817-43be25429f5a // indirect
+	google.golang.org/grpc v1.28.0 // indirect
 	gopkg.in/check.v1 v1.0.0-20190902080502-41f04d3bba15 // indirect
 	gopkg.in/ini.v1 v1.54.0 // indirect
 	gopkg.in/macaron.v1 v1.3.5
