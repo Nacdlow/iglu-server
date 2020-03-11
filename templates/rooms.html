@@ -26,7 +26,7 @@
         <div class="card-header">
         <div class="row">
           <div class="col-8 d-flex align-items-center">
-            {{if .IsRestricted}}<i class="fas fa-user-lock pl-2"></i>{{end}}<h4 class="mb-0" id="name-{{.RoomID}}">{{.RoomName}}</h4>
+            <i class="{{if .IsRestricted}}fas fa-user-lock pr-2{{else}} d-none{{end}}" id="lock-{{.RoomID}}"></i><h4 class="mb-0" id="name-{{.RoomID}}">{{.RoomName}}</h4>
           </div>
           <div class="col-4 d-flex align-items-center justify-content-end">
             <i class="{{if eq .RoomType 0}}fas fa-couch{{else if eq .RoomType 1}}fas fa-bed{{else if eq .RoomType 2}}
@@ -181,8 +181,8 @@ aria-labelledby="restrictRoom-{{.RoomID}}" aria-hidden="true">
     var inputField = document.createElement("input");
     inputField.setAttribute('id','new-'+id);
     inputField.setAttribute('class','black-text navcolor white-text p-3');
-    inputField.setAttribute('style','border: 2px solid white; opacity: 80%; border-radius: 50px; height: 37px; width: 230px; color: white;');
-    inputField.setAttribute('placeholder', 'Enter a new room name');
+    inputField.setAttribute('style','border: 2px solid white; opacity: 80%; border-radius: 50px; height: 37px; width: 200px; color: white;');
+    inputField.setAttribute('placeholder', '{{.RoomName}}');
     roomH4.parentNode.replaceChild(inputField, roomH4);
     
     var viewButton = document.getElementById("button-"+id);
@@ -190,10 +190,16 @@ aria-labelledby="restrictRoom-{{.RoomID}}" aria-hidden="true">
     saveButton.setAttribute('id','saveButton-'+id);
     saveButton.setAttribute('class','btn btn-border-green btn-new-1 text-center p-3 m-0 waves-effect waves-light');
     saveButton.setAttribute('onClick', 'postChanges('+id+');');
-    saveButton.innerHTML = "Save Changes";
+    saveButton.innerHTML = "Save";
     viewButton.parentNode.replaceChild(saveButton, viewButton);
-    {{end}}
 
+    var lock = document.getElementById("lock-"+id);
+    var close = document.createElement("a");
+    close.setAttribute('id','close-'+id);
+    close.setAttribute('class','fas fa-times-circle white-text pr-2');
+    close.setAttribute('onClick', 'reload();');
+    lock.parentNode.replaceChild(close, lock);
+    {{end}}
   }
 
   function postChanges(id){
