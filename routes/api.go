@@ -35,13 +35,23 @@ func BatteryStatHandler(ctx *macaron.Context) {
 }
 
 // ToggleHandler handles toggling devices.
-func ToggleHandler(ctx *macaron.Context) {
+func ToggleHandler(ctx *macaron.Context, sess session.Store) {
 	devices, err := models.GetDevices()
 	if err != nil {
 		panic(err)
 	}
+
 	for _, device := range devices {
 		if device.DeviceID == ctx.ParamsInt64("id") {
+			if user, err := models.GetUser(sess.Get("username").(string)); err == nil {
+				room, err := models.GetRoom(device.RoomID)
+				if err != nil {
+					panic(err)
+				}
+				if user.Role != models.AdminRole && room.IsRestricted {
+					return
+				}
+			}
 			if device.Type == models.Light || device.Type == models.Speaker ||
 				device.Type == models.TempControl || device.Type == models.Other {
 				err := models.UpdateDeviceCols(&models.Device{
@@ -68,13 +78,22 @@ func ToggleHandler(ctx *macaron.Context) {
 }
 
 // SliderHandler handles modifying device values based on sliders.
-func SliderHandler(ctx *macaron.Context) {
+func SliderHandler(ctx *macaron.Context, sess session.Store) {
 	devices, err := models.GetDevices()
 	if err != nil {
 		panic(err)
 	}
 	for _, device := range devices {
 		if device.DeviceID == ctx.ParamsInt64("id") {
+			if user, err := models.GetUser(sess.Get("username").(string)); err == nil {
+				room, err := models.GetRoom(device.RoomID)
+				if err != nil {
+					panic(err)
+				}
+				if user.Role != models.AdminRole && room.IsRestricted {
+					return
+				}
+			}
 			var err error
 			switch device.Type {
 			case models.Speaker:
@@ -121,13 +140,22 @@ func FontSliderHandler(ctx *macaron.Context, sess session.Store) {
 }
 
 // FaveHandler handles favouriting or unfavouriting devices.
-func FaveHandler(ctx *macaron.Context) {
+func FaveHandler(ctx *macaron.Context, sess session.Store) {
 	devices, err := models.GetDevices()
 	if err != nil {
 		panic(err)
 	}
 	for _, device := range devices {
 		if device.DeviceID == ctx.ParamsInt64("id") {
+			if user, err := models.GetUser(sess.Get("username").(string)); err == nil {
+				room, err := models.GetRoom(device.RoomID)
+				if err != nil {
+					panic(err)
+				}
+				if user.Role != models.AdminRole && room.IsRestricted {
+					return
+				}
+			}
 			err := models.UpdateDeviceCols(&models.Device{
 				DeviceID: device.DeviceID,
 				IsFave:   !device.IsFave}, "is_fave")
@@ -166,21 +194,39 @@ func RemoveHandler(ctx *macaron.Context) {
 }
 
 // RemoveRoomHandler handles removing rooms.
-func RemoveRoomHandler(ctx *macaron.Context) {
-	err := models.DeleteRoom(ctx.ParamsInt64("id"))
+func RemoveRoomHandler(ctx *macaron.Context, sess session.Store) {
+	device, err := models.GetDevice(ctx.ParamsInt64("id"))
+	if err != nil {
+		panic(err)
+	}
+	if user, err := models.GetUser(sess.Get("username").(string)); err == nil {
+		room, err := models.GetRoom(device.RoomID)
+		if err != nil {
+			panic(err)
+		}
+		if user.Role != models.AdminRole && room.IsRestricted {
+			return
+		}
+	}
+	err = models.DeleteRoom(ctx.ParamsInt64("id"))
 	if err != nil {
 		panic(err)
 	}
 }
 
 // ChangeNameHandler add comments @Ruaridh!
-func ChangeNameHandler(ctx *macaron.Context) {
+func ChangeNameHandler(ctx *macaron.Context, sess session.Store) {
 	rooms, err := models.GetRooms()
 	if err != nil {
 		panic(err)
 	}
 	for _, room := range rooms {
 		if room.RoomID == ctx.ParamsInt64("id") {
+			if user, err := models.GetUser(sess.Get("username").(string)); err == nil {
+				if user.Role != models.AdminRole && room.IsRestricted {
+					return
+				}
+			}
 			err := models.UpdateRoomCols(&models.Room{
 				RoomID:   room.RoomID,
 				RoomName: ctx.Params("newName"),
@@ -194,13 +240,22 @@ func ChangeNameHandler(ctx *macaron.Context) {
 }
 
 //ChangeDeviceNameHandler handles changing of the device name, crazy huh?
-func ChangeDeviceNameHandler(ctx *macaron.Context) {
+func ChangeDeviceNameHandler(ctx *macaron.Context, sess session.Store) {
 	devices, err := models.GetDevices()
 	if err != nil {
 		panic(err)
 	}
 	for _, device := range devices {
 		if device.DeviceID == ctx.ParamsInt64("id") {
+			if user, err := models.GetUser(sess.Get("username").(string)); err == nil {
+				room, err := models.GetRoom(device.RoomID)
+				if err != nil {
+					panic(err)
+				}
+				if user.Role != models.AdminRole && room.IsRestricted {
+					return
+				}
+			}
 			err := models.UpdateDeviceCols(&models.Device{
 				DeviceID:    device.DeviceID,
 				Description: ctx.Params("newName"),
@@ -213,13 +268,22 @@ func ChangeDeviceNameHandler(ctx *macaron.Context) {
 	}
 }
 
-func MoveDeviceHandler(ctx *macaron.Context) {
+func MoveDeviceHandler(ctx *macaron.Context, sess session.Store) {
 	devices, err := models.GetDevices()
 	if err != nil {
 		panic(err)
 	}
 	for _, device := range devices {
 		if device.DeviceID == ctx.ParamsInt64("did") {
+			if user, err := models.GetUser(sess.Get("username").(string)); err == nil {
+				room, err := models.GetRoom(device.RoomID)
+				if err != nil {
+					panic(err)
+				}
+				if user.Role != models.AdminRole && room.IsRestricted {
+					return
+				}
+			}
 			err := models.UpdateDeviceCols(&models.Device{
 				DeviceID: device.DeviceID,
 				RoomID:   ctx.ParamsInt64("rid"),
