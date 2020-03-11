@@ -26,7 +26,7 @@
         <div class="card-header">
         <div class="row">
           <div class="col-8 d-flex align-items-center">
-            <h4 class="mb-0" id="name-{{.RoomID}}">{{.RoomName}}</h4>
+            {{if .IsRestricted}}<i class="fas fa-user-lock"></i>{{end}}<h4 class="mb-0" id="name-{{.RoomID}}">{{.RoomName}}</h4>
           </div>
           <div class="col-4 d-flex align-items-center justify-content-end">
             <i class="{{if eq .RoomType 0}}fas fa-couch{{else if eq .RoomType 1}}fas fa-bed{{else if eq .RoomType 2}}
