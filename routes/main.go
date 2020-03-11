@@ -190,6 +190,28 @@ func ConnectDeviceHandler(ctx *macaron.Context, f *session.Flash) {
 	ctx.Redirect("/rooms")
 }
 
+func IdentifyDeviceHandler(ctx *macaron.Context, f *session.Flash) {
+	pl, err := plugin.GetPlugin(ctx.Params("plugin"))
+	if err != nil {
+		return
+	}
+
+	devices := pl.Plugin.GetAvailableDevices()
+	for _, dev := range devices {
+		if dev.UniqueID == ctx.Params("id") {
+			go func() {
+				for i := 0; i < 3; i++ {
+					pl.Plugin.OnDeviceToggle(ctx.Params("id"), true)
+					time.Sleep(800 * time.Millisecond)
+					pl.Plugin.OnDeviceToggle(ctx.Params("id"), false)
+					time.Sleep(800 * time.Millisecond)
+				}
+			}()
+			return
+		}
+	}
+}
+
 func ConnectDevicePostHandler(ctx *macaron.Context, form forms.AddDeviceForm,
 	f *session.Flash) {
 	pl, err := plugin.GetPlugin(ctx.Params("plugin"))
