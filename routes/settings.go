@@ -187,6 +187,13 @@ func SettingsHandler(ctx *macaron.Context) {
 
 // DeviceSettingsHandler handles the device settings
 func DeviceSettingsHandler(ctx *macaron.Context) {
+	var err error
+	ctx.Data["Devices"], err = models.GetDevices()
+	if err != nil {
+		panic(err)
+	}
+	ctx.Data["ArrowBack"] = 1
+
 	ctx.Data["NavTitle"] = "Device Settings"
 	ctx.HTML(http.StatusOK, "settings/devices")
 }
