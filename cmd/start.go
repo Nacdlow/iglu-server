@@ -136,11 +136,12 @@ func getMacaron(dev bool) *macaron.Macaron {
 		m.Get("/remove_device/:id", routes.RemoveHandler)   //remove a device
 		m.Get("/remove_room/:id", routes.RemoveRoomHandler) //removes a room
 
-		m.Get("/change_name/:id/:newName", routes.ChangeNameHandler)         //changes the name of a device
-		m.Get("/change_device/:id/:newName", routes.ChangeDeviceNameHandler) //changes the name of a device
-		m.Get("/move_device/:did/:rid", routes.MoveDeviceHandler)            //moves device between rooms
+		m.Get("/move_device/:did/:rid", routes.MoveDeviceHandler) //moves device between rooms
 
 		m.Group("", func() {
+			m.Get("/restrict_room/:id", routes.RestrictHandler)                  //restricts a room
+			m.Get("/change_name/:id/:newName", routes.ChangeNameHandler)         //changes the name of a device
+			m.Get("/change_device/:id/:newName", routes.ChangeDeviceNameHandler) //changes the name of a device
 			m.Group("/add", func() {
 				m.Get("", routes.AddHandler)
 				m.Get("/room", routes.AddRoomHandler)
@@ -154,6 +155,10 @@ func getMacaron(dev bool) *macaron.Macaron {
 					routes.AddDeviceRoomPostHandler)
 				m.Post("/device/:id", binding.Bind(forms.AddDeviceForm{}),
 					routes.AddDeviceRoomPostHandler)
+				m.Get("/device/connect/:plugin/:id", routes.ConnectDeviceHandler)
+				m.Get("/device/identify/:plugin/:id", routes.IdentifyDeviceHandler)
+				m.Post("/device/connect/:plugin/:id", binding.Bind(forms.AddDeviceForm{}),
+					routes.ConnectDevicePostHandler)
 			})
 			m.Group("/settings", func() {
 				m.Get("", routes.SettingsHandler)

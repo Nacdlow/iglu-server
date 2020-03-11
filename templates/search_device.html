@@ -57,6 +57,9 @@
 window.onload = function() {
     $("#deviceList").load("/add/search_device/list #devicesDiv>*", "");
 };
+function identify(plugin, id) {
+$.get("/add/device/identify/"+plugin+"/"+id);
+}
 	</script>
 {{template "base/tabnav" .}}
 {{template "base/footer" .}}

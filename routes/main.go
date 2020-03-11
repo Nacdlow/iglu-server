@@ -3,6 +3,7 @@ package routes
 import (
 	"fmt"
 	"html/template"
+	"log"
 	"math"
 	"net/http"
 	"strings"
@@ -10,6 +11,7 @@ import (
 
 	"gitlab.com/group-nacdlow/nacdlow-server/models"
 	"gitlab.com/group-nacdlow/nacdlow-server/models/forms"
+	"gitlab.com/group-nacdlow/nacdlow-server/modules/plugin"
 	"gitlab.com/group-nacdlow/nacdlow-server/modules/simulation"
 
 	"github.com/go-macaron/session"
@@ -163,6 +165,104 @@ func AddDeviceRoomPostHandler(ctx *macaron.Context, form forms.AddDeviceForm, f 
 	ctx.Redirect(fmt.Sprintf("/room/%d", form.RoomID))
 }
 
+var TYPE_NAME = []string{"Light", "Temp Control", "Other", "Speaker"}
+
+func ConnectDeviceHandler(ctx *macaron.Context, f *session.Flash) {
+	pl, err := plugin.GetPlugin(ctx.Params("plugin"))
+	if err != nil {
+		f.Error("Cannot connect to plugin")
+		ctx.Redirect("/rooms")
+		return
+	}
+	devices := pl.Plugin.GetAvailableDevices()
+	log.Println(devices)
+	for _, dev := range devices {
+		if dev.UniqueID == ctx.Params("id") {
+			ctx.Data["Device"] = dev
+			var err error
+			ctx.Data["Type"] = TYPE_NAME[dev.Type]
+			if err != nil {
+				panic(err)
+			}
+			rooms, err := models.GetRooms()
+			if err != nil {
+				panic(err)
+			}
+			ctx.Data["Rooms"] = rooms
+			ctx.HTML(http.StatusOK, "connect_device")
+			return
+		}
+	}
+	f.Error("Cannot find device (doesn't exist anymore?)")
+	ctx.Redirect("/rooms")
+}
+
+func IdentifyDeviceHandler(ctx *macaron.Context, f *session.Flash) {
+	pl, err := plugin.GetPlugin(ctx.Params("plugin"))
+	if err != nil {
+		return
+	}
+
+	devices := pl.Plugin.GetAvailableDevices()
+	for _, dev := range devices {
+		if dev.UniqueID == ctx.Params("id") {
+			go func() {
+				for i := 0; i < 3; i++ {
+					pl.Plugin.OnDeviceToggle(ctx.Params("id"), true)
+					time.Sleep(800 * time.Millisecond)
+					pl.Plugin.OnDeviceToggle(ctx.Params("id"), false)
+					time.Sleep(800 * time.Millisecond)
+				}
+			}()
+			return
+		}
+	}
+}
+
+func ConnectDevicePostHandler(ctx *macaron.Context, form forms.AddDeviceForm,
+	f *session.Flash) {
+	pl, err := plugin.GetPlugin(ctx.Params("plugin"))
+	if err != nil {
+		f.Error("Cannot connect to plugin")
+		ctx.Redirect("/rooms")
+		return
+	}
+	devices := pl.Plugin.GetAvailableDevices()
+	log.Println(devices)
+	for _, dev := range devices {
+		if dev.UniqueID == ctx.Params("id") {
+			device := &models.Device{
+				RoomID:         form.RoomID,
+				Type:           models.DeviceType(form.DeviceType),
+				Description:    form.Description,
+				ToggledUnix:    time.Now().Unix(),
+				IsRegistered:   true,
+				PluginID:       ctx.Params("plugin"),
+				PluginUniqueID: ctx.Params("id"),
+			}
+			switch device.Type {
+			case models.Light:
+				device.Brightness = 10
+				if form.IsMainLight {
+					device.IsMainLight = true
+				}
+			case models.TempControl:
+				device.Temp = 22.0
+			case models.Speaker:
+				device.Volume = 8
+			}
+			err = models.AddDevice(device)
+			if err != nil {
+				panic(err)
+			}
+			ctx.Redirect(fmt.Sprintf("/room/%d", form.RoomID))
+			return
+		}
+	}
+	f.Error("Cannot find device (doesn't exist anymore?)")
+	ctx.Redirect("/rooms")
+}
+
 // RoomsHandler handles rendering the rooms page
 func RoomsHandler(ctx *macaron.Context) {
 	ctx.Data["NavTitle"] = "Rooms"
@@ -181,9 +281,9 @@ func RoomsHandler(ctx *macaron.Context) {
 // PostRoomHandler handles post request for room page, to add a room.
 func PostRoomHandler(ctx *macaron.Context, form forms.AddRoomForm) {
 	room := &models.Room{
-		RoomName:    form.RoomName,
-		Description: form.Description,
-		RoomType:    models.RType(form.RoomType),
+		RoomName:     form.RoomName,
+		RoomType:     models.RType(form.RoomType),
+		IsRestricted: form.IsRestricted,
 	}
 	if form.PartOfRoom >= 0 {
 		room.IsSubRoom = true

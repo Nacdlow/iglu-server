@@ -6,6 +6,7 @@ import (
 
 	"github.com/go-macaron/session"
 	"gitlab.com/group-nacdlow/nacdlow-server/models"
+	"gitlab.com/group-nacdlow/nacdlow-server/modules/plugin"
 	"gitlab.com/group-nacdlow/nacdlow-server/modules/settings"
 	"gitlab.com/group-nacdlow/nacdlow-server/modules/simulation"
 	macaron "gopkg.in/macaron.v1"
@@ -49,6 +50,16 @@ func ToggleHandler(ctx *macaron.Context) {
 					ToggledUnix: time.Now().Unix()}, "status", "toggled_unix")
 				if err != nil {
 					panic(err)
+				}
+				if device.IsRegistered {
+					pl, err := plugin.GetPlugin(device.PluginID)
+					if err != nil {
+						panic(err)
+					}
+					err = pl.Plugin.OnDeviceToggle(device.PluginUniqueID, !device.Status)
+					if err != nil {
+						panic(err)
+					}
 				}
 			}
 			break
@@ -120,6 +131,24 @@ func FaveHandler(ctx *macaron.Context) {
 			err := models.UpdateDeviceCols(&models.Device{
 				DeviceID: device.DeviceID,
 				IsFave:   !device.IsFave}, "is_fave")
+			if err != nil {
+				panic(err)
+			}
+			break
+		}
+	}
+}
+
+func RestrictHandler(ctx *macaron.Context) {
+	rooms, err := models.GetRooms()
+	if err != nil {
+		panic(err)
+	}
+	for _, room := range rooms {
+		if room.RoomID == ctx.ParamsInt64("id") {
+			err := models.UpdateRoomCols(&models.Room{
+				RoomID:       room.RoomID,
+				IsRestricted: !room.IsRestricted}, "is_restricted")
 			if err != nil {
 				panic(err)
 			}

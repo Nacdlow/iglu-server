@@ -4,6 +4,8 @@ import (
 	"errors"
 
 	"github.com/brianvoe/gofakeit/v4"
+
+	"gitlab.com/group-nacdlow/nacdlow-server/modules/plugin"
 )
 
 // DeviceType is the type of smart device.
@@ -33,8 +35,14 @@ type Device struct {
 	UpdatedUnix    int64      `xorm:"updated" json:"updatedUnix" xml:"timestamps>updated_unix"`
 	IsFave         bool       `fake:"skip"` //whether the device has been favourited or not
 	ToggledUnix    int64      `json:"toggledUnix,omitempty" xml:"timestamps>toggled_unix,omitempty"`
-	IsRegistered   bool       `json:"isRegistered" xml:"plugin>registered"`
+	IsRegistered   bool       `xorm:"index" json:"isRegistered" xml:"plugin>registered"`
+	PluginID       string     `xorm:"index" json:"registeredPluginID" xml:"plugin>plugin_id,omitempty"`
 	PluginUniqueID string     `json:"pluginUniqueID" xml:"plugin>unique_id,omitempty"`
+}
+
+func HasPluginDevice(pluginID, uniqueID string) bool {
+	has, _ := engine.Where("plugin_id = ? AND plugin_unique_id = ?", pluginID, uniqueID).Get(new(Device))
+	return has
 }
 
 // GetFakeDevice returns a new randomly created Device. This is used for
@@ -64,12 +72,27 @@ func GetDevice(id int64) (*Device, error) {
 	} else if !has {
 		return d, errors.New("Device does not exist")
 	}
+	d.UpdateFromPlugin()
 	return d, nil
+}
+
+// UpdateFromPlugin updates a device's status from the plugin.
+func (d *Device) UpdateFromPlugin() {
+	if d.IsRegistered {
+		pl, err := plugin.GetPlugin(d.PluginID)
+		if err != nil {
+			return
+		}
+		d.Status = pl.Plugin.GetDeviceStatus(d.PluginUniqueID)
+	}
 }
 
 // GetDevices returns an array of all devices from the database.
 func GetDevices() (devices []Device, err error) {
 	err = engine.Find(&devices)
+	for i := range devices {
+		devices[i].UpdateFromPlugin()
+	}
 	return
 }
 
