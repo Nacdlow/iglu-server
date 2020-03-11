@@ -62,6 +62,13 @@ func AlertsHandler(ctx *macaron.Context, sess session.Store) {
 
 // InternalAccounts handels the internal accounts page
 func InternalAccountsHandler(ctx *macaron.Context) {
+	ctx.Data["NavTitle"] = "Accounts"
+	var err error
+	ctx.Data["Accounts"], err = models.GetUsers()
+	if err != nil {
+		panic(err)
+	}
+	ctx.Data["ArrowBack"] = 1
 	ctx.HTML(http.StatusNotFound, "internal_accounts")
 }
 
