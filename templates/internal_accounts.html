@@ -19,6 +19,7 @@
 </div>
 
 <div class="d-flex row align-items-center align-middle text-center" >
+  {{range .Accounts}}
     <div class="col">
         <div class = "card rounded mx-auto d-block" style="width:200px" >
             <div class="view overlay">
@@ -27,31 +28,10 @@
                     <div class = "mask rgba-black-light"></div>
                 </a>
         </div>
-        User 1
+        {{.FirstName}}{{if .LastName}} {{.LastName}}{{end}}
     </div>
     </div>
-    <div class="col">
-        <div class = "card rounded mx-auto d-block" style="width:200px" >
-            <div class="view overlay">
-                <img class="card-img rounded mx-auto d-block" src="/img/peng-user.jpg" style="height: 200px; width:200px"/>
-                <a href ="#!">
-                    <div class = "mask rgba-black-light"></div>
-                </a>
-        </div>
-        User 2
-    </div>
-    </div>
-    <div class="col">
-        <div class = "card rounded mx-auto d-block" style="width:200px" >
-            <div class="view overlay">
-                <img class="card-img rounded mx-auto d-block" src="/img/peng-user.jpg" style="height: 200px; width:200px"/>
-                <a href ="#!">
-                    <div class = "mask rgba-black-light"></div>
-                </a>
-        </div>
-        User 3
-    </div>
-    </div>
+    {{end}}
   </div>
 </div>
 
