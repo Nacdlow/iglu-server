@@ -152,6 +152,7 @@ func getMacaron(dev bool) *macaron.Macaron {
 			m.Get("/device/identify/:plugin/:id", routes.IdentifyDeviceHandler)
 			m.Post("/device/connect/:plugin/:id", binding.Bind(forms.AddDeviceForm{}),
 				routes.ConnectDevicePostHandler)
+			m.Get("/schedule", routes.AddScheduleHandler)
 		})
 		m.Get("/change_device/:id/:newName", routes.ChangeDeviceNameHandler) //changes the name of a device
 		m.Group("/settings", func() {
