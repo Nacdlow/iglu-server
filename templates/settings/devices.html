@@ -1,10 +1,48 @@
 {{template "base/head" .}}
 {{template "base/nav" .}}
 
+<div class="container">
+    <div class="mobhide">
+        <div class="row align-items-center justify-content-center pt-3 pb-1">
+          <div class="col-4"></div>
+          <div class="col-4">
+            <h2 class="text-center mb-0">Devices</h2>
+          </div>
+        <div class="col-4 d-flex justify-content-end align-items-center">
+          <a class="btn btn-new-1 navcolor w-50 text-center p-3 m-0 btn-lg" href="/settings/accounts">
+            Edit Users</a>
+          </div>
+        </div>
+        <div class="pt-2">
+          <hr>
+        </div>
+    </div>
 
-
-
-
+<div class="d-flex row align-items-center align-middle text-center" ></div>
+<div class="list-group pt-3">
+    {{range .Devices}}
+    <div class="list-group-item list-group-item-action p-4">
+        <div class="row align-items-center">
+            <div class="col-lg-9 col-8" id="text">
+                <i class="{{if eq .Type 0}}fas fa-couch{{else if eq .Type 1}}fas fa-bed{{else if eq .Type 2}}
+        fas fa-coffee{{else if eq .Type 3}}fas fa-coffee {{end}}"></i>
+                {{.Description}}
+            </div>
+            <div class="col-lg-3 col-4 text-right">
+                <a href="">
+                    <i class="fas fa-edit fa-lg mr-lg-0 mr-2"></i>
+                    <span class="mobhide pr-3">Edit</span>
+                </a>
+                <a href="">
+                    <i class="fas fa-user-times fa-lg"></i>
+                    <span class="mobhide">Delete</span>
+                </a>
+            </div>
+        </div>
+    </div>
+    {{end}}
+</div>
+</div>
 
 {{template "base/scripts" .}}
 {{template "base/tabnav" .}}

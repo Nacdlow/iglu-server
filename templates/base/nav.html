@@ -45,9 +45,11 @@
             <a class="dropdown-item black-text" href="/internal_accounts">
               <h5>Switch Accounts</h5>
             </a>
+            {{if .IsAdmin}}
             <a class="dropdown-item black-text" href="/settings/accounts">
               <h5>Edit Accounts</h5>
             </a>
+            {{end}}
             <a class="dropdown-item black-text" href="/settings/">
               <h5>Settings</h5>
             </a>

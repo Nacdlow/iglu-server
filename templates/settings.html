@@ -20,11 +20,13 @@
       <i class="fas fa-cart-arrow-down fa-2x-lg mr-lg-0 mr-2" ></i><br class="mobhide">Plugins
     </a>
   </div>
+  {{if .IsAdmin}}
   <div class="col-lg-4 col-12 p-0">
     <a  href="/settings/accounts" class="list-group-item flex-fill list-group-item-action p-4">
       <i class="fas fa-users-cog fa-2x-lg mr-lg-0 mr-2" ></i><br class="mobhide"> Accounts
     </a>
   </div>
+  {{end}}
     <div class="col-lg-4 col-12 p-0">
     <a  href="/settings/appearance" class="list-group-item flex-fill list-group-item-action p-4">
       <i class="fas fa-palette fa-2x-lg mr-lg-0 mr-2" ></i><br class="mobhide"> Appearance
@@ -45,11 +47,13 @@
       <i class="fas fa-eye fa-2x-lg mr-lg-0 mr-2" ></i><br class="mobhide"> Privacy
     </a>
     </div>
+    {{if .IsAdmin}}
     <div class="col-lg-4 col-12 p-0">
     <a  class="list-group-item list-group-item-action flex-fill p-4">
       <i class="fas fa-wrench fa-2x-lg mr-lg-0 mr-2" ></i><br class="mobhide"> Developer Options
     </a>
   </div>
+  {{end}}
   <div class="col-lg-4 col-12 p-0">
     <a  href="/settings/data" class="list-group-item list-group-item-action flex-fill p-4">
       <i class="fas fa-table fa-2x-lg mr-lg-0 mr-2" ></i><br class="mobhide">

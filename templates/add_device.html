@@ -39,7 +39,7 @@
             <div class="md-form mr-lg-5 ml-lg-5 mr-sm-0 ml-sm-0">
               <select class="browser-default custom-select" id="select" name="room_id">
                 <option value="-1" selected>Please select a room</option>
-                {{range .Rooms}}<option value="{{.RoomID}}">{{.RoomName}}</option>{{end}}
+                {{range .Rooms}}{{if or $.IsAdmin (not .IsRestricted)}}<option value="{{.RoomID}}">{{.RoomName}}</option>{{end}}{{end}}
               </select>
             </div>
             {{else}}

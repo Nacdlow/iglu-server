@@ -4,6 +4,7 @@
 	<h2 class="pt-4 pb-3 text-center">What would you like to add?</h2>
 	<div class="d-flex justify-content-center">
 		<div class="col-lg-7 col-12 p-0">
+			{{if .IsAdmin}}
 			<a class="btn btn-large btn-block p-5 btn-new" href="/add/room">
 				<h3>
 					<div class="row align-items-center">
@@ -15,6 +16,7 @@
 					</div>
 				</h3>
 			</a>
+			{{end}}
 
 			<div class="btn btn-block btn-new mt-0">
 				<h3>
