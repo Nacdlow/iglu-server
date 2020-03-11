@@ -146,8 +146,10 @@ func GetPlugin(id string) (*IgluPlugin, error) {
 	mutex.Lock()
 	defer mutex.Unlock()
 	for i, plugin := range loadedPlugins {
-		if plugin.client != nil {
-			return &loadedPlugins[i], nil
+		if plugin.Manifest.Id == id {
+			if plugin.client != nil && plugin.State == Running {
+				return &loadedPlugins[i], nil
+			}
 		}
 	}
 	return nil, errors.New("Plugin is not loaded")

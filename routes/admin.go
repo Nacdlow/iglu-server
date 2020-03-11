@@ -34,7 +34,12 @@ func AddHandler(ctx *macaron.Context) {
 
 type PluginDeviceListing struct {
 	PluginName string
-	Devices    []sdk.AvailableDevice
+	Devices    []AvailableDevice
+}
+
+type AvailableDevice struct {
+	Device   sdk.AvailableDevice
+	PluginID string
 }
 
 // SearchDeviceHandler handles the search for device
@@ -49,8 +54,15 @@ func SearchDeviceHandler(ctx *macaron.Context) {
 func SearchDeviceListHandler(ctx *macaron.Context) {
 	var listings []PluginDeviceListing
 	for _, plugin := range plugin.GetLoadedPlugins() {
-		devices := plugin.Plugin.GetAvailableDevices()
-		if len(devices) > 0 {
+		pluginDevices := plugin.Plugin.GetAvailableDevices()
+		if len(pluginDevices) > 0 {
+			var devices []AvailableDevice
+			for _, d := range pluginDevices {
+				if !models.HasPluginDevice(plugin.Manifest.Id, d.UniqueID) {
+					devices = append(devices, AvailableDevice{Device: d, PluginID: plugin.Manifest.Id})
+				}
+			}
+
 			listings = append(listings, PluginDeviceListing{
 				PluginName: plugin.Manifest.Name,
 				Devices:    devices,

@@ -5,7 +5,7 @@ go 1.13
 require (
 	cloud.google.com/go v0.54.0 // indirect
 	github.com/BurntSushi/toml v0.3.1
-	github.com/Nacdlow/plugin-sdk v0.0.0-20200308015102-f9f169a26fdc
+	github.com/Nacdlow/plugin-sdk v0.0.0-20200311032553-61c7c62ed730
 	github.com/adlio/darksky v0.0.0-20190219023837-63c8e8a7fabe
 	github.com/aws/aws-sdk-go v1.29.19 // indirect
 	github.com/brianvoe/gofakeit/v4 v4.2.3

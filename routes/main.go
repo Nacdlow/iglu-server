@@ -3,6 +3,7 @@ package routes
 import (
 	"fmt"
 	"html/template"
+	"log"
 	"math"
 	"net/http"
 	"strings"
@@ -157,6 +158,8 @@ func AddDeviceRoomPostHandler(ctx *macaron.Context, form forms.AddDeviceForm, f 
 	ctx.Redirect(fmt.Sprintf("/room/%d", form.RoomID))
 }
 
+var TYPE_NAME = []string{"Light", "Temp Control", "Other", "Speaker"}
+
 func ConnectDeviceHandler(ctx *macaron.Context, f *session.Flash) {
 	pl, err := plugin.GetPlugin(ctx.Params("plugin"))
 	if err != nil {
@@ -165,9 +168,21 @@ func ConnectDeviceHandler(ctx *macaron.Context, f *session.Flash) {
 		return
 	}
 	devices := pl.Plugin.GetAvailableDevices()
+	log.Println(devices)
 	for _, dev := range devices {
 		if dev.UniqueID == ctx.Params("id") {
-
+			ctx.Data["Device"] = dev
+			var err error
+			ctx.Data["Type"] = TYPE_NAME[dev.Type]
+			if err != nil {
+				panic(err)
+			}
+			rooms, err := models.GetRooms()
+			if err != nil {
+				panic(err)
+			}
+			ctx.Data["Rooms"] = rooms
+			ctx.HTML(http.StatusOK, "connect_device")
 			return
 		}
 	}
@@ -175,8 +190,48 @@ func ConnectDeviceHandler(ctx *macaron.Context, f *session.Flash) {
 	ctx.Redirect("/rooms")
 }
 
-func ConnectDevicePostHandler(ctx *macaron.Context) {
-
+func ConnectDevicePostHandler(ctx *macaron.Context, form forms.AddDeviceForm,
+	f *session.Flash) {
+	pl, err := plugin.GetPlugin(ctx.Params("plugin"))
+	if err != nil {
+		f.Error("Cannot connect to plugin")
+		ctx.Redirect("/rooms")
+		return
+	}
+	devices := pl.Plugin.GetAvailableDevices()
+	log.Println(devices)
+	for _, dev := range devices {
+		if dev.UniqueID == ctx.Params("id") {
+			device := &models.Device{
+				RoomID:         form.RoomID,
+				Type:           models.DeviceType(form.DeviceType),
+				Description:    form.Description,
+				ToggledUnix:    time.Now().Unix(),
+				IsRegistered:   true,
+				PluginID:       ctx.Params("plugin"),
+				PluginUniqueID: ctx.Params("id"),
+			}
+			switch device.Type {
+			case models.Light:
+				device.Brightness = 10
+				if form.IsMainLight {
+					device.IsMainLight = true
+				}
+			case models.TempControl:
+				device.Temp = 22.0
+			case models.Speaker:
+				device.Volume = 8
+			}
+			err = models.AddDevice(device)
+			if err != nil {
+				panic(err)
+			}
+			ctx.Redirect(fmt.Sprintf("/room/%d", form.RoomID))
+			return
+		}
+	}
+	f.Error("Cannot find device (doesn't exist anymore?)")
+	ctx.Redirect("/rooms")
 }
 
 // RoomsHandler handles rendering the rooms page

@@ -33,8 +33,14 @@ type Device struct {
 	UpdatedUnix    int64      `xorm:"updated" json:"updatedUnix" xml:"timestamps>updated_unix"`
 	IsFave         bool       `fake:"skip"` //whether the device has been favourited or not
 	ToggledUnix    int64      `json:"toggledUnix,omitempty" xml:"timestamps>toggled_unix,omitempty"`
-	IsRegistered   bool       `json:"isRegistered" xml:"plugin>registered"`
+	IsRegistered   bool       `xorm:"index" json:"isRegistered" xml:"plugin>registered"`
+	PluginID       string     `xorm:"index" json:"registeredPluginID" xml:"plugin>plugin_id,omitempty"`
 	PluginUniqueID string     `json:"pluginUniqueID" xml:"plugin>unique_id,omitempty"`
+}
+
+func HasPluginDevice(pluginID, uniqueID string) bool {
+	has, _ := engine.Where("plugin_id = ? AND plugin_unique_id = ?", pluginID, uniqueID).Get(new(Device))
+	return has
 }
 
 // GetFakeDevice returns a new randomly created Device. This is used for
