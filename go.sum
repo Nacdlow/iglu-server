@@ -32,14 +32,6 @@ dmitri.shuralyov.com/gpu/mtl v0.0.0-20190408044501-666a987793e9/go.mod h1:H6x//7
 github.com/BurntSushi/toml v0.3.1 h1:WXkYYl6Yr3qBf1K79EBnL4mak0OimBfB0XUf9Vl28OQ=
 github.com/BurntSushi/toml v0.3.1/go.mod h1:xHWCNGjB5oqiDr8zfno3MHue2Ht5sIBksp03qcyfWMU=
 github.com/BurntSushi/xgb v0.0.0-20160522181843-27f122750802/go.mod h1:IVnqGOEym/WlBOVXweHU+Q+/VP0lqqI8lqeDx9IjBqo=
-github.com/Nacdlow/plugin-sdk v0.0.0-20200308015102-f9f169a26fdc h1:rHERpTzKQ/xC17x+RimM9wKuEsbMEJENnODldW8KA5E=
-github.com/Nacdlow/plugin-sdk v0.0.0-20200308015102-f9f169a26fdc/go.mod h1:2pcgvmwTD3bH8+uA0k/Rww0tJUbGvA6GQl8DDuRYles=
-github.com/Nacdlow/plugin-sdk v0.0.0-20200311032553-61c7c62ed730 h1:XEQ7k0AddpsKoxKTaFFxM8+tGaznUKW02G9n+JssT1k=
-github.com/Nacdlow/plugin-sdk v0.0.0-20200311032553-61c7c62ed730/go.mod h1:2pcgvmwTD3bH8+uA0k/Rww0tJUbGvA6GQl8DDuRYles=
-github.com/Nacdlow/plugin-sdk v0.0.0-20200311035011-20c8de710511 h1:VK3eq0M+ka7M0m/y6BCS+tB4vAoJrXXXlyegVklgYFc=
-github.com/Nacdlow/plugin-sdk v0.0.0-20200311035011-20c8de710511/go.mod h1:2pcgvmwTD3bH8+uA0k/Rww0tJUbGvA6GQl8DDuRYles=
-github.com/Nacdlow/plugin-sdk v0.0.0-20200311041425-8d1dbc8ef59f h1:uHP1js89CIfs3GAh9G5tn38/XgQ09JGGuCg1vmlnf94=
-github.com/Nacdlow/plugin-sdk v0.0.0-20200311041425-8d1dbc8ef59f/go.mod h1:2pcgvmwTD3bH8+uA0k/Rww0tJUbGvA6GQl8DDuRYles=
 github.com/Nacdlow/plugin-sdk v0.0.0-20200311042405-5b018faa56b3 h1:4wsvMzM5sT991ljq7Hn0iJYYtNZxQFFuBGNtYHgGjn4=
 github.com/Nacdlow/plugin-sdk v0.0.0-20200311042405-5b018faa56b3/go.mod h1:2pcgvmwTD3bH8+uA0k/Rww0tJUbGvA6GQl8DDuRYles=
 github.com/OneOfOne/xxhash v1.2.2/go.mod h1:HSdplMjZKSmBqAxg5vPj2TmRDmfkzw+cTzAElWljhcU=
@@ -53,8 +45,6 @@ github.com/apache/thrift v0.12.0/go.mod h1:cp2SuWMxlEZw2r+iP2GNCdIi4C1qmUzdZFSVb
 github.com/armon/consul-api v0.0.0-20180202201655-eb2c6b5be1b6/go.mod h1:grANhF5doyWs3UAsr3K4I6qtAmlQcZDesFNEHPZAzj8=
 github.com/aws/aws-sdk-go v1.15.78 h1:LaXy6lWR0YK7LKyuU0QWy2ws/LWTPfYV/UgfiBu4tvY=
 github.com/aws/aws-sdk-go v1.15.78/go.mod h1:E3/ieXAlvM0XWO57iftYVDLLvQ824smPP3ATZkfNZeM=
-github.com/aws/aws-sdk-go v1.29.19 h1:+jifYixffn6kzWygtGWFWQMv0tDGyISZHNwugF9V2sE=
-github.com/aws/aws-sdk-go v1.29.19/go.mod h1:1KvfttTE3SPKMpo8g2c6jL3ZKfXtFvKscTgahTma5Xg=
 github.com/aws/aws-sdk-go v1.29.21 h1:Q9XdxpJImp2HF/AqtIlonnAtG3qU9TvhpZiy1AeuQY4=
 github.com/aws/aws-sdk-go v1.29.21/go.mod h1:1KvfttTE3SPKMpo8g2c6jL3ZKfXtFvKscTgahTma5Xg=
 github.com/beorn7/perks v0.0.0-20180321164747-3a771d992973/go.mod h1:Dwedo/Wpr24TaqPxmxbtue+5NUziq4I4S80YR8gNf3Q=
@@ -274,7 +264,6 @@ github.com/mattn/go-isatty v0.0.12/go.mod h1:cbi8OIDigv2wuxKPP5vlRcQ1OAZbq2CE4Ky
 github.com/mattn/go-runewidth v0.0.4/go.mod h1:LwmH8dsx7+W8Uxz3IHJYH5QSwggIsqBzpuz5H//U1FU=
 github.com/mattn/go-sqlite3 v1.10.0/go.mod h1:FPy6KqzDD04eiIsT53CuJW3U88zkxoIYsOqkbpncsNc=
 github.com/mattn/go-sqlite3 v1.11.0/go.mod h1:FPy6KqzDD04eiIsT53CuJW3U88zkxoIYsOqkbpncsNc=
-github.com/mattn/go-sqlite3 v1.13.0 h1:LnJI81JidiW9r7pS/hXe6cFeO5EXNq7KbfvoJLRI69c=
 github.com/mattn/go-sqlite3 v2.0.3+incompatible h1:gXHsfypPkaMZrKbD5209QV9jbUTJKjyR5WD3HYQSd+U=
 github.com/mattn/go-sqlite3 v2.0.3+incompatible/go.mod h1:FPy6KqzDD04eiIsT53CuJW3U88zkxoIYsOqkbpncsNc=
 github.com/matttproud/golang_protobuf_extensions v1.0.1/go.mod h1:D8He9yQNgCq6Z5Ld7szi9bcBfOoFv/3dc6xSMkL2PC0=
@@ -390,8 +379,6 @@ github.com/unknwon/com v0.0.0-20190804042917-757f69c95f3e h1:GSGeB9EAKY2spCABz6x
 github.com/unknwon/com v0.0.0-20190804042917-757f69c95f3e/go.mod h1:tOOxU81rwgoCLoOVVPHb6T/wt8HZygqH5id+GNnlCXM=
 github.com/unknwon/com v1.0.1 h1:3d1LTxD+Lnf3soQiD4Cp/0BRB+Rsa/+RTvz8GMMzIXs=
 github.com/unknwon/com v1.0.1/go.mod h1:tOOxU81rwgoCLoOVVPHb6T/wt8HZygqH5id+GNnlCXM=
-github.com/urfave/cli/v2 v2.1.1 h1:Qt8FeAtxE/vfdrLmR3rxR6JRE0RoVmbXu8+6kZtYU4k=
-github.com/urfave/cli/v2 v2.1.1/go.mod h1:SE9GqnLQmjVa0iPEY0f1w3ygNIYcIJ0OKPMoW2caLfQ=
 github.com/urfave/cli/v2 v2.2.0 h1:JTTnM6wKzdA0Jqodd966MVj4vWbbquZykeX1sKbe2C4=
 github.com/urfave/cli/v2 v2.2.0/go.mod h1:SE9GqnLQmjVa0iPEY0f1w3ygNIYcIJ0OKPMoW2caLfQ=
 github.com/xiang90/probing v0.0.0-20190116061207-43a291ad63a2/go.mod h1:UETIi67q53MR2AWcXfiuqkDkRtnGDLqkBTpCHuJHxtU=
@@ -568,8 +555,6 @@ golang.org/x/tools v0.0.0-20200212150539-ea181f53ac56/go.mod h1:TB2adYChydJhpapK
 golang.org/x/tools v0.0.0-20200224181240-023911ca70b2/go.mod h1:TB2adYChydJhpapKDTa4BR/hXlZSLoq2Wpct/0txZ28=
 golang.org/x/tools v0.0.0-20200304193943-95d2e580d8eb h1:iKlO7ROJc6SttHKlxzwGytRtBUqX4VARrNTgP2YLX5M=
 golang.org/x/tools v0.0.0-20200304193943-95d2e580d8eb/go.mod h1:o4KQGtdN14AW+yjsvvwRTJJuXz8XRtIHtEnmAXLyFUw=
-golang.org/x/tools v0.0.0-20200308013534-11ec41452d41 h1:9Di9iYgOt9ThCipBxChBVhgNipDoE5mxO84rQV7D0FE=
-golang.org/x/tools v0.0.0-20200308013534-11ec41452d41/go.mod h1:o4KQGtdN14AW+yjsvvwRTJJuXz8XRtIHtEnmAXLyFUw=
 golang.org/x/tools v0.0.0-20200311035431-43e3193a9bc5 h1:2XmZ+cO5PxgJ29DhDkyB9mB1rvj7wUfSY8WC3po8yvs=
 golang.org/x/tools v0.0.0-20200311035431-43e3193a9bc5/go.mod h1:o4KQGtdN14AW+yjsvvwRTJJuXz8XRtIHtEnmAXLyFUw=
 golang.org/x/xerrors v0.0.0-20190717185122-a985d3407aa7/go.mod h1:I/5z698sn9Ka8TeJc9MKroUUfqBBauWjQqLJ2OPfmY0=
@@ -620,8 +605,6 @@ google.golang.org/genproto v0.0.0-20200224152610-e50cd9704f63/go.mod h1:55QSHmfG
 google.golang.org/genproto v0.0.0-20200302123026-7795fca6ccb1 h1:RYJIKMPLUCjLP+fEg9ygjxF3KjfSHN4BSZw91aecq6U=
 google.golang.org/genproto v0.0.0-20200302123026-7795fca6ccb1/go.mod h1:55QSHmfGQM9UVYDPBsyGGes0y52j32PQ3BqQfXhyH3c=
 google.golang.org/genproto v0.0.0-20200305110556-506484158171/go.mod h1:55QSHmfGQM9UVYDPBsyGGes0y52j32PQ3BqQfXhyH3c=
-google.golang.org/genproto v0.0.0-20200306153348-d950eab6f860 h1:QmnwU8dKvY8c/vZikd2jhBNwrrGS5qeyK/2Aeeh9Grk=
-google.golang.org/genproto v0.0.0-20200306153348-d950eab6f860/go.mod h1:55QSHmfGQM9UVYDPBsyGGes0y52j32PQ3BqQfXhyH3c=
 google.golang.org/genproto v0.0.0-20200310143817-43be25429f5a h1:lRlI5zu6AFy3iU/F8YWyNrAmn/tPCnhiTxfwhWb76eU=
 google.golang.org/genproto v0.0.0-20200310143817-43be25429f5a/go.mod h1:55QSHmfGQM9UVYDPBsyGGes0y52j32PQ3BqQfXhyH3c=
 google.golang.org/grpc v1.17.0/go.mod h1:6QZJwpn2B+Zp71q/5VxRsJ6NXXVCE5NRUHRo+f3cWCs=

@@ -138,30 +138,36 @@ func getMacaron(dev bool) *macaron.Macaron {
 
 		m.Get("/move_device/:did/:rid", routes.MoveDeviceHandler) //moves device between rooms
 
+		m.Group("/add", func() {
+			m.Get("", routes.AddHandler)
+			m.Get("/search_device", routes.SearchDeviceHandler)
+			m.Get("/search_device/list", routes.SearchDeviceListHandler)
+			m.Get("/device", routes.AddDeviceHandler)
+			m.Get("/device/:id", routes.AddDeviceHandler)
+			m.Post("/device", binding.Bind(forms.AddDeviceForm{}),
+				routes.AddDeviceRoomPostHandler)
+			m.Post("/device/:id", binding.Bind(forms.AddDeviceForm{}),
+				routes.AddDeviceRoomPostHandler)
+			m.Get("/device/connect/:plugin/:id", routes.ConnectDeviceHandler)
+			m.Get("/device/identify/:plugin/:id", routes.IdentifyDeviceHandler)
+			m.Post("/device/connect/:plugin/:id", binding.Bind(forms.AddDeviceForm{}),
+				routes.ConnectDevicePostHandler)
+		})
+		m.Get("/change_device/:id/:newName", routes.ChangeDeviceNameHandler) //changes the name of a device
+		m.Group("/settings", func() {
+			m.Get("", routes.SettingsHandler)
+		})
+
 		m.Group("", func() {
-			m.Get("/restrict_room/:id", routes.RestrictHandler)                  //restricts a room
-			m.Get("/change_name/:id/:newName", routes.ChangeNameHandler)         //changes the name of a device
-			m.Get("/change_device/:id/:newName", routes.ChangeDeviceNameHandler) //changes the name of a device
 			m.Group("/add", func() {
-				m.Get("", routes.AddHandler)
 				m.Get("/room", routes.AddRoomHandler)
-				m.Get("/search_device", routes.SearchDeviceHandler)
-				m.Get("/search_device/list", routes.SearchDeviceListHandler)
 				m.Post("/room", binding.Bind(forms.AddRoomForm{}),
 					routes.PostRoomHandler)
-				m.Get("/device", routes.AddDeviceHandler)
-				m.Get("/device/:id", routes.AddDeviceHandler)
-				m.Post("/device", binding.Bind(forms.AddDeviceForm{}),
-					routes.AddDeviceRoomPostHandler)
-				m.Post("/device/:id", binding.Bind(forms.AddDeviceForm{}),
-					routes.AddDeviceRoomPostHandler)
-				m.Get("/device/connect/:plugin/:id", routes.ConnectDeviceHandler)
-				m.Get("/device/identify/:plugin/:id", routes.IdentifyDeviceHandler)
-				m.Post("/device/connect/:plugin/:id", binding.Bind(forms.AddDeviceForm{}),
-					routes.ConnectDevicePostHandler)
+
 			})
+			m.Get("/restrict_room/:id", routes.RestrictHandler)          //restricts a room
+			m.Get("/change_name/:id/:newName", routes.ChangeNameHandler) //changes the name of a room
 			m.Group("/settings", func() {
-				m.Get("", routes.SettingsHandler)
 				m.Group("/plugins", func() {
 					m.Get("", routes.PluginsSettingsHandler)
 					m.Get("/:id", routes.InstallPluginSettingsHandler)
