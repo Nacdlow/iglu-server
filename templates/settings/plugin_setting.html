@@ -6,8 +6,9 @@
       <a class="fas fa-arrow-circle-left fa-2x text-left" href="/settings/plugins"></a>
     </div>
     <div class="col-6">
-		<h2 class="text-center mb-0">{{.Plugin.Manifest.Name}} <span
-			class="text-muted">({{.Plugin.Manifest.Version}}) by
+		<h2 class="text-center mb-0">{{.Plugin.Manifest.Name}} 
+      {{if .IsAdmin}}
+      <span class="text-muted">({{.Plugin.Manifest.Version}}) by
 			{{.Plugin.Manifest.Author}}</span>
 
 					{{if eq .Plugin.State 0}}
@@ -18,13 +19,16 @@
 					<span class="badge badge-danger">Crashed</span>
 					{{else}}
 					<span class="badge badge-primary">Unknown</span>
-					{{end}}
+          {{end}}
+      {{end}}
 		</h2>
     </div>
+    {{if .IsAdmin}}
     <div class="col-3 d-flex justify-content-end align-items-center">
       <a class="btn btn-border-iglu btn-phat navcolor text-center p-3 m-0"
         href="https://market.nacdlow.com/{{.Plugin.Manifest.Id}}">View in Marketplace</a>
     </div>
+    {{end}}
   </div>
   <div class="pt-2">
     <hr>
@@ -34,7 +38,8 @@
 
     <div class="col-12">
       <div class="list-group">
-		  {{range .Plugin.Config}}
+      {{range .Plugin.Config}}
+      {{if or $.IsAdmin (not .IsUserSpecific)}}
 		  <div class="list-group-item list-group-item-action"> <!-- option -->
           <div class="row align-items-center">
             <div class="d-flex align-items-center">
@@ -70,18 +75,21 @@
 
             </div>
           </div>
-        </div>{{end}}
+        </div>
+        {{end}}{{end}}
       </div>
     </div>
   </div>
 
   <div class="row pt-3">
+    {{if .IsAdmin}}
     <div class="col-lg-3 col-8">
       <a class="btn btn-new-iglu btn-border-red  btn-block btn-phat bodycolor text-center"
 		 href="/settings/plugin/{{.Plugin.Manifest.Id}}/delete"><i class="fas fa-times pr-1"></i>
         Remove Plugin
       </a>
     </div>
+    {{end}}
 
     <div class="col-lg col-8 text-center">
       <button type="submit" class="btn btn-success-new btn-phat w-50 navcolor m-0">
@@ -89,11 +97,13 @@
       </button>
     </div>
 
+    {{if .IsAdmin}}
     <div class="col-lg-3 col-8 text-right">
       <a class="btn btn-new-iglu btn-border-iglu btn-phat btn-block bodycolor text-center"
 		 href="/settings/plugin/{{.Plugin.Manifest.Id}}/reload"><i class="fas fa-redo-alt pr-1"></i>
         Reload Plugin</a>
     </div>
+    {{end}}
   </div>
 </div>
 
