@@ -160,6 +160,8 @@ func getMacaron(dev bool) *macaron.Macaron {
 			m.Get("/plugins", routes.PluginsSettingsHandler)
 			m.Get("/plugin/:id", routes.SpecificPluginSettingsHandler)
 			m.Post("/plugin/:id", routes.SpecificPluginSettingsPostHandler)
+			m.Get("/appearance", routes.AppearanceSettingsHandler)
+			m.Get("/about", routes.AboutSettingsHandler)
 		})
 
 		m.Group("", func() {
@@ -195,14 +197,13 @@ func getMacaron(dev bool) *macaron.Macaron {
 				m.Get("/notifications", routes.NotifictionsSettingsHandler)
 				m.Get("/privacy", routes.PrivacySettingsHandler)
 
-				m.Get("/appearance", routes.AppearanceSettingsHandler)
 				m.Group("/data", func() {
 					m.Get("", routes.DataSettingsHandler)
 					m.Get("/json", routes.JSONDataSettingsHandler)
 					m.Get("/xml", routes.XMLDataSettingsHandler)
 				})
 				m.Get("/appearance/font/:size", routes.FontSliderHandler)
-				m.Get("/about", routes.AboutSettingsHandler)
+
 			})
 		}, routes.RequireAdmin)
 

@@ -16,7 +16,7 @@
 			<!--/switch -->
 
 
-			<div class="col-5">
+			<div class="">
 				<i id="lock-{{.DeviceID}}"></i><h5 class="card-title text-center" id="name-{{.DeviceID}}">{{.Description}}</h5>
 			</div>
 
@@ -35,7 +35,7 @@
 				</div>
 				<a class="dropdown-item black-text" href="#" onclick="edit({{.DeviceID}});">Edit</a>
 				<a class="dropdown-item black-text" href="#" id="move-{{.DeviceID}}" data-toggle="modal"
-				data-target="#moveDevice" onclick="passDevID({{.DeviceID}})">Move</a>
+					data-target="#moveDevice" onclick="passDevID({{.DeviceID}})">Move</a>
 				<a class="dropdown-item black-text" href="#" id="remove-{{.DeviceID}}" data-toggle="modal"
 					data-target="#removeDevice-{{.DeviceID}}">Delete</a>
 			</div>
@@ -43,8 +43,7 @@
 	</div>
 
 	<p class="text-center pt-4">Brightness</p>
-	<div id="sliderHide-{{.DeviceID}}">
-	<div class="d-flex justify-content-center">
+	<div class="d-flex justify-content-center sliderHide-{{.DeviceID}}" id="sliderHide-{{.DeviceID}}">
 		<span class="blue-text mr-2"><i class="fas fa-moon fa-lg" aria-hidden="true"></i></span>
 		<form class="range-field">
 			<input class="custom-range" type="range" min="0" max="10" value="{{.Brightness}}" id="slider-{{.DeviceID}}"
@@ -52,12 +51,11 @@
 		</form>
 		<span class="blue-text ml-2 "><i class="fas fa-sun fa-lg" aria-hidden="true"></i></span>
 	</div>
-	</div>
 	<div id="button-{{.DeviceID}}" class="button-{{.DeviceID}} text-center justify-content-center d-flex"></div>
 </div>
 <div class="footerdiv-{{.DeviceID}}" id="footerdiv-{{.DeviceID}}">
-	<div class="card-footer" {{if .Status}}style="background-color: #A8FFA8;"
-	{{else}}style="background-color: #CDCDCD;" {{end}} id="footer">
+	<div class="card-footer" {{if .Status}}style="background-color: #A8FFA8;" {{else}}style="background-color: #CDCDCD;"
+		{{end}} id="footer">
 		<p class="mb-0">
 			{{if .Status}}Time on: {{CalcSince .ToggledUnix}}{{else}}Last on:
 			{{CalcSince .ToggledUnix}}{{end}}</p>
@@ -94,39 +92,40 @@
 
 <script>
 	function edit(id) {//swaps room title with an input field and changes the button to a save button.
-		var toggleDiv = document.getElementById("toggleHide-"+id);
-		var sliderDiv = document.getElementById("sliderHide-"+id);
+		var toggleDiv = document.getElementById("toggleHide-" + id);
+		var sliderDiv = document.getElementById("sliderHide-" + id);
 		sliderDiv.style.display = "none";
 		toggleDiv.style.display = "none";
-		var deviceName = document.getElementById("name-"+id);
+		var deviceName = document.getElementById("name-" + id);
+		var name = deviceName.innerHTML;
 		var inputField = document.createElement("input");
-		inputField.setAttribute('id','new-'+id);
-		inputField.setAttribute('class','black-text navcolor white-text');
-		inputField.setAttribute('style','border: 2px solid white; opacity: 80%; border-radius: 50px; height: 35px; width: 200%; color: white;');
-		inputField.setAttribute('placeholder', '   Device name');
+		inputField.setAttribute('id', 'new-' + id);
+		inputField.setAttribute('class', 'black-text navcolor white-text');
+		inputField.setAttribute('style', 'border: 2px solid white; opacity: 80%; border-radius: 50px; height: 35px; width: 200px; color: white;');
+		inputField.setAttribute('placeholder', " Device Name:");
 		deviceName.parentNode.replaceChild(inputField, deviceName);
-		
-		var viewButton = document.getElementById("button-"+id);
+
+		var viewButton = document.getElementById("button-" + id);
 		var saveButton = document.createElement("a");
-		saveButton.setAttribute('id','saveButton-'+id);
-		saveButton.setAttribute('class','btn-new-1 text-center p-3 white-text justify-content-center pt-2 d-flex');
-		saveButton.setAttribute('style', 'background-color: #3ddb75;');
-		saveButton.setAttribute('onClick', 'postChanges('+id+');');
+		saveButton.setAttribute('id', 'saveButton-' + id);
+		saveButton.setAttribute('class', 'btn-new-1 text-center p-0 white-text justify-content-center pt-3 d-flex');
+		saveButton.setAttribute('style', 'background-color: #3ddb75;height: 50px');
+		saveButton.setAttribute('onClick', 'postChanges(' + id + ');');
 		saveButton.innerHTML = "Save";
 		viewButton.parentNode.replaceChild(saveButton, viewButton);
 
-		var lock = document.getElementById("lock-"+id);
-    	var close = document.createElement("a");
-    	close.setAttribute('id','close-'+id);
-		close.setAttribute('class','fas fa-times-circle white-text pr-2');
+		var lock = document.getElementById("lock-" + id);
+		var close = document.createElement("a");
+		close.setAttribute('id', 'close-' + id);
+		close.setAttribute('class', 'fas fa-times-circle white-text pr-2');
 		close.setAttribute('onClick', 'reload();');
 		lock.parentNode.replaceChild(close, lock);
 	}
 
-	function postChanges(id){
-		var newName = document.getElementById("new-"+id).value;
+	function postChanges(id) {
+		var newName = document.getElementById("new-" + id).value;
 		console.log(newName)
-		$.get('/change_device/'+id+'/'+newName);
+		$.get('/change_device/' + id + '/' + newName);
 		reload();
 	}
 </script>
