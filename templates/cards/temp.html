@@ -17,7 +17,7 @@
 			</div>
 
 			<div class="col-5">
-				<h5 class="card-title text-center" id="name-{{.DeviceID}}">{{.Description}}</h5>
+				<i id="lock-{{.DeviceID}}"></i><h5 class="card-title text-center" id="name-{{.DeviceID}}">{{.Description}}</h5>
 			</div>
 
 			<div class="col text-right">
@@ -42,7 +42,8 @@
 			</div>
 		</div>
 	</div>
-	
+
+		
 		<p class="text-center pt-4">Temperature</p>
 		<div id="sliderHide-{{.DeviceID}}">
 		<div class="d-flex justify-content-center">
@@ -106,7 +107,7 @@
 		var inputField = document.createElement("input");
 		inputField.setAttribute('id','new-'+id);
 		inputField.setAttribute('class','black-text navcolor white-text');
-		inputField.setAttribute('style','border: 2px solid white; opacity: 80%; border-radius: 50px; height: 35px; width: 200%; color: white;');
+		inputField.setAttribute('style','border: 2px solid white; opacity: 80%; border-radius: 50px; height: 35px; width: 200px; color: white;');
 		inputField.setAttribute('placeholder', '   Device name');
 		deviceName.parentNode.replaceChild(inputField, deviceName);
 		
@@ -116,8 +117,15 @@
 		saveButton.setAttribute('class','btn-new-1 text-center p-3 white-text justify-content-center pt-3 d-flex');
 		saveButton.setAttribute('style', 'background-color: #3ddb75;');
 		saveButton.setAttribute('onClick', 'postChanges('+id+');');
-		saveButton.innerHTML = "Save Changes";
+		saveButton.innerHTML = "Save";
 		viewButton.parentNode.replaceChild(saveButton, viewButton);
+
+		var lock = document.getElementById("lock-"+id);
+		var close = document.createElement("a");
+		close.setAttribute('id','close-'+id);
+		close.setAttribute('class','fas fa-times-circle white-text pr-2');
+		close.setAttribute('onClick', 'reload();');
+		lock.parentNode.replaceChild(close, lock);
 	}
 
 	function postChanges(id){

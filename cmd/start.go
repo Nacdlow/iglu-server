@@ -157,6 +157,9 @@ func getMacaron(dev bool) *macaron.Macaron {
 		m.Get("/change_device/:id/:newName", routes.ChangeDeviceNameHandler) //changes the name of a device
 		m.Group("/settings", func() {
 			m.Get("", routes.SettingsHandler)
+			m.Get("/plugins", routes.PluginsSettingsHandler)
+			m.Get("/plugin/:id", routes.SpecificPluginSettingsHandler)
+			m.Post("/plugin/:id", routes.SpecificPluginSettingsPostHandler)
 		})
 
 		m.Group("", func() {
@@ -170,13 +173,9 @@ func getMacaron(dev bool) *macaron.Macaron {
 			m.Get("/change_name/:id/:newName", routes.ChangeNameHandler) //changes the name of a room
 			m.Group("/settings", func() {
 				m.Group("/plugins", func() {
-					m.Get("", routes.PluginsSettingsHandler)
 					m.Get("/:id", routes.InstallPluginSettingsHandler)
 					m.Get("/confirm/:id", routes.InstallPluginConfirmSettingsHandler) // TODO use POST so it is secure
 				})
-
-				m.Get("/plugin/:id", routes.SpecificPluginSettingsHandler)
-				m.Post("/plugin/:id", routes.SpecificPluginSettingsPostHandler)
 
 				m.Get("/plugin/:id/delete", routes.DeletePluginHandler)
 				m.Get("/plugin/:id/reload", routes.ReloadPluginHandler)
