@@ -4,6 +4,7 @@ config.toml
 plugins/
 *.log
 *.prof
+vendor/
 
 # For bindata
 bindata.go
