@@ -28,7 +28,7 @@
             <div class="md-form pb-3  mr-lg-5 ml-lg-5 mr-sm-0 ml-sm-0">
               <select class="browser-default custom-select" id="select" name="device_type">
                 <option value="" disabled selected>Choose Type</option>
-                <option value="0">Lights</option>
+                <option value="0">Light</option>
                 <option value="1">Temperature Control</option>
                 <option value="3">Speaker</option>
                 <option value="2">Other</option>
@@ -45,7 +45,7 @@
             {{else}}
             <input name="room_id" value="{{.RoomID}}" type="hidden" />
             {{end}}
-            <div class="custom-control custom-checkbox text-center pt-2">
+            <div class="custom-control custom-checkbox text-center pt-2 d-none" id="mainLight">
               <input type="checkbox" class="custom-control-input" id="defaultUnchecked" name="is_main_light_source">
               <label class="custom-control-label" for="defaultUnchecked">Main Light</label>
             </div>
@@ -62,6 +62,19 @@
     </div>
   </div>
 </div>
+
+
 {{template "base/scripts" .}}
+<script>
+  function light(){
+  if($("select").val() == "0"){
+    document.getElementById("mainLight").setAttribute('class','custom-control custom-checkbox text-center pt-2 d-block');
+  }
+  }
+  light(); // This will run on page load
+    setInterval(function () {
+      light() // this will run after every 1 seconds
+    }, 1000);
+  </script>
 {{template "base/tabnav" .}}
 {{template "base/footer" .}}
