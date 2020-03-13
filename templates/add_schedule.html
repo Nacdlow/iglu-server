@@ -1,67 +1,114 @@
 {{template "base/head" .}}
 {{template "base/nav" .}}
 <div class="container">
-  <div class="d-flex d-flex justify-content-center pt-4">
-    <div class="col-lg-6 col-md-8 col-sm-12">
-      <div class="card mr-lg-0 mb-4">
-        <div class="card-header pt-4 pb-4">
-          <div class="d-flex justify-content-center align-items-center">
-            <div class="col-1 d-flex justify-content-start p-0">
-              <a class="fas fa-times-circle fa-lg" onclick="history.back();"></a>
-            </div>
-            <div class="col-10">
-              <h2 class="text-center mb-0">Add Device</h2>
-            </div>
-            <div class="col-1 p-0">
+	<div class="d-flex d-flex justify-content-center pt-4">
+		<div class="col-lg-6 col-md-8 col-sm-12">
+			<div class="card mr-lg-0 mb-4">
+				<div class="card-header pt-4 pb-4">
+					<div class="d-flex justify-content-center align-items-center">
+						<div class="col-1 d-flex justify-content-start p-0">
+							<a class="fas fa-times-circle fa-lg" onclick="history.back();"></a>
+						</div>
+						<div class="col-10">
+							<h2 class="text-center mb-0">Add Schedule</h2>
+						</div>
+						<div class="col-1 p-0">
 
-            </div>
-          </div>
-        </div>
-        <div class="card-body">
-          <form method="POST">
-            <h6 class="text-center">Enter Device Name:</h6>
-            <div class="md-form justify-content-center d-flex mt-3 mr-lg-5 ml-lg-5 mr-sm-0 ml-sm-0">
-              <input type="text" class="form-control white-text mb-3 text-center" maxlength="11"
-                placeholder="e.g. Smart Light" name="description">
-            </div>
-            <h6 class="text-center">Select Device Type:</h6>
-            <div class="md-form pb-3  mr-lg-5 ml-lg-5 mr-sm-0 ml-sm-0">
-              <select class="browser-default custom-select" id="select" name="device_type">
+						</div>
+					</div>
+				</div>
+				<div class="card-body">
+					<form method="POST">
+						<h6 class="text-center">Enter Schedule Name:</h6>
+						<div class="md-form justify-content-center d-flex mt-3 mr-lg-5 ml-lg-5 mr-sm-0 ml-sm-0">
+							<input type="text" class="form-control white-text mb-3 text-center" maxlength="11"
+								placeholder="e.g. Smart Light" name="title">
+						</div>
+						<div class="form-row pb-3">
+							<div class="col">
+								<h6 class="text-center">Select Schedule Type:</h6>
+							</div>
+							<div class="col d-flex justify-content-center">
+								
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" name="type" id="basictype" value="1">
+									<label class="custom-control-label white-text" for="basictype">Basic</label>
+								</div>
+
+								<!-- Default inline 2-->
+								<div class="custom-control custom-radio custom-control-inline">
+									<input type="radio" class="custom-control-input" id="defaultInline2" name="type" value="0">
+									<label class="custom-control-label white-text" for="defaultInline2">Advanced</label>
+								</div>
+								
+							</div>
+						</div>
+
+						<!--<div class="md-form pb-3  mr-lg-5 ml-lg-5 mr-sm-0 ml-sm-0">
+              <select class="browser-default custom-select" id="select" name="type">
                 <option value="" disabled selected>Choose Type</option>
-                <option value="0">Lights</option>
-                <option value="1">Temperature Control</option>
-                <option value="3">Speaker</option>
-                <option value="2">Other</option>
-              </select>
-            </div>
-            {{if not .RoomSelected}}
-            <h6 class="text-center ">Belongs to room:</h6>
-            <div class="md-form mr-lg-5 ml-lg-5 mr-sm-0 ml-sm-0">
-              <select class="browser-default custom-select" id="select" name="room_id">
-                <option value="-1" selected>Please select a room</option>
-                {{range .Rooms}}<option value="{{.RoomID}}">{{.RoomName}}</option>{{end}}
-              </select>
-            </div>
-            {{else}}
-            <input name="room_id" value="{{.RoomID}}" type="hidden" />
-            {{end}}
-            <div class="custom-control custom-checkbox text-center pt-2">
-              <input type="checkbox" class="custom-control-input" id="defaultUnchecked" name="is_main_light_source">
-              <label class="custom-control-label" for="defaultUnchecked">Main Light</label>
-            </div>
-            <div class="d-flex justify-content-center pt-4">
-              <div class="col-8">
-                <button type="submit" class="btn btn-success-new btn-block bodycolor">
-                  Save Device
-                </button>
-              </div>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
+                <option value="1">Basic</option>
+                <option value="0">Advanced</option>
+			  </select>
+			</div>-->	
+						<div id="basicschedule">
+						<div class="form-row pt-3">
+							<div class="col">
+								<h6 class="text-center ">Start Time:</h6>
+								<div class="md-form mt-1">
+									<input type="datetime-local" id="input_starttime" name="start" class="form-control timepicker">
+								</div>
+							</div>
+							<div class="col">
+								<h6 class="text-center ">End Time:</h6>
+								<div class="md-form mt-1">
+									<input type="datetime-local" id="input_starttime" name="end" class="form-control timepicker">
+								</div>
+							</div>
+						</div>
+						</div>
+
+						<div id="setcron"></div>
+						
+						<div class="d-flex justify-content-center pt-4">
+							<div class="col-8">
+								<button type="submit" class="btn btn-success-new btn-block bodycolor">
+									Save Device
+								</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
+
+
+<script>
+	/*$(document).ready(function () {
+		$('#setcron').cron({
+			initial: "42 3 * * 5",
+			onChange: function () {
+				$('#setcron-val').text($(this).cron("value"));
+			},
+			useGentleSelect: true // default: false
+		});
+	});*/
+</script>
+
+<script>
+ $(document).ready(function() {
+   $('input[type="radio"]').click(function() {
+       if($(this).attr('id') == 'basictype') {
+            $('#basicschedule').show();           
+       }
+       else {
+            $('#basicschedule').hide();   
+       }
+   });
+});
+  </script>
 {{template "base/scripts" .}}
 {{template "base/tabnav" .}}
-{{template "base/footer" .}}	
+{{template "base/footer" .}}
