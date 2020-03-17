@@ -87,6 +87,10 @@ func AddRoomHandler(ctx *macaron.Context) {
 // AddScheduleHandler handles the adding schedule page
 func AddScheduleHandler(ctx *macaron.Context) {
 	ctx.Data["BackLink"] = "/add"
-
+	var err error
+	ctx.Data["Devices"], err = models.GetDevices()
+	if err != nil {
+		panic(err)
+	}
 	ctx.HTML(http.StatusOK, "add_schedule")
 }

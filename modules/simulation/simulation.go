@@ -13,7 +13,7 @@ import (
 )
 
 const (
-	BatteryLowerLimit = -100
+	BatteryLowerLimit = -5
 )
 
 var (

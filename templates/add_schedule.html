@@ -21,8 +21,8 @@
 					<form method="POST">
 						<h6 class="text-center">Enter Schedule Name:</h6>
 						<div class="md-form justify-content-center d-flex mt-3 mr-lg-5 ml-lg-5 mr-sm-0 ml-sm-0">
-							<input type="text" class="form-control white-text mb-3 text-center" maxlength="11"
-								placeholder="e.g. Smart Light" name="title">
+							<input type="text" class="form-control white-text mb-3 text-center"
+								placeholder="e.g. Morning Coffee" name="title">
 						</div>
 						<div class="form-row pb-3">
 							<div class="col">
@@ -70,10 +70,18 @@
 
 						<div id="setcron"></div>
 						
+            <h6 class="text-center ">Device:</h6>
+            <div class="md-form mr-lg-5 ml-lg-5 mr-sm-0 ml-sm-0">
+              <select class="browser-default custom-select" id="select"
+				  name="device_id">
+                <option value="-1" selected>Please select a device</option>
+                {{range .Devices}}<option value="{{.DeviceID}}">{{.Description}}</option>{{end}}
+              </select>
+            </div>
 						<div class="d-flex justify-content-center pt-4">
 							<div class="col-8">
 								<button type="submit" class="btn btn-success-new btn-block bodycolor">
-									Save Device
+									Add Schedule
 								</button>
 							</div>
 						</div>
