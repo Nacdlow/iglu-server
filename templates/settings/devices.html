@@ -1,22 +1,22 @@
 {{template "base/head" .}}
 {{template "base/nav" .}}
 
-<div class="container">
-    <div class="mobhide">
-        <div class="row align-items-center justify-content-center pt-3 pb-1">
-          <div class="col-4"></div>
-          <div class="col-4">
-            <h2 class="text-center mb-0">Devices</h2>
-          </div>
-        <div class="col-4 d-flex justify-content-end align-items-center">
-          <a class="btn btn-new-1 navcolor w-50 text-center p-3 m-0 btn-lg" href="/settings/accounts">
-            Edit Users</a>
-          </div>
+    <div class="container">
+        <div class="mobhide">
+            <div class="row align-items-center justify-content-center pt-3">
+                <div class="col-4">
+                    <a class="fas fa-arrow-circle-left fa-2x text-left" href="/settings"></a>
+                </div>
+                <div class="col-4">
+                    <h2 class="text-center mb-0">Device Settings</h2>
+                </div>
+                <div class="col-4 d-flex justify-content-end align-items-center">
+                </div>
+            </div>
+            <div class="pt-2">
+                <hr>
+            </div>
         </div>
-        <div class="pt-2">
-          <hr>
-        </div>
-    </div>
 
 <div class="d-flex row align-items-center align-middle text-center" ></div>
 <div class="list-group pt-3">
@@ -26,7 +26,7 @@
             <div class="col-lg-9 col-8" id="text">
                 <i class="{{if eq .Type 0}}far fa-lightbulb{{else if eq .Type 1}}far fa-snowflake{{else if eq .Type 2}}
                 as fa-plug{{else if eq .Type 3}}fas fa-volume-up{{end}}"></i>
-                {{.Description}}
+                {{.Description}}{{if eq .Status true}}  <span class="badge badge-success">Connected</span>{{else if eq .Status false}}  <span class="badge badge-danger">Disconnected</span>{{end}}
             </div>
             <div class="col-lg-3 col-4 text-right">
                 <a href="">
@@ -34,7 +34,8 @@
                     <span class="mobhide pr-3">Edit</span>
                 </a>
                 <a href="">
-                    <i class="fas fa-user-times fa-lg"></i>
+                    
+                    <i class="fas fa-trash-alt"></i>
                     <span class="mobhide">Delete</span>
                 </a>
             </div>
