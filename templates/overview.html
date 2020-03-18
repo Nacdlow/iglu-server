@@ -1,12 +1,106 @@
 {{template "base/head" .}}
 {{template "base/nav" .}}
 
+<head>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+    integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+    crossorigin="" />
+  <!-- Make sure you put this AFTER Leaflet's CSS -->
+  <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+    integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+    crossorigin=""></script>
+  <style>
+    #map {
+      height: 50vh;
+    }
+
+    .leaflet-control-zoom-in,
+    .leaflet-control-zoom-out {
+      background-color: #323232 !important;
+    }
+
+    .leaflet-container {
+      background-color: #121212 !important;
+    }
+
+    .leaflet-disabled {
+      background-color: #555 !important;
+    }
+  </style>
+</head>
+
 <div class="container">
-<h1 class="display-1 text-center pt-5"><i class="fas fa-hard-hat"></i></h1>
-  <h1 class="display-1 text-center mobhide pb-3">Under Construction!</h1>
-  <h1 class="text-center deskhide pb-3">Under Construction!</h1>
-  <h1 class="text-center">This page will be available soon.</h1>
-  <hr>
+
+  <br>
+  <br>
+  <div id="map"></div>
+
+  <script>
+    var map = L.map("map", {
+      crs: L.CRS.Simple,
+      minZoom: -1,
+      attributionControl: false
+    });
+
+    var bounds = [
+      [0, 0],
+      [1000, 1000]
+    ];
+
+    var image = L.imageOverlay("/img/floorplan.svg", bounds).addTo(map);
+
+    map.fitBounds(bounds);
+
+    var yx = L.latLng;
+
+    var xy = function (x, y) {
+      if (L.Util.isArray(x)) {
+        // When doing xy([x, y]);
+        return yx(x[1], x[0]);
+      }
+      return yx(y, x); // When doing xy(x, y);
+    };
+
+    var kitchen = xy(200, 220);
+    var bedroom = xy(825, 700);
+    var dining = xy(484, 230);
+    var bathroom = xy(825, 350);
+    var plant = xy(825, 175);
+    var study = xy(440, 450);
+    var lounge = xy(200, 710);
+
+    L.marker(kitchen)
+      .addTo(map)
+      .bindPopup("Kitchen");
+
+    L.marker(bedroom)
+      .addTo(map)
+      .bindPopup("Bedroom");
+      
+    L.marker(dining)
+      .addTo(map)
+      .bindPopup("Dining Area");
+
+    L.marker(bathroom)
+      .addTo(map)
+      .bindPopup("Bathroom");
+
+    L.marker(plant)
+      .addTo(map)
+      .bindPopup("Plant Room??");
+
+    L.marker(study)
+      .addTo(map)
+      .bindPopup("Study Area");
+
+    L.marker(lounge)
+      .addTo(map)
+      .bindPopup("Lounge");
+  </script>
+  
+  <br>
+  <hr class="horizontal">
+  
 </div>
 
 
@@ -22,17 +116,17 @@
             <div id="toggle">
               <div class="custom-control custom-switch float-left">
                 <input type="checkbox" class="custom-control-input" id="customSwitches-{{.DeviceID}}" {{if .Status}}
-                                          checked {{end}} onclick="$.get('/toggle_device/{{.DeviceID}}');reload();" />
-                <label class="custom-control-label"
-                     for="customSwitches-{{.DeviceID}}" id="label-{{.DeviceID}}">{{if .Status}}On{{else}}Off{{end}}</label>
+                  checked {{end}} onclick="$.get('/toggle_device/{{.DeviceID}}');reload();" />
+                <label class="custom-control-label" for="customSwitches-{{.DeviceID}}"
+                  id="label-{{.DeviceID}}">{{if .Status}}On{{else}}Off{{end}}</label>
               </div>
             </div>
           </div>
-    
+
           <div class="col-4">
             <h4 class="text-center black-text">Lamp</h4>
           </div>
-    
+
           <div class="col-4 text-right">
             <a class="p-0" id="navbarDropdownMenuLink-333" data-toggle="dropdown" aria-haspopup="true"
               aria-expanded="false">
@@ -41,23 +135,23 @@
             <div class="dropdown-menu dropdown-menu-right dropdown-default text-center"
               aria-labelledby="navbarDropdownMenuLink-333">
               <a class="dropdown-item {{if .IsFave}}red-text{{else}}black-text{{end}}" href="#" id="fave-{{.DeviceID}}"
-              onclick="$.get('/toggle_fave/{{.DeviceID}}');reload();">
-              {{if .IsFave}}Un-favourite{{else}}Favourite{{end}} <i class="fas fa-heart red-text"></i></a>
+                onclick="$.get('/toggle_fave/{{.DeviceID}}');reload();">
+                {{if .IsFave}}Un-favourite{{else}}Favourite{{end}} <i class="fas fa-heart red-text"></i></a>
               <a class="dropdown-item black-text" data-toggle="modal" data-target="#options">Options</a>
-              <a class="dropdown-item black-text" href="#" id="remove-{{.DeviceID}}" data-toggle="modal" data-target="#removeDevice-{{.DeviceID}}">Remove</a>
+              <a class="dropdown-item black-text" href="#" id="remove-{{.DeviceID}}" data-toggle="modal"
+                data-target="#removeDevice-{{.DeviceID}}">Remove</a>
             </div>
           </div>
         </div>
         <p class="text-center pt-4">Brightness</p>
-		<div class="d-flex justify-content-center">
-			<span class="blue-text mr-2"><i class="fas fa-moon fa-lg" aria-hidden="true"></i></span>
-			<form class="range-field">
-				<input class="custom-range" type="range" min="0" max="10" value="{{.Brightness}}"
-					  id="slider-{{.DeviceID}}"
-					  onclick="$.get('/toggle_slider/{{.DeviceID}}/'+ $('#slider-{{.DeviceID}}').val());reload();" />
-			</form>
-			<span class="blue-text ml-2 "><i class="fas fa-sun fa-lg" aria-hidden="true"></i></span>
-		</div>
+        <div class="d-flex justify-content-center">
+          <span class="blue-text mr-2"><i class="fas fa-moon fa-lg" aria-hidden="true"></i></span>
+          <form class="range-field">
+            <input class="custom-range" type="range" min="0" max="10" value="{{.Brightness}}" id="slider-{{.DeviceID}}"
+              onclick="$.get('/toggle_slider/{{.DeviceID}}/'+ $('#slider-{{.DeviceID}}').val());reload();" />
+          </form>
+          <span class="blue-text ml-2 "><i class="fas fa-sun fa-lg" aria-hidden="true"></i></span>
+        </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -66,7 +160,6 @@
     </div>
   </div>
 </div>
-
 
 {{template "base/scripts" .}}
 {{template "base/tabnav" .}}
