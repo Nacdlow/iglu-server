@@ -15,7 +15,6 @@ import (
 	"log"
 	"math"
 	"net/http"
-	"net/http/pprof"
 	"os"
 	"os/signal"
 	"time"
@@ -56,7 +55,7 @@ var CmdStart = &cli.Command{
 func getMacaron(dev bool) *macaron.Macaron {
 	m := macaron.Classic()
 	renderOpts := macaron.RenderOptions{
-		PrefixXML:  []byte(`<?xml version="1.0" encoding="utf-8" ?>`),
+		PrefixXML:  []byte(`<?xml version="1.0" encoding="utf-8" ?>` + "\n"),
 		IndentJSON: true,
 		IndentXML:  true,
 		Funcs: []template.FuncMap{map[string]interface{}{
@@ -113,9 +112,9 @@ func getMacaron(dev bool) *macaron.Macaron {
 	m.NotFound(routes.NotFoundHandler)
 	m.Get("/", routes.LoginHandler)
 	m.Get("/login", routes.LoginHandler)
-	m.Post("/", binding.Bind(forms.SignInForm{}), routes.PostLoginHandler)
+	m.Post("/", binding.BindIgnErr(forms.SignInForm{}), routes.PostLoginHandler)
 	m.Get("/register", routes.RegisterHandler)
-	m.Post("/register", binding.Bind(forms.RegisterForm{}), routes.AddUserHandler) //registers a user
+	m.Post("/register", binding.BindIgnErr(forms.RegisterForm{}), routes.AddUserHandler) //registers a user
 	m.Get("/forgot", routes.ForgotHandler)
 
 	m.Group("", func() {
@@ -144,13 +143,13 @@ func getMacaron(dev bool) *macaron.Macaron {
 			m.Get("/search_device/list", routes.SearchDeviceListHandler)
 			m.Get("/device", routes.AddDeviceHandler)
 			m.Get("/device/:id", routes.AddDeviceHandler)
-			m.Post("/device", binding.Bind(forms.AddDeviceForm{}),
+			m.Post("/device", binding.BindIgnErr(forms.AddDeviceForm{}),
 				routes.AddDeviceRoomPostHandler)
-			m.Post("/device/:id", binding.Bind(forms.AddDeviceForm{}),
+			m.Post("/device/:id", binding.BindIgnErr(forms.AddDeviceForm{}),
 				routes.AddDeviceRoomPostHandler)
 			m.Get("/device/connect/:plugin/:id", routes.ConnectDeviceHandler)
 			m.Get("/device/identify/:plugin/:id", routes.IdentifyDeviceHandler)
-			m.Post("/device/connect/:plugin/:id", binding.Bind(forms.AddDeviceForm{}),
+			m.Post("/device/connect/:plugin/:id", binding.BindIgnErr(forms.AddDeviceForm{}),
 				routes.ConnectDevicePostHandler)
 			m.Get("/schedule", routes.AddScheduleHandler)
 		})
@@ -167,7 +166,7 @@ func getMacaron(dev bool) *macaron.Macaron {
 		m.Group("", func() {
 			m.Group("/add", func() {
 				m.Get("/room", routes.AddRoomHandler)
-				m.Post("/room", binding.Bind(forms.AddRoomForm{}),
+				m.Post("/room", binding.BindIgnErr(forms.AddRoomForm{}),
 					routes.PostRoomHandler)
 
 			})
@@ -189,7 +188,7 @@ func getMacaron(dev bool) *macaron.Macaron {
 					m.Get("/delete/:username", routes.DeleteAccountHandler)
 					m.Post("/delete/:username", routes.PostDeleteAccountHandler)
 					m.Get("/edit/:username", routes.EditAccountHandler)
-					m.Post("/edit/:username", binding.Bind(forms.EditAccountForm{}),
+					m.Post("/edit/:username", binding.BindIgnErr(forms.EditAccountForm{}),
 						routes.PostEditAccountHandler)
 				})
 
@@ -226,29 +225,7 @@ func getMacaron(dev bool) *macaron.Macaron {
 		m.Get("/set_window_status/:room/:open_count", routes_sim.SetWindowStatusHandler)
 	})
 
-	// For debugging purposes.
-	m.Group("/debug/pprof", func() {
-		m.Get("/", pprofHandler(pprof.Index))
-		m.Get("/cmdline", pprofHandler(pprof.Cmdline))
-		m.Get("/profile", pprofHandler(pprof.Profile))
-		m.Post("/symbol", pprofHandler(pprof.Symbol))
-		m.Get("/symbol", pprofHandler(pprof.Symbol))
-		m.Get("/trace", pprofHandler(pprof.Trace))
-		m.Get("/allocs", pprofHandler(pprof.Handler("allocs").ServeHTTP))
-		m.Get("/block", pprofHandler(pprof.Handler("block").ServeHTTP))
-		m.Get("/goroutine", pprofHandler(pprof.Handler("goroutine").ServeHTTP))
-		m.Get("/heap", pprofHandler(pprof.Handler("heap").ServeHTTP))
-		m.Get("/mutex", pprofHandler(pprof.Handler("mutex").ServeHTTP))
-		m.Get("/threadcreate", pprofHandler(pprof.Handler("threadcreate").ServeHTTP))
-	})
 	return m
-}
-
-func pprofHandler(h http.HandlerFunc) macaron.Handler {
-	handler := http.HandlerFunc(h)
-	return func(c *macaron.Context) {
-		handler.ServeHTTP(c.Resp, c.Req.Request)
-	}
 }
 
 func start(clx *cli.Context) (err error) {

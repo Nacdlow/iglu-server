@@ -14,6 +14,7 @@ import (
 	"gitlab.com/group-nacdlow/nacdlow-server/modules/plugin"
 	"gitlab.com/group-nacdlow/nacdlow-server/modules/simulation"
 
+	"github.com/go-macaron/binding"
 	"github.com/go-macaron/session"
 	macaron "gopkg.in/macaron.v1"
 )
@@ -119,7 +120,13 @@ func OverviewHandler(ctx *macaron.Context) {
 }
 
 // AddDeviceRoomPostHandler handles post for adding a device to a room.
-func AddDeviceRoomPostHandler(ctx *macaron.Context, form forms.AddDeviceForm, f *session.Flash) {
+func AddDeviceRoomPostHandler(ctx *macaron.Context, form forms.AddDeviceForm,
+	errs binding.Errors, f *session.Flash) {
+	if len(errs) > 0 {
+		f.Error("Missing required fields!")
+		ctx.Redirect(fmt.Sprintf("/rooms"))
+		return
+	}
 	device := &models.Device{
 		RoomID:      form.RoomID,
 		Type:        models.DeviceType(form.DeviceType),
@@ -220,7 +227,12 @@ func IdentifyDeviceHandler(ctx *macaron.Context, f *session.Flash) {
 }
 
 func ConnectDevicePostHandler(ctx *macaron.Context, form forms.AddDeviceForm,
-	f *session.Flash) {
+	errs binding.Errors, f *session.Flash) {
+	if len(errs) > 0 {
+		f.Error("Missing required fields!")
+		ctx.Redirect("/rooms")
+		return
+	}
 	pl, err := plugin.GetPlugin(ctx.Params("plugin"))
 	if err != nil {
 		f.Error("Cannot connect to plugin")
@@ -279,7 +291,13 @@ func RoomsHandler(ctx *macaron.Context) {
 }
 
 // PostRoomHandler handles post request for room page, to add a room.
-func PostRoomHandler(ctx *macaron.Context, form forms.AddRoomForm) {
+func PostRoomHandler(ctx *macaron.Context, form forms.AddRoomForm,
+	errs binding.Errors, f *session.Flash) {
+	if len(errs) > 0 {
+		f.Error("Missing required fields!")
+		ctx.Redirect("/rooms")
+		return
+	}
 	room := &models.Room{
 		RoomName:     form.RoomName,
 		RoomType:     models.RType(form.RoomType),

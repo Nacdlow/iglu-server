@@ -10,6 +10,7 @@ import (
 
 	"net/http"
 
+	"github.com/go-macaron/binding"
 	"golang.org/x/crypto/bcrypt"
 	macaron "gopkg.in/macaron.v1"
 )
@@ -46,7 +47,12 @@ func ForgotHandler(ctx *macaron.Context, sess session.Store) {
 
 // PostLoginHandler handles the post login page.
 func PostLoginHandler(ctx *macaron.Context, x csrf.CSRF, sess session.Store,
-	form forms.SignInForm, f *session.Flash) {
+	form forms.SignInForm, errs binding.Errors, f *session.Flash) {
+	if len(errs) > 0 {
+		f.Error("Missing required fields!")
+		ctx.Redirect("/")
+		return
+	}
 	if sess.Get("auth") == LoggedIn {
 		ctx.Redirect("/dashboard")
 		return
@@ -87,7 +93,13 @@ func RegisterHandler(ctx *macaron.Context, sess session.Store) {
 }
 
 // AddUserHandler handles adding a new user from registeration.
-func AddUserHandler(ctx *macaron.Context, form forms.RegisterForm, f *session.Flash) {
+func AddUserHandler(ctx *macaron.Context, form forms.RegisterForm,
+	errs binding.Errors, f *session.Flash) {
+	if len(errs) > 0 {
+		f.Error("Missing required fields!")
+		ctx.Redirect("/")
+		return
+	}
 	ok := tokens.CheckAndConsumeKey(form.InviteCode)
 	if !ok {
 		f.Error("Invalid invite code. Please ask for an invite code from the home owner.")

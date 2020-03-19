@@ -9,6 +9,7 @@ import (
 	"gitlab.com/group-nacdlow/nacdlow-server/modules/plugin"
 	"gitlab.com/group-nacdlow/nacdlow-server/modules/tokens"
 
+	"github.com/go-macaron/binding"
 	"github.com/go-macaron/session"
 	"golang.org/x/crypto/bcrypt"
 	macaron "gopkg.in/macaron.v1"
@@ -91,7 +92,12 @@ func EditAccountHandler(ctx *macaron.Context) {
 
 // PostEditAccountHandler handles post for editing accounts.
 func PostEditAccountHandler(ctx *macaron.Context, f *session.Flash,
-	form forms.EditAccountForm) {
+	form forms.EditAccountForm, errs binding.Errors) {
+	if len(errs) > 0 {
+		f.Error("Missing required fields!")
+		ctx.Redirect("/settings/accounts")
+		return
+	}
 	users, err := models.GetUsers()
 	if err != nil {
 		panic(err)
