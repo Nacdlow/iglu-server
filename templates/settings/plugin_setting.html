@@ -33,39 +33,40 @@
   <div class="pt-2">
     <hr>
   </div>
-
+  <form method="post">
   <div class="row justify-content-center">
 
     <div class="col-12">
       <div class="list-group">
-      {{range .Plugin.Config}}
-      {{if or $.IsAdmin (.IsUserSpecific)}}
+      {{range .FilledConfigs}}
+      {{if or $.IsAdmin (.Conf.IsUserSpecific)}}
 		  <div class="list-group-item list-group-item-action"> <!-- option -->
           <div class="row align-items-center">
             <div class="d-flex align-items-center">
-				{{if .IsUserSpecific}}<i class="fas fa-user pl-3" data-toggle="tooltip" data-placement="top" title="This setting is user-specific"></i>{{else}}
+				{{if .Conf.IsUserSpecific}}<i class="fas fa-user pl-3" data-toggle="tooltip" data-placement="top" title="This setting is user-specific"></i>{{else}}
 				<i class="fas fa-globe-europe pl-3" data-toggle="tooltip" data-placement="top" title="This setting applies to all users"></i>{{end}}
             </div>
             <div class="col-6">
-				<h6> {{.Title}}</h6>
-				<p class="mb-0"><i>{{.Description}}</i></p>
+				<h6> {{.Conf.Title}}</h6>
+				<p class="mb-0"><i>{{.Conf.Description}}</i></p>
             </div>
             <div class="col">
-				{{if eq .Type 0}}
+				{{if eq .Conf.Type 0}}
                 <input type="text" class="form-control black-text" placeholder="Another Option Type"
-				  name="field-{{.Key}}">
-				{{else if eq .Type 1}}
+				 name="field-{{.Conf.Key}}" value="{{.Value}}">
+				{{else if eq .Conf.Type 1}}
                 <input type="number" class="form-control black-text" placeholder="Another Option Type"
-				 name="field-{{.Key}}">
-				{{else if eq .Type 2}}
-				<select class="browser-default custom-select" id="select" name="field-{{.Key}}">
-					{{range $k, $v := .Values}}
-					<option value="{{$v}}">{{$v}}</option>
+				 name="field-{{.Conf.Key}}" value="{{.Value}}">
+				{{else if eq .Conf.Type 2}}
+				<select class="browser-default custom-select" id="select" name="field-{{.Conf.Key}}">
+					{{range $k, $v := .Conf.Values}}
+					<option value="{{$v}}">{{$v}}{{$.Value}}</option>
 				  {{end}}
                 </select>
-				{{else if eq .Type 3}}
+				{{else if eq .Conf.Type 3}}
                 <div class="text-right custom-control custom-switch" id="div">
-					<input type="checkbox" class="custom-control-input" id="customSwitches" name="field-{{.Key}}" />
+					<input type="checkbox" class="custom-control-input" id="customSwitches" name="field-{{.Conf.Key}}"
+					{{if eq .Value "true"}}selected="1"{{end}}/>
 
                   <label class="custom-control-label" for="customSwitches">
                     Enable/Disable
@@ -105,6 +106,7 @@
     </div>
     {{end}}
   </div>
+  </form>
 </div>
 
 
