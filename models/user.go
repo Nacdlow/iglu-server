@@ -32,6 +32,7 @@ type User struct {
 	UpdatedUnix   int64             `xorm:"updated" json:"updatedUnix" xml:"timestamps>updated_unix"`
 	FontSize      string            `json:"fontSize" xml:"font_size"`
 	PluginKVStore map[string]string `xorm:"null" json:"pluginKVStore" xml:"plugin_key_value_store"` // must check if null first
+	Avatar        string            `json:"avatar" xml:"avatar"`
 }
 
 // GetFakeUser returns a new randomly generated User. This is used for testing
