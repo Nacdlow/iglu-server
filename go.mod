@@ -43,6 +43,7 @@ require (
 	gitlab.com/skilstak/code/go/uniq v0.0.0-20190715184642-a9672d63d2d8
 	golang.org/x/crypto v0.0.0-20200317142112-1b76d66859c6
 	golang.org/x/tools v0.0.0-20200318150045-ba25ddc85566 // indirect
+	golang.org/x/tools/gopls v0.3.4 // indirect
 	google.golang.org/genproto v0.0.0-20200318110522-7735f76e9fa5 // indirect
 	gopkg.in/check.v1 v1.0.0-20190902080502-41f04d3bba15 // indirect
 	gopkg.in/ini.v1 v1.55.0 // indirect
