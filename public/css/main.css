@@ -113,17 +113,17 @@ html {
    font-size: var(--font-);
  } */
 
- .split-left {
-   border-right: solid 2px var(--iglu-colour);
- }
+.split-left {
+  border-right: solid 2px var(--iglu-colour);
+}
 
- .split-top {
-   border-bottom: solid 2px var(--iglu-colour);
- }
+.split-top {
+  border-bottom: solid 2px var(--iglu-colour);
+}
 
- #mobilenav {
-   border-top: solid 2px var(--iglu-colour);
- }
+#mobilenav {
+  border-top: solid 2px var(--iglu-colour);
+}
 
 .horizontal {
   border-color: #888 !important;
@@ -263,7 +263,7 @@ small {
 }
 
 .lightcolor {
-  background-color: var(--light)!important;
+  background-color: var(--light) !important;
 }
 
 body {
@@ -411,7 +411,7 @@ a {
     display: none;
   }
 
-  .text-center-lg{
+  .text-center-lg {
     text-align: center;
   }
 
@@ -641,7 +641,7 @@ div.scrollmenu a:hover {
 .nav-link.active {
   border: 0 !important;
   /*border-bottom: 4px solid var(--iglu-colour) !important;*/
-  background-color: var(--light)!important;
+  background-color: var(--light) !important;
 }
 
 .blue-text {
@@ -707,24 +707,22 @@ input {
   content: "";
   flex: 1;
   border-bottom: 1.5px solid #888 !important;
-  
 }
 
-#moveRoomLink{
-  opacity: 1.0;
+#moveRoomLink {
+  opacity: 1;
   filter: alpha(opacity=100);
 }
 
 #moveRoomLink:hover {
   opacity: 0.5;
-    filter: alpha(opacity=40);
-    background-color: var(--iglu-colour);
+  filter: alpha(opacity=40);
+  background-color: var(--iglu-colour);
 }
 .toast-header {
   background-color: var(--light);
   color: white;
 }
-
 
 .card-header {
   background-color: var(--light);
