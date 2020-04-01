@@ -31,7 +31,7 @@ func TestCascadeDeleteRoom(t *testing.T) {
 	devices, err = GetDevices()
 	assert.Nil(err)
 
-	assert.False(HasRoom(mainRoom.RoomID), "Deleted room should'nt exist")
+	assert.False(HasRoom(mainRoom.RoomID), "Deleted room shouldn't exist")
 	assert.Equal(0, len(devices), "List of all devices must be zero, as we cascade delete.")
 
 }

@@ -7,12 +7,15 @@ import (
 	"net/http"
 	"os"
 	"runtime"
+	"strconv"
 
 	"github.com/BurntSushi/toml"
+	"github.com/Nacdlow/plugin-sdk"
 	"github.com/go-macaron/session"
 	"github.com/hashicorp/go-getter"
 	macaron "gopkg.in/macaron.v1"
 
+	"gitlab.com/group-nacdlow/nacdlow-server/models"
 	"gitlab.com/group-nacdlow/nacdlow-server/modules/plugin"
 	"gitlab.com/group-nacdlow/nacdlow-server/modules/settings"
 )
@@ -131,6 +134,11 @@ func InstallPluginSettingsHandler(ctx *macaron.Context, f *session.Flash) {
 	ctx.HTML(http.StatusOK, "settings/plugin_install_confirm")
 }
 
+type FilledPluginConfig struct {
+	Conf  sdk.PluginConfig
+	Value string
+}
+
 func SpecificPluginSettingsHandler(ctx *macaron.Context, f *session.Flash) {
 	var pl *plugin.IgluPlugin
 	plugins := plugin.GetLoadedPlugins()
@@ -147,12 +155,89 @@ func SpecificPluginSettingsHandler(ctx *macaron.Context, f *session.Flash) {
 		return
 	}
 
+	user := ctx.Data["User"].(*models.User)
+
+	var filledConfigs []FilledPluginConfig
+
+	for i, c := range pl.Config {
+		if !c.IsUserSpecific && ctx.Data["IsAdmin"].(int) != 1 {
+			continue
+		}
+		kvName := fmt.Sprintf("%s.%s", pl.Manifest.Id, c.Key)
+
+		filled := FilledPluginConfig{Conf: pl.Config[i]}
+
+		if c.IsUserSpecific {
+			val, ok := user.PluginKVStore[kvName]
+			if ok {
+				filled.Value = val
+			}
+		} else {
+			// TODO add global load
+		}
+		filledConfigs = append(filledConfigs, filled)
+	}
+
 	ctx.Data["Plugin"] = pl
+	ctx.Data["FilledConfigs"] = filledConfigs
 	ctx.HTML(http.StatusOK, "settings/plugin_setting")
 }
 
-func SpecificPluginSettingsPostHandler(ctx *macaron.Context) {
+func SpecificPluginSettingsPostHandler(ctx *macaron.Context, f *session.Flash) {
+	var pl *plugin.IgluPlugin
+	plugins := plugin.GetLoadedPlugins()
+	for i := range plugins {
+		if plugins[i].Manifest.Id == ctx.Params("id") {
+			pl = &plugins[i]
+			break
+		}
+	}
 
+	if pl == nil {
+		f.Error("Cannot find plugin.")
+		ctx.Redirect("/settings/plugins")
+		return
+	}
+
+	user := ctx.Data["User"].(*models.User)
+	userUpdated := false
+	if user.PluginKVStore == nil {
+		user.PluginKVStore = make(map[string]string)
+	}
+
+	for _, c := range pl.Config {
+		if !c.IsUserSpecific && ctx.Data["IsAdmin"].(int) != 1 {
+			continue
+		}
+
+		fieldName := fmt.Sprintf("field-%s", c.Key)
+		var input string
+
+		switch c.Type {
+		case sdk.OptionValue:
+			fallthrough
+		case sdk.StringValue:
+			input = ctx.Query(fieldName)
+		case sdk.BooleanValue:
+			input = fmt.Sprintf("%t", ctx.QueryBool(fieldName))
+		case sdk.NumberValue:
+			input = strconv.Itoa(ctx.QueryInt(fieldName))
+		}
+		if len(input) > 0 {
+			if c.IsUserSpecific {
+				kvName := fmt.Sprintf("%s.%s", pl.Manifest.Id, c.Key)
+				user.PluginKVStore[kvName] = input
+
+				userUpdated = true
+			} else {
+				// TODO add global save
+			}
+		}
+	}
+	if userUpdated {
+		models.UpdateUserCols(user, "plugin_kv_store")
+	}
+	// TODO send the KVs to the plugin
 }
 
 func DeletePluginHandler(ctx *macaron.Context, f *session.Flash) {
