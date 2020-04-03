@@ -146,6 +146,12 @@ func PostEditAccountHandler(ctx *macaron.Context, f *session.Flash,
 	ctx.Redirect("/settings/accounts")
 }
 
+// EditAvatarHandler handles editing account avatars.
+func EditAvatarHandler(ctx *macaron.Context) {
+	ctx.Data["ArrowBack"] = 1
+	ctx.HTML(http.StatusOK, "settings/edit_avatar")
+}
+
 // AppearanceSettingsHandler handles the settings
 func AppearanceSettingsHandler(ctx *macaron.Context, sess session.Store) {
 	ctx.Data["NavTitle"] = "Appearance"
