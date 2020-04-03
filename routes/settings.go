@@ -222,6 +222,12 @@ func PrivacySettingsHandler(ctx *macaron.Context) {
 	ctx.HTML(http.StatusOK, "settings/privacy")
 }
 
+// HelpHandler handles the how-to help section.
+func HelpHandler(ctx *macaron.Context) {
+	ctx.Data["NavTitle"] = "Device Settings"
+	ctx.HTML(http.StatusOK, "settings/help")
+}
+
 // LibraryDesc represents the description of an open-source library.
 type LibraryDesc struct {
 	Author     string

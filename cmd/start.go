@@ -161,6 +161,7 @@ func getMacaron(dev bool) *macaron.Macaron {
 			m.Post("/plugin/:id", routes.SpecificPluginSettingsPostHandler)
 			m.Get("/appearance", routes.AppearanceSettingsHandler)
 			m.Get("/about", routes.AboutSettingsHandler)
+			m.Get("/help", routes.HelpHandler)
 		})
 
 		m.Group("", func() {
