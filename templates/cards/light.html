@@ -1,6 +1,6 @@
-<div class="card w-100">
-	<div class="card-body">
-		<div class="row">
+<div class="card w-100" style="height: 230px;">
+	<div class="card-header">
+		<div class="row align-items-center">
 			<!-- switch -->
 			<div class="col" id="toggleHide-{{.DeviceID}}">
 				<div class="custom-control custom-switch float-left" id="div">
@@ -10,14 +10,15 @@
 					<label class="custom-control-label" for="customSwitches-{{.DeviceID}}"></label>
 				</div>
 				<div class="labeldiv-{{.DeviceID}}" id="labeldiv-{{.DeviceID}}">
-					<label class="" id="label-{{.DeviceID}}">{{if .Status}}On{{else}}Off{{end}}</label>
+					<label class="mb-0" id="label-{{.DeviceID}}">{{if .Status}}On{{else}}Off{{end}}</label>
 				</div>
 			</div>
 			<!--/switch -->
 
 
 			<div class="">
-				<i id="lock-{{.DeviceID}}"></i><h5 class="card-title text-center" id="name-{{.DeviceID}}">{{.Description}}</h5>
+				<i id="lock-{{.DeviceID}}"></i>
+				<h5 class="card-title text-center mb-0" id="name-{{.DeviceID}}">{{.Description}}</h5>
 			</div>
 
 			<div class="col text-right">
@@ -43,16 +44,22 @@
 			</div>
 		</div>
 	</div>
+</div>
 
-	<p class="text-center pt-4">Brightness</p>
+<div class="card-body">
+	<p class="text-center">Brightness</p>
 	<div class="d-flex justify-content-center sliderHide-{{.DeviceID}}" id="sliderHide-{{.DeviceID}}">
 		<span class="blue-text mr-2"><i class="fas fa-moon fa-lg" aria-hidden="true"></i></span>
 		<form class="range-field">
 			<input class="custom-range" type="range" min="0" max="10" value="{{.Brightness}}" id="slider-{{.DeviceID}}"
 				onclick="$.get('/toggle_slider/{{.DeviceID}}/'+ $('#slider-{{.DeviceID}}').val());" />
+			<div class="sliderdiv-{{.DeviceID}} text-center" id="sliderdiv-{{.DeviceID}}">
+				<output for="slider-{{.DeviceID}}">{{.Brightness}}</output>
+			</div>
 		</form>
 		<span class="blue-text ml-2 "><i class="fas fa-sun fa-lg" aria-hidden="true"></i></span>
 	</div>
+
 	<div id="button-{{.DeviceID}}" class="button-{{.DeviceID}} text-center justify-content-center d-flex"></div>
 </div>
 <div class="footerdiv-{{.DeviceID}}" id="footerdiv-{{.DeviceID}}">

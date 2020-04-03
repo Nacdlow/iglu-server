@@ -1,10 +1,13 @@
-<div class="card w-100">
-	<div class="card-body">
+<div class="card w-100" style="height: 230px;">
+	<div class="card-header">
 
 		<div class="row">
+			<div class="col"></div>
 
 			<div class="">
-				<i id="lock-{{.DeviceID}}"></i><h5 class="card-title text-center justify-content-center" id="name-{{.DeviceID}}">{{.Description}}</h5>
+				<i id="lock-{{.DeviceID}}"></i>
+				<h5 class="card-title text-center justify-content-center mb-0" id="name-{{.DeviceID}}">{{.Description}}
+				</h5>
 			</div>
 
 			<div class="col text-right">
@@ -25,12 +28,15 @@
 				</div>
 			</div>
 		</div>
+	</div>
+
+	<div class="card-body">
 		<!-- switch -->
-		<div class="col justify-content-center d-flex" id="toggleHide-{{.DeviceID}}">
+		<div class="col justify-content-center align-items-center d-flex" id="toggleHide-{{.DeviceID}}">
 			<div class="labeldiv-{{.DeviceID}}" id="labeldiv-{{.DeviceID}}">
 				<a class="fas fa-power-off pb-1 {{if .Status}}green-text{{else}}red-text{{end}}" href="#"
 					style="color: black; font-size: 4em;" onclick="$.get('/toggle_device/{{.DeviceID}}');update();"></a>
-				<label class="col justify-content-center d-flex">{{if .Status}}On{{else}}Off{{end}}</label>
+				<label class="col justify-content-center d-flex mb-0">{{if .Status}}On{{else}}Off{{end}}</label>
 			</div>
 			<!--/switch -->
 		</div>

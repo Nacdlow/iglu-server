@@ -641,7 +641,7 @@ div.scrollmenu a:hover {
 .nav-link.active {
   border: 0 !important;
   /*border-bottom: 4px solid var(--iglu-colour) !important;*/
-  background-color: var(--light) !important;
+  background-color: var(--top-bar) !important;
 }
 
 .blue-text {
@@ -656,7 +656,7 @@ div.scrollmenu a:hover {
 .nav-tabs .nav-item.show .nav-link,
 .nav-tabs .nav-link.active,
 .nav-tabs .nav-link {
-  background-color: var(--top-bar);
+  background-color: var(--light);
   color: #fff !important;
 }
 
@@ -682,7 +682,7 @@ div.scrollmenu a:hover {
 
 .tab-content {
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 -5px 10px rgba(0, 0, 0, 0.22);
-  background-color: var(--light);
+  background-color: var(--top-bar);
 }
 
 input {

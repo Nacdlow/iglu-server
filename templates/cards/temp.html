@@ -1,6 +1,6 @@
-<div class="card w-100">
-	<div class="card-body">
-		<div class="row">
+<div class="card w-100" style="height: 230px;">
+	<div class="card-header">
+		<div class="row align-items-center">
 			<!-- switch -->
 			<div class="col" id="toggleHide-{{.DeviceID}}">
 				<div class="custom-control custom-switch float-left">
@@ -11,13 +11,14 @@
 					<label class="custom-control-label" for="customSwitches-{{.DeviceID}}"></label>
 				</div>
 				<div class="labeldiv-{{.DeviceID}}" id="labeldiv-{{.DeviceID}}">
-					<label class="">{{if .Status}}On{{else}}Off{{end}}</label>
+					<label class="mb-0">{{if .Status}}On{{else}}Off{{end}}</label>
 				</div>
 				<!--/switch -->
 			</div>
 
 			<div class="">
-				<i id="lock-{{.DeviceID}}"></i><h5 class="card-title text-center" id="name-{{.DeviceID}}">{{.Description}}</h5>
+				<i id="lock-{{.DeviceID}}"></i>
+				<h5 class="card-title text-center mb-0" id="name-{{.DeviceID}}">{{.Description}}</h5>
 			</div>
 
 			<div class="col text-right">
@@ -40,9 +41,10 @@
 			</div>
 		</div>
 	</div>
+</div>
 
-
-	<p class="text-center pt-4">Temperature</p>
+<div class="card-body">
+	<p class="text-center">Temperature</p>
 	<div id="sliderHide-{{.DeviceID}}">
 		<div class="d-flex justify-content-center">
 			<span class="font-weight-bold blue-text mr-2 ">0<small>&deg;C</small></span>
