@@ -228,6 +228,42 @@ func HelpHandler(ctx *macaron.Context) {
 	ctx.HTML(http.StatusOK, "settings/help")
 }
 
+// HelpHandler handles the how-to help section/fave device.
+func HelpFdHandler(ctx *macaron.Context) {
+	ctx.Data["NavTitle"] = "How to Favourite a Device"
+	ctx.HTML(http.StatusOK, "settings/how-to/fave_device")
+}
+
+// HelpHandler handles the how-to help section./add device
+func HelpAdHandler(ctx *macaron.Context) {
+	ctx.Data["NavTitle"] = "How to Add a Device"
+	ctx.HTML(http.StatusOK, "settings/how-to/add_device")
+}
+
+// HelpHandler handles the how-to help section./add room
+func HelpArHandler(ctx *macaron.Context) {
+	ctx.Data["NavTitle"] = "How to Add a Room"
+	ctx.HTML(http.StatusOK, "settings/how-to/add_room")
+}
+
+// HelpHandler handles the how-to help section./add user
+func HelpAuHandler(ctx *macaron.Context) {
+	ctx.Data["NavTitle"] = "How to Add a User"
+	ctx.HTML(http.StatusOK, "settings/how-to/add_user")
+}
+
+// HelpHandler handles the how-to help section./delete device
+func HelpDdHandler(ctx *macaron.Context) {
+	ctx.Data["NavTitle"] = "How to Delete a Device"
+	ctx.HTML(http.StatusOK, "settings/how-to/delete_device")
+}
+
+// HelpHandler handles the how-to help section./delete room
+func HelpDrHandler(ctx *macaron.Context) {
+	ctx.Data["NavTitle"] = "How to Delete a Room"
+	ctx.HTML(http.StatusOK, "settings/how-to/delete_room")
+}
+
 // LibraryDesc represents the description of an open-source library.
 type LibraryDesc struct {
 	Author     string

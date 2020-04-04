@@ -162,6 +162,12 @@ func getMacaron(dev bool) *macaron.Macaron {
 			m.Get("/appearance", routes.AppearanceSettingsHandler)
 			m.Get("/about", routes.AboutSettingsHandler)
 			m.Get("/help", routes.HelpHandler)
+			m.Get("/help/fave_device", routes.HelpFdHandler)
+			m.Get("/help/add_device", routes.HelpAdHandler)
+			m.Get("/help/add_room", routes.HelpArHandler)
+			m.Get("/help/add_user", routes.HelpAuHandler)
+			m.Get("/help/delete_device", routes.HelpDdHandler)
+			m.Get("/help/delete_room", routes.HelpDrHandler)
 		})
 
 		m.Group("", func() {
