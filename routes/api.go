@@ -195,12 +195,8 @@ func RemoveHandler(ctx *macaron.Context) {
 
 // RemoveRoomHandler handles removing rooms.
 func RemoveRoomHandler(ctx *macaron.Context, sess session.Store) {
-	device, err := models.GetDevice(ctx.ParamsInt64("id"))
-	if err != nil {
-		panic(err)
-	}
 	if user, err := models.GetUser(sess.Get("username").(string)); err == nil {
-		room, err := models.GetRoom(device.RoomID)
+		room, err := models.GetRoom(ctx.ParamsInt64("id"))
 		if err != nil {
 			panic(err)
 		}
@@ -208,7 +204,7 @@ func RemoveRoomHandler(ctx *macaron.Context, sess session.Store) {
 			return
 		}
 	}
-	err = models.DeleteRoom(ctx.ParamsInt64("id"))
+	err := models.DeleteRoom(ctx.ParamsInt64("id"))
 	if err != nil {
 		panic(err)
 	}
