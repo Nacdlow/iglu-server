@@ -168,6 +168,8 @@ func getMacaron(dev bool) *macaron.Macaron {
 			m.Get("/help/add_user", routes.HelpAuHandler)
 			m.Get("/help/delete_device", routes.HelpDdHandler)
 			m.Get("/help/delete_room", routes.HelpDrHandler)
+			m.Get("/help/edit_room", routes.HelpErHandler)
+			m.Get("/help/restrict_room", routes.HelpRrHandler)
 		})
 
 		m.Group("", func() {

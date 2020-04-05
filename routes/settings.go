@@ -264,6 +264,18 @@ func HelpDrHandler(ctx *macaron.Context) {
 	ctx.HTML(http.StatusOK, "settings/how-to/delete_room")
 }
 
+// HelpHandler handles the how-to help section./edit room
+func HelpErHandler(ctx *macaron.Context) {
+	ctx.Data["NavTitle"] = "How to Edit Room Name"
+	ctx.HTML(http.StatusOK, "settings/how-to/edit_room")
+}
+
+// HelpHandler handles the how-to help section./edit room
+func HelpRrHandler(ctx *macaron.Context) {
+	ctx.Data["NavTitle"] = "Restrict/Un-restrict a Room"
+	ctx.HTML(http.StatusOK, "settings/how-to/restrict_room")
+}
+
 // LibraryDesc represents the description of an open-source library.
 type LibraryDesc struct {
 	Author     string
