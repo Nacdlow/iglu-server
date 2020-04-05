@@ -298,6 +298,11 @@ small {
   box-shadow: -1px -1px 30px 0px rgba(0, 0, 0, 0.64);
 }
 
+.image_check_border{
+  border: 0.5rem solid var(--green-colour);
+  box-shadow: -1px -1px 30px 0px rgba(0, 0, 0, 0.64);
+  transition: 0.5s ease;
+}
 
 body {
   background-color: var(--back) !important;

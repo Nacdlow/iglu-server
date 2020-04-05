@@ -22,72 +22,72 @@
             <div class="border border-light rounded lightcolor mb-0">
             <div class="row pt-3 pb-3 mr-lg-0 ml-lg-0 mr-3 ml-3">
                 <div class="col-4 text-center">
-                    <a href="#">
-                    <img class="rounded-circle w-responsive box_shadow" alt="100x100" src="/img/profiles/penguin_pixabay.jpg">
+                    <a onclick="ImageSelect()">
+                    <img id="ImageID" class="rounded-circle w-responsive box_shadow" alt="100x100" src="/img/profiles/penguin_pixabay.jpg">
                     </a>
                 </div>
                 <div class="col-4 text-center">
-                    <a href="#">
-                    <img class="rounded-circle w-responsive box_shadow" alt="100x100" src="/img/profiles/cat_elina_sazonova.jpg">
+                    <a  onclick="ImageSelect()">
+                    <img id="ImageID" class="rounded-circle w-responsive box_shadow" alt="100x100" src="/img/profiles/cat_elina_sazonova.jpg">
                     </a>
                 </div>
                 <div class="col-4 text-center">
-                    <a href="#">
-                    <img class="rounded-circle w-responsive box_shadow" alt="100x100" src="/img/profiles/dog_Sebastian_Coman_Travel.jpg">
+                    <a  onclick="ImageSelect()">
+                    <img id="ImageID" class="rounded-circle w-responsive box_shadow" alt="100x100" src="/img/profiles/dog_Sebastian_Coman_Travel.jpg">
                     </a>
                 </div>
 
                 <div class="col-12 pb-4"></div>
 
                 <div class="col-4 text-center">
-                    <a href="#">
-                    <img class="rounded-circle w-responsive box_shadow" alt="100x100" src="/img/profiles/flower_Vlad_Bagacian.jpg">
+                    <a  onclick="ImageSelect()">
+                    <img id="ImageID" class="rounded-circle w-responsive box_shadow" alt="100x100" src="/img/profiles/flower_Vlad_Bagacian.jpg">
                     </a>
                 </div>
                 <div class="col-4 text-center">
-                    <a href="#">
-                    <img class="rounded-circle w-responsive box_shadow" alt="100x100" src="/img/profiles/leaves_anna_shvets.jpg">
+                    <a  onclick="ImageSelect()">
+                    <img id="ImageID" class="rounded-circle w-responsive box_shadow" alt="100x100" src="/img/profiles/leaves_anna_shvets.jpg">
                     </a>
                 </div>  
                 <div class="col-4 text-center">
-                    <a href="#">
-                    <img class="rounded-circle w-responsive box_shadow" alt="100x100" src="/img/profiles/road_thelazyartistgallery.jpg">
+                    <a  onclick="ImageSelect()">
+                    <img id="ImageID" class="rounded-circle w-responsive box_shadow" alt="100x100" src="/img/profiles/road_thelazyartistgallery.jpg">
                     </a>
                 </div>
 
                 <div class="col-12 pb-4"></div>
 
                 <div class="col-4 text-center">
-                    <a href="#">
-                    <img class="rounded-circle w-responsive box_shadow" alt="100x100" src="/img/profiles/seats_matt_hardy.jpg">
+                    <a  onclick="ImageSelect()">
+                    <img id="ImageID" class="rounded-circle w-responsive box_shadow" alt="100x100" src="/img/profiles/seats_matt_hardy.jpg">
                     </a>
                 </div>
                 <div class="col-4 text-center">
-                    <a href="#">
-                    <img class="rounded-circle w-responsive box_shadow" alt="100x100" src="/img/profiles/spiral_sourav_mishra.jpg">
+                    <a  onclick="ImageSelect()">
+                    <img id="ImageID" class="rounded-circle w-responsive box_shadow" alt="100x100" src="/img/profiles/spiral_sourav_mishra.jpg">
                     </a>
                 </div>
                 <div class="col-4 text-center">
-                    <a href="#">
-                    <img class="rounded-circle w-responsive box_shadow" alt="100x100" src="/img/profiles/stairs_akwice.jpg">
+                    <a  onclick="ImageSelect()">
+                    <img id="ImageID" class="rounded-circle w-responsive box_shadow" alt="100x100" src="/img/profiles/stairs_akwice.jpg">
                     </a>
                 </div>
 
                 <div class="col-12 pb-4"></div>
 
                 <div class="col-4 text-center">
-                    <a href="#">
-                    <img class="rounded-circle w-responsive box_shadow" alt="100x100" src="/img/profiles/sunset_bob_ward.jpg">
+                    <a  onclick="ImageSelect()">
+                    <img id="ImageID" class="rounded-circle w-responsive box_shadow" alt="100x100" src="/img/profiles/sunset_bob_ward.jpg">
                     </a>
                 </div>
                 <div class="col-4 text-center">
-                    <a href="#">
-                    <img class="rounded-circle w-responsive box_shadow" alt="100x100" src="/img/profiles/covid_cottonbro.jpg">
+                    <a  onclick="ImageSelect()">
+                    <img id="ImageID" class="rounded-circle w-responsive box_shadow" alt="100x100" src="/img/profiles/covid_cottonbro.jpg">
                     </a>
                 </div>
                 <div class="col-4 text-center">
-                    <a href="#">
-                    <img class="rounded-circle w-responsive box_shadow" alt="100x100" src="/img/profiles/cat_matthias_oben.jpg">
+                    <a  onclick="ImageSelect()">
+                    <img id="ImageID" class="rounded-circle w-responsive box_shadow" alt="100x100" src="/img/profiles/cat_matthias_oben.jpg">
                     </a>
                 </div>
 
@@ -110,7 +110,10 @@
 
 
 <script>
-
+function ImageSelect() {
+  var element = document.getElementById("ImageID");
+  element.classList.toggle("image_check_border");
+}
 </script>
 {{template "base/scripts" .}}
 {{template "base/tabnav" .}}
