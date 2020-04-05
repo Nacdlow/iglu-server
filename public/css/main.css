@@ -168,6 +168,7 @@ html {
 
 .btn:hover {
   border-color: var(--hover) !important;
+  color: white!important;
 }
 
 /* .btn:hover {

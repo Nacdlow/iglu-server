@@ -4,27 +4,33 @@
     <div class="d-flex justify-content-center pt-5">
     <div class="col-lg-6 col-md-10 col-sm-12 pt-3">
     <div class="card mr-lg-0 mb-4">
+        <div class="card-header pt-4 pb-4">
+            <div class="d-flex justify-content-center align-items-center">
+              <div class="col-1 d-flex justify-content-start p-0">
+                <a class="fas fa-times-circle fa-lg" onclick="history.back();"></a>
+              </div>
+              <div class="col-10">
+                <div class="text-center mb-0" style="font-size: 30px; font-weight: 300;">Register</div>
+              </div>
+              <div class="col-1 p-0">
+      
+              </div>
+            </div>
+          </div>
       <div class="card-body">
-        <div class="d-flex justify-content-center">
-            <row class="col-12">
-                <a class="fas fa-times-circle d-flex text-left" href="/logout"></a>
-                <h2 class="text-center">Register</h2>
-                </row>
-        </div>
-        <hr>
         <form class="text-center" method="POST">   
         
             <div class="form-row">
                 <div class="col">       
                     <!-- First name -->
-                    <div class="md-form">
+                    <div class="md-form mt-0">
                         <input type="text" id="fn" class="form-control white-text"
                         placeholder="First name" name="fname" autofocus="1">
                     </div>
                 </div>
                 <div class="col">
                     <!-- Last name -->
-                    <div class="md-form">
+                    <div class="md-form mt-0">
                         <input type="text" id="ln" class="form-control white-text" placeholder="Last name" name="lname">
                     </div>
                 </div>
@@ -58,7 +64,7 @@
             <!-- Sign up button -->
             <div class="d-flex justify-content-center">
                 <div class="col-lg-8 col-12 p-0 pb-3">
-                     <button class="btn btn-new-1 btn-block" id="registeruser" type="submit">Sign up</button>
+                     <button class="btn btn-new-1 btn-block btn-border-grey" id="registeruser" type="submit">Sign up</button>
                 </div>
             </div>
            
