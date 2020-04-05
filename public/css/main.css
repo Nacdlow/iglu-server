@@ -113,6 +113,33 @@ html {
    font-size: var(--font-);
  } */
 
+/* Bootstrap Override */
+.row {
+  margin-left: 0!important;
+  margin-right: 0!important;
+}
+
+.p-nomargin {
+  margin: 0;
+}
+
+.btn-primary.dropdown-toggle {
+  background-color: var(--back)!important;
+}
+
+.dropdown-toggle {
+   border-radius: 5px !important;
+}
+ 
+.dropdown-menu {
+   background-color: var(--top-bar) !important;
+   box-shadow: 0 3px 10px rgba(0,0,0,0.5);
+}
+
+.dropdown-item:hover {
+  background-color: var(--light);
+}
+
 .split-left {
   border-right: solid 2px var(--iglu-colour);
 }

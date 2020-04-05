@@ -42,19 +42,13 @@
           </a>
           <div class="dropdown-menu dropdown-menu-right dropdown-default text-center"
             aria-labelledby="navbarDropdownMenuLink-333">
-            <a class="dropdown-item black-text" href="/internal_accounts">
-              <h5>Switch Accounts</h5>
-            </a>
+            <a class="dropdown-item" href="/internal_accounts">Switch Accounts</a>
             {{if .IsAdmin}}
-            <a class="dropdown-item black-text" href="/settings/accounts">
-              <h5>Edit Accounts</h5>
-            </a>
+            <a class="dropdown-item" href="/settings/accounts">Edit Accounts</a>
             {{end}}
-            <a class="dropdown-item black-text" href="/settings/">
-              <h5>Settings</h5>
-            </a>
-            <a class="dropdown-item black-text" href="/logout">
-              <h5><i class="fas fa-sign-out-alt fa-rotate-180"></i> Log Out</h5>
+            <a class="dropdown-item" href="/settings/">Settings</a>
+            <a class="dropdown-item" href="/logout">
+            <i class="fas fa-sign-out-alt fa-rotate-180"></i> Log Out
             </a>
           </div>
         </div>

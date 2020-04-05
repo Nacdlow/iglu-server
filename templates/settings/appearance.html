@@ -18,14 +18,15 @@
 
   <div class="list-group pt-3">
     <div class="list-group-item list-group-item-action">
+      <p class="p-nomargin">Dark Theme</p>
       <!-- Default checked -->
       <div class="custom-control custom-switch">
         <input type="checkbox" class="custom-control-input" id="customSwitch1" checked>
-        <label class="custom-control-label" for="customSwitch1">Enable Dark Theme</label>
+        <label class="custom-control-label" for="customSwitch1">Enabled</label>
       </div>
     </div>
     <div class="list-group-item list-group-item-action">
-      <label for="customRange2">Font Size</label>
+      <p class="p-nomargin">Text Size</p>
       <input type="range" class="custom-range" min="1" max="5" value="{{.SliderNumber}}" id="customRange">
       <div class="text-center" id="fontsize">
         {{.SliderText}}
@@ -36,6 +37,22 @@
           <button class="btn btn-new-1 w-50" onclick="reload();">Apply</button>
         </div>
       </div>
+    </div>
+    <div class="list-group-item list-group-item-action">
+
+      <p class="p-nomargin">Font</p>
+
+      <!-- Basic dropdown -->
+      <button class="btn btn-primary dropdown-toggle mr-4" type="button" data-toggle="dropdown" aria-haspopup="true"
+        aria-expanded="false">Browser Default</button>
+
+      <div class="dropdown-menu">
+        <a class="dropdown-item" href="#">Browser Default</a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="#">OpenDyslexic 2</a>
+        <a class="dropdown-item" href="#">OpenDyslexic 3</a>
+      </div>
+      <!-- Basic dropdown -->
     </div>
   </div>
 </div>
