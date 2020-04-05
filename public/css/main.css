@@ -291,6 +291,14 @@ small {
   background-color: var(--cool-button);
 }
 
+.box_shadow{
+  box-shadow: -1px -1px 10px 0px rgba(0, 0, 0, 0.64);
+}
+.box_shadow:hover{
+  box-shadow: -1px -1px 30px 0px rgba(0, 0, 0, 0.64);
+}
+
+
 body {
   background-color: var(--back) !important;
   color: white !important;
