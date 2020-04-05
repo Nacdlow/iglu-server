@@ -4,24 +4,33 @@
   <div class="d-flex d-flex justify-content-center pt-4">
   <div class="col-lg-6 col-md-8 col-sm-12">
   <div class="card mr-lg-0 mb-4">
-    <div class="card-body">
-      <div class="d-flex justify-content-center">
-          <h2>Edit User</h2>
+    <div class="card-header pt-4 pb-4">
+      <div class="d-flex justify-content-center align-items-center">
+        <div class="col-1 d-flex justify-content-start p-0">
+          <a class="fas fa-times-circle fa-lg" onclick="history.back();"></a>
+        </div>
+        <div class="col-10">
+          <h2 class="text-center mb-0">Edit Account</h2>
+        </div>
+        <div class="col-1 p-0">
+
+        </div>
       </div>
-      <hr>
+    </div>
+    <div class="card-body">
         <form method="POST">
 
     <div class="form-row">
         <div class="col">       
             <!-- First name -->
-            <div class="md-form">
+            <div class="md-form mb-0 mt-0">
                 <input type="text" id="fn" class="form-control white-text"
 				   placeholder="First name" name="fname" autofocus="1" value="{{.EditUser.FirstName}}">
             </div>
         </div>
         <div class="col">
             <!-- Last name -->
-            <div class="md-form">
+            <div class="md-form mb-0 mt-0">
 				<input type="text" id="ln" class="form-control white-text" placeholder="Last name" name="lname" value="{{.EditUser.LastName}}">
             </div>
         </div>
@@ -47,9 +56,14 @@
         Passwords must be at least 8 characters
     </small>
 
-    <button class="btn btn-success-new btn-block" id="registeruser"
-		type="submit">Update User</button>
 
+    <div class="d-flex justify-content-center">
+      <div class="col-8">
+        <button type="submit" class="btn btn-success-new btn-block coolcolor" id="registeruser">
+          Update User
+        </button>
+      </div>
+    </div>
       </form>
     </div>
   </div>

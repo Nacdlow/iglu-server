@@ -266,6 +266,10 @@ small {
   background-color: var(--light) !important;
 }
 
+.coolcolor {
+  background-color: var(--cool-button);
+}
+
 body {
   background-color: var(--back) !important;
   color: white !important;
