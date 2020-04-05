@@ -113,12 +113,6 @@ html {
    font-size: var(--font-);
  } */
 
-/* Bootstrap Override */
-.row {
-  margin-left: 0!important;
-  margin-right: 0!important;
-}
-
 .p-nomargin {
   margin: 0;
 }
