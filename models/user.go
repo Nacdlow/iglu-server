@@ -94,12 +94,18 @@ func HasUser(user string) (has bool) {
 
 // UpdateUser updates an User in the database.
 func UpdateUser(u *User) (err error) {
+	if len(u.Avatar) == 0 {
+		u.Avatar = "/img/profiles/penguin_pixabay.jpg"
+	}
 	_, err = engine.Id(u.Username).Update(u)
 	return
 }
 
 // UpdateUserCols will update the columns of an item even if they are empty.
 func UpdateUserCols(u *User, cols ...string) error {
+	if len(u.Avatar) == 0 {
+		u.Avatar = "/img/profiles/penguin_pixabay.jpg"
+	}
 	_, err := engine.Id(u.Username).Cols(cols...).Update(u)
 	return err
 }
