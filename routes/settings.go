@@ -270,10 +270,22 @@ func HelpErHandler(ctx *macaron.Context) {
 	ctx.HTML(http.StatusOK, "settings/how-to/edit_room")
 }
 
-// HelpHandler handles the how-to help section./edit room
+// HelpHandler handles the how-to help section./restrict rooms
 func HelpRrHandler(ctx *macaron.Context) {
 	ctx.Data["NavTitle"] = "Restrict/Un-restrict a Room"
 	ctx.HTML(http.StatusOK, "settings/how-to/restrict_room")
+}
+
+// HelpHandler handles the how-to help section./change password
+func HelpCpHandler(ctx *macaron.Context) {
+	ctx.Data["NavTitle"] = "Change Password"
+	ctx.HTML(http.StatusOK, "settings/how-to/change_password")
+}
+
+// HelpHandler handles the how-to help section./remove user
+func HelpRuHandler(ctx *macaron.Context) {
+	ctx.Data["NavTitle"] = "Remove a user"
+	ctx.HTML(http.StatusOK, "settings/how-to/remove_user")
 }
 
 // LibraryDesc represents the description of an open-source library.

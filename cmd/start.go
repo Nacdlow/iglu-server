@@ -170,6 +170,8 @@ func getMacaron(dev bool) *macaron.Macaron {
 			m.Get("/help/delete_room", routes.HelpDrHandler)
 			m.Get("/help/edit_room", routes.HelpErHandler)
 			m.Get("/help/restrict_room", routes.HelpRrHandler)
+			m.Get("/help/change_password", routes.HelpCpHandler)
+			m.Get("/help/remove_user", routes.HelpRuHandler)
 		})
 
 		m.Group("", func() {
