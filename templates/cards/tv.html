@@ -17,13 +17,13 @@
 				</a>
 				<div class="dropdown-menu dropdown-menu-right dropdown-default text-center"
 					aria-labelledby="navbarDropdownMenuLink-333">
-					<a class="dropdown-item {{if .IsFave}}red-text{{else}}black-text{{end}}" href="#"
+					<a class="dropdown-item {{if .IsFave}}red-text{{else}}white-text{{end}}" href="#"
 						id="fave-{{.DeviceID}}" onclick="$.get('/toggle_fave/{{.DeviceID}}');reload();">
 						{{if .IsFave}}Un-favourite{{else}}Favourite{{end}} <i class="fas fa-heart red-text"></i></a>
-					<a class="dropdown-item black-text" href="#" onclick="edit({{.DeviceID}});">Edit</a>
-					<a class="dropdown-item black-text" href="#" id="move-{{.DeviceID}}" data-toggle="modal"
+					<a class="dropdown-item white-text" href="#" onclick="edit({{.DeviceID}});">Edit</a>
+					<a class="dropdown-item white-text" href="#" id="move-{{.DeviceID}}" data-toggle="modal"
 						data-target="#moveDevice" onclick="passDevID({{.DeviceID}})">Move</a>
-					<a class="dropdown-item black-text" href="#" id="remove-{{.DeviceID}}" data-toggle="modal"
+					<a class="dropdown-item white-text" href="#" id="remove-{{.DeviceID}}" data-toggle="modal"
 						data-target="#removeDevice-{{.DeviceID}}">Delete</a>
 				</div>
 			</div>
@@ -45,7 +45,7 @@
 	<div class="footerdiv-{{.DeviceID}}" id="footerdiv-{{.DeviceID}}">
 		<div class="card-footer" {{if .Status}}style="background-color: #A8FFA8;"
 			{{else}}style="background-color: #CDCDCD;" {{end}}>
-			<p class="mb-0">{{if .Status}}Time On: 30 minutes{{else}}Disconnected{{end}}</p>
+			<p class="mb-0">{{if .Status}}Time on: {{CalcSince .ToggledUnix}}{{else}}Disconnected{{end}}</p>
 		</div>
 	</div>
 </div>

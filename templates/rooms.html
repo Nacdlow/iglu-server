@@ -33,21 +33,21 @@
         fas fa-coffee{{else if eq .RoomType 3}}fas fa-utensils{{else if eq .RoomType 4}}fas fa-bath{{else if eq .RoomType 5}}
         fas fa-door-open{{else if eq .RoomType 6}}fas fa-toolbox{{else if eq .RoomType 7}}fas fa-socks{{else if eq .RoomType 8}}
         fas fa-warehouse{{else if eq .RoomType 9}}fas fa-user{{end}} fa-2x"></i>
+        {{if $.IsAdmin}}
         <a class="pl-3 p-0" id="navbarDropdownMenuLink-333" data-toggle="dropdown" aria-haspopup="true"
             aria-expanded="false">
             <i class="fas fa-ellipsis-v fa-lg"></i></a>
             <div class="dropdown-menu dropdown-menu-right dropdown-default text-center"
             aria-labelledby="navbarDropdownMenuLink-333">
-            <a class="dropdown-item black-text" href="#" onclick="edit({{.RoomID}});">Edit</a>
-            {{if $.IsAdmin}}
-            <a class="dropdown-item black-text" href="#" id="restrict-{{.RoomID}}" data-toggle="modal"
+            <a class="dropdown-item white-text" href="#" onclick="edit({{.RoomID}});">Edit</a>
+            <a class="dropdown-item white-text" href="#" id="restrict-{{.RoomID}}" data-toggle="modal"
               data-target="#restrictRoom-{{.RoomID}}">
               {{if .IsRestricted}}Un-Restrict{{else}}Restrict{{end}}
             </a>
-            {{end}}
-            <a class="dropdown-item black-text" href="#" id="remove-{{.RoomID}}" data-toggle="modal"
+            <a class="dropdown-item white-text" href="#" id="remove-{{.RoomID}}" data-toggle="modal"
               data-target="#removeRoom-{{.RoomID}}">Remove</a>
           </div>
+          {{end}}
           </div>
         </div>
       </div>
@@ -137,7 +137,7 @@ aria-labelledby="restrictRoom-{{.RoomID}}" aria-hidden="true">
   <div class="modal-content" style="background-color: transparent!important;">
     <div class="card w-100">
       <div class="card-header">
-      <h3 class="text-center mb-0" id="restrictDevice">{{if .IsRestricted}} Un-Restrict {{.RoomName}} {{else}} Restrict {{.IsRestricted}} - {{.RoomName}} {{end}}</h3>
+      <h3 class="text-center mb-0" id="restrictDevice">{{if .IsRestricted}} Un-Restrict {{.RoomName}} {{else}} Restrict - {{.RoomName}} {{end}}</h3>
     </div>
       <div class="card-body">
         <h4 class="text-center pb-1">{{if .IsRestricted}}Are You Sure? This Room will be accessible to everyone. 
