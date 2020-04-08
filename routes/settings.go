@@ -27,6 +27,29 @@ func AccountSettingsHandler(ctx *macaron.Context) {
 	ctx.HTML(http.StatusOK, "settings/accounts")
 }
 
+func SetAvatarHandler(ctx *macaron.Context, sess session.Store, f *session.Flash) {
+	users, err := models.GetUsers()
+	if err != nil {
+		panic(err)
+	}
+	for _, u := range users {
+		if u.Username == ctx.Params("username") {
+			u.Avatar = "/img/profiles/" + ctx.Params("avatar") + ".jpg"
+
+			err = models.UpdateUserCols(&u, "Avatar")
+			if err != nil {
+				panic(err)
+			}
+			f.Success("Avatar updated")
+			ctx.Redirect("/settings/accounts")
+			return
+		}
+	}
+
+	f.Error("User does not exist.")
+	ctx.Redirect("/settings/accounts")
+}
+
 // PostAccountSettingsHandler handles the settings
 func PostAccountSettingsHandler(ctx *macaron.Context, f *session.Flash) {
 	switch ctx.Query("action") {
@@ -149,6 +172,7 @@ func PostEditAccountHandler(ctx *macaron.Context, f *session.Flash,
 // EditAvatarHandler handles editing account avatars.
 func EditAvatarHandler(ctx *macaron.Context) {
 	ctx.Data["ArrowBack"] = 1
+	ctx.Data["uname"] = ctx.Params("username")
 	ctx.HTML(http.StatusOK, "settings/edit_avatar")
 }
 
