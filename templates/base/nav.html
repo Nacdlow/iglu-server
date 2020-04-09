@@ -42,7 +42,9 @@
           </a>
           <div class="dropdown-menu dropdown-menu-right dropdown-default text-center"
             aria-labelledby="navbarDropdownMenuLink-333">
+            {{if not (eq .User.Role 3)}}
             <a class="dropdown-item" href="/internal_accounts">Switch Accounts</a>
+            {{end}}
             {{if .IsAdmin}}
             <a class="dropdown-item" href="/settings/accounts">Edit Accounts</a>
             {{end}}
@@ -71,11 +73,13 @@
         <!-- Links -->
 
         <ul class="navbar-nav mobhide">
+          {{if not (eq .User.Role 3)}}
           <li class="nav-item">
             <a class="nav-link waves-effect waves-light"
               href="{{if .IsSpecificRoom}}/add/device/{{.Room.RoomID}}{{else}}/add{{end}}">
               <i class="fa fa-plus"></i></a>
           </li>
+          {{end}}
           <ul class="navbar-nav mobhide">
             <li class="nav-item">
               <a class="nav-link waves-effect waves-light" href="/alerts"> <i class="far fa-bell"></i></a>
@@ -88,8 +92,12 @@
               </a>
               <div class="dropdown-menu dropdown-menu-right dropdown-default text-center"
                 aria-labelledby="navbarDropdownMenuLink-444">
+                {{if not (eq .User.Role 3)}}
                 <a class="dropdown-item" href="/internal_accounts">Switch Account</a>
+                {{end}}
+                {{if .IsAdmin}}
                 <a class="dropdown-item" href="/settings/accounts">Edit Accounts</a>
+                {{end}}
                 <a class="dropdown-item" href="/logout"><i class="fas fa-sign-out-alt fa-rotate-180"></i> Log
                   Out</a>
               </div>

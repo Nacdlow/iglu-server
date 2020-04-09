@@ -7,4 +7,5 @@ type EditAccountForm struct {
 	Email      string `form:"email" binding:"Required;Email"`
 	Password   string `form:"password"`
 	RePassword string `form:"repassword"`
+	Role       int64  `form:"role-type"`
 }

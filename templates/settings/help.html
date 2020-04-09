@@ -19,6 +19,7 @@
         </div>
 
 <div class="d-flex row align-items-center align-middle text-center" ></div>
+{{if .IsAdmin}}
 <div class="list-group pt-3">
         <a class="list-group-item" href="/settings/help/add_room">
         <div class="row align-items-center">
@@ -28,8 +29,9 @@
         </div>
     </a>
 </div>
+{{end}}
 
-
+{{if not (eq .User.Role 3)}}
 <div class="list-group ">
         <a class="list-group-item" href="/settings/help/add_device">
         <div class="row align-items-center">
@@ -39,6 +41,7 @@
         </div>
     </a>
 </div>
+{{end}}
 
 {{if .IsAdmin}}
 <div class="list-group">
@@ -63,6 +66,7 @@
 </div>
 {{end}}
 
+{{if not (eq .User.Role 3)}}
 <div class="list-group">
         <a class="list-group-item" href="/settings/help/delete_device">
         <div class="row align-items-center">
@@ -72,6 +76,7 @@
         </div>
     </a>
 </div>
+{{end}}
 
 <div class="list-group">
     <a class="list-group-item" href="/settings/help/fave_device">

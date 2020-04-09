@@ -34,11 +34,13 @@
 							{{if .IsFave}}Un-favourite{{else}}Favourite{{end}} <i class="fas fa-heart red-text"></i>
 					</a>
 				</div>
+		
 				<a class="dropdown-item white-text" href="#" onclick="edit({{.DeviceID}});">Edit</a>
 				{{if not (.IsMainLight)}}
 				<a class="dropdown-item white-text" href="#" id="move-{{.DeviceID}}" data-toggle="modal"
 					data-target="#moveDevice" onclick="passDevID({{.DeviceID}})">Move</a>
 				{{end}}
+				
 				<a class="dropdown-item white-text" href="#" id="remove-{{.DeviceID}}" data-toggle="modal"
 					data-target="#removeDevice-{{.DeviceID}}">Delete</a>
 			</div>

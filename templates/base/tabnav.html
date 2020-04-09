@@ -15,6 +15,7 @@
 			</li>
 		</div>
 		<div class="col-3">
+			{{if not (eq .User.Role 3)}}
 			<li class="nav-item p-0">
 				<div class="plus-button">
 					<a class="nav-link bottom-nav p-2 d-flex align-items-center justify-content-center
@@ -23,6 +24,7 @@
 						<i class="fa fa-plus" style="font-size: 15px;"></i></a>
 				</div>
 			</li>
+			{{end}}
 		</div>
 
 		<div class="col-2 p-0">

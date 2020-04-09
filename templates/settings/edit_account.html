@@ -52,9 +52,20 @@
 		placeholder="Confirm Password" aria-describedby="defaultRegisterFormPasswordHelpBlock" name="repassword">
     </div>
 
-    <small id="defaultRegisterFormPasswordHelpBlock" class="form-text text-muted mb-4">
+    <small id="defaultRegisterFormPasswordHelpBlock" class="form-text text-muted mb-2">
         Passwords must be at least 8 characters
     </small>
+
+    <h6 class="text-center">Select User Type:</h6>
+            <div class="md-form pb-3  mr-lg-5 ml-lg-5 mr-sm-0 ml-sm-0">
+              <select class="browser-default custom-select" id="select" name="role-type">
+                <option value="" disabled selected>Choose Type</option>
+                <option value="0">Normal</option>
+                <option value="1">Admin</option>
+                <option value="2">Guest</option>
+                <option value="3">Restricted</option>
+              </select>
+            </div>
 
 
     <div class="d-flex justify-content-center">

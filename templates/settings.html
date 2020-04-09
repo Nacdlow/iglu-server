@@ -13,6 +13,7 @@
   </form> -->
   <br class="mobhide">
 
+  {{if not (eq .User.Role 3)}}
   <div class="list-group text-center">
     <div class="row pt-3 pr-3 pl-3 justify-content-center">
     <div class="col-lg-4 col-12 p-0">
@@ -20,6 +21,7 @@
       <i class="fas fa-cart-arrow-down fa-2x-lg mr-lg-0 mr-2" ></i><br class="mobhide">Plugins
     </a>
   </div>
+  {{end}}
   {{if .IsAdmin}}
   <div class="col-lg-4 col-12 p-0">
     <a  href="/settings/accounts" class="list-group-item flex-fill list-group-item-action p-4">
