@@ -1,6 +1,8 @@
 package cmd
 
 import (
+	"strings"
+
 	"github.com/go-macaron/bindata"
 	"github.com/go-macaron/binding"
 	"github.com/go-macaron/csrf"
@@ -78,6 +80,9 @@ func getMacaron(dev bool) *macaron.Macaron {
 			},
 			"RoundPower": func(power float64) float64 {
 				return math.Round(power*100) / 100
+			},
+			"strContains": func(a, b string) bool {
+				return strings.Contains(a, b)
 			},
 		}},
 	}
@@ -170,6 +175,8 @@ func getMacaron(dev bool) *macaron.Macaron {
 			m.Get("/help/delete_room", routes.HelpDrHandler)
 			m.Get("/help/edit_room", routes.HelpErHandler)
 			m.Get("/help/restrict_room", routes.HelpRrHandler)
+			m.Get("/help/change_password", routes.HelpCpHandler)
+			m.Get("/help/remove_user", routes.HelpRuHandler)
 		})
 
 		m.Group("", func() {
@@ -197,6 +204,7 @@ func getMacaron(dev bool) *macaron.Macaron {
 					m.Get("/delete/:username", routes.DeleteAccountHandler)
 					m.Post("/delete/:username", routes.PostDeleteAccountHandler)
 					m.Get("/edit_avatar/:username", routes.EditAvatarHandler)
+					m.Get("/edit_avatar/:username/:avatar", routes.SetAvatarHandler)
 					m.Get("/edit/:username", routes.EditAccountHandler)
 					m.Post("/edit/:username", binding.BindIgnErr(forms.EditAccountForm{}),
 						routes.PostEditAccountHandler)
@@ -212,6 +220,7 @@ func getMacaron(dev bool) *macaron.Macaron {
 					m.Get("/xml", routes.XMLDataSettingsHandler)
 				})
 				m.Get("/appearance/font/:size", routes.FontSliderHandler)
+				m.Get("/appearance/fontface/:font", routes.FontDropDownHandler)
 
 			})
 		}, routes.RequireAdmin)

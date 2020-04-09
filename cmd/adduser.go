@@ -40,6 +40,7 @@ func adduser(c *cli.Context) (err error) {
 		u.Role = models.NormalRole
 	}
 	u.FontSize = "medium"
+	u.FontFace = "Roboto"
 	u.Avatar = "/img/profiles/penguin_pixabay.jpg"
 	fmt.Printf("Username (email): ")
 	fmt.Scanln(&u.Username)

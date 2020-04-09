@@ -42,17 +42,21 @@
 
       <p class="p-nomargin">Font</p>
 
-      <!-- Basic dropdown -->
       <button class="btn btn-primary dropdown-toggle mr-4" type="button" data-toggle="dropdown" aria-haspopup="true"
-        aria-expanded="false">Browser Default</button>
+        aria-expanded="false">{{if eq .User.FontFace "sans-serif"}}Browser Default{{else}}
+        {{.User.FontFace}}{{end}}</button>
 
       <div class="dropdown-menu">
-        <a class="dropdown-item" href="#">Browser Default</a>
+        <a class="dropdown-item" href="appearance/fontface/1">Browser Default</a>
         <div class="dropdown-divider"></div>
-        <a class="dropdown-item" href="#">OpenDyslexic 2</a>
-        <a class="dropdown-item" href="#">OpenDyslexic 3</a>
+        <a class="dropdown-item" href="appearance/fontface/0">Roboto (Default)</a>
+        <a class="dropdown-item" href="appearance/fontface/3">Roboto Bold</a>
+        <a class="dropdown-item" href="appearance/fontface/2">Roboto Light</a>
+        <a class="dropdown-item" href="appearance/fontface/4">OpenDyslexic</a>
+        <a class="dropdown-item" href="appearance/fontface/5">OpenDyslexic Bold</a>
+        <a class="dropdown-item" href="appearance/fontface/6">OpenDyslexic 3</a>
+        <a class="dropdown-item" href="appearance/fontface/7">OpenDyslexic 3 Bold</a>
       </div>
-      <!-- Basic dropdown -->
     </div>
   </div>
 </div>

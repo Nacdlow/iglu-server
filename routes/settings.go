@@ -27,6 +27,29 @@ func AccountSettingsHandler(ctx *macaron.Context) {
 	ctx.HTML(http.StatusOK, "settings/accounts")
 }
 
+func SetAvatarHandler(ctx *macaron.Context, sess session.Store, f *session.Flash) {
+	users, err := models.GetUsers()
+	if err != nil {
+		panic(err)
+	}
+	for _, u := range users {
+		if u.Username == ctx.Params("username") {
+			u.Avatar = "/img/profiles/" + ctx.Params("avatar") + ".jpg"
+
+			err = models.UpdateUserCols(&u, "Avatar")
+			if err != nil {
+				panic(err)
+			}
+			f.Success("Avatar updated")
+			ctx.Redirect("/settings/accounts")
+			return
+		}
+	}
+
+	f.Error("User does not exist.")
+	ctx.Redirect("/settings/accounts")
+}
+
 // PostAccountSettingsHandler handles the settings
 func PostAccountSettingsHandler(ctx *macaron.Context, f *session.Flash) {
 	switch ctx.Query("action") {
@@ -149,6 +172,7 @@ func PostEditAccountHandler(ctx *macaron.Context, f *session.Flash,
 // EditAvatarHandler handles editing account avatars.
 func EditAvatarHandler(ctx *macaron.Context) {
 	ctx.Data["ArrowBack"] = 1
+	ctx.Data["uname"] = ctx.Params("username")
 	ctx.HTML(http.StatusOK, "settings/edit_avatar")
 }
 
@@ -270,10 +294,22 @@ func HelpErHandler(ctx *macaron.Context) {
 	ctx.HTML(http.StatusOK, "settings/how-to/edit_room")
 }
 
-// HelpHandler handles the how-to help section./edit room
+// HelpHandler handles the how-to help section./restrict rooms
 func HelpRrHandler(ctx *macaron.Context) {
 	ctx.Data["NavTitle"] = "Restrict/Un-restrict a Room"
 	ctx.HTML(http.StatusOK, "settings/how-to/restrict_room")
+}
+
+// HelpHandler handles the how-to help section./change password
+func HelpCpHandler(ctx *macaron.Context) {
+	ctx.Data["NavTitle"] = "Change Password"
+	ctx.HTML(http.StatusOK, "settings/how-to/change_password")
+}
+
+// HelpHandler handles the how-to help section./remove user
+func HelpRuHandler(ctx *macaron.Context) {
+	ctx.Data["NavTitle"] = "Remove a user"
+	ctx.HTML(http.StatusOK, "settings/how-to/remove_user")
 }
 
 // LibraryDesc represents the description of an open-source library.

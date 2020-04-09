@@ -40,7 +40,7 @@
     </a>
 </div>
 
-
+{{if .IsAdmin}}
 <div class="list-group">
         <a class="list-group-item" href="/settings/help/add_user">
         <div class="row align-items-center">
@@ -51,6 +51,7 @@
     </a>
 </div>
 
+
 <div class="list-group">
         <a class="list-group-item" href="/settings/help/delete_room">
         <div class="row align-items-center">
@@ -60,6 +61,7 @@
         </div>
     </a>
 </div>
+{{end}}
 
 <div class="list-group">
         <a class="list-group-item" href="/settings/help/delete_device">
@@ -81,11 +83,12 @@
 </a>
 </div>
 
+{{if .IsAdmin}}
 <div class="list-group">
     <a class="list-group-item" href="/settings/help/edit_room">
     <div class="row align-items-center">
         <div class="col-lg-9 col-8" id="text">
-            <i class = "far fa-times-circle pr-2"></i>Edit a Room Name
+            <i class = "fas fa-bed pr-2"></i>Edit a Room Name
         </div>
     </div>
 </a>
@@ -95,11 +98,32 @@
     <a class="list-group-item" href="/settings/help/restrict_room">
     <div class="row align-items-center">
         <div class="col-lg-9 col-8" id="text">
-            <i class = "far fa-times-circle pr-2"></i>Restrict/Un-restrict a room
+            <i class = "fas fa-lock pr-2"></i>Restrict/Un-restrict a room
         </div>
     </div>
 </a>
 </div>
+
+<div class="list-group">
+    <a class="list-group-item" href="/settings/help/change_password">
+    <div class="row align-items-center">
+        <div class="col-lg-9 col-8" id="text">
+            <i class = "fas fa-star pr-2"></i>Change a Password
+        </div>
+    </div>
+</a>
+</div>
+
+<div class="list-group">
+    <a class="list-group-item" href="/settings/help/remove_user">
+    <div class="row align-items-center">
+        <div class="col-lg-9 col-8" id="text">
+            <i class = "fas fa-users-cog pr-2"></i>Remove a user
+        </div>
+    </div>
+</a>
+</div>
+{{end}}
 
 </div>
 
