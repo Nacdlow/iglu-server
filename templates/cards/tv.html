@@ -4,26 +4,33 @@
 		<div class="row">
 			<div class="col"></div>
 
-			<div class="">
+			<h5 class="card-title text-center mb-0" id="nameHide-{{.DeviceID}}">{{.Description}}</h5>
+
+			<div class="col-12" id="colHide-{{.DeviceID}}" style="display: none;">
+				<div class="row align-items-center">
+				<div class="col-1 p-0">
 				<i id="lock-{{.DeviceID}}"></i>
-				<h5 class="card-title text-center justify-content-center mb-0" id="name-{{.DeviceID}}">{{.Description}}
-				</h5>
+				</div>
+				<div class="col-8 p-0 pl-2">
+				<i id="name-{{.DeviceID}}"></i>
+			</div>
+				<div class="col-3 p-0 pr-2 text-right">
+				<div id="button-{{.DeviceID}}" class="button-{{.DeviceID}} text-center justify-content-center d-flex"></div>
+				</div>
+				</div>
 			</div>
 
 			<div class="col text-right">
 				<a class="p-0" id="navbarDropdownMenuLink-333" data-toggle="dropdown" aria-haspopup="true"
 					aria-expanded="false">
-					<i class="fas fa-ellipsis-h"></i>
+					<i class="fas fa-ellipsis-h" id="ellipsesHide-{{.DeviceID}}"></i>
 				</a>
 				<div class="dropdown-menu dropdown-menu-right dropdown-default text-center"
 					aria-labelledby="navbarDropdownMenuLink-333">
 					<a class="dropdown-item {{if .IsFave}}red-text{{else}}white-text{{end}}" href="#"
 						id="fave-{{.DeviceID}}" onclick="$.get('/toggle_fave/{{.DeviceID}}');reload();">
 						{{if .IsFave}}Un-favourite{{else}}Favourite{{end}} <i class="fas fa-heart red-text"></i></a>
-					
-					
-					<a class="dropdown-item white-text" href="#" onclick="edit({{.DeviceID}});">Edit</a>
-					
+					<a class="dropdown-item white-text" href="#" onclick="edit({{.DeviceID}}); toggle_visibility({{.DeviceID}});">Edit</a>
 					<a class="dropdown-item white-text" href="#" id="move-{{.DeviceID}}" data-toggle="modal"
 						data-target="#moveDevice" onclick="passDevID({{.DeviceID}})">Move</a>
 				
@@ -44,7 +51,6 @@
 			</div>
 			<!--/switch -->
 		</div>
-		<div id="button-{{.DeviceID}}" class="button-{{.DeviceID}} text-center justify-content-center d-flex"></div>
 	</div>
 	<div class="footerdiv-{{.DeviceID}}" id="footerdiv-{{.DeviceID}}">
 		<div class="card-footer" {{if .Status}}style="background-color: #A8FFA8;"
@@ -79,39 +85,4 @@
 	</div>
 </div>
 <!-- /Remove Device -->
-<script>
-	function edit(id) {//swaps room title with an input field and changes the button to a save button.
-		var toggleDiv = document.getElementById("toggleHide-" + id);
-		toggleDiv.style.display = "none";
-		var deviceName = document.getElementById("name-" + id);
-		var inputField = document.createElement("input");
-		inputField.setAttribute('id', 'new-' + id);
-		inputField.setAttribute('class', 'black-text navcolor white-text');
-		inputField.setAttribute('style', 'border: 2px solid white; opacity: 80%; border-radius: 50px; height: 35px; width: 200px; color: white;');
-		inputField.setAttribute('placeholder', " Device Name:");
-		deviceName.parentNode.replaceChild(inputField, deviceName);
 
-		var viewButton = document.getElementById("button-" + id);
-		var saveButton = document.createElement("a");
-		saveButton.setAttribute('id', 'saveButton-' + id);
-		saveButton.setAttribute('class', 'btn-new-1 text-center p-4 white-text justify-content-center pt-3 d-flex');
-		saveButton.setAttribute('style', 'background-color: #3ddb75;');
-		saveButton.setAttribute('onClick', 'postChanges(' + id + ');');
-		saveButton.innerHTML = "Save";
-		viewButton.parentNode.replaceChild(saveButton, viewButton);
-
-		var lock = document.getElementById("lock-" + id);
-		var close = document.createElement("a");
-		close.setAttribute('id', 'close-' + id);
-		close.setAttribute('class', 'fas fa-times-circle white-text pr-2');
-		close.setAttribute('onClick', 'reload();');
-		lock.parentNode.replaceChild(close, lock);
-	}
-
-	function postChanges(id) {
-		var newName = document.getElementById("new-" + id).value;
-		console.log(newName)
-		$.get('/change_device/' + id + '/' + newName);
-		reload();
-	}
-</script>
