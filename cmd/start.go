@@ -1,6 +1,8 @@
 package cmd
 
 import (
+	"strings"
+
 	"github.com/go-macaron/bindata"
 	"github.com/go-macaron/binding"
 	"github.com/go-macaron/csrf"
@@ -78,6 +80,9 @@ func getMacaron(dev bool) *macaron.Macaron {
 			},
 			"RoundPower": func(power float64) float64 {
 				return math.Round(power*100) / 100
+			},
+			"strContains": func(a, b string) bool {
+				return strings.Contains(a, b)
 			},
 		}},
 	}
@@ -214,6 +219,7 @@ func getMacaron(dev bool) *macaron.Macaron {
 					m.Get("/xml", routes.XMLDataSettingsHandler)
 				})
 				m.Get("/appearance/font/:size", routes.FontSliderHandler)
+				m.Get("/appearance/fontface/:font", routes.FontDropDownHandler)
 
 			})
 		}, routes.RequireAdmin)

@@ -15,6 +15,16 @@
 	<link href="/css/jquery-cron.css" rel="stylesheet" />
 	<link href="/css/jquery-gentleSelect.css" rel="stylesheet" />
 	<style id="access">
+
+		body, h1, h2, h3, h4, h5, h6, p, .nav-link.nav-rounded.waves-effect.waves-light {
+			font-family: "{{.Font}}", sans-serif !important;
+
+			{{if .IsLight}}
+			font-weight: light!important;
+			{{else if .IsBold}}
+			font-weight: bold!important;
+			{{end}}
+		}
 			
 		strong, h1, h1.font-weight-bolder, #h1, #lblGreetings {
 			font-size: var(--{{.User.FontSize}}-title-desktop)!important;

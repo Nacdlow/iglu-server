@@ -31,6 +31,7 @@ type User struct {
 	CreatedUnix   int64             `xorm:"created" json:"createdUnix" xml:"timestamps>created_unix"`
 	UpdatedUnix   int64             `xorm:"updated" json:"updatedUnix" xml:"timestamps>updated_unix"`
 	FontSize      string            `json:"fontSize" xml:"font_size"`
+	FontFace      string            `json:"fontFace" xml:"font_face"`
 	PluginKVStore map[string]string `xorm:"null" json:"pluginKVStore" xml:"plugin_key_value_store"` // must check if null first
 	Avatar        string            `json:"avatar" xml:"avatar"`
 }
@@ -97,6 +98,15 @@ func UpdateUser(u *User) (err error) {
 	if len(u.Avatar) == 0 {
 		u.Avatar = "/img/profiles/penguin_pixabay.jpg"
 	}
+
+	if len(u.FontSize) == 0 {
+		u.FontSize = "medium"
+	}
+
+	if len(u.FontFace) == 0 {
+		u.FontFace = "Roboto"
+	}
+
 	_, err = engine.Id(u.Username).Update(u)
 	return
 }

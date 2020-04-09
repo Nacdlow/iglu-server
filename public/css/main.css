@@ -71,6 +71,38 @@
   --xlarge-bottom-nav: 20px;
 }
 
+@font-face {
+  font-family: 'OpenDyslexic';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: local('OpenDyslexic'), url('/font/opendyslexic2/OpenDyslexic-Regular.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'OpenDyslexic';
+  font-style: normal;
+  font-weight: bold;
+  font-display: swap;
+  src: local('OpenDyslexic'), url('/font/opendyslexic2/OpenDyslexic-Bold.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'OpenDyslexic3';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: local('OpenDyslexic3'), url('/font/opendyslexic3/OpenDyslexic3-Regular.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'OpenDyslexic3';
+  font-style: normal;
+  font-weight: bold;
+  font-display: swap;
+  src: local('OpenDyslexic3'), url('/font/opendyslexic3/OpenDyslexic3-Bold.woff2') format('woff2');
+}
+
 /*Scrollbar Settings*/
 html {
   overflow-y: scroll;

@@ -139,6 +139,36 @@ func FontSliderHandler(ctx *macaron.Context, sess session.Store) {
 	}
 }
 
+// FontDropDownHandler handles changing the font typeface
+func FontDropDownHandler(ctx *macaron.Context, sess session.Store) {
+	if user, err := models.GetUser(sess.Get("username").(string)); err == nil {
+		var fontFace string
+
+		switch ctx.ParamsInt("font") {
+		case 0:
+			fontFace = "Roboto"
+		case 1:
+			fontFace = "sans-serif"
+		case 2:
+			fontFace = "Roboto Light"
+		case 3:
+			fontFace = "Roboto Bold"
+		case 4:
+			fontFace = "OpenDyslexic"
+		case 5:
+			fontFace = "OpenDyslexic Bold"
+		case 6:
+			fontFace = "OpenDyslexic3"
+		case 7:
+			fontFace = "OpenDyslexic3 Bold"
+		}
+
+		models.UpdateUserCols(&models.User{Username: user.Username, FontFace: fontFace}, "font_face")
+
+		ctx.Redirect("/settings/appearance")
+	}
+}
+
 // FaveHandler handles favouriting or unfavouriting devices.
 func FaveHandler(ctx *macaron.Context, sess session.Store) {
 	devices, err := models.GetDevices()

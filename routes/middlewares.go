@@ -6,7 +6,7 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/Nacdlow/plugin-sdk"
+	sdk "github.com/Nacdlow/plugin-sdk"
 	"github.com/go-macaron/session"
 	macaron "gopkg.in/macaron.v1"
 
@@ -36,6 +36,20 @@ func ContextInit() macaron.Handler {
 				if user.Role == models.AdminRole {
 					ctx.Data["IsAdmin"] = 1
 				}
+				if strings.Contains(user.FontFace, " Bold") {
+					ctx.Data["IsBold"] = 1
+				} else if strings.Contains(user.FontFace, " Light") {
+					ctx.Data["IsLight"] = 1
+				}
+
+				font := user.FontFace
+				if font == "sans-serif" {
+					font = "Browser Default"
+				} else {
+					font = strings.ReplaceAll(font, " Bold", "")
+					font = strings.ReplaceAll(font, " Light", "")
+				}
+				ctx.Data["Font"] = font
 			} else {
 				// Logged in user does not exist
 				err := sess.Set("auth", Unauthenticated)

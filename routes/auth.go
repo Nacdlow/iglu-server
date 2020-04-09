@@ -116,6 +116,7 @@ func AddUserHandler(ctx *macaron.Context, form forms.RegisterForm,
 		FirstName: form.FirstName,
 		LastName:  form.LastName,
 		FontSize:  "medium",
+		FontFace:  "default-roboto",
 		Avatar:    "/img/profiles/penguin_pixabay.jpg",
 	}
 	err = models.AddUser(user)
