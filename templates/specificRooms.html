@@ -168,6 +168,58 @@ aria-labelledby="moveDevice" aria-hidden="true">
 
 {{template "base/scripts" .}}
 <script>
+
+function toggle_visibility(id) {
+  var colDiv = document.getElementById("colHide-" + id);
+       if(colDiv.style.display == 'block')
+          colDiv.style.display = 'none';
+       else
+          colDiv.style.display = 'block';
+    }
+
+
+	function edit(id) {//swaps room title with an input field and changes the button to a save button.
+		var toggleDiv = document.getElementById("toggleHide-" + id);
+    var sliderDiv = document.getElementById("sliderHide-" + id);
+    var ellipsesDiv = document.getElementById("ellipsesHide-" + id);
+    var nameDiv = document.getElementById("nameHide-" + id);
+		sliderDiv.style.display = "none";
+    toggleDiv.style.display = "none";
+    ellipsesDiv.style.display = "none";
+    nameDiv.style.display = "none";
+		var deviceName = document.getElementById("name-" + id);
+		var name = deviceName.innerHTML;
+		var inputField = document.createElement("input");
+		inputField.setAttribute('id', 'new-' + id);
+		inputField.setAttribute('class', 'pl-2 navcolor white-text');
+    inputField.setAttribute('style', 'border: 2px solid white; opacity: 80%; border-radius: 50px; height: 35px; width:100%;');
+    inputField.setAttribute('maxlength', '11');
+		inputField.setAttribute('placeholder', "Device Name");
+		deviceName.parentNode.replaceChild(inputField, deviceName);
+
+		var viewButton = document.getElementById("button-" + id);
+		var saveButton = document.createElement("a");
+		saveButton.setAttribute('id', 'saveButton-' + id);
+		saveButton.setAttribute('class', 'btn btn-success-new p-3 m-0 waves-effect waves-light');
+		saveButton.setAttribute('onClick', 'postChanges(' + id + ');');
+		saveButton.innerHTML = "Save";
+		viewButton.parentNode.replaceChild(saveButton, viewButton);
+
+		var lock = document.getElementById("lock-" + id);
+		var close = document.createElement("a");
+		close.setAttribute('id', 'close-' + id);
+		close.setAttribute('class', 'fas fa-times-circle white-text pl-2 pr-2');
+		close.setAttribute('onClick', 'reload();');
+		lock.parentNode.replaceChild(close, lock);
+	}
+
+	function postChanges(id) {
+		var newName = document.getElementById("new-" + id).value;
+		console.log(newName)
+		$.get('/change_device/' + id + '/' + newName);
+		reload();
+	}
+
 	function update() {
     {{range .Devices}}
     $(" #labeldiv-{{.DeviceID}}").load(location.href + " #labeldiv-{{.DeviceID}}>*", "");

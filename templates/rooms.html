@@ -180,8 +180,8 @@ aria-labelledby="restrictRoom-{{.RoomID}}" aria-hidden="true">
     var roomH4 = document.getElementById("name-"+id);
     var inputField = document.createElement("input");
     inputField.setAttribute('id','new-'+id);
-    inputField.setAttribute('class','black-text navcolor white-text p-3');
-    inputField.setAttribute('style','border: 2px solid white; opacity: 80%; border-radius: 50px; height: 37px; width: 200px; color: white;');
+    inputField.setAttribute('class','navcolor white-text p-3');
+    inputField.setAttribute('style','border: 2px solid white; opacity: 80%; border-radius: 50px; height: 37px; width: 200px;');
     inputField.setAttribute('placeholder', '{{.RoomName}}');
     roomH4.parentNode.replaceChild(inputField, roomH4);
     
