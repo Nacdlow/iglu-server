@@ -129,10 +129,7 @@ func PostEditAccountHandler(ctx *macaron.Context, f *session.Flash,
 		if u.Username == form.Email {
 			var updateCols []string
 
-			user := models.User{
-				Username: form.Email,
-				Role:     models.UserRole(form.Role),
-			}
+			user := models.User{Username: form.Email}
 
 			// Update password
 			if form.Password != "" {
@@ -149,6 +146,10 @@ func PostEditAccountHandler(ctx *macaron.Context, f *session.Flash,
 				updateCols = append(updateCols, "password")
 				user.Password = string(pass)
 			}
+
+			// Update Role
+			updateCols = append(updateCols, "role")
+			user.Role = models.UserRole(form.Role)
 
 			// Update first name
 			if form.FirstName != "" && form.FirstName != u.FirstName {

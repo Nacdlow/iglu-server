@@ -45,10 +45,12 @@
             {{else}}
             <input name="room_id" value="{{.RoomID}}" type="hidden" />
             {{end}}
+            {{if not (.Room.HasLight)}}
             <div class="custom-control custom-checkbox text-center pt-2 d-none" id="mainLight">
               <input type="checkbox" class="custom-control-input" id="defaultUnchecked" name="is_main_light_source">
               <label class="custom-control-label" for="defaultUnchecked">Main Light</label>
             </div>
+            {{end}}
             <div class="d-flex justify-content-center pt-4">
               <div class="col-8">
                 <button type="submit" class="btn btn-success-new btn-block bodycolor">
