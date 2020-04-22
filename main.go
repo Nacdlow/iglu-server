@@ -4,7 +4,7 @@ import (
 	"log"
 	"os"
 
-	"gitlab.com/group-nacdlow/nacdlow-server/cmd"
+	"github.com/Nacdlow/iglu-server/cmd"
 
 	"github.com/urfave/cli/v2"
 )

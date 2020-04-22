@@ -21,16 +21,16 @@ import (
 	"os/signal"
 	"time"
 
-	"gitlab.com/group-nacdlow/nacdlow-server/models"
-	"gitlab.com/group-nacdlow/nacdlow-server/models/forms"
-	forms_sim "gitlab.com/group-nacdlow/nacdlow-server/models/forms/sim"
-	"gitlab.com/group-nacdlow/nacdlow-server/modules/plugin"
-	"gitlab.com/group-nacdlow/nacdlow-server/modules/settings"
-	"gitlab.com/group-nacdlow/nacdlow-server/modules/simulation"
-	"gitlab.com/group-nacdlow/nacdlow-server/public"
-	"gitlab.com/group-nacdlow/nacdlow-server/routes"
-	routes_sim "gitlab.com/group-nacdlow/nacdlow-server/routes/simulator"
-	"gitlab.com/group-nacdlow/nacdlow-server/templates"
+	"github.com/Nacdlow/iglu-server/models"
+	"github.com/Nacdlow/iglu-server/models/forms"
+	forms_sim "github.com/Nacdlow/iglu-server/models/forms/sim"
+	"github.com/Nacdlow/iglu-server/modules/plugin"
+	"github.com/Nacdlow/iglu-server/modules/settings"
+	"github.com/Nacdlow/iglu-server/modules/simulation"
+	"github.com/Nacdlow/iglu-server/public"
+	"github.com/Nacdlow/iglu-server/routes"
+	routes_sim "github.com/Nacdlow/iglu-server/routes/simulator"
+	"github.com/Nacdlow/iglu-server/templates"
 )
 
 // CmdStart represents a command-line command

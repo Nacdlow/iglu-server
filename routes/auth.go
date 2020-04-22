@@ -3,10 +3,10 @@ package routes
 import (
 	"github.com/go-macaron/csrf"
 	"github.com/go-macaron/session"
-	"gitlab.com/group-nacdlow/nacdlow-server/models"
-	"gitlab.com/group-nacdlow/nacdlow-server/models/forms"
-	"gitlab.com/group-nacdlow/nacdlow-server/modules/settings"
-	"gitlab.com/group-nacdlow/nacdlow-server/modules/tokens"
+	"github.com/Nacdlow/iglu-server/models"
+	"github.com/Nacdlow/iglu-server/models/forms"
+	"github.com/Nacdlow/iglu-server/modules/settings"
+	"github.com/Nacdlow/iglu-server/modules/tokens"
 
 	"net/http"
 

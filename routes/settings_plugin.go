@@ -15,9 +15,9 @@ import (
 	"github.com/hashicorp/go-getter"
 	macaron "gopkg.in/macaron.v1"
 
-	"gitlab.com/group-nacdlow/nacdlow-server/models"
-	"gitlab.com/group-nacdlow/nacdlow-server/modules/plugin"
-	"gitlab.com/group-nacdlow/nacdlow-server/modules/settings"
+	"github.com/Nacdlow/iglu-server/models"
+	"github.com/Nacdlow/iglu-server/modules/plugin"
+	"github.com/Nacdlow/iglu-server/modules/settings"
 )
 
 type pluginDescription struct {

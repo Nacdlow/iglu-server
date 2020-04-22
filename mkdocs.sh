@@ -5,7 +5,7 @@
 
 ## Change these variables...
 # This shall be the module name of the project.
-module="gitlab.com/group-nacdlow/nacdlow-server"
+module="github.com/Nacdlow/iglu-server"
 # This shall be the path of the wiki site.
 docpath="../nacdlow-server.wiki"
 

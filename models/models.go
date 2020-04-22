@@ -7,7 +7,7 @@ import (
 	"time"
 
 	"github.com/brianvoe/gofakeit/v4"
-	"gitlab.com/group-nacdlow/nacdlow-server/modules/settings"
+	"github.com/Nacdlow/iglu-server/modules/settings"
 	"xorm.io/core"
 	"xorm.io/xorm"
 )

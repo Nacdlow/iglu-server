@@ -10,8 +10,8 @@ import (
 	"github.com/go-macaron/session"
 	macaron "gopkg.in/macaron.v1"
 
-	"gitlab.com/group-nacdlow/nacdlow-server/models"
-	"gitlab.com/group-nacdlow/nacdlow-server/modules/plugin"
+	"github.com/Nacdlow/iglu-server/models"
+	"github.com/Nacdlow/iglu-server/modules/plugin"
 )
 
 // LoginStatus represents the status of a user's session.

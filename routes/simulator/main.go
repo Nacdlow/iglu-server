@@ -1,9 +1,9 @@
 package simulator
 
 import (
-	"gitlab.com/group-nacdlow/nacdlow-server/models"
-	forms "gitlab.com/group-nacdlow/nacdlow-server/models/forms/sim"
-	"gitlab.com/group-nacdlow/nacdlow-server/modules/simulation"
+	"github.com/Nacdlow/iglu-server/models"
+	forms "github.com/Nacdlow/iglu-server/models/forms/sim"
+	"github.com/Nacdlow/iglu-server/modules/simulation"
 
 	macaron "gopkg.in/macaron.v1"
 

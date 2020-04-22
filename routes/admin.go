@@ -3,8 +3,8 @@ package routes
 import (
 	"net/http"
 
-	"gitlab.com/group-nacdlow/nacdlow-server/models"
-	"gitlab.com/group-nacdlow/nacdlow-server/modules/plugin"
+	"github.com/Nacdlow/iglu-server/models"
+	"github.com/Nacdlow/iglu-server/modules/plugin"
 
 	sdk "github.com/Nacdlow/plugin-sdk"
 	macaron "gopkg.in/macaron.v1"

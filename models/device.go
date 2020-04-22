@@ -5,7 +5,7 @@ import (
 
 	"github.com/brianvoe/gofakeit/v4"
 
-	"gitlab.com/group-nacdlow/nacdlow-server/modules/plugin"
+	"github.com/Nacdlow/iglu-server/modules/plugin"
 )
 
 // DeviceType is the type of smart device.

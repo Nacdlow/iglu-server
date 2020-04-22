@@ -2,7 +2,7 @@ package weather
 
 import (
 	"github.com/adlio/darksky"
-	"gitlab.com/group-nacdlow/nacdlow-server/modules/settings"
+	"github.com/Nacdlow/iglu-server/modules/settings"
 )
 
 // GetWeather loads the forecast from Darksky's API.

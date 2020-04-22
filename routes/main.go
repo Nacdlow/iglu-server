@@ -9,10 +9,10 @@ import (
 	"strings"
 	"time"
 
-	"gitlab.com/group-nacdlow/nacdlow-server/models"
-	"gitlab.com/group-nacdlow/nacdlow-server/models/forms"
-	"gitlab.com/group-nacdlow/nacdlow-server/modules/plugin"
-	"gitlab.com/group-nacdlow/nacdlow-server/modules/simulation"
+	"github.com/Nacdlow/iglu-server/models"
+	"github.com/Nacdlow/iglu-server/models/forms"
+	"github.com/Nacdlow/iglu-server/modules/plugin"
+	"github.com/Nacdlow/iglu-server/modules/simulation"
 
 	"github.com/go-macaron/binding"
 	"github.com/go-macaron/session"

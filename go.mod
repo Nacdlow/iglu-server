@@ -1,4 +1,4 @@
-module gitlab.com/group-nacdlow/nacdlow-server
+module github.com/Nacdlow/iglu-server
 
 go 1.13
 

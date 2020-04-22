@@ -7,9 +7,9 @@ import (
 	"time"
 
 	"github.com/adlio/darksky"
-	"gitlab.com/group-nacdlow/nacdlow-server/models"
-	"gitlab.com/group-nacdlow/nacdlow-server/modules/settings"
-	"gitlab.com/group-nacdlow/nacdlow-server/modules/weather"
+	"github.com/Nacdlow/iglu-server/models"
+	"github.com/Nacdlow/iglu-server/modules/settings"
+	"github.com/Nacdlow/iglu-server/modules/weather"
 )
 
 const (
